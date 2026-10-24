@@ -19,6 +19,9 @@ final class Slides
             // Who I am and what this talk is about.
             <Cover />,
 
+            // The audience joins on their phones, to follow the slides and use the live example.
+            <Join />,
+
             // One like button, built the usual ways, and the wires it needs.
             <Example />,
             <JsonApi />,
@@ -46,8 +49,7 @@ final class Slides
             <Demo />,
             <Thanks />,
 
-            // Extra slides, for reference.
-            <Join />,
+            // Extra slide, for reference.
             <DesignSheet />,
         ];
     }

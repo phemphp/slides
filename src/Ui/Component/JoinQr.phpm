@@ -6,11 +6,10 @@ use App\Audience\AudienceLink;
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// The QR code and the URL of the audience view.
+// The QR code of the audience view.
 #[Component]
 final class JoinQr
 {
-    private string $url = '';
     private string $qrCode = '';
 
     public function __construct(
@@ -20,20 +19,15 @@ final class JoinQr
 
     public function mount(): void
     {
-        $this->url = $this->link->url();
         $this->qrCode = $this->link->qrCode();
     }
 
     public function render(): Node
     {
-        $url = $this->url;
         $qrCode = $this->qrCode;
 
         return (
-            <figure className="flex flex-col items-center gap-6">
-                <img src={{ qrCode }} alt="QR code of the audience view" className="ph-qr" />
-                <figcaption><span className="ph-chip ph-chip-mono">{{ url }}</span></figcaption>
-            </figure>
+            <img src={{ qrCode }} alt="QR code of the audience view" className="ph-qr" />
         );
     }
 }

@@ -66,9 +66,11 @@
     color: var(--text-tertiary);
 }
 
-/* The QR code of the audience view, on a white card so a phone camera reads it. */
+/* The QR code of the audience view, on a white card so a phone camera reads it. It is as tall
+   as the slide content (720px less the padding), so the back rows can scan it too. */
 .ph-qr {
-    width: 300px;
+    box-sizing: border-box;
+    width: 460px;
     padding: var(--space-16);
     border-radius: var(--radius-lg);
     background: var(--text);
