@@ -13,7 +13,8 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 #[Component]
 final class Deck
 {
-    #[Prop, Provide] public Role $role = Role::Audience;
+    #[Prop, Provide] 
+    public Role $role = Role::Audience;
 
     private int $index = 0;
     private int $total = 0;
