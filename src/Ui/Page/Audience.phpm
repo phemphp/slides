@@ -1,0 +1,27 @@
+<?phpm
+
+namespace App\Ui\Page;
+
+use App\Ui\Component\Deck;
+use App\Deck\Role;
+use Phem\Attribute\{Page, Subscribe};
+use Phem\Node;
+
+use function App\Ui\Component\Document;
+
+// The view of the audience (the QR code opens it): the current slide, and its interactive parts.
+#[Page('/', name: 'audience'), Subscribe]
+final class Audience
+{
+    public function render(): Node
+    {
+        $role = Role::Audience;
+
+        return (
+            <Document>
+                <Document:title>Phem, live</Document:title>
+                <Deck role={{ role }} />
+            </Document>
+        );
+    }
+}

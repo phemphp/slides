@@ -1,0 +1,18 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// The frame of a slide. The sizes use the width of the frame (cqw), so the same slide fits the
+// projector and a phone.
+#[Component]
+function Slide(Html $children, string $className = ''): Node
+{
+    return (
+        <article className={{ ['@container w-full max-w-[177.78vh] px-[6cqw] py-[4cqw]', className] }}>
+            {{ children }}
+        </article>
+    );
+}

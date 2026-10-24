@@ -1,0 +1,96 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use App\Deck\{Navigator, Role};
+use App\Security\SpeakerAccess;
+use Phem\Attribute\{Component, Prop, Provide};
+use Phem\Node;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+// The current slide of the presentation. The speaker moves it: the other screens follow.
+// A dynamic slide reads the role (#[Context] Role) to show the speaker or the audience part.
+#[Component]
+final class Deck
+{
+    #[Prop, Provide] public Role $role = Role::Audience;
+
+    private int $index = 0;
+    private int $total = 0;
+    private ?Node $slide = null;
+
+    public function __construct(
+        private readonly Navigator $navigator,
+        private readonly SpeakerAccess $speakerAccess,
+    ) {
+    }
+
+    // No #[State]: each render reads the current slide again (also after a push).
+    public function mount(): void
+    {
+        $this->load($this->navigator->current());
+    }
+
+    public function next(): void
+    {
+        $this->move($this->index + 1);
+    }
+
+    public function previous(): void
+    {
+        $this->move($this->index - 1);
+    }
+
+    public function first(): void
+    {
+        $this->move(0);
+    }
+
+    public function render(): Node
+    {
+        $speaker = Role::Speaker === $this->role;
+        $slide = $this->slide;
+        $number = $this->index + 1;
+        $total = $this->total;
+
+        return (
+            <section
+                id="deck"
+                className={{ ['relative flex h-full flex-col', speaker ? 'overflow-hidden' : 'min-h-dvh'] }}
+                data-controller={{ speaker ? 'deck-keys' : null }}
+                data-action={{ speaker ? 'keydown@window->deck-keys#press' : null }}
+                data-phem-transition
+            >
+                <div className="flex flex-1 items-center justify-center">
+                    {{ slide }}
+                </div>
+                {% if speaker %}
+                    <nav className="absolute right-4 bottom-4 flex items-center gap-2 text-sm text-slate-400 opacity-30 transition-opacity hover:opacity-100">
+                        <button type="button" onClick={{ first }} data-deck-keys-target="first" tabindex="-1" className="rounded px-2 py-1 hover:bg-slate-800" title="First slide (Home)">⇤</button>
+                        <button type="button" onClick={{ previous }} data-deck-keys-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-slate-800" title="Previous (←)">←</button>
+                        <span className="tabular-nums">{{ number }} / {{ total }}</span>
+                        <button type="button" onClick={{ next }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-slate-800" title="Next (→)">→</button>
+                    </nav>
+                {% else %}
+                    <footer className="px-4 py-3 text-center text-xs text-slate-500 tabular-nums">Slide {{ number }} / {{ total }}</footer>
+                {% endif %}
+            </section>
+        );
+    }
+
+    private function move(int $index): void
+    {
+        if (Role::Speaker !== $this->role || !$this->speakerAccess->granted()) {
+            throw new AccessDeniedHttpException('Only the speaker moves the slides.');
+        }
+
+        $this->load($this->navigator->go($index));
+    }
+
+    private function load(int $index): void
+    {
+        $this->index = $index;
+        $this->total = $this->navigator->count();
+        $this->slide = $this->navigator->slide($index);
+    }
+}

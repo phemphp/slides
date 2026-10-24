@@ -1,0 +1,10 @@
+# The dev server: the project is mounted, phemc and Tailwind build again on each change.
+# The live presentation uses compose.prod.yaml.
+name: slides-dev
+
+services:
+  app:
+    build: { context: ., target: dev }
+    ports: ["8080:8080"]
+    volumes:
+      - .:/app

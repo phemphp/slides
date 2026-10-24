@@ -1,0 +1,38 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use App\Audience\AudienceLink;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// The QR code and the URL of the audience view.
+#[Component]
+final class JoinQr
+{
+    private string $url = '';
+    private string $qrCode = '';
+
+    public function __construct(private readonly AudienceLink $link)
+    {
+    }
+
+    public function mount(): void
+    {
+        $this->url = $this->link->url();
+        $this->qrCode = $this->link->qrCode();
+    }
+
+    public function render(): Node
+    {
+        $url = $this->url;
+        $qrCode = $this->qrCode;
+
+        return (
+            <figure className="flex flex-col items-center gap-[1.5cqw]">
+                <img src={{ qrCode }} alt="QR code of the audience view" className="w-[22cqw] min-w-40 rounded-xl bg-white" />
+                <figcaption className="font-mono text-[1.8cqw] text-slate-300">{{ url }}</figcaption>
+            </figure>
+        );
+    }
+}

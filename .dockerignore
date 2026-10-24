@@ -1,0 +1,6 @@
+.git
+vendor
+var
+public/assets
+assets/vendor
+.env.local

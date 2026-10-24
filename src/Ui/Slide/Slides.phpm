@@ -1,0 +1,43 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{JoinQr, Slide};
+use Phem\Node;
+
+// The slides of the presentation, in their order. A slide is markup: it renders only when it is
+// the current slide. A dynamic slide is a component with its own handlers.
+final class Slides
+{
+    /**
+     * @return list<Node>
+     */
+    public function all(): array
+    {
+        return [
+            <Slide className="text-center">
+                <p className="text-[2cqw] uppercase tracking-[0.3em] text-fuchsia-400">Phem</p>
+                <h1 className="mt-[2cqw] text-[8cqw] font-black leading-none">Components for Symfony</h1>
+                <p className="mt-[3cqw] text-[2.5cqw] text-slate-400">A slide deck made with Phem, live.</p>
+            </Slide>,
+
+            <Slide className="flex flex-col items-center gap-[3cqw] text-center">
+                <h2 className="text-[5cqw] font-bold">Join on your phone</h2>
+                <JoinQr />
+            </Slide>,
+
+            <Slide>
+                <h2 className="text-[5cqw] font-bold">How this deck works</h2>
+                <ul className="mt-[3cqw] list-disc space-y-[1.5cqw] pl-[3cqw] text-[3cqw] text-slate-300">
+                    <li>Each slide is Phem markup.</li>
+                    <li>The speaker moves the slides with the keyboard.</li>
+                    <li>Your phone follows with Mercure, in real time.</li>
+                </ul>
+            </Slide>,
+
+            <Slide className="text-center">
+                <h2 className="text-[7cqw] font-black">Thank you!</h2>
+            </Slide>,
+        ];
+    }
+}

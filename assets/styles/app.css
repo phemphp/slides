@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* The .phpm sources have the classes of the slides. */
+@source "../../src";
+
+/* The slides change with a cross-fade (data-phem-transition). */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 250ms;
+}
+
+.phem-loading {
+    cursor: progress;
+}
