@@ -29,4 +29,16 @@ class Post
         public string $summary,
     ) {
     }
+
+    /**
+     * The post of the example slide (slide 3).
+     */
+    public static function example(): self
+    {
+        return new self(
+            title: 'Hello, components',
+            date: new \DateTimeImmutable('2026-10-22'),
+            summary: 'A short post with one button under it. You click it, the heart fills, and the server saves your like.',
+        );
+    }
 }

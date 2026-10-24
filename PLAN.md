@@ -29,19 +29,7 @@ second goal is to test Phem on a real app. Write each problem with Phem in the
 
 ## Phases
 
-### Phase 1: Foundation (done)
-
-- Symfony 8.1 + Phem 0.1.2, as in the getting-started guide of Phem.
-- Docker: `compose.yaml` (dev, watch mode) and `compose.prod.yaml` (the live presentation, prod
-  image, database in a volume).
-- SQLite (Doctrine ORM, migrations) and Tailwind CSS 4 (symfonycasts/tailwind-bundle).
-- The speaker and audience views, keyboard control, real-time sync, and the QR code
-  (`<JoinQr />`).
-- The slides of the talk "Cut the wires" (20 slides, ported from the slide artifact), the QR code
-  as slide 2 (the audience joins before the example), and one extra slide for reference: the
-  design system sheet.
-
-### Phase 2: Slide kit
+### Phase 1: Slide kit
 
 - Layout components: title, section, bullets, code (syntax highlight on the server), image, two
   columns, quote.
@@ -50,7 +38,7 @@ second goal is to test Phem on a real app. Write each problem with Phem in the
 - Theme: fonts, colors, the transition between the slides.
 - Optional: a presenter view (notes, next slide, timer) on the laptop, apart from the projector.
 
-### Phase 3: Dynamic slides
+### Phase 2: Dynamic slides
 
 - Decide the interactions of the talk (to do: you give the list).
 - Make one component for each interaction. It reads `Role` to show the audience part or the
@@ -58,16 +46,15 @@ second goal is to test Phem on a real app. Write each problem with Phem in the
 - Keep the data of the audience in SQLite. Push the changes with `Streams::refresh()`.
 - Add `#[RateLimit]` to the handlers of the audience.
 
-### Phase 4: Live hardening
+### Phase 3: Live hardening
 
 - Fix the lost push: a push between the page render and the Mercure connection does not arrive.
   Refresh the deck when the connection opens.
-- HTTPS for the phones (a tunnel such as Cloudflare Tunnel, or Caddy with a domain).
 - A load test: about 200 phones on the hub, and a burst of audience events.
 - A reset command (current slide 0, delete the data of the audience).
 - A fallback: a static export of the slides (PDF or HTML).
 
-### Phase 5: Review
+### Phase 4: Review
 
 - Read the friction log. Report the problems and the good points to the Phem project.
 

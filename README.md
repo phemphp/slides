@@ -3,10 +3,13 @@
 An interactive slide presentation made with Phem. Read [PLAN.md](PLAN.md) for the design and
 the phases.
 
+Run `make` to see the common tasks (start the dev server, run a console command, load the
+fixtures, run the tests, start the live presentation).
+
 ## Development
 
 ```sh
-docker compose up --build
+make up
 ```
 
 - Audience view: http://localhost:8080/
@@ -24,7 +27,27 @@ again when you save.
 Use the prod image. Give the URL that the phones can open (your LAN IP, or a tunnel):
 
 ```sh
-SPEAKER_KEY=<a secret> PUBLIC_URL=http://192.168.1.20:8080 docker compose -f compose.prod.yaml up --build
+SPEAKER_KEY=<a secret> PUBLIC_URL=http://192.168.1.20:8080 make live
 ```
 
 The SQLite database is in the `data` volume.
+
+### HTTPS with a Cloudflare Tunnel
+
+Use a tunnel when the phones are not on your LAN, or when the venue Wi-Fi isolates the clients.
+You need a Cloudflare account with a domain. A quick tunnel (`trycloudflare.com`) does not work:
+it does not support Server-Sent Events, so the slides do not follow the speaker.
+
+1. In the Cloudflare dashboard, go to Networking > Tunnels. Create a tunnel. On the install
+   page, select Docker and copy the token (the long `eyJ…` string after `--token`). Do not run
+   the command: `compose.prod.yaml` runs `cloudflared`.
+2. On the Routes tab of the tunnel, add a route of the type "Published application", for
+   example `slides.example.com`. Set the service URL to `http://app:8080`.
+3. Start the app and the tunnel:
+
+```sh
+SPEAKER_KEY=<a secret> TUNNEL_TOKEN=<the token> PUBLIC_URL=https://slides.example.com make live-tunnel
+```
+
+Open `https://slides.example.com/speaker?key=<a secret>` on the laptop. The QR code shows the
+HTTPS URL.

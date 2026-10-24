@@ -6,6 +6,8 @@ mkdir -p var/data
 php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 # The new tables (post) have no migration: update the schema directly.
 php bin/console doctrine:schema:update --force
+# The data that the slides need (the post of the example slide).
+php bin/console app:seed
 # Tailwind builds the CSS again when a class changes in the .phpm files.
 php bin/console tailwind:build --watch &
 # The workers restart when a PHP class in src/ changes.
