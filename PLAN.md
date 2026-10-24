@@ -37,7 +37,8 @@ second goal is to test Phem on a real app. Write each problem with Phem in the
 - SQLite (Doctrine ORM, migrations) and Tailwind CSS 4 (symfonycasts/tailwind-bundle).
 - The speaker and audience views, keyboard control, real-time sync, and the QR code
   (`<JoinQr />`).
-- Four example slides.
+- The slides of the talk "Cut the wires" (20 slides, ported from the slide artifact), and two
+  extra slides for reference: the QR code and the design system sheet.
 
 ### Phase 2: Slide kit
 

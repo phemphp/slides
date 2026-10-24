@@ -2,11 +2,12 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{BulletSlide, JoinQr, ListItem, Slide, SlideHeading, TitleSlide};
+use App\Ui\Component\{JoinQr, Slide, SlideHeading};
 use Phem\Node;
 
 // The slides of the presentation, in their order. A slide is markup: it renders only when it is
-// the current slide. A dynamic slide is a component with its own handlers.
+// the current slide. A dynamic slide is a component with its own handlers. The speaker notes are
+// the comments of the slide components.
 final class Slides
 {
     /**
@@ -15,13 +16,37 @@ final class Slides
     public function all(): array
     {
         return [
-            // To check the look of the design system. Remove it before the talk.
-            <DesignSheet />,
+            // Who I am and what this talk is about.
+            <Cover />,
 
-            <TitleSlide title="Phem" eyebrow="Phem, live">
-                Components for Symfony. <span className="ph-em">A slide deck made with Phem, live.</span>
-            </TitleSlide>,
+            // One like button, built the usual ways, and the wires it needs.
+            <Example />,
+            <JsonApi />,
+            <HtmlOverTheWire />,
+            <TwoFiles />,
+            <Wires />,
+            <Question />,
 
+            // The reveal: one PHP class holds the state, the actions and the markup.
+            <Reveal />,
+            <FunctionComponent />,
+            <ClassComponent />,
+            <Action />,
+            <Services />,
+            <TwigCompare />,
+
+            // How it works: compile to Twig, then events over HTTP.
+            <Compile />,
+            <EventFlow />,
+
+            // What changes for you, the limits, a live demo and the recap.
+            <WiresGone />,
+            <ReactMap />,
+            <TradeOffs />,
+            <Demo />,
+            <Thanks />,
+
+            // Extra slides, for reference.
             <Slide glowX="72%" glowY="50%" className="flex items-center justify-between">
                 <div>
                     <SlideHeading eyebrow="Phem, live">Join on your <span className="ph-em">phone</span></SlideHeading>
@@ -29,17 +54,7 @@ final class Slides
                 </div>
                 <JoinQr />
             </Slide>,
-
-            <BulletSlide eyebrow="Phem, live">
-                <BulletSlide:title>How this <span className="ph-em">deck</span> works</BulletSlide:title>
-                <ListItem icon="layers" title="Each slide is Phem markup." />
-                <ListItem icon="cursor" title="The speaker moves the slides with the keyboard." />
-                <ListItem icon="broadcast" title="Your phone follows with Mercure, in real time." active />
-            </BulletSlide>,
-
-            <Slide glowX="50%" glowY="50%" className="flex items-center justify-center">
-                <h2 className="ph-display">Thank you</h2>
-            </Slide>,
+            <DesignSheet />,
         ];
     }
 }

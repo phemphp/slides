@@ -5,10 +5,10 @@ namespace App\Ui\Component;
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// A row of a list: an orb (icon) or a StepMarker (step), a title and a second line. The active
-// row is a glass pill with the iridescent ring.
+// A row of a list: an orb (icon or number) or a StepMarker (step), a title and a second line.
+// The active row is a glass pill with the iridescent ring.
 #[Component]
-function ListItem(string $title, ?string $detail = null, string $icon = '', ?string $step = null, bool $active = false): Node
+function ListItem(string $title, ?string $detail = null, string $icon = '', ?string $number = null, ?string $step = null, bool $active = false): Node
 {
     $classes = ['ph-list-item', $active ? 'is-active' : '', $step ? 'pl-0' : ''];
 
@@ -17,7 +17,7 @@ function ListItem(string $title, ?string $detail = null, string $icon = '', ?str
             {% if step %}
                 <StepMarker>{{ step }}</StepMarker>
             {% else %}
-                <IconOrb icon={{ icon }} size="sm" active={{ active }} />
+                <IconOrb icon={{ icon }} number={{ number }} size="sm" active={{ active }} />
             {% endif %}
             <span className="ph-list-text">
                 {{ title }}
