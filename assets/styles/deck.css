@@ -128,3 +128,32 @@
 .ph-box.is-accent > .ph-eyebrow {
     color: var(--accent);
 }
+
+/* The live like button of the example slide: a primary button that glows more on hover and
+   gets darker on a click. The button does not move or change its size. The heart grows while
+   the button is down, then springs back on release. */
+.ph-like {
+    user-select: none;
+    transition: box-shadow 150ms ease, filter 150ms ease;
+}
+
+.ph-like:hover {
+    filter: brightness(1.12);
+    box-shadow: 0 0 36px rgba(255, 138, 42, 0.5);
+}
+
+.ph-like:active {
+    filter: brightness(0.95);
+    box-shadow: 0 0 16px rgba(255, 138, 42, 0.3), inset 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.ph-like-heart {
+    display: inline-block;
+    transition: transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ph-like:active .ph-like-heart {
+    transform: scale(1.4);
+    transition-duration: 100ms;
+    transition-timing-function: ease-out;
+}

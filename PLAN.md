@@ -81,3 +81,7 @@ Write each problem with Phem here: the date, what happened, and the work-around.
   page shows an old slide until the next push.
 - 2026-10-24: The Mercure `publisher_jwt` directive needs an `issuer` block in the new Mercure
   versions. The app does not need it: `mercure_publish()` publishes with no key.
+- 2026-10-24: A test that mounts a `#[Transactional]` component with an entity prop
+  (`mount(LikeButton::class, ['post' => $post])`) shows the new value, but saves nothing. The
+  event resets the services, so the prop is a detached entity and the flush ignores it. No
+  error tells you. Work-around: mount the parent that loads the entity (`Example`).

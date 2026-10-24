@@ -2,7 +2,9 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{Button, ListItem, Slide, SlideHeading};
+use App\Entity\Post;
+use App\Repository\PostRepository;
+use App\Ui\Component\{LikeButton, ListItem, Slide, SlideHeading};
 use Phem\Attribute\Component;
 use Phem\Node;
 
@@ -10,31 +12,51 @@ use Phem\Node;
 // (the heart fills), save it (the server stores the like), show it (the button shows the new
 // state). It is small on purpose: one piece of state, one action, one piece of markup. Ask the
 // room: how would you build this today? Keep the answer for the next slides.
+// The button is live: a click on any screen adds one like to the post in the database.
 #[Component]
-function Example(): Node
+final class Example
 {
-    return (
-        <Slide glowX="30%" glowY="60%">
-            <SlideHeading>A blog post with a <span className="ph-em">LikeButton</span></SlideHeading>
-            <div className="mt-[77px] grid grid-cols-[653px_1fr] items-start gap-12">
-                <div className="ph-preview overflow-hidden rounded-(--radius-lg) border border-(--edge)">
-                    <div className="ph-preview-bar">
-                        <span className="ph-url">localhost/posts/42</span>
-                        <span className="ph-live">Live</span>
+    private Post $post;
+
+    public function __construct(
+        private readonly PostRepository $posts,
+    ) {
+    }
+
+    public function mount(): void
+    {
+        $this->post = $this->posts->first();
+    }
+
+    public function render(): Node
+    {
+        $post = $this->post;
+
+        return (
+            <Slide glowX="30%" glowY="60%">
+                <SlideHeading>A blog post with a <span className="ph-em">LikeButton</span></SlideHeading>
+                <div className="mt-[77px] grid grid-cols-[653px_1fr] items-start gap-12">
+                    <div className="ph-preview overflow-hidden rounded-(--radius-lg) border border-(--edge)">
+                        <div className="ph-preview-bar">
+                            <span className="ph-url">localhost/posts/{{ post.id ?? 1 }}</span>
+                            <span className="ph-live">Live</span>
+                        </div>
+                        {% if post %}
+                            <div className="ph-preview-body">
+                                <p className="ph-eyebrow m-0">Blog · {{ post.date|date('j F') }}</p>
+                                <h3>{{ post.title }}</h3>
+                                <p className="mb-2 text-[20px] leading-[1.4] text-(--text-secondary)">{{ post.summary }}</p>
+                                <LikeButton post={{ post }} />
+                            </div>
+                        {% endif %}
                     </div>
-                    <div className="ph-preview-body">
-                        <p className="ph-eyebrow m-0">Blog · 22 October</p>
-                        <h3>Hello, components</h3>
-                        <p className="m-0 text-[20px] leading-[1.4] text-(--text-secondary)">A short post with one button under it. You click it, the heart fills, and the server saves your like.</p>
-                        <Button primary>♡ Like</Button>
-                    </div>
+                    <ul className="ph-list">
+                        <ListItem number="1" title="Click it" detail="The heart fills." active />
+                        <ListItem number="2" title="Save it" detail="The server stores the like." />
+                        <ListItem number="3" title="Show it" detail="The button shows the new state." />
+                    </ul>
                 </div>
-                <ul className="ph-list">
-                    <ListItem number="1" title="Click it" detail="The heart fills." active />
-                    <ListItem number="2" title="Save it" detail="The server stores the like." />
-                    <ListItem number="3" title="Show it" detail="The button shows the new state." />
-                </ul>
-            </div>
-        </Slide>
-    );
+            </Slide>
+        );
+    }
 }
