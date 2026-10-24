@@ -57,13 +57,13 @@ final class Deck
         return (
             <section
                 id="deck"
-                className={{ ['relative flex h-full flex-col', speaker ? 'overflow-hidden' : 'min-h-dvh'] }}
+                className={{ speaker ? 'relative flex h-full flex-col overflow-hidden' : 'ph-deck-audience' }}
                 data-controller={{ speaker ? 'deck-keys' : null }}
                 data-action={{ speaker ? 'keydown@window->deck-keys#press' : null }}
                 data-phem-transition
             >
-                <div className="flex flex-1 items-center justify-center">
-                    <div className="w-full max-w-[177.78vh]">{{ slide }}</div>
+                <div className="ph-deck-stage">
+                    <div>{{ slide }}</div>
                 </div>
                 {% if speaker %}
                     <nav className="absolute right-4 bottom-4 flex items-center gap-2 text-sm text-(--text-tertiary) opacity-30 transition-opacity hover:opacity-100">
@@ -72,8 +72,6 @@ final class Deck
                         <span className="tabular-nums">{{ number }} / {{ total }}</span>
                         <button type="button" onClick={{ next }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
                     </nav>
-                {% else %}
-                    <footer className="px-4 py-3 text-center text-xs text-(--text-tertiary) tabular-nums">Slide {{ number }} / {{ total }}</footer>
                 {% endif %}
             </section>
         );

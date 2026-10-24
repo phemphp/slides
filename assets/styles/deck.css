@@ -22,6 +22,56 @@
     scale: tan(atan2(100cqw, var(--frame-w)));
 }
 
+/* Safari computes atan2() wrong with relative units (a negative scale: the slide is not on the
+   screen). A browser that divides a length by a length uses the division. */
+@supports (scale: calc(1px / 1px)) {
+    .ph-frame > .ph-frame-content {
+        scale: calc(100cqw / var(--frame-w));
+    }
+}
+
+/* The area of the current slide in the deck: the slide is as big as the screen lets it be, at
+   16:9, and centered. The deck fills the screen, so --deck-height is the height of the screen. */
+.ph-deck-stage {
+    --deck-height: 100dvh;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+}
+
+.ph-deck-stage > * {
+    width: min(100%, var(--deck-height) * 16 / 9);
+}
+
+/* The audience view fills the screen. */
+.ph-deck-audience {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+/* On a phone held upright, a 16:9 slide gets only the short side of the screen. Turn the view a
+   quarter turn, so the slide uses the long side. The audience turns the phone to read it, also
+   with the rotation lock on. */
+@media (orientation: portrait) and (pointer: coarse) {
+    .ph-deck-audience {
+        position: fixed;
+        top: 0;
+        left: 100dvw;
+        width: 100dvh;
+        height: 100dvw;
+        transform-origin: 0 0;
+        rotate: 90deg;
+    }
+
+    .ph-deck-audience .ph-deck-stage {
+        --deck-height: 100dvw;
+    }
+}
+
 /* A small stage for one element, centered. */
 .ph-frame-stage {
     display: flex;
@@ -136,12 +186,18 @@
    the button is down, then springs back on release. */
 .ph-like {
     user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
     transition: box-shadow 150ms ease, filter 150ms ease;
 }
 
-.ph-like:hover {
-    filter: brightness(1.12);
-    box-shadow: 0 0 36px rgba(255, 138, 42, 0.5);
+/* A touch screen keeps :hover after a tap, so the hover glow is only for a mouse. */
+@media (hover: hover) {
+    .ph-like:hover {
+        filter: brightness(1.12);
+        box-shadow: 0 0 36px rgba(255, 138, 42, 0.5);
+    }
 }
 
 .ph-like:active {
