@@ -8,18 +8,15 @@ use Phem\Attribute\{Page, Subscribe};
 use Phem\Node;
 
 // The view of the audience (the QR code opens it): the current slide, and its interactive parts.
-#[Page('/', name: 'audience'), Subscribe]
-final class Audience
+#[Page('/'), Subscribe]
+function Audience(): Node
 {
-    public function render(): Node
-    {
-        $role = Role::Audience;
+    $role = Role::Audience;
 
-        return (
-            <Document>
-                <Document:title>Phem, live</Document:title>
-                <Deck role={{ role }} />
-            </Document>
-        );
-    }
+    return (
+        <Document>
+            <Document:title>Phem, live</Document:title>
+            <Deck role={{ role }} />
+        </Document>
+    );
 }

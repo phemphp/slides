@@ -9,18 +9,15 @@ use Phem\Node;
 
 // The view of the speaker (the projector): the keyboard moves the slides of all the screens.
 // App\Security\SpeakerAccess protects it.
-#[Page('/speaker', name: 'speaker'), Subscribe]
-final class Speaker
+#[Page('/speaker'), Subscribe]
+function Speaker(): Node
 {
-    public function render(): Node
-    {
-        $role = Role::Speaker;
+    $role = Role::Speaker;
 
-        return (
-            <Document>
-                <Document:title>Phem, live (speaker)</Document:title>
-                <Deck role={{ role }} />
-            </Document>
-        );
-    }
+    return (
+        <Document>
+            <Document:title>Phem, live (speaker)</Document:title>
+            <Deck role={{ role }} />
+        </Document>
+    );
 }

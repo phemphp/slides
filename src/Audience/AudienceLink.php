@@ -4,8 +4,11 @@ namespace App\Audience;
 
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Writer\SvgWriter;
+use Phem\Routing\PageName;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+use function App\Ui\Page\Audience;
 
 /**
  * The URL of the audience view, and its QR code.
@@ -25,7 +28,7 @@ final class AudienceLink
             return rtrim($this->publicUrl, '/').'/';
         }
 
-        return $this->urls->generate('audience', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        return $this->urls->generate(PageName::of(Audience(...)), [], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     /**
