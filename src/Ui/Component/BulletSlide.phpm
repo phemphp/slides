@@ -1,0 +1,18 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// A list of three to five topics (ListItem children) as orb rows: the agenda and the recaps.
+#[Component]
+function BulletSlide(Html $title, Html $children, string $eyebrow = '', ?string $footer = null, ?string $number = null): Node
+{
+    return (
+        <Slide glowX="16%" glowY="48%" footer={{ footer }} number={{ number }}>
+            <SlideHeading eyebrow={{ eyebrow }} className="mb-9">{{ title }}</SlideHeading>
+            <ul className="ph-list max-w-[760px]">{{ children }}</ul>
+        </Slide>
+    );
+}

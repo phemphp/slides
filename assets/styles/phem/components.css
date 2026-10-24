@@ -1,0 +1,934 @@
+/* Phem slides: glass, orbs and code on a dark stage. Every value comes from tokens.json (tokens.css loads first).
+   All classes start with ph- so they do not meet the type style classes of tokens.css. */
+
+/* ---------- Stage ---------- */
+
+body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+}
+
+.ph-stage {
+    padding: var(--space-48);
+}
+
+.ph-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-32);
+}
+
+.ph-slide {
+    position: relative;
+    box-sizing: border-box;
+    width: var(--slide-width);
+    height: var(--slide-height);
+    padding: var(--space-80);
+    overflow: hidden;
+    background: var(--canvas);
+    color: var(--text);
+    font-family: var(--font-sans);
+}
+
+/* The warm light behind the focal point. Move it with --glow-x and --glow-y. */
+.ph-slide::before {
+    content: "";
+    position: absolute;
+    left: var(--glow-x, 30%);
+    top: var(--glow-y, 45%);
+    width: 900px;
+    height: 900px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, var(--canvas-glow), transparent);
+    pointer-events: none;
+}
+
+.ph-slide > * {
+    position: relative;
+}
+
+.ph-eyebrow {
+    margin: 0 0 var(--space-16);
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.ph-title {
+    margin: 0;
+    font-size: 64px;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.ph-display {
+    margin: 0;
+    font-size: 112px;
+    line-height: 0.98;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+}
+
+.ph-lead {
+    margin: var(--space-16) 0 0;
+    font-size: 30px;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+.ph-em {
+    color: var(--accent);
+}
+
+.ph-em-cool {
+    color: var(--accent-cool);
+}
+
+.ph-code-inline {
+    padding: 0.08em 0.4em;
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    color: var(--text);
+    background: var(--surface-glass-strong);
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-sm);
+}
+
+.ph-footer {
+    position: absolute;
+    left: var(--space-80);
+    right: var(--space-80);
+    bottom: 36px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+/* ---------- Glass ---------- */
+
+.ph-glass {
+    background: linear-gradient(90deg, var(--surface-glass-strong), var(--surface-glass));
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-glass);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+}
+
+.ph-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-32);
+    padding: var(--space-16) var(--space-80) var(--space-16) var(--space-16);
+    border-radius: var(--radius-pill);
+    background: linear-gradient(90deg, var(--surface-glass-strong), var(--surface-glass));
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-glass);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+}
+
+.ph-pill-label {
+    font-size: 56px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--text);
+}
+
+.ph-pill-sm {
+    gap: var(--space-16);
+    padding: 10px var(--space-32) 10px 10px;
+}
+
+.ph-pill-sm .ph-pill-label {
+    font-size: 28px;
+}
+
+.ph-card {
+    padding: var(--space-32);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--surface-glass-strong), var(--surface-glass));
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-glass);
+}
+
+/* ---------- Orb: a metal icon on a sunken disc, inside a ring ---------- */
+
+.ph-orb {
+    --size: var(--orb-md);
+    --ring: var(--ring-width);
+    position: relative;
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+}
+
+.ph-orb-sm { --size: var(--orb-sm); --ring: 3px; }
+.ph-orb-lg { --size: var(--orb-lg); --ring: 9px; }
+
+.ph-orb-ring {
+    position: absolute;
+    inset: 0;
+    padding: var(--ring);
+    border-radius: 50%;
+    background: var(--edge-strong);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+}
+
+.ph-orb-disc {
+    position: absolute;
+    inset: calc(var(--ring) + var(--size) * 0.035);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 28%, var(--surface-glass-strong), transparent 70%), var(--orb);
+    box-shadow: var(--shadow-orb);
+}
+
+.ph-orb .ph-icon {
+    position: relative;
+    width: calc(var(--size) * 0.36);
+    height: calc(var(--size) * 0.36);
+}
+
+.ph-orb-num {
+    position: relative;
+    font-size: calc(var(--size) * 0.36);
+    font-weight: 700;
+    color: var(--metal-light);
+}
+
+/* The active orb: the iridescent ring, its bloom and the warm glow. */
+.ph-orb.is-active .ph-orb-ring,
+.ph-iris {
+    background: conic-gradient(from 0deg,
+        var(--iris-white) 0deg, var(--iris-yellow) 14deg, var(--iris-orange) 30deg, var(--iris-red) 50deg,
+        var(--surface) 72deg, var(--iris-blue) 96deg, var(--iris-cyan) 116deg, var(--iris-orange) 140deg,
+        var(--surface) 162deg, var(--iris-red) 184deg, var(--iris-white) 200deg, var(--iris-blue) 224deg,
+        var(--iris-violet) 248deg, var(--surface) 274deg, var(--iris-red) 294deg, var(--iris-blue) 318deg,
+        var(--iris-cyan) 338deg, var(--iris-white) 360deg);
+}
+
+.ph-orb.is-active .ph-orb-ring {
+    filter: saturate(1.2);
+}
+
+.ph-orb.is-active::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: var(--shadow-glow);
+}
+
+.ph-orb.is-active::after {
+    content: "";
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    top: calc(var(--ring) * -1.2);
+    height: calc(var(--ring) * 3.4);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--iris-white), transparent);
+    filter: blur(2px);
+}
+
+/* ---------- Icons: brushed metal through a mask ---------- */
+
+.ph-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(180deg, var(--metal-light) 0%, var(--metal-mid) 55%, var(--metal-dark) 100%);
+    -webkit-mask: var(--icon) center / contain no-repeat;
+    mask: var(--icon) center / contain no-repeat;
+}
+
+.ph-icon-home { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.6 23 12.2h-3.3V22h-5.4v-6.2H9.7V22H4.3v-9.8H1Z'/%3E%3C/svg%3E"); }
+.ph-icon-code { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 6 2 12l6 6M16 6l6 6-6 6M13.5 4l-3 16'/%3E%3C/svg%3E"); }
+.ph-icon-bolt { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 1 3.5 13.5H11L9.5 23 20.5 10H13Z'/%3E%3C/svg%3E"); }
+.ph-icon-layers { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 23 8l-11 6L1 8Z'/%3E%3Cpath d='m3.6 11.4 8.4 4.6 8.4-4.6L23 13l-11 6-11-6Z'/%3E%3Cpath d='m3.6 16.4 8.4 4.6 8.4-4.6L23 18l-11 6-11-6Z'/%3E%3C/svg%3E"); }
+.ph-icon-broadcast { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='2.6' fill='%23000'/%3E%3Cpath d='M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.6 4.6a10.5 10.5 0 0 0 0 14.8M19.4 4.6a10.5 10.5 0 0 1 0 14.8'/%3E%3C/svg%3E"); }
+.ph-icon-server { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M3 2.5h18a1.5 1.5 0 0 1 1.5 1.5v5A1.5 1.5 0 0 1 21 10.5H3A1.5 1.5 0 0 1 1.5 9V4A1.5 1.5 0 0 1 3 2.5Zm3 3a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM3 13.5h18a1.5 1.5 0 0 1 1.5 1.5v5a1.5 1.5 0 0 1-1.5 1.5H3A1.5 1.5 0 0 1 1.5 20v-5A1.5 1.5 0 0 1 3 13.5Zm3 3a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z'/%3E%3C/svg%3E"); }
+.ph-icon-cursor { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 2v18.5l5-4.6 3.4 7.6 3.3-1.5-3.4-7.4H19Z'/%3E%3C/svg%3E"); }
+.ph-icon-browser { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M3.5 2.5h17a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2h-17a2 2 0 0 1-2-2v-15a2 2 0 0 1 2-2Zm.5 6v10.5h16V8.5Zm1.5-4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm3 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z'/%3E%3C/svg%3E"); }
+
+/* ---------- Button ---------- */
+
+.ph-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-12);
+    padding: 14px 30px;
+    font: 500 22px/1.2 var(--font-sans);
+    color: var(--text);
+    background: linear-gradient(180deg, var(--surface-glass-strong), var(--surface-glass));
+    border: 1px solid var(--edge-strong);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 var(--edge-highlight);
+}
+
+.ph-button .ph-icon {
+    width: 22px;
+    height: 22px;
+}
+
+/* The primary button wears the iridescent ring as its border. */
+.ph-button-primary {
+    border: 2px solid transparent;
+    background:
+        linear-gradient(180deg, var(--surface-raised), var(--surface)) padding-box,
+        conic-gradient(from 0deg, var(--iris-white), var(--iris-yellow) 6%, var(--iris-orange) 12%, var(--iris-red) 22%,
+            var(--iris-violet) 38%, var(--iris-blue) 52%, var(--iris-cyan) 66%, var(--iris-orange) 80%, var(--iris-white)) border-box;
+    box-shadow: 0 0 24px rgba(255, 138, 42, 0.3);
+}
+
+.ph-button.is-pressed {
+    background: linear-gradient(180deg, var(--surface-glass), var(--surface-glass-strong));
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* A click marker: a flat transparent halo, a small dot and a mouse pointer that show where the user clicks. Put it in a positioned parent. */
+.ph-click {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: -32px 0 0 -32px;
+    border-radius: 50%;
+    background: rgba(255, 177, 92, 0.16);
+    pointer-events: none;
+    /* Always the top layer: notes, chips and glass panels never cover the click. */
+    z-index: 1000;
+}
+
+.ph-click::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    border-radius: 50%;
+    background: rgba(255, 177, 92, 0.6);
+}
+
+/* The mouse pointer: its tip sits at the center of the rings. */
+.ph-click::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 34px;
+    height: 34px;
+    margin: -2px 0 0 -6px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 2.5v17.2l4.4-4.1 3 6.8 3.1-1.4-3-6.7h6Z' fill='%23fff' stroke='%23050506' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+}
+
+/* ---------- Chip ---------- */
+
+.ph-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-12) var(--space-24);
+    font: 500 18px/1 var(--font-sans);
+    color: var(--text);
+    background: var(--surface-raised);
+    border: 1px solid var(--edge-strong);
+    border-radius: var(--radius-pill);
+}
+
+.ph-chip-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.ph-chip-mono {
+    font-family: var(--font-mono);
+    font-size: 17px;
+}
+
+/* ---------- Step marker ---------- */
+
+.ph-step {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    font: 700 20px/1 var(--font-sans);
+    color: var(--canvas);
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255, 177, 92, 0.18);
+}
+
+.ph-step-sm {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+    box-shadow: 0 0 0 3px rgba(255, 177, 92, 0.18);
+    vertical-align: middle;
+}
+
+.ph-step.is-cool {
+    background: var(--accent-cool);
+    box-shadow: 0 0 0 4px rgba(124, 200, 255, 0.18);
+}
+
+.ph-step.is-muted {
+    color: var(--text);
+    background: var(--surface-raised);
+    border: 1px solid var(--edge-strong);
+    box-shadow: none;
+}
+
+/* ---------- Arrows ---------- */
+
+/* A straight arrow with a label over it. Add .is-down for a vertical one. */
+.ph-arrow {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    gap: var(--space-8);
+    color: var(--text-secondary);
+}
+
+.ph-arrow-line {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+    background: currentColor;
+}
+
+.ph-arrow-line::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    border-top: 3px solid currentColor;
+    border-right: 3px solid currentColor;
+    border-radius: 2px;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.ph-arrow-label {
+    font: 500 17px/1.2 var(--font-mono);
+    white-space: nowrap;
+}
+
+.ph-arrow.is-back .ph-arrow-line::after {
+    right: auto;
+    left: -2px;
+    transform: translateY(-50%) rotate(-135deg);
+}
+
+.ph-arrow.is-dashed .ph-arrow-line {
+    background: repeating-linear-gradient(90deg, currentColor 0 12px, transparent 12px 20px);
+}
+
+.ph-arrow.is-accent { color: var(--accent); }
+.ph-arrow.is-cool { color: var(--accent-cool); }
+
+.ph-arrow.is-down {
+    flex-direction: row;
+    min-width: 0;
+    min-height: 100px;
+}
+
+.ph-arrow.is-down .ph-arrow-line {
+    width: 3px;
+    height: auto;
+    align-self: stretch;
+}
+
+.ph-arrow.is-down .ph-arrow-line::after {
+    right: 50%;
+    top: auto;
+    bottom: -2px;
+    transform: translateX(50%) rotate(135deg);
+}
+
+/* Curved arrows are inline SVG: <svg class="ph-arrow-svg"> with a path and the ph-head marker. */
+.ph-arrow-svg {
+    overflow: visible;
+    color: var(--text-secondary);
+}
+
+.ph-arrow-svg .ph-arrow-path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.ph-arrow-svg .ph-arrow-head {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: none;
+}
+
+.ph-arrow-svg.is-accent { color: var(--accent); }
+.ph-arrow-svg.is-cool { color: var(--accent-cool); }
+.ph-arrow-svg.is-dashed .ph-arrow-path { stroke-dasharray: 12 8; }
+
+/* ---------- Annotation and callout ---------- */
+
+.ph-note {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--space-16);
+    max-width: 420px;
+    padding: var(--space-16) var(--space-24) var(--space-16) var(--space-16);
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--text);
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--surface-glass-strong), var(--surface-glass));
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-glass);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+}
+
+.ph-note .ph-step {
+    margin-top: -2px;
+}
+
+.ph-note small {
+    display: block;
+    margin-top: 4px;
+    font-size: 18px;
+    color: var(--text-secondary);
+}
+
+.ph-callout {
+    display: flex;
+    gap: var(--space-24);
+    align-items: flex-start;
+    max-width: 760px;
+    padding: var(--space-32);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--surface-glass-strong), var(--surface-glass));
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-glass);
+}
+
+.ph-callout-title {
+    margin: 0 0 var(--space-8);
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.ph-callout-body {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.45;
+    color: var(--text-secondary);
+}
+
+.ph-callout.is-warning .ph-callout-title {
+    color: var(--danger);
+}
+
+/* ---------- Code window ---------- */
+
+.ph-window {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-window);
+}
+
+.ph-window-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-24);
+    height: 52px;
+    padding: 0 var(--space-24);
+    background: var(--surface-raised);
+    border-bottom: 1px solid var(--edge);
+}
+
+.ph-window-dots {
+    display: flex;
+    gap: var(--space-8);
+}
+
+.ph-window-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--edge-strong);
+}
+
+.ph-window-tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font: 500 16px/1.4 var(--font-mono);
+    color: var(--text-secondary);
+}
+
+.ph-window-tab.is-active {
+    color: var(--text);
+}
+
+.ph-window-tab.is-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--iris-cyan), var(--iris-white), var(--iris-orange));
+}
+
+.ph-window-meta {
+    margin-left: auto;
+}
+
+.ph-code {
+    margin: 0;
+    padding: var(--space-24) var(--space-24) var(--space-24) 0;
+    counter-reset: ph-line;
+    font: 400 21px/1.6 var(--font-mono);
+    color: var(--code-text);
+    tab-size: 4;
+    white-space: pre;
+    overflow: hidden;
+}
+
+.ph-code-lg {
+    font-size: 26px;
+    line-height: 1.55;
+}
+
+.ph-code-sm {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.ph-line {
+    position: relative;
+    display: block;
+    min-height: 1.6em;
+    padding-left: 4.2em;
+    padding-right: var(--space-24);
+}
+
+.ph-line::before {
+    counter-increment: ph-line;
+    content: counter(ph-line);
+    position: absolute;
+    left: 0;
+    width: 2.8em;
+    text-align: right;
+    color: var(--line-number);
+}
+
+.ph-code.no-numbers .ph-line {
+    padding-left: var(--space-24);
+}
+
+.ph-code.no-numbers .ph-line::before {
+    content: none;
+    counter-increment: ph-line;
+}
+
+.ph-line.is-focus { background: var(--line-focus); }
+.ph-code.has-focus .ph-line:not(.is-focus) { opacity: 0.45; }
+
+.ph-line.is-add { background: var(--diff-add); }
+.ph-line.is-del { background: var(--diff-del); }
+.ph-line.is-add::after,
+.ph-line.is-del::after {
+    position: absolute;
+    left: 3.3em;
+    font-weight: 700;
+}
+.ph-line.is-add::after { content: "+"; color: var(--success); }
+.ph-line.is-del::after { content: "-"; color: var(--danger); }
+
+/* A step marker or a short tag at the end of a line. */
+.ph-line .ph-step-sm,
+.ph-line-tag {
+    margin-left: var(--space-16);
+}
+
+.ph-line-tag {
+    padding: 2px 10px;
+    font: 600 14px/1.4 var(--font-sans);
+    letter-spacing: 0.04em;
+    color: var(--canvas);
+    background: var(--accent);
+    border-radius: var(--radius-pill);
+    vertical-align: 3px;
+}
+
+.tok-comment { color: var(--tok-comment); font-style: italic; }
+.tok-keyword { color: var(--tok-keyword); }
+.tok-string { color: var(--tok-string); }
+.tok-variable { color: var(--tok-variable); }
+.tok-function { color: var(--tok-function); }
+.tok-component { color: var(--tok-component); }
+.tok-tag { color: var(--tok-tag); }
+.tok-attr { color: var(--tok-attr); }
+.tok-number { color: var(--tok-number); }
+.tok-twig { color: var(--tok-twig); font-weight: 600; }
+.tok-attribute { color: var(--tok-attribute); }
+.tok-punct { color: var(--tok-punct); }
+
+/* ---------- Terminal ---------- */
+
+.ph-terminal {
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    box-shadow: var(--shadow-window);
+}
+
+.ph-terminal .ph-window-bar {
+    height: 44px;
+}
+
+.ph-terminal-body {
+    margin: 0;
+    padding: var(--space-24);
+    font: 400 20px/1.6 var(--font-mono);
+    color: var(--text-secondary);
+    white-space: pre;
+}
+
+.ph-prompt { color: var(--accent); }
+.ph-cmd { color: var(--text); }
+.ph-ok { color: var(--success); }
+.ph-err { color: var(--danger); }
+.ph-dim { color: var(--text-tertiary); }
+
+/* ---------- Sandbox: code and its running page side by side ---------- */
+
+.ph-sandbox {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--edge);
+    background: var(--surface);
+    box-shadow: var(--shadow-window);
+}
+
+.ph-sandbox > .ph-window {
+    border-radius: 0;
+    box-shadow: none;
+    border-right: 1px solid var(--edge);
+}
+
+.ph-preview {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(160deg, var(--surface-glass-strong), var(--surface-glass)), var(--canvas);
+}
+
+.ph-preview-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    height: 52px;
+    padding: 0 var(--space-16);
+    background: var(--surface-raised);
+    border-bottom: 1px solid var(--edge);
+}
+
+.ph-url {
+    flex: 1;
+    padding: 6px var(--space-16);
+    font: 500 15px/1.4 var(--font-mono);
+    color: var(--text-secondary);
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-pill);
+}
+
+.ph-live {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--success);
+}
+
+.ph-live::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+}
+
+.ph-preview-body {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-16);
+    padding: var(--space-32);
+}
+
+.ph-preview-body h3 {
+    margin: 0 0 var(--space-8);
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.ph-preview-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    padding: var(--space-16);
+    border-top: 1px solid var(--edge);
+}
+
+.ph-preview-status .ph-chip {
+    padding: 8px 14px;
+    font-size: 15px;
+}
+
+/* ---------- Lists and flows ---------- */
+
+.ph-list {
+    display: grid;
+    gap: var(--space-16);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ph-list-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-24);
+    padding: 10px var(--space-32) 10px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+}
+
+.ph-list-item.is-active {
+    background: linear-gradient(90deg, var(--surface-glass-strong), var(--surface-glass));
+    border-color: var(--edge);
+    box-shadow: var(--shadow-glass);
+}
+
+.ph-list-text {
+    font-size: 28px;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.ph-list-text small {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.ph-list-item:not(.is-active) .ph-list-text {
+    color: var(--text-secondary);
+}
+
+.ph-flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16);
+}
+
+.ph-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-16);
+    width: 180px;
+    text-align: center;
+}
+
+.ph-node-label {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.ph-node-caption {
+    margin-top: -8px;
+    font-size: 18px;
+    line-height: 1.35;
+    color: var(--text-secondary);
+}
+
+/* ---------- Slide layouts ---------- */
+
+.ph-split {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: var(--space-48);
+    align-items: center;
+    height: 100%;
+}
+
+.ph-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-32);
+    margin-top: var(--space-48);
+}
+
+.ph-compare > *,
+.ph-split > * {
+    min-width: 0;
+}
+
+.ph-compare-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-16);
+}

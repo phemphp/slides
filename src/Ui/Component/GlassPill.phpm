@@ -1,0 +1,21 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// The signature element: a glass pill with an icon orb and a large label (one or two words).
+#[Component]
+function GlassPill(string $label, string $icon, bool $active = false, bool $small = false, string $className = ''): Node
+{
+    $classes = ['ph-pill', $small ? 'ph-pill-sm' : '', $className];
+    $size = $small ? 'sm' : 'md';
+
+    return (
+        <div className={{ classes }}>
+            <IconOrb icon={{ icon }} size={{ size }} active={{ active }} />
+            <span className="ph-pill-label">{{ label }}</span>
+        </div>
+    );
+}

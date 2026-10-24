@@ -1,0 +1,21 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// The eyebrow and the title of a content slide. Highlight one phrase of the title with
+// <span className="ph-em">.
+#[Component]
+function SlideHeading(Html $children, string $eyebrow = '', string $className = ''): Node
+{
+    $classes = ['ph-title', $className];
+
+    return (
+        <>
+            {% if eyebrow %}<p className="ph-eyebrow">{{ eyebrow }}</p>{% endif %}
+            <h2 className={{ classes }}>{{ children }}</h2>
+        </>
+    );
+}

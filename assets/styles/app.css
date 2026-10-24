@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* The Phem design system (https://claude.ai/artifact/T5N2WpkFmnefFy1coMezsV): copy its files as
+   they are. The utilities of Tailwind come after its layer, so a class can change a component. */
+@import "./phem/tokens.css" layer(base);
+@import "./phem/components.css" layer(components);
+@import "./deck.css" layer(components);
+
 /* The .phpm sources have the classes of the slides. */
 @source "../../src";
 

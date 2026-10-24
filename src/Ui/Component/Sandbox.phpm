@@ -1,0 +1,28 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// The code (a CodeWindow, as children) and the page it renders (the preview slot), side by side.
+// The status slot has chips that tell what happened on the wire.
+#[Component]
+function Sandbox(string $url, Html $children, Html $preview, ?Html $status = null, string $className = ''): Node
+{
+    $classes = ['ph-sandbox', $className];
+
+    return (
+        <div className={{ classes }}>
+            {{ children }}
+            <div className="ph-preview">
+                <div className="ph-preview-bar">
+                    <span className="ph-url">{{ url }}</span>
+                    <span className="ph-live">Live</span>
+                </div>
+                <div className="ph-preview-body">{{ preview }}</div>
+                {% if status %}<div className="ph-preview-status">{{ status }}</div>{% endif %}
+            </div>
+        </div>
+    );
+}

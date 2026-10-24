@@ -1,0 +1,36 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// Two CodeWindows side by side: the familiar version (before) and the Phem version (after),
+// with the same names on both sides.
+#[Component]
+function ComparisonSlide(
+    Html $title,
+    Html $before,
+    Html $after,
+    string $beforeLabel,
+    string $afterLabel,
+    string $eyebrow = '',
+    ?string $footer = null,
+    ?string $number = null,
+): Node {
+    return (
+        <Slide glowX="78%" glowY="60%" footer={{ footer }} number={{ number }} className="pt-16">
+            <SlideHeading eyebrow={{ eyebrow }} className="text-[52px]">{{ title }}</SlideHeading>
+            <div className="ph-compare mt-9">
+                <div>
+                    <div className="ph-compare-head"><Chip dot="accent-cool">{{ beforeLabel }}</Chip></div>
+                    {{ before }}
+                </div>
+                <div>
+                    <div className="ph-compare-head"><Chip dot="accent">{{ afterLabel }}</Chip></div>
+                    {{ after }}
+                </div>
+            </div>
+        </Slide>
+    );
+}

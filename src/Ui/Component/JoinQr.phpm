@@ -13,8 +13,9 @@ final class JoinQr
     private string $url = '';
     private string $qrCode = '';
 
-    public function __construct(private readonly AudienceLink $link)
-    {
+    public function __construct(
+        private readonly AudienceLink $link,
+    ) {
     }
 
     public function mount(): void
@@ -29,9 +30,9 @@ final class JoinQr
         $qrCode = $this->qrCode;
 
         return (
-            <figure className="flex flex-col items-center gap-[1.5cqw]">
-                <img src={{ qrCode }} alt="QR code of the audience view" className="w-[22cqw] min-w-40 rounded-xl bg-white" />
-                <figcaption className="font-mono text-[1.8cqw] text-slate-300">{{ url }}</figcaption>
+            <figure className="flex flex-col items-center gap-6">
+                <img src={{ qrCode }} alt="QR code of the audience view" className="ph-qr" />
+                <figcaption><span className="ph-chip ph-chip-mono">{{ url }}</span></figcaption>
             </figure>
         );
     }

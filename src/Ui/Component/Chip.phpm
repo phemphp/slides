@@ -1,0 +1,22 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// A small pill for a name: a language, a tool, an attribute, a route. `dot` is the name of a
+// color token (tok-attribute, accent, ...). `mono` is for code names.
+#[Component]
+function Chip(Html $children, ?string $dot = null, bool $mono = false, string $className = ''): Node
+{
+    $classes = ['ph-chip', $mono ? 'ph-chip-mono' : '', $className];
+    $dotStyle = $dot ? sprintf('background: var(--%s);', $dot) : null;
+
+    return (
+        <span className={{ classes }}>
+            {% if dotStyle %}<span className="ph-chip-dot" style={{ dotStyle }}></span>{% endif %}
+            {{ children }}
+        </span>
+    );
+}

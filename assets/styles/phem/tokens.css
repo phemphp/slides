@@ -1,0 +1,187 @@
+/* Phem — generated from tokens.json */
+:root, [data-theme="dark"] {
+  --canvas: #050506; /* The slide background. Near-black, never pure #000, so the glow and the glass edges stay visible. */
+  --canvas-glow: rgba(255, 138, 61, 0.18); /* Warm radial light behind the focal point of a slide (an orb, a title). One glow for each slide. */
+  --surface-glass: rgba(255, 255, 255, 0.06); /* Fill of glass panels: pills, cards, the callout. Always with edge on top and over canvas. */
+  --surface-glass-strong: rgba(255, 255, 255, 0.1); /* Fill of a glass panel that sits on another glass panel, and the active row of a list. */
+  --surface: #141416; /* Solid panel where glass would hurt reading: the code window body behind long code. */
+  --surface-raised: #1c1c1f; /* Title bar of code windows and terminals; chips. */
+  --orb: #2a2a2e; /* Fill of the icon orb disc, under an inset shadow (shadow-orb). */
+  --edge: rgba(255, 255, 255, 0.1); /* 1px outline of glass panels and windows. Decorative: it does not carry meaning. */
+  --edge-strong: rgba(255, 255, 255, 0.18); /* 1px outline of chips and of an inactive orb ring. 1.6:1 on canvas, so a word or icon always comes with it. */
+  --edge-highlight: rgba(255, 255, 255, 0.28); /* The thin light along the top inside edge of glass, as in the pill of the reference. Use in inset shadows only. */
+  --text: #ffffff; /* Titles, labels and body text on canvas, surface-glass and surface (20.4:1 on canvas, 18.4:1 on surface). */
+  --text-secondary: #b4b6bd; /* Lead lines, captions under titles, the second line of a list item, on canvas, glass and surface (10.1:1 on canvas, 9.1:1 on surface). */
+  --text-tertiary: #858892; /* Slide numbers, footers, eyebrows, file paths, on canvas and surface (5.8:1 on canvas, 5.2:1 on surface). Not on orb (4.0:1). */
+  --metal-light: #f4f4f5; /* Top stop of the brushed-metal gradient of icons in orbs. */
+  --metal-mid: #d4d5d8; /* Middle stop of the metal gradient. */
+  --metal-dark: #a4a6ac; /* Bottom stop of the metal gradient. The darkest part of an icon is still 5.9:1 on orb. */
+  --iris-white: #fff4e2; /* The hot spot of the iridescent ring, at its top, where the light hits. */
+  --iris-orange: #ff8a2a; /* Ring stop; also the color of the warm glow. */
+  --iris-yellow: #ffd35e; /* Ring stop between white and orange. */
+  --iris-red: #ff3d55; /* Ring stop. */
+  --iris-violet: #8a5cff; /* Ring stop. */
+  --iris-blue: #2f6bff; /* Ring stop: the cool side of the ring. */
+  --iris-cyan: #3fd0ff; /* Ring stop next to the hot spot. */
+  --accent: #ffb15c; /* The one emphasis color in text: a highlighted word in a title, the active step number, a link. 11.3:1 on canvas. Use it once or twice on a slide. */
+  --accent-cool: #7cc8ff; /* Second emphasis, for the 'after' side of a comparison and for selected nodes in a flow. 11.2:1 on canvas. */
+  --success: #5ee38a; /* Text and markers for passing tests and added lines, with a + or a check. 12.4:1 on canvas. */
+  --danger: #ff6b78; /* Text and markers for errors and removed lines, with a - or a cross. 7.4:1 on canvas. Success is lighter (12.4:1), so the pair also differs in lightness. */
+  --diff-add: rgba(94, 227, 138, 0.12); /* Line background of an added line in a code window. */
+  --diff-del: rgba(255, 107, 120, 0.12); /* Line background of a removed line in a code window. */
+  --line-focus: rgba(255, 177, 92, 0.12); /* Line background of the lines a slide talks about. Pair it with dimmed other lines (opacity 0.45). */
+  --code-text: #e8e9ec; /* Plain code on surface (15.2:1). */
+  --line-number: #5f636d; /* Gutter numbers in a code window. Decorative: 3.1:1 on surface. */
+  --tok-keyword: #ff7aa8; /* PHP and Twig keywords (function, return, final, class, use) on surface. 7.5:1. */
+  --tok-twig: #ff7aa8; /* Twig delimiters {{ }} and {% %}, at weight 600, on surface. */
+  --tok-variable: #ffb15c; /* PHP variables ($count) on surface. The same amber as accent. */
+  --tok-string: #9ee493; /* String literals on surface. */
+  --tok-function: #7cc8ff; /* Function calls on surface. */
+  --tok-component: #5fdcf0; /* Component tags (<CountButton />) and capitalized calls on surface. */
+  --tok-tag: #78e6cb; /* HTML tags in markup literals on surface. */
+  --tok-attr: #ffd35e; /* Attribute and prop names in markup on surface. */
+  --tok-attribute: #b99cff; /* PHP attributes (#[Component], #[State], #[Page]) on surface. The PHP-violet of the system. */
+  --tok-number: #ff9e64; /* Number literals on surface. */
+  --tok-comment: #868a95; /* Comments, in italic, on surface (5.3:1). */
+  --tok-punct: #9ea2ad; /* Punctuation and tag brackets on surface. */
+  --logo-purple: #5b56b5; /* Body of the elephant in the Phem logo. For the logo badge and covers only. Never text: 3.3:1 on canvas. */
+  --logo-leaf: #a1e328; /* Leaves of the sprout in the Phem logo. For covers only. */
+  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 0 10px rgba(255, 255, 255, 0.025), 0 24px 60px rgba(0, 0, 0, 0.55); /* Glass pills and cards: the top highlight, the faint outer rim of the reference pill, and the drop shadow. */
+  --shadow-orb: inset 0 2px 8px rgba(0, 0, 0, 0.65), inset 0 -1px 0 rgba(255, 255, 255, 0.06), 0 1px 0 rgba(255, 255, 255, 0.08); /* The sunken disc of an icon orb. */
+  --shadow-glow: 0 0 28px 4px rgba(255, 138, 42, 0.45), 0 0 80px 24px rgba(255, 138, 42, 0.18); /* The warm glow around an active iridescent ring. Only the active orb on a slide gets it. */
+  --shadow-window: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06); /* Code windows and terminals. */
+}
+:root {
+  --space-8: 8px; /* Gap between a chip icon and its label; between gutter and code. */
+  --space-12: 12px; /* Gap between chips; padding of chips (with space-20 on the sides). */
+  --space-16: 16px; /* Gap between the orb ring and the pill edge; between an eyebrow and a title. */
+  --space-24: 24px; /* Padding of a code window body; gap between list items. */
+  --space-32: 32px; /* Gap between an orb and its label; padding of glass cards. */
+  --space-48: 48px; /* Gap between the two columns of a split slide; gap between a title and its content. */
+  --space-64: 64px; /* Gap between big blocks on a slide. */
+  --space-80: 80px; /* The safe margin of a slide on all four sides. Nothing but the glow and bleeding shapes goes outside it. */
+  --radius-sm: 10px; /* Line highlights, small badges inside code. */
+  --radius-md: 16px; /* Terminal windows, flow nodes. */
+  --radius-lg: 24px; /* Code windows and glass cards. */
+  --radius-pill: 999px; /* Glass pills, chips, orbs: every rounded control. The reference is built from pills and circles. */
+  --slide-width: 1280px; /* Width of the slide canvas. Slides are 16:9. */
+  --slide-height: 720px; /* Height of the slide canvas. */
+  --orb-sm: 64px; /* Orb in a chip row or a list item. */
+  --orb-md: 120px; /* Orb in a section pill or a flow node. */
+  --orb-lg: 200px; /* Orb on a title slide, as in the reference. */
+  --ring-width: 6px; /* Width of the iridescent ring around an orb (scale it with the orb: 3px at orb-sm, 9px at orb-lg). */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --text-display: 700 112px/0.98 var(--font-sans); /* The title slide only. One or two words. */
+  --text-slide-title: 700 64px/1.05 var(--font-sans); /* The title of a content slide. At most two lines. */
+  --text-pill-label: 500 56px/1 var(--font-sans); /* The label beside an orb in a glass pill, as in the reference image. */
+  --text-section-title: 600 48px/1.1 var(--font-sans); /* Headings inside a slide, and the label of a section slide pill. */
+  --text-lead: 400 30px/1.4 var(--font-sans); /* The one sentence under a slide title, in text-secondary. */
+  --text-point: 500 28px/1.4 var(--font-sans); /* A bullet point or list item. Its second line uses lead in text-secondary. */
+  --text-body: 400 24px/1.45 var(--font-sans); /* Text in callouts and card bodies. */
+  --text-caption: 400 20px/1.4 var(--font-sans); /* Labels under diagram nodes and figures, in text-secondary. */
+  --text-eyebrow: 600 16px/1.2 var(--font-sans); /* The small uppercase line over a slide title, and the footer, in text-tertiary. */
+  --text-chip-label: 500 18px/1 var(--font-sans); /* Text in chips (languages, versions, tools). */
+  --text-code-lg: 400 26px/1.55 var(--font-mono); /* A code slide with at most 12 lines. */
+  --text-code: 400 21px/1.6 var(--font-mono); /* Code windows with 13 to 20 lines, and split slides. */
+  --text-code-label: 500 16px/1.4 var(--font-mono); /* File tabs of code windows, terminal titles and inline file paths. */
+  --text-terminal: 400 20px/1.6 var(--font-mono); /* Commands and their output in a terminal window. */
+}
+.display {
+  font-family: var(--font-sans);
+  font-size: 112px;
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+.slide-title {
+  font-family: var(--font-sans);
+  font-size: 64px;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.pill-label {
+  font-family: var(--font-sans);
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.section-title {
+  font-family: var(--font-sans);
+  font-size: 48px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.lead {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.point {
+  font-family: var(--font-sans);
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.body {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.caption {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+.chip-label {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.code-lg {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.code {
+  font-family: var(--font-mono);
+  font-size: 21px;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.code-label {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.terminal {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0;
+}

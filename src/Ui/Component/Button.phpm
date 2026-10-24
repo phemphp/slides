@@ -1,0 +1,41 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// A glass button: the UI that the code on a slide renders. It is not a control of the deck.
+// `click` puts the click marker over it, at clickX and clickY.
+#[Component]
+function Button(
+    Html $children,
+    string $icon = '',
+    bool $primary = false,
+    bool $pressed = false,
+    bool $click = false,
+    string $clickX = '94%',
+    string $clickY = '88%',
+): Node {
+    $classes = ['ph-button', $primary ? 'ph-button-primary' : '', $pressed ? 'is-pressed' : ''];
+    $iconClass = $icon ? 'ph-icon ph-icon-'.$icon : null;
+    $clickStyle = sprintf('left: %s; top: %s;', $clickX, $clickY);
+
+    $button = (
+        <span className={{ classes }}>
+            {% if iconClass %}<span className={{ iconClass }}></span>{% endif %}
+            {{ children }}
+        </span>
+    );
+
+    if (!$click) {
+        return $button;
+    }
+
+    return (
+        <span className="relative inline-block">
+            {{ button }}
+            <span className="ph-click" style={{ clickStyle }}></span>
+        </span>
+    );
+}

@@ -1,0 +1,24 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// Text on the left (at most three ListItem steps, as children), code on the right (the code
+// slot), 4:8.
+#[Component]
+function SplitSlide(Html $title, Html $children, Html $code, string $eyebrow = '', ?string $footer = null, ?string $number = null): Node
+{
+    return (
+        <Slide glowX="20%" glowY="30%" footer={{ footer }} number={{ number }}>
+            <div className="ph-split">
+                <div>
+                    <SlideHeading eyebrow={{ eyebrow }}>{{ title }}</SlideHeading>
+                    <ul className="ph-list mt-10">{{ children }}</ul>
+                </div>
+                {{ code }}
+            </div>
+        </Slide>
+    );
+}

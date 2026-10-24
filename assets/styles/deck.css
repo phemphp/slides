@@ -1,0 +1,76 @@
+/* The parts of the deck that the design system does not have. */
+
+/* A frame scales a stage of a fixed size (1280×720 for a slide) to the width of its parent, so
+   the same slide fits the projector, a phone and a thumbnail. tan(atan2(a, b)) is a / b as a
+   number. */
+.ph-frame {
+    --frame-w: var(--slide-width);
+    --frame-h: var(--slide-height);
+    container-type: inline-size;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.ph-frame > .ph-frame-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--frame-w);
+    height: var(--frame-h);
+    transform-origin: 0 0;
+    scale: tan(atan2(100cqw, var(--frame-w)));
+}
+
+/* A small stage for one element, centered. */
+.ph-frame-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-24);
+    box-sizing: border-box;
+    padding: var(--space-32);
+    background: var(--canvas);
+}
+
+/* The design system sheet: one tile for each component. */
+.ph-sheet {
+    padding: var(--space-48);
+}
+
+.ph-sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-16);
+    margin-top: var(--space-24);
+}
+
+.ph-tile {
+    margin: 0;
+}
+
+.ph-tile-view {
+    overflow: hidden;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-sm);
+}
+
+.ph-tile-name {
+    margin-top: 6px;
+    font: 500 13px/1.2 var(--font-mono);
+    color: var(--text-secondary);
+}
+
+.ph-tile-group {
+    color: var(--text-tertiary);
+}
+
+/* The QR code of the audience view, on a white card so a phone camera reads it. */
+.ph-qr {
+    width: 300px;
+    padding: var(--space-16);
+    border-radius: var(--radius-lg);
+    background: var(--text);
+    box-shadow: var(--shadow-glass);
+}

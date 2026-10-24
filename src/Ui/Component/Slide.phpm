@@ -5,14 +5,29 @@ namespace App\Ui\Component;
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
-// The frame of a slide. The sizes use the width of the frame (cqw), so the same slide fits the
-// projector and a phone.
+// The frame of a slide: a 1280×720 stage that scales to the width of its parent, so the same
+// slide fits the projector, a phone and a thumbnail. Put the glow behind the focal point with
+// glowX and glowY.
 #[Component]
-function Slide(Html $children, string $className = ''): Node
-{
+function Slide(
+    Html $children,
+    string $glowX = '30%',
+    string $glowY = '45%',
+    ?string $footer = null,
+    ?string $number = null,
+    string $className = '',
+): Node {
+    $classes = ['ph-slide ph-frame-content', $className];
+    $style = sprintf('--glow-x: %s; --glow-y: %s;', $glowX, $glowY);
+
     return (
-        <article className={{ ['@container w-full max-w-[177.78vh] px-[6cqw] py-[4cqw]', className] }}>
-            {{ children }}
-        </article>
+        <div className="ph-frame">
+            <section className={{ classes }} style={{ style }}>
+                {{ children }}
+                {% if footer or number %}
+                    <div className="ph-footer"><span>{{ footer }}</span><span>{{ number }}</span></div>
+                {% endif %}
+            </section>
+        </div>
     );
 }

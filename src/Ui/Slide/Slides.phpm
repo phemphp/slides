@@ -2,7 +2,7 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{JoinQr, Slide};
+use App\Ui\Component\{BulletSlide, JoinQr, ListItem, Slide, SlideHeading, TitleSlide};
 use Phem\Node;
 
 // The slides of the presentation, in their order. A slide is markup: it renders only when it is
@@ -15,28 +15,30 @@ final class Slides
     public function all(): array
     {
         return [
-            <Slide className="text-center">
-                <p className="text-[2cqw] uppercase tracking-[0.3em] text-fuchsia-400">Phem</p>
-                <h1 className="mt-[2cqw] text-[8cqw] font-black leading-none">Components for Symfony</h1>
-                <p className="mt-[3cqw] text-[2.5cqw] text-slate-400">A slide deck made with Phem, live.</p>
-            </Slide>,
+            // To check the look of the design system. Remove it before the talk.
+            <DesignSheet />,
 
-            <Slide className="flex flex-col items-center gap-[3cqw] text-center">
-                <h2 className="text-[5cqw] font-bold">Join on your phone</h2>
+            <TitleSlide title="Phem" eyebrow="Phem, live">
+                Components for Symfony. <span className="ph-em">A slide deck made with Phem, live.</span>
+            </TitleSlide>,
+
+            <Slide glowX="72%" glowY="50%" className="flex items-center justify-between">
+                <div>
+                    <SlideHeading eyebrow="Phem, live">Join on your <span className="ph-em">phone</span></SlideHeading>
+                    <p className="ph-lead max-w-[520px]">Open the link or scan the code. Your screen follows the slides.</p>
+                </div>
                 <JoinQr />
             </Slide>,
 
-            <Slide>
-                <h2 className="text-[5cqw] font-bold">How this deck works</h2>
-                <ul className="mt-[3cqw] list-disc space-y-[1.5cqw] pl-[3cqw] text-[3cqw] text-slate-300">
-                    <li>Each slide is Phem markup.</li>
-                    <li>The speaker moves the slides with the keyboard.</li>
-                    <li>Your phone follows with Mercure, in real time.</li>
-                </ul>
-            </Slide>,
+            <BulletSlide eyebrow="Phem, live">
+                <BulletSlide:title>How this <span className="ph-em">deck</span> works</BulletSlide:title>
+                <ListItem icon="layers" title="Each slide is Phem markup." />
+                <ListItem icon="cursor" title="The speaker moves the slides with the keyboard." />
+                <ListItem icon="broadcast" title="Your phone follows with Mercure, in real time." active />
+            </BulletSlide>,
 
-            <Slide className="text-center">
-                <h2 className="text-[7cqw] font-black">Thank you!</h2>
+            <Slide glowX="50%" glowY="50%" className="flex items-center justify-center">
+                <h2 className="ph-display">Thank you</h2>
             </Slide>,
         ];
     }

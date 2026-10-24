@@ -1,0 +1,27 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// The Phem stack as two rows of chips: the server side, then the browser side.
+#[Component]
+function StackChips(): Node
+{
+    return (
+        <div className="grid gap-3">
+            <div className="ph-row gap-3">
+                <Chip dot="tok-attribute">PHP 8.5</Chip>
+                <Chip dot="metal-light">Symfony</Chip>
+                <Chip dot="tok-tag">Bundle</Chip>
+                <Chip dot="success">Twig</Chip>
+            </div>
+            <div className="ph-row gap-3">
+                <Chip dot="accent-cool">Turbo</Chip>
+                <Chip dot="accent">Stimulus</Chip>
+                <Chip dot="tok-keyword">Mercure</Chip>
+            </div>
+        </div>
+    );
+}
