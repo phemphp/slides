@@ -1,5 +1,5 @@
 # The common tasks of the project. Run "make" to see the list.
-#   Dev:  make up, make console c="debug:router", make test
+#   Dev:  make up (or make up-tunnel, with TUNNEL_TOKEN), make console c="debug:router", make test
 #   Live: SPEAKER_KEY=... PUBLIC_URL=... make live (or make live-tunnel, with TUNNEL_TOKEN)
 
 DEV  = docker compose
@@ -7,7 +7,7 @@ LIVE = docker compose -f compose.prod.yaml
 EXEC = $(DEV) exec app
 
 .DEFAULT_GOAL = help
-.PHONY: help up down logs sh console schema fixtures test live live-tunnel live-down live-logs
+.PHONY: help up up-tunnel down logs sh console schema fixtures test live live-tunnel live-down live-logs
 
 help: ## Show this list
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
@@ -17,11 +17,15 @@ help: ## Show this list
 up: ## Start the dev server in the background (http://localhost:8080)
 	$(DEV) up --build --detach
 
-down: ## Stop the dev server
-	$(DEV) down
+up-tunnel: ## Start the dev server with HTTPS (needs TUNNEL_TOKEN; stop the live presentation first)
+	@test -n "$(TUNNEL_TOKEN)" || { echo "Set TUNNEL_TOKEN: the token of the Cloudflare Tunnel"; exit 1; }
+	$(DEV) --profile tunnel up --build --detach
 
-logs: ## Follow the logs of the dev server
-	$(DEV) logs --follow
+down: ## Stop the dev server (and its tunnel)
+	$(DEV) --profile tunnel down
+
+logs: ## Follow the logs of the dev server (and its tunnel)
+	$(DEV) --profile tunnel logs --follow
 
 sh: ## Open a shell in the dev container
 	$(EXEC) bash

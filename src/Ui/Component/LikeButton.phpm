@@ -5,30 +5,45 @@ namespace App\Ui\Component;
 use App\Entity\Post;
 use Phem\Attribute\{Component, Prop, State, Transactional};
 use Phem\Node;
+use Phem\Stream\Streams;
 
+// A like on any screen shows on all the open screens: each one renders its button again.
 #[Component]
 final class LikeButton
 {
     #[Prop]
     public Post $post;
 
+    public function __construct(
+        private readonly Streams $streams,
+    ) {
+    }
+
     #[Transactional]
     public function like(): void
     {
         ++$this->post->likes;
+
+        $this->streams->everywhere()->refresh($this->id());
     }
 
     public function render(): Node
     {
+        $id = $this->id();
         $likes = $this->post->likes;
 
         return (
-            <button type="button" onClick={{ like }} className="ph-button ph-button-primary ph-like cursor-pointer">
+            <button id={{ id }} type="button" onClick={{ like }} className="ph-button ph-button-primary ph-like cursor-pointer">
                 <span><span className="ph-like-heart">{{ likes > 0 ? '♥' : '♡' }}</span> Like</span>
                 {% if likes > 0 %}
                     <span className="border-l border-(--edge-strong) pl-3 tabular-nums">{{ likes }}</span>
                 {% endif %}
             </button>
         );
+    }
+
+    private function id(): string
+    {
+        return 'like-'.$this->post->id;
     }
 }

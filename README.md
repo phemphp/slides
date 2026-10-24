@@ -22,6 +22,21 @@ Put each slide in its own file in `src/Ui/Slide/`, with its number as the prefix
 `01-Cover.phpm`). Then add it to the list in `src/Ui/Slide/Slides.phpm`. `phemc` and Tailwind build
 again when you save.
 
+### Development with the tunnel
+
+To test on phones during dev, use the tunnel of the live presentation (see
+[HTTPS with a Cloudflare Tunnel](#https-with-a-cloudflare-tunnel)). Its route goes to
+`http://app:8080`, and the dev app has the same service name. Stop the live presentation first
+(`make live-down`): two connectors with the same token share the traffic.
+
+```sh
+TUNNEL_TOKEN=<the token> make up-tunnel
+```
+
+Open `https://slides.example.com/speaker?key=dev`. The QR code shows the URL of the request, so
+open the speaker view through the tunnel, not through `localhost`. `make down` stops the app and
+the tunnel.
+
 ## The live presentation
 
 Use the prod image. Give the URL that the phones can open (your LAN IP, or a tunnel):
