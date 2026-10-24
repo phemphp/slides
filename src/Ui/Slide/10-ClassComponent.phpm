@@ -1,0 +1,47 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeSlide, CodeWindow};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// This is the real LikeButton of the quickstart. A .phpm file is a PHP file with markup
+// literals, the way a .jsx file is JavaScript with JSX. 1: #[Component] makes the class a
+// component. 2: #[State] makes $liked its state. 3: toggle() is an action, a plain method that
+// changes the state. 4: render() returns markup; inside it you write Twig, {{ }}, and
+// onClick={{ toggle }} passes the method itself. No template path, no variables array, no route.
+// Use it as <LikeButton />; each one keeps its own state.
+#[Component]
+function ClassComponent(): Node
+{
+    $code = <<<'PHP'
+        #[Component]
+        final class LikeButton {
+            #[State] public bool $liked = false;
+
+            public function toggle(): void {
+                $this->liked = !$this->liked;
+            }
+
+            public function render(): Node {
+                return <button onClick={{ toggle }}>
+                    {{ liked ? '♥ Liked' : '♡ Like' }}
+                </button>;
+            }
+        }
+        PHP;
+
+    return (
+        <CodeSlide eyebrow="Phem · a component" footer="One file · state, action and markup together">
+            <CodeSlide:title>A component is a <span className="ph-em">PHP class</span></CodeSlide:title>
+            <CodeWindow code={{ code }} file="src/Components/LikeButton.phpm" size="sm" focus={{ [1, 3, 5, 6, 10, 11] }} steps={{ {1: '1', 3: '2', 5: '3', 10: '4'} }} />
+            <CodeSlide:notes>
+                <Annotation step="1">A component</Annotation>
+                <Annotation step="2">State is a property</Annotation>
+                <Annotation step="3">An action is a method</Annotation>
+                <Annotation step="4">The markup uses both</Annotation>
+            </CodeSlide:notes>
+        </CodeSlide>
+    );
+}

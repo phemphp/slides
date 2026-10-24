@@ -1,0 +1,53 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Arrow, Chip, FlowNode, IconOrb, Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// The browser and the server of an approach: the browser sends a POST and gets the answer
+// (JSON or HTML). The server boxes are the children.
+#[Component]
+function Approach(Html $title, array $browser, string $answer, Html $children, ?Html $footer = null): Node
+{
+    return (
+        <Slide glowX="66%" glowY="44%">
+            <SlideHeading>{{ title }}</SlideHeading>
+            <div className="mt-12 flex items-center gap-4">
+                <div className="flex w-[280px] flex-col items-center gap-3">
+                    <FlowNode icon="browser" label="Browser" />
+                    {% for name in browser %}<Chip key={{ name }} mono>{{ name }}</Chip>{% endfor %}
+                </div>
+                <div className="grid w-[150px] gap-8">
+                    <Arrow label="POST" tone="accent" />
+                    <Arrow label={{ answer }} tone="cool" back />
+                </div>
+                <div className="ph-card grid flex-1 gap-4">
+                    <div className="flex items-center gap-4">
+                        <IconOrb icon="server" size="sm" active />
+                        <span className="ph-node-label">Server</span>
+                    </div>
+                    {{ children }}
+                </div>
+            </div>
+            {% if footer %}<div className="ph-footer"><span>{{ footer }}</span></div>{% endif %}
+        </Slide>
+    );
+}
+
+// A box of the server: a part of the code and its files (children). `accent` is the part that
+// the slide is about, `gone` a part that went away.
+#[Component]
+function Box(string $title, Html $children, bool $accent = false, bool $gone = false): Node
+{
+    $classes = ['ph-box', $accent ? 'is-accent' : '', $gone ? 'is-gone' : ''];
+    $titleClasses = ['ph-eyebrow', $gone ? 'line-through' : ''];
+
+    return (
+        <div className={{ classes }}>
+            <p className={{ titleClasses }}>{{ title }}</p>
+            <div className="flex flex-wrap gap-3">{{ children }}</div>
+        </div>
+    );
+}

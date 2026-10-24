@@ -1,0 +1,37 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{GlassPill, Slide, Terminal};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// Demo script, about 5 minutes. 1. make up, open /examples/Profile: click the LikeButton, the
+// heart fills; show the request in the network tab: one POST with the handler name. 2. Open
+// LikeButton.phpm side by side, change the label, save: phemc watch rebuilds, reload. 3. Open
+// /examples/CounterSeparate: two Counter components, each keeps its own state. 4. Make a typo in
+// a component name and show the phemc error with the line and column. Backup: a recording of
+// the same steps, in case the network fails.
+#[Component]
+function Demo(): Node
+{
+    $lines = [
+        ['cmd', 'make up'],
+        ['ok', 'phemc watch'],
+        ['ok', 'FrankenPHP, worker mode'],
+        ['ok', 'localhost:8080'],
+        ['out', ''],
+        ['cmd', 'open /examples/Profile'],
+        ['cmd', 'open /examples/CounterSeparate'],
+    ];
+
+    return (
+        <Slide glowX="22%" glowY="42%" footer="examples/quickstart" className="grid grid-cols-[1fr_560px] items-center gap-16">
+            <div>
+                <GlassPill label="Live demo" icon="play" active />
+                <p className="ph-lead mt-12">Two like buttons, two counters. Each one keeps its own state.</p>
+            </div>
+            <Terminal title="phem — zsh" lines={{ lines }} />
+        </Slide>
+    );
+}

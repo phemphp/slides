@@ -1,0 +1,38 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Callout, Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// Read the table as a list of contracts. Each row is a name written twice, in two places, with
+// no compiler between them. This is the moment to ask: what if the markup and the PHP that drives
+// it were one thing, so that these names are just PHP? Pause, then go to the next slide.
+#[Component]
+function Wires(): Node
+{
+    $wires = [
+        ['wire' => 'template', 'php' => "render('like/_button.html.twig')", 'twig' => 'the file path'],
+        ['wire' => 'variables', 'php' => "'liked' => \$post->isLiked()", 'twig' => '{{ liked }}'],
+        ['wire' => 'route', 'php' => "name: 'like'", 'twig' => "path('like', …)"],
+        ['wire' => 'parameters', 'php' => "'/like/{id}'", 'twig' => '{id: id}'],
+    ];
+
+    return (
+        <Slide glowX="40%" glowY="45%" footer="The glue that is left after approach 2">
+            <SlideHeading eyebrow="The problem · 5">Each wire is a <span className="ph-em">string</span> nobody checks</SlideHeading>
+            <table className="ph-table mt-12">
+                <tr><th className="w-[18%]">wire</th><th className="w-[41%]">in PHP</th><th>in Twig</th></tr>
+                {% for row in wires %}
+                    <tr key={{ row.wire }}><td>{{ row.wire }}</td><td>{{ row.php }}</td><td>{{ row.twig }}</td></tr>
+                {% endfor %}
+            </table>
+            <div className="mt-6">
+                <Callout title="A typo is a runtime error" icon="warning" warning>
+                    Or a button that does not update and says nothing.
+                </Callout>
+            </div>
+        </Slide>
+    );
+}

@@ -2,12 +2,12 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{JoinQr, Slide, SlideHeading};
 use Phem\Node;
 
-// The slides of the presentation, in their order. A slide is markup: it renders only when it is
-// the current slide. A dynamic slide is a component with its own handlers. The speaker notes are
-// the comments of the slide components.
+// The slides of the presentation, in their order. Each slide has its own file, with its number
+// as the prefix. A slide is markup: it renders only when it is the current slide. A dynamic slide
+// is a component with its own handlers. The speaker notes are the comments of the slide
+// components.
 final class Slides
 {
     /**
@@ -47,13 +47,7 @@ final class Slides
             <Thanks />,
 
             // Extra slides, for reference.
-            <Slide glowX="72%" glowY="50%" className="flex items-center justify-between">
-                <div>
-                    <SlideHeading eyebrow="Phem, live">Join on your <span className="ph-em">phone</span></SlideHeading>
-                    <p className="ph-lead max-w-[520px]">Open the link or scan the code. Your screen follows the slides.</p>
-                </div>
-                <JoinQr />
-            </Slide>,
+            <Join />,
             <DesignSheet />,
         ];
     }

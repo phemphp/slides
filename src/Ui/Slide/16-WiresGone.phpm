@@ -1,0 +1,51 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// Go back to the table of wires from the problem part. Each string now has a PHP name, so your
+// IDE and phemc see it: an unknown component or prop is E010–E015, an undefined variable in
+// markup is E030. No route and no route parameter: the button knows its own state, and the
+// browser sends it back with each event. The counter: three places for the like count, and two
+// of them are the database. Be honest: the win is less about the count and more that the
+// remaining places are checked.
+#[Component]
+function WiresGone(): Node
+{
+    $rows = [
+        ["render('…/_button.html.twig')", 'render()'],
+        ["'liked' => \$post->isLiked()", '#[State] $liked'],
+        ["name: 'like', path('like')", 'onClick={{ toggle }}'],
+        ["'/like/{id}', {id: id}", 'the state of the button'],
+    ];
+
+    $counts = [
+        ['label' => 'JSON API', 'places' => 9, 'phem' => false],
+        ['label' => 'HTML over the wire', 'places' => 4, 'phem' => false],
+        ['label' => 'Phem', 'places' => 3, 'phem' => true],
+    ];
+
+    return (
+        <Slide glowX="70%" glowY="50%" footer="Each string becomes PHP · phemc checks it before you run it">
+            <SlideHeading eyebrow="What changes for you">Where the <span className="ph-em">wires</span> went</SlideHeading>
+            <div className="mt-9">
+                <Mapping from="Approach 2" to="Phem" rows={{ rows }} />
+            </div>
+            <div className="ph-card mt-8 flex items-center gap-12 py-5">
+                <div className="flex-1">
+                    <p className="ph-eyebrow m-0">The like count</p>
+                    <p className="m-0 mt-2 [font:var(--text-caption)] text-(--text-secondary)">Entity, migration, one .phpm file.</p>
+                </div>
+                {% for count in counts %}
+                    <p key={{ count.label }} className={{ ['m-0 flex items-baseline gap-4 [font:var(--text-body)]', count.phem ? '' : 'text-(--text-secondary)'] }}>
+                        {{ count.label }}
+                        <span className={{ ['leading-none font-bold', count.phem ? 'ph-em text-[64px]' : 'text-[48px]'] }}>{{ count.places }}</span>
+                    </p>
+                {% endfor %}
+            </div>
+        </Slide>
+    );
+}

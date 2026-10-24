@@ -15,7 +15,9 @@ docker compose up --build
 Keys of the speaker view: `→` `↓` `PageDown` `Space` `n` (next), `←` `↑` `PageUp` `p`
 (previous), `Home` (first slide).
 
-Add the slides in `src/Ui/Slide/Slides.phpm`. `phemc` and Tailwind build again when you save.
+Put each slide in its own file in `src/Ui/Slide/`, with its number as the prefix (for example
+`01-Cover.phpm`). Then add it to the list in `src/Ui/Slide/Slides.phpm`. `phemc` and Tailwind build
+again when you save.
 
 ## The live presentation
 

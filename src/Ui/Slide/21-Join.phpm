@@ -1,0 +1,22 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{JoinQr, Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// Extra slide: the audience joins on their phones. The QR code opens the audience view.
+#[Component]
+function Join(): Node
+{
+    return (
+        <Slide glowX="72%" glowY="50%" className="flex items-center justify-between">
+            <div>
+                <SlideHeading eyebrow="Phem, live">Join on your <span className="ph-em">phone</span></SlideHeading>
+                <p className="ph-lead max-w-[520px]">Open the link or scan the code. Your screen follows the slides.</p>
+            </div>
+            <JoinQr />
+        </Slide>
+    );
+}

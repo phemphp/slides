@@ -1,0 +1,50 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{CodeWindow, Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// Here is the like button with approach 2. It is one thing in our heads: a component with state,
+// an action and markup. In the code it is two files, in two languages, and they know each other
+// only by strings: the route name and its parameter, the template path, and the variable names.
+// Rename "liked" on one side and you find out at runtime. The highlighted lines are the lines
+// with a wire.
+#[Component]
+function TwoFiles(): Node
+{
+    $controller = <<<'PHP'
+        #[Route('/like/{id}', name: 'like')]
+        public function like(Post $post): Response
+        {
+            $post->toggleLike();
+
+            return $this->render(
+                'like/_button.html.twig', [
+                    'id' => $post->getId(),
+                    'liked' => $post->isLiked(),
+                ],
+            );
+        }
+        PHP;
+
+    $template = <<<'TWIG'
+        <form method="post"
+          action="{{ path('like', {id: id}) }}">
+          <button>
+            {{ liked ? '♥ Liked' : '♡ Like' }}
+          </button>
+        </form>
+        TWIG;
+
+    return (
+        <Slide glowX="50%" glowY="60%" footer="In amber: strings that link the two files">
+            <SlideHeading>Two files for <span className="ph-em">one component</span></SlideHeading>
+            <div className="mt-12 grid grid-cols-2 items-start gap-8">
+                <CodeWindow code={{ controller }} file="LikeController.php" size="sm" focus={{ [1, 7, 8, 9, 10] }} />
+                <CodeWindow code={{ template }} file="like/_button.html.twig" size="sm" focus={{ [2, 4] }} />
+            </div>
+        </Slide>
+    );
+}

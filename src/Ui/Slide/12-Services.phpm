@@ -1,0 +1,47 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{CodeWindow, ListItem, SplitSlide};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// This answers "where does the like get saved?". LikePostButton gets a Post entity as a prop, and
+// the entity has a liked bool property. A component class is a Symfony service, so its
+// constructor gets the services it needs (autowiring). 1: the Post comes in as a prop:
+// <LikePostButton post={{ post }} />. 2: the PostRepository comes in the constructor. 3: the
+// handler flips $post->liked and saves it. With Doctrine ORM, each handler runs in a transaction:
+// Phem flushes and commits when the handler returns. This is the server action, with no API
+// between it and the button.
+#[Component]
+function Services(): Node
+{
+    $code = <<<'PHP'
+        #[Component]
+        final class LikePostButton {
+            #[Prop] public Post $post;
+
+            public function __construct(
+                private PostRepository $posts,
+            ) {}
+
+            public function toggle(): void {
+                $this->post->liked = !$this->post->liked;
+                $this->posts->save($this->post);
+            }
+            // render(): {{ post.liked ? '♥ Liked' : '♡ Like' }}
+        }
+        PHP;
+
+    return (
+        <SplitSlide eyebrow="Phem · services" footer="The handler is plain PHP · call any service">
+            <SplitSlide:title>Components are <span className="ph-em">services</span></SplitSlide:title>
+            <ListItem step="1" title="A Post entity as a prop" />
+            <ListItem step="2" title="Autowired by Symfony" />
+            <ListItem step="3" title="Saved in the handler" />
+            <SplitSlide:code>
+                <CodeWindow code={{ code }} file="src/Components/LikePostButton.phpm" size="sm" focus={{ [3, 5, 6, 7, 11] }} steps={{ {3: '1', 6: '2', 11: '3'} }} />
+            </SplitSlide:code>
+        </SplitSlide>
+    );
+}

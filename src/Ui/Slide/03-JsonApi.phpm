@@ -1,0 +1,39 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\Chip;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// The most common answer today. The UI is a JavaScript app in the browser. On the server, a JSON
+// API layer sits in front of the controller, the model and the repository. Everything that
+// crosses the wire needs a contract: routes, DTOs, serializer groups, an error format, types on
+// the other side and a client. It works, but one button now has two codebases.
+//
+// Then the running task: "Show how many people liked the post." One number next to the heart.
+// Count the places with the room. This counter comes back twice: after approach 2, and after
+// the reveal. The exact number depends on your stack; the point is the shape: every field
+// crosses the wire, so every field exists twice.
+#[Component]
+function JsonApi(): Node
+{
+    $browser = ['Node', 'React', 'LikePostButton.tsx'];
+
+    return (
+        <Approach browser={{ browser }} answer="JSON">
+            <Approach:title>Approach 1: <span className="ph-em">JSON API</span> layer</Approach:title>
+            <Box title="API layer" accent>
+                <Chip mono>POST /api/likes</Chip>
+                <Chip mono>JSON</Chip>
+                <Chip mono>Serializer</Chip>
+                <Chip mono>LikePayload</Chip>
+            </Box>
+            <Box title="Controller · model · repository">
+                <Chip mono>LikeController.php</Chip>
+                <Chip mono>Post.php</Chip>
+                <Chip mono>PostRepository.php</Chip>
+            </Box>
+        </Approach>
+    );
+}

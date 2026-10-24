@@ -1,0 +1,37 @@
+<?phpm
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// Say these before someone asks. Each event is a round trip: about 1 ms on the server, plus the
+// network. Animations, drag and drop or anything that must feel instant stays in a normal
+// Stimulus controller. State must be JSON values. There is no useEffect, because there is no
+// long-lived component on the server. render() must be pure, because Phem renders only the
+// components that can change and keeps the others. The project has no release yet.
+#[Component]
+function TradeOffs(): Node
+{
+    $tradeOffs = [
+        ['title' => 'Each event is a round trip', 'body' => 'Browser-only logic stays in a Stimulus controller.'],
+        ['title' => 'State is JSON', 'body' => 'Closures, objects and services are not state.'],
+        ['title' => 'No useEffect', 'body' => 'The server keeps no session between events.'],
+        ['title' => 'render() must be pure', 'body' => 'Phem skips the components that cannot change.'],
+    ];
+
+    return (
+        <Slide glowX="30%" glowY="50%" footer="No release yet · the API can still change">
+            <SlideHeading eyebrow="What changes for you">The <span className="ph-em">trade-offs</span></SlideHeading>
+            <div className="mt-12 grid grid-cols-2 gap-8">
+                {% for item in tradeOffs %}
+                    <div key={{ item.title }} className="ph-card">
+                        <p className="ph-callout-title">{{ item.title }}</p>
+                        <p className="ph-callout-body">{{ item.body }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </Slide>
+    );
+}
