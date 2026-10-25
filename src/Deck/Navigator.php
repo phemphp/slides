@@ -3,6 +3,7 @@
 namespace App\Deck;
 
 use App\Repository\PresentationRepository;
+use App\Ui\Component\Deck;
 use App\Ui\Slide\Slides;
 use Phem\Node;
 use Phem\Stream\Streams;
@@ -42,8 +43,7 @@ final class Navigator
         $presentation->slide = $this->clamp($index);
         $this->presentation->save($presentation);
 
-        // Each open page (speaker and audience) renders its deck again.
-        $this->streams->everywhere()->refresh('deck');
+        $this->streams->toComponent(Deck::class)->refresh('deck');
 
         return $presentation->slide;
     }

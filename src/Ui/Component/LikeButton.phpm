@@ -8,6 +8,8 @@ use Phem\Node;
 use Phem\Stream\Streams;
 
 // A like on any screen shows on all the open screens: each one renders its button again.
+// No #[Subscribe] here: the button renders first in an event (a move of the deck), and such a
+// component gets no pushes. The pages subscribe, and everywhere() reaches them.
 #[Component]
 final class LikeButton
 {

@@ -4,13 +4,14 @@ namespace App\Ui\Component;
 
 use App\Deck\{Navigator, Role};
 use App\Security\SpeakerAccess;
-use Phem\Attribute\{Component, Prop, Provide};
+use Phem\Attribute\{Component, Prop, Provide, Subscribe};
 use Phem\Node;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 // The current slide of the presentation. The speaker moves it: the other screens follow.
 // A dynamic slide reads the role (#[Context] Role) to show the speaker or the audience part.
-#[Component]
+// #[Subscribe]: each page that renders the deck gets the moves (see Navigator::go()).
+#[Component, Subscribe]
 final class Deck
 {
     #[Prop, Provide] 

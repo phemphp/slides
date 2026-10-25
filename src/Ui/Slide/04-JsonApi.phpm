@@ -27,7 +27,6 @@ function JsonApi(): Node
                 <Chip mono>POST /api/likes</Chip>
                 <Chip mono>JSON</Chip>
                 <Chip mono>Serializer</Chip>
-                <Chip mono>LikePayload</Chip>
             </Box>
             <Box title="Controller · model · repository">
                 <Chip mono>LikeController.php</Chip>
