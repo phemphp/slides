@@ -30,12 +30,14 @@ To test on phones during dev, use the tunnel of the live presentation (see
 (`make live-down`): two connectors with the same token share the traffic.
 
 ```sh
-TUNNEL_TOKEN=<the token> make up-tunnel
+SPEAKER_KEY=<a secret> TUNNEL_TOKEN=<the token> make up-tunnel
 ```
 
-Open `https://slides.example.com/speaker?key=dev`. The QR code shows the URL of the request, so
-open the speaker view through the tunnel, not through `localhost`. `make down` stops the app and
-the tunnel.
+The tunnel is public, so `make up-tunnel` needs a secret key (not the `dev` key of `.env.dev`).
+Open `https://slides.example.com/speaker?key=<the secret>`. The QR code shows the URL of the
+request, so open the speaker view through the tunnel, not through `localhost`. Through the
+tunnel, the dev server has no profiler and no debug toolbar: use `localhost:8080` for them.
+`make down` stops the app and the tunnel.
 
 ## The live presentation
 

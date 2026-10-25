@@ -1,5 +1,5 @@
 # The common tasks of the project. Run "make" to see the list.
-#   Dev:  make up (or make up-tunnel, with TUNNEL_TOKEN), make console c="debug:router", make test
+#   Dev:  make up (or make up-tunnel, with TUNNEL_TOKEN and SPEAKER_KEY), make console c="debug:router", make test
 #   Live: SPEAKER_KEY=... PUBLIC_URL=... make live (or make live-tunnel, with TUNNEL_TOKEN)
 
 DEV  = docker compose
@@ -17,8 +17,9 @@ help: ## Show this list
 up: ## Start the dev server in the background (http://localhost:8080)
 	$(DEV) up --build --detach
 
-up-tunnel: ## Start the dev server with HTTPS (needs TUNNEL_TOKEN; stop the live presentation first)
+up-tunnel: ## Start the dev server with HTTPS (needs TUNNEL_TOKEN and SPEAKER_KEY; stop the live presentation first)
 	@test -n "$(TUNNEL_TOKEN)" || { echo "Set TUNNEL_TOKEN: the token of the Cloudflare Tunnel"; exit 1; }
+	@test -n "$(SPEAKER_KEY)" -a "$(SPEAKER_KEY)" != "dev" || { echo "Set SPEAKER_KEY to a secret: the tunnel is public, and the dev key is in git"; exit 1; }
 	$(DEV) --profile tunnel up --build --detach
 
 down: ## Stop the dev server (and its tunnel)
