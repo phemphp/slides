@@ -20,7 +20,7 @@ second goal is to test Phem on a real app. Write each problem with Phem in the
   database again.
 - On the speaker view, the `deck-keys` Stimulus controller changes a key into a click on a hidden
   button. The click is a normal Phem event (`next`, `previous`, `first`).
-- `Navigator::go()` saves the index and pushes `refresh('deck')` to all the `#[Subscribe]`
+- `Navigator::go()` saves the index and pushes `refresh('deck')` to all the `#[Broadcast]`
   pages. Each browser then renders its deck again through the Mercure hub of FrankenPHP.
 - `SpeakerAccess` gives the speaker access through the session. Without it, `/speaker` is a 404.
   The handlers check the access again.

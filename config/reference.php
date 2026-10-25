@@ -748,7 +748,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     state_cache_min_size?: int|Param, // The bytes of the smallest state that the cache.phem.state pool keeps. An event sends a smaller state with its signature: no request more on a miss, and no cache write. 0 keeps all the states. // Default: 4096
  *     max_event_size?: int|Param, // The maximum size of an event body in bytes, with the state of the page (0 for no limit). A larger event gets a 413 response. // Default: 1048576
  *     max_upload_size?: int|Param, // The maximum size of the files of an event in bytes, together (0 for no limit). Larger files get a 413 response. The post_max_size option of PHP also applies, and a file over upload_max_filesize gets to the handler with an upload error. // Default: 8388608
- *     mercure?: array{ // The Mercure hub of FrankenPHP, for the pages with #[Subscribe] (see Phem\Stream\Streams)
+ *     mercure?: array{ // The Mercure hub of FrankenPHP, for the pages with #[Broadcast] (see Phem\Stream\Streams)
  *         hub_url?: scalar|Param|null, // The URL of the hub, as the browser connects to it. It is the audience of the access token: behind a proxy that ends TLS, configure the trusted proxies, or give an absolute URL. // Default: "/.well-known/mercure"
  *         subscriber_key?: scalar|Param|null, // The subscriber key of the hub (`issuer … { subscriber { jwt <key> } }` in the Caddyfile). With a key, the updates are private and each page gets an access token for its topics. With null, the updates are public: the hub needs the `anonymous` directive. // Default: null
  *         issuer?: scalar|Param|null, // The issuer of the hub configuration (`issuer phem { … }`) // Default: "phem"

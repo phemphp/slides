@@ -4,11 +4,11 @@ namespace App\Ui\Page;
 
 use App\Ui\Component\Deck;
 use App\Deck\Role;
-use Phem\Attribute\{Page, Subscribe};
+use Phem\Attribute\{Page, Broadcast};
 use Phem\Node;
 
 // The view of the audience (the QR code opens it): the current slide, and its interactive parts.
-#[Page('/'), Subscribe]
+#[Page('/'), Broadcast]
 function Audience(): Node
 {
     $role = Role::Audience;

@@ -11,7 +11,7 @@
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.7",
         "endroid/qr-code": "^6.1",
-        "phem/phem": "^0.2.0",
+        "phem/phem": "^0.2.1",
         "symfony/asset": "8.1.*",
         "symfony/asset-mapper": "8.1.*",
         "symfony/console": "8.1.*",

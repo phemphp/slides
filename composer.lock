@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "802c6a35ee790ab82616f5a48770d909",
+    "content-hash": "0ec1d4efe5c67788c6a85f29fabd294a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1379,16 +1379,16 @@
         },
         {
             "name": "phem/phem",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phemphp/phem.git",
-                "reference": "af6ea7771dd496c4f5ca340c849707de82b931c6"
+                "reference": "dff347e566383e3f8683107e3e68e1541b72d040"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phemphp/phem/zipball/af6ea7771dd496c4f5ca340c849707de82b931c6",
-                "reference": "af6ea7771dd496c4f5ca340c849707de82b931c6",
+                "url": "https://api.github.com/repos/phemphp/phem/zipball/dff347e566383e3f8683107e3e68e1541b72d040",
+                "reference": "dff347e566383e3f8683107e3e68e1541b72d040",
                 "shasum": ""
             },
             "require": {
@@ -1452,9 +1452,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phemphp/phem/issues",
-                "source": "https://github.com/phemphp/phem/tree/v0.2.0"
+                "source": "https://github.com/phemphp/phem/tree/v0.2.1"
             },
-            "time": "2026-10-24T23:48:00+00:00"
+            "time": "2026-10-25T22:11:30+00:00"
         },
         {
             "name": "psr/cache",
