@@ -8,15 +8,10 @@ use App\Ui\Component\{LikeButton, ListItem, Slide, SlideHeading};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// This is the only example in the talk: one like button under a post. Three needs: click it
-// (the heart fills), save it (the server stores the like), show it (the button shows the new
-// state). It is small on purpose: one piece of state, one action, one piece of markup. Ask the
-// room: how would you build this today? Keep the answer for the next slides.
-// The button is live: a click on any screen adds one like to the post in the database.
 #[Component]
 final class Example
 {
-    private Post $post;
+    public Post $post;
 
     public function __construct(
         private readonly PostRepository $posts,
@@ -30,25 +25,21 @@ final class Example
 
     public function render(): Node
     {
-        $post = $this->post;
-
         return (
             <Slide glowX="30%" glowY="60%">
                 <SlideHeading>A blog post with a <span className="ph-em">LikeButton</span></SlideHeading>
                 <div className="mt-[77px] grid grid-cols-[653px_1fr] items-start gap-12">
                     <div className="ph-preview overflow-hidden rounded-(--radius-lg) border border-(--edge)">
                         <div className="ph-preview-bar">
-                            <span className="ph-url">localhost/posts/{{ post.id ?? 1 }}</span>
+                            <span className="ph-url">localhost/posts/{{ this.post.id ?? 1 }}</span>
                             <span className="ph-live">Live</span>
                         </div>
-                        {% if post %}
-                            <div className="ph-preview-body">
-                                <p className="ph-eyebrow m-0">Blog · {{ post.date|date('j F') }}</p>
-                                <h3>{{ post.title }}</h3>
-                                <p className="mb-2 text-[20px] leading-[1.4] text-(--text-secondary)">{{ post.summary }}</p>
-                                <LikeButton post={{ post }} />
-                            </div>
-                        {% endif %}
+                        <div className="ph-preview-body">
+                            <p className="ph-eyebrow m-0">Blog · {{ this.post.date|date('j F') }}</p>
+                            <h3>{{ this.post.title }}</h3>
+                            <p className="mb-2 text-[20px] leading-[1.4] text-(--text-secondary)">{{ this.post.summary }}</p>
+                            <LikeButton post={{ this.post }} />
+                        </div>
                     </div>
                     <ul className="ph-list">
                         <ListItem number="1" title="Click it" detail="The heart fills." active />

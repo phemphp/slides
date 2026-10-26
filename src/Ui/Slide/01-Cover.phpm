@@ -6,10 +6,6 @@ use App\Ui\Component\Slide;
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// Say the title, then introduce yourself in 30 seconds: Yonel Ceruto, Software Architect at
-// Vacatia and member of the Symfony Core Team. Then: "Today I want to show you one small
-// feature, a like button, and count the wires we need to build it in PHP. At the end, I show you
-// a way to cut most of them." Do not name the tech yet.
 #[Component]
 function Cover(): Node
 {

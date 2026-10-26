@@ -3,49 +3,31 @@
 namespace App\Ui\Component;
 
 use App\Entity\Post;
-use Phem\Attribute\{Component, Prop, State, Transactional};
+use Phem\Attribute\{Component, Prop, State, Transactional, Broadcast};
 use Phem\Node;
 use Phem\Stream\Streams;
 
-// A like on any screen shows on all the open screens: each one renders its button again.
-// No #[Broadcast] here: the button renders first in an event (a move of the deck), and such a
-// component gets no pushes. The pages subscribe, and everywhere() reaches them.
 #[Component]
 final class LikeButton
 {
     #[Prop]
     public Post $post;
 
-    public function __construct(
-        private readonly Streams $streams,
-    ) {
-    }
-
-    #[Transactional]
+    #[Transactional, Broadcast]
     public function like(): void
     {
         ++$this->post->likes;
-
-        $this->streams->everywhere()->refresh($this->id());
     }
 
     public function render(): Node
     {
-        $id = $this->id();
-        $likes = $this->post->likes;
-
         return (
-            <button id={{ id }} type="button" onClick={{ like }} className="ph-button ph-button-primary ph-like cursor-pointer">
-                <span><span className="ph-like-heart">{{ likes > 0 ? '♥' : '♡' }}</span> Like</span>
-                {% if likes > 0 %}
-                    <span className="border-l border-(--edge-strong) pl-3 tabular-nums">{{ likes }}</span>
+            <button type="button" onClick={{ like }} className="ph-button ph-button-primary ph-like cursor-pointer">
+                <span><span className="ph-like-heart">{{ post.likes > 0 ? '♥' : '♡' }}</span> Like</span>
+                {% if post.likes > 0 %}
+                    <span className="border-l border-(--edge-strong) pl-3 tabular-nums">{{ post.likes }}</span>
                 {% endif %}
             </button>
         );
-    }
-
-    private function id(): string
-    {
-        return 'like-'.$this->post->id;
     }
 }

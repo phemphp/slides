@@ -6,8 +6,6 @@ use App\Ui\Component\{JoinQr, Slide, SlideHeading};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// The audience joins on their phones. The QR code opens the audience view: each phone follows
-// the slides, and the audience can click the live LikeButton of the next slide.
 #[Component]
 function Join(): Node
 {
