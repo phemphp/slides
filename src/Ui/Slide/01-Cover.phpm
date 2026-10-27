@@ -13,7 +13,7 @@ function Cover(): Node
         <Slide glowX="82%" glowY="45%">
             <div className="absolute top-[100px] left-20 w-[770px]">
                 <h1 className="ph-display">Cut the <span className="ph-em">wires</span></h1>
-                <p className="mt-6 [font:var(--text-pill-label)]">A component model for Symfony Web apps</p>
+                <p className="mt-6 [font:var(--text-pill-label)]">UI server components for Symfony</p>
             </div>
             <div className="absolute top-[389px] left-20">
                 <p className="[font:var(--text-point)] font-bold">Yonel Ceruto</p>
