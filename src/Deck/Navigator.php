@@ -3,13 +3,11 @@
 namespace App\Deck;
 
 use App\Repository\PresentationRepository;
-use App\Ui\Component\Deck;
 use App\Ui\Slide\Slides;
 use Phem\Node;
-use Phem\Stream\Streams;
 
 /**
- * The current slide of the presentation. A move updates all the open screens.
+ * The current slide of the presentation.
  */
 final class Navigator
 {
@@ -18,7 +16,6 @@ final class Navigator
 
     public function __construct(
         private readonly PresentationRepository $presentation,
-        private readonly Streams $streams,
     ) {
     }
 
@@ -42,8 +39,6 @@ final class Navigator
         $presentation = $this->presentation->get();
         $presentation->slide = $this->clamp($index);
         $this->presentation->save($presentation);
-
-        $this->streams->toComponent(Deck::class)->refresh('deck');
 
         return $presentation->slide;
     }

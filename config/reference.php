@@ -740,14 +740,15 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * }
  * @psalm-type PhemConfig = array{
  *     source_dir?: scalar|Param|null, // The .phpm sources (the directory that you pass to `phemc build`) // Default: "%kernel.project_dir%/src"
- *     build_dir?: scalar|Param|null, // The phemc output (`phemc build --out`) // Default: "%kernel.project_dir%/var/cache/phem"
+ *     build_dir?: scalar|Param|null, // The phemc output (`phemc build --out`) // Default: "%kernel.project_dir%/var/phem"
  *     secret?: scalar|Param|null, // The key that signs the component state in the browser // Default: "%kernel.secret%"
  *     state_max_age?: int|Param, // The seconds that a signed state is valid (0 for no limit). An older state reloads the page. // Default: 86400
  *     state_bind_session?: bool|Param, // Sign the session id with the state, so the state of a session is not valid in another session. A login makes the open pages reload on their next event. // Default: false
  *     state_cache?: bool|Param, // Keep each signed state in the cache.phem.state pool (framework.cache.pools), so an event can send only its signature. The browser sends the full state when the pool does not have it. // Default: true
  *     state_cache_min_size?: int|Param, // The bytes of the smallest state that the cache.phem.state pool keeps. An event sends a smaller state with its signature: no request more on a miss, and no cache write. 0 keeps all the states. // Default: 4096
- *     max_event_size?: int|Param, // The maximum size of an event body in bytes, with the state of the page (0 for no limit). A larger event gets a 413 response. // Default: 1048576
+ *     max_event_size?: int|Param, // The maximum size of an event body in bytes, with the state of the page (0 for no limit). A larger event gets a 413 response. A page whose state is too large for an event throws in debug mode, and logs an error in production. // Default: 1048576
  *     max_upload_size?: int|Param, // The maximum size of the files of an event in bytes, together (0 for no limit). Larger files get a 413 response. The post_max_size option of PHP also applies, and a file over upload_max_filesize gets to the handler with an upload error. // Default: 8388608
+ *     suspense_stream?: bool|Param, // Stream the <Suspense> boundaries that are not lazy in the response of the page, after the page. With false, the browser loads them with an event after the page. // Default: true
  *     mercure?: array{ // The Mercure hub of FrankenPHP, for the pages with #[Broadcast] (see Phem\Stream\Streams)
  *         hub_url?: scalar|Param|null, // The URL of the hub, as the browser connects to it. It is the audience of the access token: behind a proxy that ends TLS, configure the trusted proxies, or give an absolute URL. // Default: "/.well-known/mercure"
  *         subscriber_key?: scalar|Param|null, // The subscriber key of the hub (`issuer … { subscriber { jwt <key> } }` in the Caddyfile). With a key, the updates are private and each page gets an access token for its topics. With null, the updates are public: the hub needs the `anonymous` directive. // Default: null

@@ -3,14 +3,13 @@
 namespace App\Ui\Component;
 
 use App\Entity\Post;
-use Phem\Attribute\{Component, Prop, State, Transactional, Broadcast};
+use Phem\Attribute\{Component, Prop, Transactional, Broadcast, BroadcastKey};
 use Phem\Node;
-use Phem\Stream\Streams;
 
 #[Component]
 final class LikeButton
 {
-    #[Prop]
+    #[Prop, BroadcastKey]
     public Post $post;
 
     #[Transactional, Broadcast]

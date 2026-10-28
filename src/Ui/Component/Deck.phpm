@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 // The current slide of the presentation. The speaker moves it: the other screens follow.
 // A dynamic slide reads the role (#[Context] Role) to show the speaker or the audience part.
-// #[Broadcast]: each page that renders the deck gets the moves (see Navigator::go()).
+// #[Broadcast]: after each move, the other pages that render the deck render it again.
 #[Component, Broadcast]
 final class Deck
 {
@@ -67,12 +67,7 @@ final class Deck
                     <div>{{ slide }}</div>
                 </div>
                 {% if speaker %}
-                    <nav className="absolute right-4 bottom-4 flex items-center gap-2 text-sm text-(--text-tertiary) opacity-30 transition-opacity hover:opacity-100">
-                        <button type="button" onClick={{ first }} data-deck-keys-target="first" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="First slide (Home)">⇤</button>
-                        <button type="button" onClick={{ previous }} data-deck-keys-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Previous (←)">←</button>
-                        <span className="tabular-nums">{{ number }} / {{ total }}</span>
-                        <button type="button" onClick={{ next }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
-                    </nav>
+                    <DeckNav number={{ number }} total={{ total }} onFirst={{ first }} onPrevious={{ previous }} onNext={{ next }} />
                 {% endif %}
             </section>
         );

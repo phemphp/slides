@@ -7,6 +7,38 @@
                 "autoimport": {
                     "@phem/phem/dist/phem.css": true
                 }
+            },
+            "optimistic": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "toggle": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "dialog": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "tabs": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "toast": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "clipboard": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "autofocus": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "confirm": {
+                "enabled": false,
+                "fetch": "lazy"
             }
         }
     },
