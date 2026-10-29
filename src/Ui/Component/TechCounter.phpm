@@ -1,0 +1,33 @@
+<?phpm
+
+namespace App\Ui\Component;
+
+use App\Entity\Tech;
+use Phem\Attribute\{Component, Prop, Transactional, Broadcast, BroadcastKey};
+use Phem\Node;
+
+// A glass button for one tech: its logo in brushed metal, its name and its votes. Each click adds
+// one vote, and the other screens show the new count.
+#[Component]
+final class TechCounter
+{
+    #[Prop, BroadcastKey]
+    public Tech $tech;
+
+    #[Transactional, Broadcast]
+    public function vote(): void
+    {
+        ++$this->tech->votes;
+    }
+
+    public function render(): Node
+    {
+        return (
+            <button type="button" onClick={{ vote }} className="ph-button ph-tech cursor-pointer">
+                <span className="ph-icon" style={{ '--icon: url(' ~ asset('images/tech/' ~ tech.icon ~ '.svg') ~ ');' }}></span>
+                <span className="ph-tech-name">{{ tech.name }}</span>
+                <span className={{ ['ph-tech-votes', tech.votes > 0 ? 'is-voted' : ''] }}>{{ tech.votes }}</span>
+            </button>
+        );
+    }
+}

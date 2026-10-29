@@ -22,10 +22,9 @@ final class Slides
             // The audience joins on their phones, to follow the slides and use the live example.
             <Join />,
 
-            // One like button, built the usual ways, and the wires it needs.
+            // One like button, the techs of the usual ways, and the wires it needs.
             <Example />,
-            <JsonApi />,
-            <HtmlOverTheWire />,
+            <Stack />,
             <TwoFiles />,
             <Wires />,
             <Question />,
