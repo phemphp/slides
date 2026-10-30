@@ -2,8 +2,10 @@
 
 namespace App\Ui\Component;
 
-use App\Deck\{Navigator, Role};
+use App\Deck\Role;
+use App\Repository\PresentationRepository;
 use App\Security\SpeakerAccess;
+use App\Ui\Slide\Slides;
 use Phem\Attribute\{Component, Prop, Provide, Broadcast};
 use Phem\Node;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -21,16 +23,20 @@ final class Deck
     private int $total = 0;
     private ?Node $slide = null;
 
+    /** @var list<Node> */
+    private array $slides;
+
     public function __construct(
-        private readonly Navigator $navigator,
+        private readonly PresentationRepository $presentation,
         private readonly SpeakerAccess $speakerAccess,
     ) {
+        $this->slides = new Slides()->all();
     }
 
     // No #[State]: each render reads the current slide again (also after a push).
     public function mount(): void
     {
-        $this->load($this->navigator->current());
+        $this->load($this->presentation->get()->slide);
     }
 
     public function next(): void
@@ -79,13 +85,22 @@ final class Deck
             throw new AccessDeniedHttpException('Only the speaker moves the slides.');
         }
 
-        $this->load($this->navigator->go($index));
+        $presentation = $this->presentation->get();
+        $presentation->slide = $this->clamp($index);
+        $this->presentation->save($presentation);
+
+        $this->load($presentation->slide);
     }
 
     private function load(int $index): void
     {
-        $this->index = $index;
-        $this->total = $this->navigator->count();
-        $this->slide = $this->navigator->slide($index);
+        $this->index = $this->clamp($index);
+        $this->total = \count($this->slides);
+        $this->slide = $this->slides[$this->index] ?? null;
+    }
+
+    private function clamp(int $index): int
+    {
+        return max(0, min($index, \count($this->slides) - 1));
     }
 }
