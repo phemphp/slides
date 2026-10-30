@@ -739,7 +739,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  * }
  * @psalm-type PhemConfig = array{
- *     source_dir?: scalar|Param|null, // The .phpm sources (the directory that you pass to `phemc build`) // Default: "%kernel.project_dir%/src"
  *     build_dir?: scalar|Param|null, // The phemc output (`phemc build --out`) // Default: "%kernel.project_dir%/var/phem"
  *     secret?: scalar|Param|null, // The key that signs the component state in the browser // Default: "%kernel.secret%"
  *     state_max_age?: int|Param, // The seconds that a signed state is valid (0 for no limit). An older state reloads the page. // Default: 86400
