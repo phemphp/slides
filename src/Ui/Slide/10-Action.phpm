@@ -6,20 +6,18 @@ use App\Ui\Component\{Button, Chip, CodeWindow, Sandbox, Slide, SlideHeading, St
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// Follow the numbers. 1: the user clicks the button. 2: onClick={{ toggle }} passes the method
-// itself, not a URL. 3: toggle() runs on the server, in PHP, with the state of this button. Phem
-// renders the button again and the browser shows "♥ Liked". No route, no controller, no
-// JavaScript to write. The status row shows what the browser sent: the handler name. Its state
-// is now liked: true.
 #[Component]
 function Action(): Node
 {
     $code = <<<'PHP'
-        #[Component] final class LikeButton {
+        #[Component] final class LikeButton 
+        {
             #[State] public bool $liked = false;
+
             public function toggle(): void {
                 $this->liked = !$this->liked;
             }
+
             public function render(): Node {
                 return <button onClick={{ toggle }}>
                     {{ liked ? '♥ Liked' : '♡ Like' }}
@@ -29,10 +27,10 @@ function Action(): Node
         PHP;
 
     return (
-        <Slide glowX="82%" glowY="12%" footer="1 click · 2 the button calls toggle · 3 toggle runs on the server" className="pt-16">
-            <SlideHeading eyebrow="Phem · an action">The handler runs on the <span className="ph-em">server</span></SlideHeading>
+        <Slide glowX="82%" glowY="12%" className="pt-16">
+            <SlideHeading>The handler runs on the <span className="ph-em">server</span></SlideHeading>
             <Sandbox url="/posts/42" className="mt-9">
-                <CodeWindow code={{ code }} file="LikeButton.phpm" size="sm" focus={{ [3, 4, 5, 7] }} steps={{ {3: '3', 7: '2'} }} />
+                <CodeWindow code={{ code }} file="LikeButton.phpm" size="sm" focus={{ [3, 5, 6, 7] }} steps={{ {3: '3', 5: '2'} }} />
                 <Sandbox:preview>
                     <p className="ph-eyebrow m-0">Blog</p>
                     <h3>Hello, components</h3>
