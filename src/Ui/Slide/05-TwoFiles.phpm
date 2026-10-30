@@ -10,7 +10,7 @@ use Phem\Node;
 function TwoFiles(): Node
 {
     $controller = <<<'PHP'
-        #[Route('/post/{id}/like', 'post_like')]
+        #[Route('/posts/{id}/like', 'post_like')]
         public function like(Post $post): Response
         {
             $post->like();
@@ -37,7 +37,7 @@ function TwoFiles(): Node
         <Slide glowX="50%" glowY="60%" footer="In amber: strings that link the two files">
             <SlideHeading>Two files for <span className="ph-em">one component</span></SlideHeading>
             <div className="mt-12 grid grid-cols-2 items-start gap-8">
-                <CodeWindow code={{ controller }} file="LikeController.php" size="sm" focus={{ [1, 7, 8, 9, 10] }} />
+                <CodeWindow code={{ controller }} file="PostController.php" size="sm" focus={{ [1, 7, 8, 9, 10] }} />
                 <CodeWindow code={{ template }} file="like_button.html.twig" size="sm" focus={{ [2, 4] }} />
             </div>
         </Slide>
