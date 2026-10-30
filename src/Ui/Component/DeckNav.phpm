@@ -2,23 +2,82 @@
 
 namespace App\Ui\Component;
 
-use Phem\Attribute\Component;
+use App\Deck\Role;
+use App\Repository\PresentationRepository;
+use App\Security\SpeakerAccess;
+use Phem\Attribute\{Component, Context, Prop};
+use Phem\Event;
 use Phem\Node;
+use Phem\Stream\Streams;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
+// The controls of the speaker: the buttons and the keyboard move the current slide.
+// After a move, this page renders again, and the other pages render the deck again.
 #[Component]
-function DeckNav(
-    int $number,
-    int $total,
-    Closure $onFirst,
-    Closure $onPrevious,
-    Closure $onNext,
-): Node {
-    return (
-        <nav className="absolute right-4 bottom-4 flex items-center gap-2 text-sm text-(--text-tertiary) opacity-30 transition-opacity hover:opacity-100">
-            <button type="button" onClick={{ onFirst }} data-deck-keys-target="first" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="First slide (Home)">⇤</button>
-            <button type="button" onClick={{ onPrevious }} data-deck-keys-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Previous (←)">←</button>
-            <span className="tabular-nums">{{ number }} / {{ total }}</span>
-            <button type="button" onClick={{ onNext }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
-        </nav>
-    );
+final class DeckNav
+{
+    #[Prop]
+    public int $number;
+
+    #[Prop]
+    public int $total;
+
+    #[Context]
+    public Role $role;
+
+    public function __construct(
+        private readonly PresentationRepository $presentation,
+        private readonly SpeakerAccess $speakerAccess,
+        private readonly Streams $streams,
+    ) {
+    }
+
+    public function next(Event $e): void
+    {
+        $this->move($this->number, $e);
+    }
+
+    public function previous(Event $e): void
+    {
+        $this->move($this->number - 2, $e);
+    }
+
+    public function first(Event $e): void
+    {
+        $this->move(0, $e);
+    }
+
+    public function render(): Node
+    {
+        $number = $this->number;
+        $total = $this->total;
+
+        return (
+            <nav
+                className="absolute right-4 bottom-4 flex items-center gap-2 text-sm text-(--text-tertiary) opacity-30 transition-opacity hover:opacity-100"
+                data-controller="deck-keys"
+                data-action="keydown@window->deck-keys#press"
+            >
+                <button type="button" onClick={{ first }} data-deck-keys-target="first" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="First slide (Home)">⇤</button>
+                <button type="button" onClick={{ previous }} data-deck-keys-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Previous (←)">←</button>
+                <span className="tabular-nums">{{ number }} / {{ total }}</span>
+                <button type="button" onClick={{ next }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
+            </nav>
+        );
+    }
+
+    private function move(int $index, Event $e): void
+    {
+        if (Role::Speaker !== $this->role || !$this->speakerAccess->granted()) {
+            throw new AccessDeniedHttpException('Only the speaker moves the slides.');
+        }
+
+        $presentation = $this->presentation->get();
+        $presentation->slide = max(0, min($index, $this->total - 1));
+        $this->presentation->save($presentation);
+
+        // The deck reads the new slide in mount(): on this page, and on the other pages.
+        $e->refresh();
+        $this->streams->toComponent(Deck::class)->refresh();
+    }
 }

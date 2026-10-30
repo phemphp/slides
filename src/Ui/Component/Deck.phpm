@@ -4,15 +4,13 @@ namespace App\Ui\Component;
 
 use App\Deck\Role;
 use App\Repository\PresentationRepository;
-use App\Security\SpeakerAccess;
 use App\Ui\Slide\Slides;
 use Phem\Attribute\{Component, Prop, Provide, Broadcast};
 use Phem\Node;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-// The current slide of the presentation. The speaker moves it: the other screens follow.
+// The current slide of the presentation. The speaker moves it with DeckNav: the other screens follow.
 // A dynamic slide reads the role (#[Context] Role) to show the speaker or the audience part.
-// #[Broadcast]: after each move, the other pages that render the deck render it again.
+// #[Broadcast]: the deck gets the refresh that DeckNav pushes after each move.
 #[Component, Broadcast]
 final class Deck
 {
@@ -28,7 +26,6 @@ final class Deck
 
     public function __construct(
         private readonly PresentationRepository $presentation,
-        private readonly SpeakerAccess $speakerAccess,
     ) {
         $this->slides = new Slides()->all();
     }
@@ -37,21 +34,6 @@ final class Deck
     public function mount(): void
     {
         $this->load($this->presentation->get()->slide);
-    }
-
-    public function next(): void
-    {
-        $this->move($this->index + 1);
-    }
-
-    public function previous(): void
-    {
-        $this->move($this->index - 1);
-    }
-
-    public function first(): void
-    {
-        $this->move(0);
     }
 
     public function render(): Node
@@ -65,31 +47,16 @@ final class Deck
             <section
                 id="deck"
                 className={{ speaker ? 'relative flex h-full flex-col overflow-hidden' : 'ph-deck-audience' }}
-                data-controller={{ speaker ? 'deck-keys' : null }}
-                data-action={{ speaker ? 'keydown@window->deck-keys#press' : null }}
                 data-phem-transition
             >
                 <div className="ph-deck-stage">
                     <div>{{ slide }}</div>
                 </div>
                 {% if speaker %}
-                    <DeckNav number={{ number }} total={{ total }} onFirst={{ first }} onPrevious={{ previous }} onNext={{ next }} />
+                    <DeckNav number={{ number }} total={{ total }} />
                 {% endif %}
             </section>
         );
-    }
-
-    private function move(int $index): void
-    {
-        if (Role::Speaker !== $this->role || !$this->speakerAccess->granted()) {
-            throw new AccessDeniedHttpException('Only the speaker moves the slides.');
-        }
-
-        $presentation = $this->presentation->get();
-        $presentation->slide = $this->clamp($index);
-        $this->presentation->save($presentation);
-
-        $this->load($presentation->slide);
     }
 
     private function load(int $index): void
