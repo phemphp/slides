@@ -16,7 +16,7 @@ function Cover(): Node
                 <p className="mt-6 [font:var(--text-pill-label)]">UI server components for Symfony</p>
             </div>
             <div className="absolute top-[389px] left-20">
-                <p className="[font:var(--text-point)] font-bold">Yonel Ceruto</p>
+                <p className="[font:var(--text-point)] font-bold">Yonel Ceruto · @yceruto</p>
                 <p className="mt-2 flex items-center gap-3 [font:var(--text-body)] text-(--text-secondary)">
                     Software Architect at <img src={{ asset('images/vacatia.svg') }} alt="Vacatia" className="h-[38px]" />
                 </p>
@@ -27,10 +27,7 @@ function Cover(): Node
                 alt="Photo of Yonel Ceruto"
                 className="absolute top-[calc(50%-35px)] left-[853px] size-[316px] -translate-y-1/2 rounded-full border-4 border-(--surface)"
             />
-            <div className="absolute right-20 bottom-[18px] left-20 flex items-center justify-between">
-                <p className="flex items-center gap-2 [font:var(--text-point)]">
-                    <img src={{ asset('images/github.svg') }} alt="GitHub" className="size-[25px]" /> @yceruto
-                </p>
+            <div className="absolute right-20 bottom-[18px] left-20 flex items-center justify-end">
                 <p className="flex items-center gap-4">
                     <span className="ph-eyebrow m-0">Symfonyconf · Warsaw · 2026</span>
                     <img src={{ asset('images/symfony.svg') }} alt="Symfony" className="size-14" />
