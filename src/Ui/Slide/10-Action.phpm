@@ -3,48 +3,80 @@
 namespace App\Ui\Slide;
 
 use App\Ui\Component\{Button, Chip, CodeWindow, Sandbox, Slide, SlideHeading, StepMarker};
-use Phem\Attribute\Component;
+use Phem\Attribute\{Component, State};
 use Phem\Node;
 
+// Click the Like button: the handler runs on the server, the state changes, and the button
+// renders again. Each screen keeps its own state: no #[Broadcast], and no database.
 #[Component]
-function Action(): Node
+final class Action
 {
-    $code = <<<'PHP'
-        #[Component] final class LikeButton 
-        {
-            #[State] public bool $liked = false;
+    #[State] public bool $liked = false;
 
-            public function toggle(): void {
-                $this->liked = !$this->liked;
+    // After the first click, the slide shows the steps of each click (see .ph-action in deck.css).
+    #[State] public bool $clicked = false;
+
+    public function toggle(): void
+    {
+        $this->liked = !$this->liked;
+        $this->clicked = true;
+    }
+
+    public function render(): Node
+    {
+        $code = <<<'PHP'
+            #[Component] final class LikeButton
+            {
+                #[State] public bool $liked = false;
+
+                public function toggle(): void {
+                    $this->liked = !$this->liked;
+                }
+
+                public function render(): Node {
+                    return <button onClick={{ toggle }}>
+                        {{ liked ? '♥ Liked' : '♡ Like' }}
+                    </button>;
+                }
             }
+            PHP;
 
-            public function render(): Node {
-                return <button onClick={{ toggle }}>
-                    {{ liked ? '♥ Liked' : '♡ Like' }}
-                </button>;
-            }
-        }
-        PHP;
+        $liked = $this->liked;
+        $clicked = $this->clicked;
+        // A click changes the name of the animations (a or b), so they start again.
+        $sandbox = 'mt-9 ph-action'.($clicked ? ($liked ? ' is-a' : ' is-b') : '');
 
-    return (
-        <Slide glowX="82%" glowY="12%" className="pt-16">
-            <SlideHeading>The handler runs on the <span className="ph-em">server</span></SlideHeading>
-            <Sandbox url="/posts/42" className="mt-9">
-                <CodeWindow code={{ code }} file="LikeButton.phpm" size="sm" focus={{ [3, 5, 6, 7] }} steps={{ {3: '3', 5: '2'} }} />
-                <Sandbox:preview>
-                    <p className="ph-eyebrow m-0">Blog</p>
-                    <h3>Hello, components</h3>
-                    <p className="m-0 text-[18px] text-(--text-secondary)">A short post with one button.</p>
-                    <div className="flex items-center gap-4">
-                        <Button pressed click>♥ Liked</Button>
-                        <StepMarker small>1</StepMarker>
-                    </div>
-                </Sandbox:preview>
-                <Sandbox:status>
-                    <Chip mono>handler: toggle</Chip>
-                    <Chip mono>liked: true</Chip>
-                </Sandbox:status>
-            </Sandbox>
-        </Slide>
-    );
+        return (
+            <Slide glowX="82%" glowY="12%" className="pt-16">
+                <SlideHeading>The handler runs on the <span className="ph-em">server</span></SlideHeading>
+                <Sandbox url="/posts/42" className={{ sandbox }}>
+                    <CodeWindow code={{ code }} file="LikeButton.phpm" size="sm" focus={{ [3, 5, 6, 7, 9, 10, 11, 12] }} steps={{ {3: '3', 5: '2', 9: '4'} }} />
+                    <Sandbox:preview>
+                        <p className="ph-eyebrow m-0">Blog</p>
+                        <h3 className="m-0">Hello, Phem Components</h3>
+                        <p className="m-0 text-[18px] text-(--text-secondary)">A short post with one button.</p>
+                        <div className="flex items-center gap-4">
+                            <button type="button" onClick={{ toggle }} className="ph-action-like ph-action-swap">
+                                {% if clicked %}
+                                    <span className="ph-action-old"><Button pressed={{ not liked }}>{{ liked ? '♡ Like' : '♥ Liked' }}</Button></span>
+                                {% endif %}
+                                <span className="ph-action-new"><Button pressed={{ liked }}>{{ liked ? '♥ Liked' : '♡ Like' }}</Button></span>
+                            </button>
+                            <StepMarker small>1</StepMarker>
+                        </div>
+                    </Sandbox:preview>
+                    <Sandbox:status>
+                        <Chip mono className="ph-action-handler">handler: toggle</Chip>
+                        <Chip mono className="ph-action-state">
+                            liked:
+                            <span className="ph-action-swap">
+                                {% if clicked %}<span className="ph-action-old">{{ liked ? 'false' : 'true' }}</span>{% endif %}
+                                <span className="ph-action-new">{{ liked ? 'true' : 'false' }}</span>
+                            </span>
+                        </Chip>
+                    </Sandbox:status>
+                </Sandbox>
+            </Slide>
+        );
+    }
 }
