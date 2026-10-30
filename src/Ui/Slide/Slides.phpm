@@ -26,7 +26,6 @@ final class Slides
             <Example />,
             <Stack />,
             <TwoFiles />,
-            <Wires />,
             <Question />,
 
             // The reveal: one PHP class holds the state, the actions and the markup.

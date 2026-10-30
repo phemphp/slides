@@ -245,3 +245,8 @@
     transition-duration: 100ms;
     transition-timing-function: ease-out;
 }
+
+/* A footer with only one part (no slide number) is on the right. */
+.ph-footer > :only-child {
+    margin-left: auto;
+}
