@@ -5,8 +5,6 @@ namespace App\Ui\Component;
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
-// A small glass note that explains one part of the code. `step` is the number of the same
-// StepMarker in the code; the `detail` slot is the second line.
 #[Component]
 function Annotation(Html $children, ?string $step = null, ?Html $detail = null): Node
 {

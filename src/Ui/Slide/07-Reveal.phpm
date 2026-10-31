@@ -6,10 +6,6 @@ use App\Ui\Component\{Chip, Slide};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// Say your own story of the name here. One sentence: a .phpm file is a PHP file with markup
-// literals, the way a .jsx file is JavaScript with JSX. A compiler written in Rust (phemc) turns
-// it into plain PHP and Twig. A Symfony bundle runs it. Turbo and Stimulus carry the events. Now
-// the same like button.
 #[Component]
 function Reveal(): Node
 {

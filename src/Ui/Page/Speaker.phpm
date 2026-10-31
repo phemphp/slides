@@ -7,8 +7,6 @@ use App\Deck\Role;
 use Phem\Attribute\{Page, Broadcast};
 use Phem\Node;
 
-// The view of the speaker (the projector): the keyboard moves the slides of all the screens.
-// App\Security\SpeakerAccess protects it.
 #[Page('/speaker'), Broadcast]
 function Speaker(): Node
 {

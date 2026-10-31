@@ -5,8 +5,6 @@ namespace App\Ui\Component;
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
-// A glass card for the one idea to remember from a slide. `warning` is for a mistake to avoid:
-// say the rule in the title.
 #[Component]
 function Callout(string $title, Html $children, string $icon = 'server', bool $active = false, bool $warning = false): Node
 {

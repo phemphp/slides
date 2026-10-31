@@ -8,9 +8,6 @@ use App\Ui\Slide\Slides;
 use Phem\Attribute\{Component, Prop, Provide, Broadcast};
 use Phem\Node;
 
-// The current slide of the presentation. The speaker moves it with DeckNav: the other screens follow.
-// A dynamic slide reads the role (#[Context] Role) to show the speaker or the audience part.
-// #[Broadcast]: the deck gets the refresh that DeckNav pushes after each move.
 #[Component, Broadcast]
 final class Deck
 {

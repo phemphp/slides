@@ -5,8 +5,6 @@ namespace App\Ui\Component;
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
-// Opens a part of the talk with one GlassPill and one sentence (children). Use the same icon
-// for the part on every slide of that part.
 #[Component]
 function SectionSlide(
     string $label,

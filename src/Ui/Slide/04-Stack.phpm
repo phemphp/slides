@@ -42,7 +42,6 @@ final class Stack
     }
 }
 
-// One side of the stack: a glass card with its title and the counters of its techs.
 #[Component]
 function StackSide(string $icon, string $title, array $techs): Node
 {

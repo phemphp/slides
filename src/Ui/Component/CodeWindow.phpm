@@ -6,9 +6,6 @@ use App\Ui\Code\Highlighter;
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
-// A dark window with PHP, .phpm or Twig source, highlighted on the server. The line numbers of
-// focus, added, removed, steps (number => step) and tags (number => tag) start at 1.
-// `size`: lg (12 lines or less) or sm (in a split, a comparison or a sandbox).
 #[Component]
 function CodeWindow(
     string $code,

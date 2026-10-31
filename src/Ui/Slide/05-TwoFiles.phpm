@@ -6,13 +6,6 @@ use App\Ui\Component\{CodeWindow, Slide, SlideHeading};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// Read the amber strings as a list of contracts. Each one is a name written twice, in two places,
-// with no compiler between them. The template: the file path in render(). The variables: 'id'
-// and 'likes' in the array, {{ id }} and {{ likes }} in Twig. The route: 'post_like' and
-// path('post_like', …). The parameters: '/posts/{id}/like' and {id: id}. A typo is a runtime
-// error, or a button that does not update and says nothing. This is the moment to ask: what if
-// the markup and the PHP that drives it were one thing, so that these names are just PHP? Pause,
-// then go to the next slide.
 #[Component]
 function TwoFiles(): Node
 {

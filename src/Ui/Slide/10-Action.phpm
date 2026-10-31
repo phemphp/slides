@@ -6,8 +6,6 @@ use App\Ui\Component\{Button, Chip, CodeWindow, Sandbox, Slide, SlideHeading, St
 use Phem\Attribute\{Component, State};
 use Phem\Node;
 
-// Click the Like button: the handler runs on the server, the state changes, and the button
-// renders again. Each screen keeps its own state: no #[Broadcast], and no database.
 #[Component]
 final class Action
 {

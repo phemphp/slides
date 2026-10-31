@@ -6,8 +6,6 @@ use App\Entity\Tech;
 use Phem\Attribute\{Component, Prop, Transactional, Broadcast, BroadcastKey};
 use Phem\Node;
 
-// A glass button for one tech: its logo in brushed metal, its name and its votes. Each click adds
-// one vote, and the other screens show the new count.
 #[Component]
 final class TechCounter
 {

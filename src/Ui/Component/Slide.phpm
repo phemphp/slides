@@ -5,9 +5,6 @@ namespace App\Ui\Component;
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
-// The frame of a slide: a 1280×720 stage that scales to the width of its parent, so the same
-// slide fits the projector, a phone and a thumbnail. Put the glow behind the focal point with
-// glowX and glowY.
 #[Component]
 function Slide(
     Html $children,

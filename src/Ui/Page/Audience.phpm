@@ -7,7 +7,6 @@ use App\Deck\Role;
 use Phem\Attribute\{Page, Broadcast};
 use Phem\Node;
 
-// The view of the audience (the QR code opens it): the current slide, and its interactive parts.
 #[Page('/'), Broadcast]
 function Audience(): Node
 {

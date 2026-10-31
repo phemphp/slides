@@ -5,7 +5,6 @@ namespace App\Ui\Component;
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// A node of a FlowSlide: an orb, a label and a caption. The node where the code runs is active.
 #[Component]
 function FlowNode(string $icon, string $label, string $caption = '', bool $active = false): Node
 {

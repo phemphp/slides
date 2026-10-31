@@ -6,8 +6,6 @@ use App\Ui\Component\{GlassPill, Slide};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// Let this slide breathe. Say it slowly. Then: "I spent the last months building this. Let me
-// show you."
 #[Component]
 function Question(): Node
 {

@@ -5,9 +5,6 @@ namespace App\Ui\Component;
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// A line that shows what moves where. `tone`: accent (the main path) or cool (the answer).
-// `back` points left, `down` is vertical, `dashed` is a stream. With `curve` (an SVG path in a
-// box of width × height), it is a curved arrow.
 #[Component]
 function Arrow(
     string $label = '',

@@ -11,8 +11,6 @@ use Phem\Node;
 use Phem\Stream\Streams;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-// The controls of the speaker: the buttons and the keyboard move the current slide.
-// After a move, this page renders again, and the other pages render the deck again.
 #[Component]
 final class DeckNav
 {
