@@ -7,3 +7,4 @@ Ideas for the presentation.
 - [ ] Add a slide to remember the roots of PHP + HTML before reveling Phem, it could be after the two files slide.
 - [ ] Add a slide to compare Phem markup with Twig, composition vs inheritance approach.
 - [ ] Add anatomy of a component and page (mount, render, prop, state, etc.)
+- [ ] At the end, to showcase the primary Phem features, use comparison Standard Symfony Controller + Twig version vs Phem version of the same feature.
