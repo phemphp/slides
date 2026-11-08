@@ -9,12 +9,12 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Phem\Test\{ComponentTester, InteractsWithPhem};
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-// Slide 7 (ClassComponent) shows its 5 points one at a time: down and up change the point.
+// Slide 8 (ClassComponent) shows its 5 points one at a time: down and up change the point.
 final class DeckStepTest extends KernelTestCase
 {
     use InteractsWithPhem;
 
-    private const int CLASS_COMPONENT = 6;
+    private const int CLASS_COMPONENT = 7;
 
     protected function setUp(): void
     {

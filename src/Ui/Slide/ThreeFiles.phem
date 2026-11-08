@@ -53,7 +53,7 @@ function ThreeFiles(): Node
                 <CodeWindow code={{ controller }} file="PostController.php" size="xs" focus={{ [1, 2, 3, 4, 5, 10, 11, 12, 13, 14, 15] }} />
                 <div className="flex flex-col gap-4">
                     <CodeWindow code={{ template }} file="like_button.html.twig" size="xs" focus={{ [2, 4] }} />
-                    <CodeWindow code={{ script }} file="app.js" size="xs" focus={{ [4] }} />
+                    <CodeWindow code={{ script }} file="app.js" size="xs" focus={{ [4, 5] }} />
                 </div>
             </div>
         </Slide>

@@ -10,6 +10,7 @@ use Phem\{Html, Node};
 // With "reveal", the markers of the steps show one at a time (see Slide): the marker of the
 // current point is amber and its lines (stepFocus, or the line of the marker) are the focus. The
 // markers of the earlier points are "done", and the markers of the later points do not show.
+// With "dim" false, the lines out of focus keep full opacity.
 #[Component]
 function CodeWindow(
     string $code,
@@ -26,6 +27,7 @@ function CodeWindow(
     string $className = '',
     bool $reveal = false,
     array $stepFocus = [],
+    bool $dim = true,
     #[Context] ?Step $step = null,
 ): Node {
     $current = 0;
@@ -51,7 +53,7 @@ function CodeWindow(
     }
     // One string: the white space between the lines of a <pre> counts.
     $body = new Html(implode('', $lines));
-    $codeClasses = ['ph-code', $size ? 'ph-code-'.$size : '', $focus ? 'has-focus' : '', $numbers ? '' : 'no-numbers'];
+    $codeClasses = ['ph-code', $size ? 'ph-code-'.$size : '', $focus && $dim ? 'has-focus' : '', $numbers ? '' : 'no-numbers'];
     $classes = ['ph-window', $className];
 
     return (

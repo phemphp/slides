@@ -21,8 +21,8 @@ function Reveal(): Node
                 <h1 className="ph-display">Phem</h1>
                 <p className="ph-lead">UI server components for Symfony web apps, <br/>written the way you think.</p>
                 <div className="mt-10 flex flex-wrap gap-3">
-                    <Chip mono>UI</Chip>
                     <Chip mono>PHP</Chip>
+                    <Chip mono>Symfony</Chip>
                     <Chip mono>Twig</Chip>
                     <Chip mono>Turbo</Chip>
                     <Chip mono>Stimulus</Chip>
