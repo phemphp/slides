@@ -15,7 +15,7 @@ function ThreeFiles(): Node
             name: 'post_like', 
             methods: ['POST'],
         )]
-        public function like(Post $post): Response
+        public function __invoke(Post $post): Response
         {
             $post->like();
 
@@ -50,7 +50,7 @@ function ThreeFiles(): Node
         <Slide glowX="50%" glowY="60%">
             <SlideHeading>Three files for <span className="ph-em">one component</span></SlideHeading>
             <div className="mt-8 grid grid-cols-2 items-start gap-8">
-                <CodeWindow code={{ controller }} file="PostController.php" size="xs" focus={{ [1, 2, 3, 4, 5, 11, 12, 13, 14, 15, 16] }} />
+                <CodeWindow code={{ controller }} file="PostController.php" size="xs" focus={{ [1, 2, 3, 4, 5, 10, 11, 12, 13, 14, 15] }} />
                 <div className="flex flex-col gap-4">
                     <CodeWindow code={{ template }} file="like_button.html.twig" size="xs" focus={{ [2, 4] }} />
                     <CodeWindow code={{ script }} file="app.js" size="xs" focus={{ [4] }} />

@@ -29,8 +29,8 @@ final class Slides
 
             // The reveal: one PHP class holds the state, the actions and the markup.
             <Reveal />,
-            <FunctionComponent />,
             <ClassComponent />,
+            <FunctionComponent />,
             <Action />,
             <Services />,
             <TwigCompare />,
