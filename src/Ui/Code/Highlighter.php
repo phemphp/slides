@@ -10,7 +10,7 @@ namespace App\Ui\Code;
 final class Highlighter
 {
     private const KEYWORDS = [
-        'abstract', 'as', 'bool', 'case', 'catch', 'class', 'const', 'echo', 'else', 'enum',
+        'abstract', 'as', 'async', 'await', 'bool', 'case', 'catch', 'class', 'const', 'echo', 'else', 'enum',
         'extends', 'false', 'final', 'float', 'fn', 'for', 'foreach', 'function', 'if', 'implements',
         'in', 'int', 'interface', 'match', 'mixed', 'namespace', 'new', 'null', 'private',
         'protected', 'public', 'readonly', 'return', 'self', 'static', 'string', 'throw', 'true',

@@ -25,7 +25,7 @@ final class Slides
             // One like button, the techs of the usual ways, and the wires it needs.
             <Example />,
             <Stack />,
-            <TwoFiles />,
+            <ThreeFiles />,
 
             // The reveal: one PHP class holds the state, the actions and the markup.
             <Reveal />,

@@ -139,6 +139,12 @@
     padding-right: 0;
 }
 
+/* A size below ph-code-sm, for a slide with three code windows. */
+.ph-code-xs {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
 /* A table of names in code: the first row is the head. */
 .ph-table {
     width: 100%;

@@ -1,0 +1,58 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{CodeWindow, Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function ThreeFiles(): Node
+{
+    $controller = <<<'PHP'
+        #[Route('/{id}/like', 'post_like', methods: ['POST'])]
+        public function like(Post $post): Response
+        {
+            $post->like();
+            $this->entityManager->flush();
+
+            return $this->render(
+                'like_button.html.twig', [
+                    'id' => $post->getId(),
+                    'likes' => $post->getLikes(),
+                ],
+            );
+        }
+        PHP;
+
+    $template = <<<'TWIG'
+        <form method="post"
+          action="{{ path('post_like', {id: id}) }}">
+          <button>
+            {{ likes > 0 ? '♥' : '♡' }} {{ likes }}
+          </button>
+        </form>
+        TWIG;
+
+    $script = <<<'JS'
+        document.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const {action} = e.target;
+          const res = await fetch(action, {method: 'POST'});
+          e.target.outerHTML = await res.text();
+        });
+        JS;
+
+    return (
+        <Slide glowX="50%" glowY="60%">
+            <SlideHeading>Three files for <span className="ph-em">one component</span></SlideHeading>
+            <div className="mt-8 grid grid-cols-2 items-start gap-8">
+                <CodeWindow code={{ controller }} file="PostController.php" size="xs" focus={{ [1, 7, 8, 9, 10, 11, 12] }} />
+                <div className="flex flex-col gap-4">
+                    <CodeWindow code={{ template }} file="like_button.html.twig" size="xs" focus={{ [2, 4] }} />
+                    <CodeWindow code={{ script }} file="app.js" size="xs" focus={{ [4] }} />
+                </div>
+            </div>
+        </Slide>
+    );
+}
