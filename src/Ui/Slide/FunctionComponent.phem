@@ -17,10 +17,10 @@ function FunctionComponent(): Node
         use Phem\{Attribute\Component, Node};
 
         #[Component]
-        function LikeButton(bool $liked = false): Node
+        function LikeButton(bool $liked, mixed ...$attrs): Node
         {
-            return <button className="bg-blue-600 text-white">
-                {{ liked ? '♥ Liked' : '♡ Like' }}
+            return <button className="btn" {{ ...attrs }}>
+                {{ liked ? '♥' : '♡' }}
             </button>;
         }
         PHP;
