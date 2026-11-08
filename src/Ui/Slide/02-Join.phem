@@ -1,0 +1,21 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{JoinQr, Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function Join(): Node
+{
+    return (
+        <Slide glowX="72%" glowY="50%" className="flex items-center justify-between">
+            <div>
+                <SlideHeading eyebrow="Live presentation">Join on your <span className="ph-em">phone</span></SlideHeading>
+                <p className="ph-lead max-w-[520px]">Scan the code. Your screen follows the slides, and you can click the live components.</p>
+            </div>
+            <JoinQr />
+        </Slide>
+    );
+}

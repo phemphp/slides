@@ -1,0 +1,55 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use App\Ui\Code\Highlighter;
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+#[Component]
+function CodeWindow(
+    string $code,
+    string $file = '',
+    array $tabs = [],
+    ?Html $meta = null,
+    string $size = '',
+    array $focus = [],
+    array $added = [],
+    array $removed = [],
+    array $steps = [],
+    array $tags = [],
+    bool $numbers = true,
+    string $className = '',
+): Node {
+    $lines = [];
+    foreach (Highlighter::lines($code) as $i => $html) {
+        $n = $i + 1;
+        $class = 'ph-line'
+            .(\in_array($n, $focus, true) ? ' is-focus' : '')
+            .(\in_array($n, $added, true) ? ' is-add' : '')
+            .(\in_array($n, $removed, true) ? ' is-del' : '');
+        if (isset($tags[$n])) {
+            $html .= '<span class="ph-line-tag">'.htmlspecialchars($tags[$n]).'</span>';
+        }
+        if (isset($steps[$n])) {
+            $html .= ' <span class="ph-step ph-step-sm">'.htmlspecialchars((string) $steps[$n]).'</span>';
+        }
+        $lines[] = '<span class="'.$class.'">'.$html.'</span>';
+    }
+    // One string: the white space between the lines of a <pre> counts.
+    $body = new Html(implode('', $lines));
+    $codeClasses = ['ph-code', $size ? 'ph-code-'.$size : '', $focus ? 'has-focus' : '', $numbers ? '' : 'no-numbers'];
+    $classes = ['ph-window', $className];
+
+    return (
+        <div className={{ classes }}>
+            <div className="ph-window-bar">
+                <span className="ph-window-dots"><span></span><span></span><span></span></span>
+                {% if file %}<span className="ph-window-tab is-active">{{ file }}</span>{% endif %}
+                {% for tab in tabs %}<span key={{ tab }} className="ph-window-tab">{{ tab }}</span>{% endfor %}
+                {% if meta %}<span className="ph-window-meta">{{ meta }}</span>{% endif %}
+            </div>
+            <pre className={{ codeClasses }}><code>{{ body }}</code></pre>
+        </div>
+    );
+}

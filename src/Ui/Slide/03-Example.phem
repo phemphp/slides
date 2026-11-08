@@ -1,0 +1,53 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Entity\Post;
+use App\Repository\PostRepository;
+use App\Ui\Component\{LikeButton, ListItem, Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+final class Example
+{
+    public Post $post;
+
+    public function __construct(
+        private readonly PostRepository $posts,
+    ) {
+    }
+
+    public function mount(): void
+    {
+        $this->post = $this->posts->first();
+    }
+
+    public function render(): Node
+    {
+        return (
+            <Slide glowX="30%" glowY="60%">
+                <SlideHeading>A Like, <span className="ph-em">End to End</span></SlideHeading>
+                <div className="mt-[77px] grid grid-cols-[653px_1fr] items-start gap-12">
+                    <div className="ph-preview overflow-hidden rounded-(--radius-lg) border border-(--edge)">
+                        <div className="ph-preview-bar">
+                            <span className="ph-url">localhost/posts/{{ this.post.id ?? 1 }}</span>
+                            <span className="ph-live">Live</span>
+                        </div>
+                        <div className="ph-preview-body">
+                            <p className="ph-eyebrow m-0">Blog · {{ this.post.date|date('j F') }}</p>
+                            <h3>{{ this.post.title }}</h3>
+                            <p className="mb-2 text-[20px] leading-[1.4] text-(--text-secondary)">{{ this.post.summary }}</p>
+                            <LikeButton post={{ this.post }} />
+                        </div>
+                    </div>
+                    <ul className="ph-list">
+                        <ListItem number="1" title="Click it" detail="The heart fills." active />
+                        <ListItem number="2" title="Save it" detail="The server stores the like." />
+                        <ListItem number="3" title="Show it" detail="The button shows the new state." />
+                    </ul>
+                </div>
+            </Slide>
+        );
+    }
+}

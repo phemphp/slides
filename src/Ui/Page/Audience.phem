@@ -1,0 +1,21 @@
+<?phem
+
+namespace App\Ui\Page;
+
+use App\Ui\Component\Deck;
+use App\Deck\Role;
+use Phem\Attribute\{Page, Broadcast};
+use Phem\Node;
+
+#[Page('/'), Broadcast]
+function Audience(): Node
+{
+    $role = Role::Audience;
+
+    return (
+        <Document>
+            <Document:title>Phem, live</Document:title>
+            <Deck role={{ role }} />
+        </Document>
+    );
+}

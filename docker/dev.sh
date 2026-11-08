@@ -8,9 +8,9 @@ php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migratio
 php bin/console doctrine:schema:update --force
 # The data that the slides need (the post of the example slide).
 php bin/console app:seed
-# Tailwind builds the CSS again when a class changes in the .phpm files.
+# Tailwind builds the CSS again when a class changes in the .phem files.
 php bin/console tailwind:build --watch &
 # The workers restart when a PHP class in src/ changes.
 export FRANKENPHP_WORKER_CONFIG='watch ./src/**/*.php'
-# phemc builds again when a .phpm file changes, then restarts FrankenPHP.
+# phemc builds again when a .phem file changes, then restarts FrankenPHP.
 exec vendor/bin/phemc watch src --exec "frankenphp run --config Caddyfile"

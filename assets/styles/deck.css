@@ -269,7 +269,7 @@
     --action-hide: ph-action-hide-b;
 }
 
-/* The lines of LikeButton.phpm, by their number: toggle() (5 to 7) with the handler, #[State]
+/* The lines of LikeButton.phem, by their number: toggle() (5 to 7) with the handler, #[State]
    (3) with the state, and render() (9 to 12) with the button. */
 .ph-action .ph-line:is(:nth-child(3), :nth-child(n+5):nth-child(-n+7), :nth-child(n+9):nth-child(-n+12)) {
     animation-name: var(--action-line, none);

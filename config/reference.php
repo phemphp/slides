@@ -748,11 +748,14 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     max_event_size?: int|Param, // The maximum size of an event body in bytes, with the state of the page (0 for no limit). A larger event gets a 413 response. A page whose state is too large for an event throws in debug mode, and logs an error in production. // Default: 1048576
  *     max_upload_size?: int|Param, // The maximum size of the files of an event in bytes, together (0 for no limit). Larger files get a 413 response. The post_max_size option of PHP also applies, and a file over upload_max_filesize gets to the handler with an upload error. // Default: 8388608
  *     suspense_stream?: bool|Param, // Stream the <Suspense> boundaries that are not lazy in the response of the page, after the page. With false, the browser loads them with an event after the page. // Default: true
+ *     show_exceptions?: bool|Param|null, // Show the Symfony page of the exception for an HTTP error, not the #[ErrorPage] of the application. Null is the debug mode of the kernel. Set false in the test environment so the tests get the error pages. The preview at /_error/{code} always shows the error page. // Default: null
  *     class_merger?: array{ // Merges the classes of a ClassList (`classes()`) when the attribute renders. By default, it removes the duplicates.
  *         tailwind?: bool|array{ // The Tailwind CSS v4 merger (tales-from-a-dev/tailwind-merge-php): a later class removes the earlier classes of the same group (`px-2` and then `px-4` gives `px-4`)
  *             enabled?: bool|Param, // Default: false
  *             prefix?: scalar|Param|null, // The prefix of the Tailwind classes (`@import "tailwindcss" prefix(tw);`), with no colon // Default: null
  *             cache?: scalar|Param|null, // The id of a PSR-16 cache service for the merged classes. The merger also keeps them in memory, between the requests of a worker. // Default: null
+ *             css?: scalar|Param|null, // The Tailwind entry CSS (`%kernel.project_dir%/assets/styles/app.css`). When the container builds, Phem reads the custom names of its `@theme` blocks and of the blocks of its relative imports, as the theme option. A change of these files rebuilds the container in debug mode. // Default: null
+ *             theme?: array<string, list<scalar|Param|null>>,
  *         },
  *         service?: scalar|Param|null, // The id of the Phem\Dom\ClassMerger service of the application // Default: null
  *     },

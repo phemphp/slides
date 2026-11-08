@@ -1,0 +1,29 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+#[Component]
+function TitleSlide(
+    string $title,
+    Html $children,
+    string $eyebrow = '',
+    string $icon = 'code',
+    ?Html $stack = null,
+    ?string $footer = null,
+    ?string $number = null,
+): Node {
+    return (
+        <Slide glowX="24%" glowY="46%" footer={{ footer }} number={{ number }} className="flex items-center gap-[72px]">
+            <IconOrb icon={{ icon }} size="lg" active />
+            <div>
+                {% if eyebrow %}<p className="ph-eyebrow">{{ eyebrow }}</p>{% endif %}
+                <h1 className="ph-display">{{ title }}</h1>
+                <p className="ph-lead max-w-[640px]">{{ children }}</p>
+                <div className="mt-10">{% if stack %}{{ stack }}{% else %}<StackChips />{% endif %}</div>
+            </div>
+        </Slide>
+    );
+}

@@ -1,0 +1,61 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Entity\{Side, Tech};
+use App\Repository\TechRepository;
+use App\Ui\Component\{IconOrb, Slide, SlideHeading, TechCounter};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+final class Stack
+{
+    /** @var list<Tech> */
+    public array $frontend;
+
+    /** @var list<Tech> */
+    public array $backend;
+
+    public function __construct(
+        private readonly TechRepository $repository,
+    ) {
+    }
+
+    public function mount(): void
+    {
+        $this->frontend = $this->repository->side(Side::Frontend);
+        $this->backend = $this->repository->side(Side::Backend);
+    }
+
+    public function render(): Node
+    {
+        return (
+            <Slide glowX="50%" glowY="58%" footer="Tap each tech that you think the like button needs">
+                <SlideHeading>One like button, <span className="ph-em">how many techs</span>?</SlideHeading>
+                <div className="mt-12 grid grid-cols-2 gap-8">
+                    <StackSide icon="browser" title="Frontend" techs={{ this.frontend }} />
+                    <StackSide icon="server" title="Backend" techs={{ this.backend }} />
+                </div>
+            </Slide>
+        );
+    }
+}
+
+#[Component]
+function StackSide(string $icon, string $title, array $techs): Node
+{
+    return (
+        <div className="ph-card grid content-start gap-6">
+            <div className="flex items-center gap-4">
+                <IconOrb icon={{ icon }} size="sm" />
+                <span className="ph-node-label">{{ title }}</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+                {% for tech in techs %}
+                    <TechCounter key={{ tech.id }} tech={{ tech }} />
+                {% endfor %}
+            </div>
+        </div>
+    );
+}

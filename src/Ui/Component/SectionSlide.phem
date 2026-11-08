@@ -1,0 +1,24 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+#[Component]
+function SectionSlide(
+    string $label,
+    string $icon,
+    string $part = '',
+    ?Html $children = null,
+    ?string $footer = null,
+    ?string $number = null,
+): Node {
+    return (
+        <Slide glowX="36%" glowY="46%" footer={{ footer }} number={{ number }} className="flex flex-col justify-center">
+            {% if part %}<p className="ph-eyebrow ml-6">{{ part }}</p>{% endif %}
+            <GlassPill label={{ label }} icon={{ icon }} active className="self-start" />
+            {% if children %}<p className="ph-lead mt-10 ml-6 max-w-[720px]">{{ children }}</p>{% endif %}
+        </Slide>
+    );
+}

@@ -1,0 +1,18 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function FlowNode(string $icon, string $label, string $caption = '', bool $active = false): Node
+{
+    return (
+        <div className="ph-node">
+            <IconOrb icon={{ icon }} active={{ active }} />
+            <span className="ph-node-label">{{ label }}</span>
+            {% if caption %}<span className="ph-node-caption">{{ caption }}</span>{% endif %}
+        </div>
+    );
+}

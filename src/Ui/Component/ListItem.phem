@@ -1,0 +1,26 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function ListItem(string $title, ?string $detail = null, string $icon = '', ?string $number = null, ?string $step = null, bool $active = false): Node
+{
+    $classes = ['ph-list-item', $active ? 'is-active' : '', $step ? 'pl-0' : ''];
+
+    return (
+        <li className={{ classes }}>
+            {% if step %}
+                <StepMarker>{{ step }}</StepMarker>
+            {% else %}
+                <IconOrb icon={{ icon }} number={{ number }} size="sm" active={{ active }} />
+            {% endif %}
+            <span className="ph-list-text">
+                {{ title }}
+                {% if detail %}<small>{{ detail }}</small>{% endif %}
+            </span>
+        </li>
+    );
+}

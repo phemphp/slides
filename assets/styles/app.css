@@ -6,7 +6,7 @@
 @import "./phem/components.css" layer(components);
 @import "./deck.css" layer(components);
 
-/* The .phpm sources have the classes of the slides. */
+/* The .phem sources have the classes of the slides. */
 @source "../../src";
 
 /* The slides change with a cross-fade (data-phem-transition). */

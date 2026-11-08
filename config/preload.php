@@ -3,7 +3,3 @@
 foreach (glob(dirname(__DIR__).'/var/cache/prod/*.preload.php') ?: [] as $file) {
     require $file;
 }
-
-if (file_exists(dirname(__DIR__).'/var/phem/preload.php')) {
-    require dirname(__DIR__).'/var/phem/preload.php';
-}

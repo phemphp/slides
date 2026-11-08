@@ -3,7 +3,7 @@
 namespace App\Ui\Code;
 
 /**
- * Highlights PHP and .phpm source on the server, with the tok-* classes of the design system
+ * Highlights PHP and .phem source on the server, with the tok-* classes of the design system
  * (the same classes as the highlighter of the Phem docs). It is made for the short samples of
  * the slides, not for all of PHP.
  */

@@ -1,0 +1,32 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use App\Entity\Post;
+use Phem\Attribute\{Component, Prop, Transactional, Broadcast, BroadcastKey};
+use Phem\Node;
+
+#[Component]
+final class LikeButton
+{
+    #[Prop, BroadcastKey]
+    public Post $post;
+
+    #[Transactional, Broadcast]
+    public function like(): void
+    {
+        ++$this->post->likes;
+    }
+
+    public function render(): Node
+    {
+        return (
+            <button type="button" onClick={{ like }} className="ph-button ph-button-primary ph-like cursor-pointer">
+                <span><span className="ph-like-heart">{{ post.likes > 0 ? '♥' : '♡' }}</span> Like</span>
+                {% if post.likes > 0 %}
+                    <span className="border-l border-(--edge-strong) pl-3 tabular-nums">{{ post.likes }}</span>
+                {% endif %}
+            </button>
+        );
+    }
+}

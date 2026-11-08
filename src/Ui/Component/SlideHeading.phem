@@ -1,0 +1,19 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+#[Component]
+function SlideHeading(Html $children, string $eyebrow = '', string $className = ''): Node
+{
+    $classes = ['ph-title', $className];
+
+    return (
+        <>
+            {% if eyebrow %}<p className="ph-eyebrow">{{ eyebrow }}</p>{% endif %}
+            <h2 className={{ classes }}>{{ children }}</h2>
+        </>
+    );
+}

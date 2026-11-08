@@ -1,0 +1,26 @@
+<?phem
+
+namespace App\Ui\Page;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node, Root};
+
+#[Component]
+function Document(Html $title, Html $children): Node
+{
+    return (
+        <html lang="en" className="h-full bg-(--canvas)">
+            <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+                <meta name="color-scheme" content="dark" />
+                <title>{{ title }}</title>
+                <link rel="icon" href="/favicon.ico" sizes="any" />
+                {{ importmap('app') }}
+            </head>
+            <body className="h-full text-(--text) antialiased">
+                <Root className="h-full">{{ children }}</Root>
+            </body>
+        </html>
+    );
+}

@@ -1,0 +1,44 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{CodeWindow, ListItem, Slide, SlideHeading};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// phemc is a compiler written in Rust. It finds the markup literals in the PHP code, checks them
+// (closed tags, one root, known components and props), and writes two things: PHP where each
+// literal becomes new \Phem\Element('PostPage.0.twig', [...]), and one Twig template for each
+// literal. Show the generated template: the numbers match the previous slide. The parent is an
+// embed, the slot is a block, the child is a component tag. Then bin/console phem:warmup
+// compiles the Twig cache at build time.
+#[Component]
+function Compile(): Node
+{
+    $code = <<<'TWIG'
+        {% component embed 'App\\Components\\Document' %}
+            {% block title %}My post{% endblock %}
+            {% block children %}
+                <h1>My post</h1>
+                {% component 'App\\Components\\LikeButton' %}
+            {% endblock %}
+        {% endcomponent %}
+        TWIG;
+
+    return (
+        <Slide glowX="36%" glowY="58%" footer="At runtime, nothing parses .phem or .twig">
+            <SlideHeading eyebrow="How it works · compile time">It compiles to the <span className="ph-em">Twig you know</span></SlideHeading>
+            <div className="mt-12 grid grid-cols-[1fr_340px] items-center gap-12">
+                <CodeWindow code={{ code }} file="templates/Pages/PostPage.0.twig" size="sm" focus={{ [1, 2, 5] }} steps={{ {1: '1', 2: '2', 5: '3'} }}>
+                    <CodeWindow:meta><span className="ph-eyebrow m-0">Generated</span></CodeWindow:meta>
+                </CodeWindow>
+                <ul className="ph-list">
+                    <ListItem icon="code" title=".phem" detail="your source" />
+                    <ListItem icon="wrench" title="phemc" detail="checks, then writes" active />
+                    <ListItem icon="layers" title="PHP + Twig" detail="one per literal" />
+                    <ListItem icon="bolt" title="Twig cache" detail="built before deploy" />
+                </ul>
+            </div>
+        </Slide>
+    );
+}

@@ -19,7 +19,7 @@ Keys of the speaker view: `→` `↓` `PageDown` `Space` `n` (next), `←` `↑`
 (previous), `Home` (first slide).
 
 Put each slide in its own file in `src/Ui/Slide/`, with its number as the prefix (for example
-`01-Cover.phpm`). Then add it to the list in `src/Ui/Slide/Slides.phpm`. `phemc` and Tailwind build
+`01-Cover.phem`). Then add it to the list in `src/Ui/Slide/Slides.phem`. `phemc` and Tailwind build
 again when you save.
 
 ### Development with the tunnel

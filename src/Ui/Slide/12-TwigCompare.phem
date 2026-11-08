@@ -1,0 +1,50 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{CodeWindow, ComparisonSlide, ListItem};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// This slide speaks to Twig users. A child template extends a parent by path and fills blocks by
+// name. A Phem page does the same: Document is the parent, a component with a title slot and
+// children. The default block (body) becomes the children: what is inside the tag. include()
+// becomes a component tag, <LikeButton />, and phemc checks that the component exists and that
+// its props are right (E010–E015). Next slide shows that this is literally what it compiles to.
+#[Component]
+function TwigCompare(): Node
+{
+    $before = <<<'TWIG'
+        {% extends 'base.html.twig' %}
+        {% block title %}My post{% endblock %}
+        {% block body %}
+            <h1>My post</h1>
+            {{ include('_like.html.twig') }}
+        {% endblock %}
+        TWIG;
+
+    $after = <<<'PHP'
+        return <Document>
+            <Document:title>My post</Document:title>
+            <h1>My post</h1>
+            <LikeButton />
+        </Document>;
+        PHP;
+
+    return (
+        <ComparisonSlide eyebrow="Phem · components" beforeLabel="Before" afterLabel="After" footer="The same idea as Twig inheritance, with types">
+            <ComparisonSlide:title>From child template to <span className="ph-em">component</span></ComparisonSlide:title>
+            <ComparisonSlide:before>
+                <CodeWindow code={{ before }} file="post.html.twig" size="sm" numbers={{ false }} focus={{ [1, 2, 5] }} steps={{ {1: '1', 2: '2', 5: '3'} }} />
+            </ComparisonSlide:before>
+            <ComparisonSlide:after>
+                <CodeWindow code={{ after }} file="PostPage.phem" size="sm" numbers={{ false }} focus={{ [1, 2, 4] }} steps={{ {1: '1', 2: '2', 4: '3'} }} />
+            </ComparisonSlide:after>
+            <ul className="ph-list grid-cols-3">
+                <ListItem step="1" title="A parent by class" />
+                <ListItem step="2" title="A block is a slot" />
+                <ListItem step="3" title="Checked by phemc" />
+            </ul>
+        </ComparisonSlide>
+    );
+}
