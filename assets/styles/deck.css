@@ -383,3 +383,29 @@
 @keyframes ph-action-hide-b {
     from, to { visibility: hidden; }
 }
+
+/* ---------- Points shown one at a time ---------- */
+
+/* The marker of a point before the current one, in the code and in the notes: amber-gray. */
+.ph-step.is-done {
+    color: var(--canvas);
+    background: color-mix(in srgb, var(--accent) 45%, var(--surface-raised));
+    box-shadow: none;
+}
+
+/* A point that shows fades in. */
+.ph-note.is-reveal,
+.ph-line .ph-step-sm {
+    animation: ph-reveal 240ms ease-out;
+}
+
+@keyframes ph-reveal {
+    from { opacity: 0; translate: 0 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ph-note.is-reveal,
+    .ph-line .ph-step-sm {
+        animation: none;
+    }
+}

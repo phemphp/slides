@@ -2,9 +2,13 @@
 
 namespace App\Ui\Component;
 
-use Phem\Attribute\Component;
+use App\Deck\Step;
+use Phem\Attribute\{Component, Context};
 use Phem\{Html, Node};
 
+// A slide with points (steps > 0) shows them one at a time: down and up change the point (see
+// deck_keys_controller.js). The components with "reveal" read the current point (CodeWindow,
+// Annotation).
 #[Component]
 function Slide(
     Html $children,
@@ -13,13 +17,17 @@ function Slide(
     ?string $footer = null,
     ?string $number = null,
     string $className = '',
+    int $steps = 0,
+    #[Context] ?Step $step = null,
 ): Node {
     $classes = ['ph-slide ph-frame-content', $className];
     $style = sprintf('--glow-x: %s; --glow-y: %s;', $glowX, $glowY);
+    $stepCount = $steps > 0 ? $steps : null;
+    $current = $steps > 0 ? min($step?->current ?? 1, $steps) : null;
 
     return (
         <div className="ph-frame">
-            <section className={{ classes }} style={{ style }}>
+            <section className={{ classes }} style={{ style }} data-deck-steps={{ stepCount }} data-deck-step={{ current }}>
                 {{ children }}
                 {% if footer or number %}
                     <div className="ph-footer">{% if footer %}<span>{{ footer }}</span>{% endif %}{% if number %}<span>{{ number }}</span>{% endif %}</div>

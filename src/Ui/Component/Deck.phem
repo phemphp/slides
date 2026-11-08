@@ -2,7 +2,7 @@
 
 namespace App\Ui\Component;
 
-use App\Deck\Role;
+use App\Deck\{Role, Step};
 use App\Repository\PresentationRepository;
 use App\Ui\Slide\Slides;
 use Phem\Attribute\{Component, Prop, Provide, Broadcast};
@@ -13,6 +13,10 @@ final class Deck
 {
     #[Prop, Provide] 
     public Role $role = Role::Audience;
+
+    // The current point of the slide, for the slides that show their points one at a time.
+    #[Provide]
+    public Step $step;
 
     private int $index = 0;
     private int $total = 0;
@@ -25,12 +29,15 @@ final class Deck
         private readonly PresentationRepository $presentation,
     ) {
         $this->slides = new Slides()->all();
+        $this->step = new Step();
     }
 
     // No #[State]: each render reads the current slide again (also after a push).
     public function mount(): void
     {
-        $this->load($this->presentation->get()->slide);
+        $presentation = $this->presentation->get();
+        $this->load($presentation->slide);
+        $this->step = new Step(max(1, $presentation->step));
     }
 
     public function render(): Node

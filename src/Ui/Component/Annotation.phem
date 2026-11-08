@@ -2,15 +2,30 @@
 
 namespace App\Ui\Component;
 
-use Phem\Attribute\Component;
+use App\Deck\Step;
+use Phem\Attribute\{Component, Context};
 use Phem\{Html, Node};
 
+// With "reveal", the note shows from its point on (see Slide), and its marker is "done" after
+// its point.
 #[Component]
-function Annotation(Html $children, ?string $step = null, ?Html $detail = null): Node
-{
+function Annotation(
+    Html $children,
+    ?string $step = null,
+    ?Html $detail = null,
+    bool $reveal = false,
+    #[Context] ?Step $current = null,
+): Node {
+    $current ??= new Step();
+    $n = (int) $step;
+    // A note before its point is in the page, but hidden: the layout of the notes stays simple.
+    $hidden = $reveal && !$current->shows($n);
+    $tone = $reveal && $current->isDone($n) ? 'done' : '';
+    $classes = ['ph-note', $reveal ? 'is-reveal' : ''];
+
     return (
-        <div className="ph-note">
-            {% if step %}<StepMarker small>{{ step }}</StepMarker>{% endif %}
+        <div className={{ classes }} hidden={{ hidden }}>
+            {% if step %}<StepMarker small tone={{ tone }}>{{ step }}</StepMarker>{% endif %}
             <span>
                 {{ children }}
                 {% if detail %}<small>{{ detail }}</small>{% endif %}
