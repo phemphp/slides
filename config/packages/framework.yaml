@@ -6,7 +6,10 @@ framework:
     # The session keeps the access of the speaker (App\Security\SpeakerAccess). Keep it in
     # var/data (a volume in prod), so a new container keeps it, and for one day, so an idle
     # speaker page does not lose it after the 24 minutes of PHP.
+    # The cookie has its own name: browsers share the localhost cookies between the ports, so
+    # PHPSESSID of another local app (for example on :8000) replaced or deleted this one.
     session:
+        name: slides_session
         handler_id: session.handler.native_file
         save_path: '%kernel.project_dir%/var/data/sessions'
         gc_maxlifetime: 86400
