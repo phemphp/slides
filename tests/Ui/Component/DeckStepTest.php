@@ -72,7 +72,8 @@ final class DeckStepTest extends KernelTestCase
         $this->speaker()
             ->click('[data-deck-keys-target="down"]')
             ->click('[data-deck-keys-target="next"]')
-            ->assertSelectorNotExists('[data-deck-steps]');
+            ->assertSelectorExists('[data-deck-steps="3"][data-deck-step="1"]')
+            ->assertSelectorTextContains('.ph-note:not([hidden])', 'A page is a route');
 
         $this->assertSame(1, $this->step());
     }
