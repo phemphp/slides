@@ -18,8 +18,8 @@ make up
 Keys of the speaker view: `→` `↓` `PageDown` `Space` `n` (next), `←` `↑` `PageUp` `p`
 (previous), `Home` (first slide).
 
-Put each slide in its own file in `src/Ui/Slide/`, with its number as the prefix (for example
-`01-Cover.phem`). Then add it to the list in `src/Ui/Slide/Slides.phem`. `phemc` and Tailwind build
+Put each slide in its own file in `src/Ui/Slide/`, named as its component (for example
+`Cover.phem`). Then add it to the list in `src/Ui/Slide/Slides.phem`. The list sets the order. `phemc` and Tailwind build
 again when you save.
 
 ### Development with the tunnel

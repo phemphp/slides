@@ -1,0 +1,45 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeSlide, CodeWindow};
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function ClassComponent(): Node
+{
+    $code = <<<'PHP'
+        <?phem
+
+        #[Component]
+        final class PostLikesButton
+        {
+            #[State] public Post $post;
+
+            public function like(): void {
+                ++$this->post->likes;
+            }
+
+            public function render(): Node {
+                return <button onClick={{ like }}>
+                    ♥ {{ post.likes }}
+                </button>;
+            }
+        }
+        PHP;
+
+    return (
+        <CodeSlide>
+            <CodeSlide:title>A component is a <span className="ph-em">PHP class</span></CodeSlide:title>
+            <CodeWindow code={{ code }} file="src/Ui/PostLikesButton.phem" size="sm" focus={{ [1, 3, 4, 6, 8, 9, 10, 12, 13, 14, 15, 16] }} steps={{ {1: '1', 3: '2', 6: '3', 8: '4', 12: '5'} }} />
+            <CodeSlide:notes>
+                <Annotation step="1">A new file type: .phem</Annotation>
+                <Annotation step="2">Mark a class</Annotation>
+                <Annotation step="3">State is a property</Annotation>
+                <Annotation step="4">A handler is a method</Annotation>
+                <Annotation step="5">The markup uses both</Annotation>
+            </CodeSlide:notes>
+        </CodeSlide>
+    );
+}

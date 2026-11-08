@@ -18,7 +18,6 @@ function ThreeFiles(): Node
         public function like(Post $post): Response
         {
             $post->like();
-            $this->entityManager->flush();
 
             return $this->render(
                 'like_button.html.twig', [
@@ -33,7 +32,7 @@ function ThreeFiles(): Node
         <form method="post"
           action="{{ path('post_like', {id: id}) }}">
           <button>
-            {{ likes > 0 ? '♥' : '♡' }} {{ likes }}
+            ♥ {{ likes }}
           </button>
         </form>
         TWIG;

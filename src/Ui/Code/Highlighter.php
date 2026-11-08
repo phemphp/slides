@@ -28,7 +28,7 @@ final class Highlighter
         .'|(?<number>\b\d+(?:\.\d+)?\b)'
         .'|(?<word>[A-Za-z_][\w-]*)'
         .'|(?<other>\s+|.)'
-        .')~s';
+        .')~su';
 
     /**
      * @return list<string> the HTML of each line

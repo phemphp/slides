@@ -24,8 +24,9 @@ function Reveal(): Node
                     <Chip mono>UI</Chip>
                     <Chip mono>PHP</Chip>
                     <Chip mono>Twig</Chip>
+                    <Chip mono>Turbo</Chip>
+                    <Chip mono>Stimulus</Chip>
                     <Chip mono>Rust</Chip>
-                    <Chip mono>Symfony Bundle</Chip>
                 </div>
             </div>
         </Slide>
