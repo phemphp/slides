@@ -4,7 +4,8 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends git unzip \
  && rm -rf /var/lib/apt/lists/*
 # pcntl: vendor/bin/phemc gives the signals (Ctrl+C) to the compiler.
-RUN install-php-extensions pcntl pdo_sqlite
+# intl: Symfony asks for it, for best performance.
+RUN install-php-extensions intl pcntl pdo_sqlite
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 WORKDIR /app
