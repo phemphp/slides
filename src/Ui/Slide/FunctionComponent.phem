@@ -12,14 +12,14 @@ function FunctionComponent(): Node
     $code = <<<'PHP'
         <?phem
 
-        namespace App\Ui\Common;
+        namespace App\Ui;
 
         use Phem\{Attribute\Component, Node};
 
         #[Component]
         function LikeButton(bool $liked, mixed ...$attrs): Node
         {
-            return <button className="btn" {{ ...attrs }}>
+            return <button class="btn" {{ ...attrs }}>
                 {{ liked ? '♥' : '♡' }}
             </button>;
         }
@@ -31,7 +31,7 @@ function FunctionComponent(): Node
         <CodeSlide steps={{ 4 }}>
             <CodeSlide:title>A component is a <span className="ph-em">PHP function</span> and <span className="ph-em">Twig markup</span></CodeSlide:title>
             <div className="grid gap-6">
-                <CodeWindow code={{ code }} file="src/Ui/Common/LikeButton.phem" size="sm" reveal dim={{ false }} steps={{ {1: '1', 7: '2', 8: '3', 10: '4'} }} stepFocus={{ {4: [10, 11, 12]} }} />
+                <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" reveal dim={{ false }} steps={{ {1: '1', 7: '2', 8: '3', 10: '4'} }} stepFocus={{ {4: [10, 11, 12]} }} />
                 <div className="flex items-center gap-4">
                     <span className="ph-eyebrow m-0">Use it</span>
                     <Chip mono>{{ usage }}</Chip>
