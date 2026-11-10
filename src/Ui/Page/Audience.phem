@@ -10,12 +10,10 @@ use Phem\Node;
 #[Page('/'), Broadcast]
 function Audience(): Node
 {
-    $role = Role::Audience;
-
     return (
         <Document>
             <Document:title>Phem, live</Document:title>
-            <Deck role={{ role }} />
+            <Deck role={{ Role.Audience }} />
         </Document>
     );
 }

@@ -77,6 +77,18 @@ final class DeckStepTest extends KernelTestCase
         $this->assertSame(1, $this->step());
     }
 
+    public function testTheAudienceGetsTheMoveOfTheSpeaker(): void
+    {
+        $audience = $this->visit('/')
+            ->assertSee('A component is a');
+
+        $this->speaker()->click('[data-deck-keys-target="next"]');
+
+        $audience->receive()
+            ->assertSee('A page is a')
+            ->assertDontSee('A component is a');
+    }
+
     private function speaker(): ComponentTester
     {
         return $this->visit('/speaker?key=test')->followRedirect();

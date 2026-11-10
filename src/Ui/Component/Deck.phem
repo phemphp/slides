@@ -3,15 +3,16 @@
 namespace App\Ui\Component;
 
 use App\Deck\{Role, Step};
+use App\Entity\Presentation;
 use App\Repository\PresentationRepository;
 use App\Ui\Slide\Slides;
 use Phem\Attribute\{Component, Prop, Provide, Broadcast};
 use Phem\Node;
 
-#[Component, Broadcast]
+#[Component, Broadcast(on: Presentation::class)]
 final class Deck
 {
-    #[Prop, Provide] 
+    #[Prop, Provide]
     public Role $role = Role::Audience;
 
     // The current point of the slide, for the slides that show their points one at a time.
@@ -42,9 +43,7 @@ final class Deck
     public function render(): Node
     {
         $speaker = Role::Speaker === $this->role;
-        $slide = $this->slide;
         $number = $this->index + 1;
-        $total = $this->total;
 
         return (
             <section

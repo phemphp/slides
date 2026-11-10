@@ -23,8 +23,6 @@ final class JoinQr
 
     public function render(): Node
     {
-        $qrCode = $this->qrCode;
-
         return (
             <img src={{ qrCode }} alt="QR code of the audience view" className="ph-qr" />
         );

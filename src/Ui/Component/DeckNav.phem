@@ -9,81 +9,51 @@ use App\Security\SpeakerAccess;
 use Phem\Attribute\{Component, Context, Prop};
 use Phem\Event;
 use Phem\Node;
-use Phem\Stream\Streams;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 #[Component]
 final class DeckNav
 {
-    #[Prop]
-    public int $number;
-
-    #[Prop]
-    public int $total;
-
-    #[Context]
-    public Role $role;
+    #[Prop] public int $number;
+    #[Prop] public int $total;
+    #[Context] public Role $role;
 
     public function __construct(
         private readonly PresentationRepository $presentation,
         private readonly SpeakerAccess $speakerAccess,
-        private readonly Streams $streams,
     ) {
     }
 
-    public function next(Event $e): void
-    {
-        $this->move($this->number, $e);
-    }
-
-    public function previous(Event $e): void
-    {
-        $this->move($this->number - 2, $e);
-    }
-
-    public function first(Event $e): void
-    {
-        $this->move(0, $e);
-    }
-
-    public function down(Event $e): void
-    {
-        $this->update(fn (Presentation $presentation) => $presentation->step = $presentation->step + 1, $e);
-    }
-
-    public function up(Event $e): void
-    {
-        $this->update(fn (Presentation $presentation) => $presentation->step = max(1, $presentation->step - 1), $e);
-    }
-
-    public function render(): Node
-    {
-        $number = $this->number;
-        $total = $this->total;
-
-        return (
-            <nav
-                className="absolute right-4 bottom-4 flex items-center gap-2 text-sm text-(--text-tertiary) opacity-30 transition-opacity hover:opacity-100"
-                data-controller="deck-keys"
-                data-action="keydown@window->deck-keys#press"
-            >
-                <button type="button" onClick={{ first }} data-deck-keys-target="first" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="First slide (Home)">⇤</button>
-                <button type="button" onClick={{ previous }} data-deck-keys-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Previous (←)">←</button>
-                <span className="tabular-nums">{{ number }} / {{ total }}</span>
-                <button type="button" onClick={{ up }} data-deck-keys-target="up" tabindex="-1" hidden>↑</button>
-                <button type="button" onClick={{ down }} data-deck-keys-target="down" tabindex="-1" hidden>↓</button>
-                <button type="button" onClick={{ next }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
-            </nav>
-        );
-    }
-
-    private function move(int $index, Event $e): void
+    public function move(int $index, Event $e): void
     {
         $this->update(function (Presentation $presentation) use ($index) {
             $presentation->slide = max(0, min($index, $this->total - 1));
             // A slide starts at its first point.
             $presentation->step = 1;
         }, $e);
+    }
+
+    public function point(int $by, Event $e): void
+    {
+        $this->update(fn (Presentation $presentation) => $presentation->step = max(1, $presentation->step + $by), $e);
+    }
+
+    public function render(): Node
+    {
+        return (
+            <nav
+                className="absolute right-4 bottom-4 flex items-center gap-2 text-sm text-(--text-tertiary) opacity-30 transition-opacity hover:opacity-100"
+                data-controller="deck-keys"
+                data-action="keydown@window->deck-keys#press"
+            >
+                <button type="button" onClick={{ move(0) }} data-deck-keys-target="first" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="First slide (Home)">⇤</button>
+                <button type="button" onClick={{ move(number - 2) }} data-deck-keys-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Previous (←)">←</button>
+                <span className="tabular-nums">{{ number }} / {{ total }}</span>
+                <button type="button" onClick={{ point(-1) }} data-deck-keys-target="up" tabindex="-1" hidden>↑</button>
+                <button type="button" onClick={{ point(1) }} data-deck-keys-target="down" tabindex="-1" hidden>↓</button>
+                <button type="button" onClick={{ move(number) }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
+            </nav>
+        );
     }
 
     private function update(\Closure $change, Event $e): void
@@ -96,8 +66,8 @@ final class DeckNav
         $change($presentation);
         $this->presentation->save($presentation);
 
-        // The deck reads the new slide and point in mount(): on this page, and on the other pages.
+        // The deck reads the new slide and point in mount(). The other browsers get the
+        // broadcast of the Presentation (see Deck).
         $e->refresh();
-        $this->streams->toComponent(Deck::class)->refresh();
     }
 }
