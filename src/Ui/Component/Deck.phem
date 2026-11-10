@@ -19,6 +19,7 @@ final class Deck
     #[Provide]
     public Step $step;
 
+    private Presentation $presentation;
     private int $index = 0;
     private int $total = 0;
     private ?Node $slide = null;
@@ -27,7 +28,7 @@ final class Deck
     private array $slides;
 
     public function __construct(
-        private readonly PresentationRepository $presentation,
+        private readonly PresentationRepository $repository,
     ) {
         $this->slides = new Slides()->all();
         $this->step = new Step();
@@ -35,9 +36,9 @@ final class Deck
 
     public function mount(): void
     {
-        $presentation = $this->presentation->get();
-        $this->load($presentation->slide);
-        $this->step = new Step(max(1, $presentation->step));
+        $this->presentation = $this->repository->get();
+        $this->load($this->presentation->slide);
+        $this->step = new Step(max(1, $this->presentation->step));
     }
 
     public function render(): Node
@@ -55,7 +56,7 @@ final class Deck
                     <div>{{ slide }}</div>
                 </div>
                 {% if speaker %}
-                    <DeckNav number={{ number }} total={{ total }} />
+                    <DeckNav presentation={{ presentation }} number={{ number }} total={{ total }} />
                 {% endif %}
             </section>
         );

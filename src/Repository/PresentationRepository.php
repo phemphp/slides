@@ -15,12 +15,11 @@ class PresentationRepository extends ServiceEntityRepository
 
     public function get(): Presentation
     {
-        return $this->find(1) ?? new Presentation();
-    }
+        if (null === $presentation = $this->find(1)) {
+            $presentation = new Presentation();
+            $this->getEntityManager()->persist($presentation);
+        }
 
-    public function save(Presentation $presentation): void
-    {
-        $this->getEntityManager()->persist($presentation);
-        $this->getEntityManager()->flush();
+        return $presentation;
     }
 }
