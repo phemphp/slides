@@ -6,9 +6,6 @@ use App\Entity\Presentation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Presentation>
- */
 class PresentationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

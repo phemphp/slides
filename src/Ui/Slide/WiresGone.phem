@@ -6,12 +6,6 @@ use App\Ui\Component\{Slide, SlideHeading};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// Go back to the amber strings of the two files from the problem part. Each string now has a PHP
-// name, so your IDE and phemc see it: an unknown component or prop is E010–E015, an undefined
-// variable in markup is E030. No route and no route parameter: the button knows its own state, and
-// the browser sends it back with each event. The counter: three places for the like count, and two
-// of them are the database. Be honest: the win is less about the count and more that the remaining
-// places are checked.
 #[Component]
 function WiresGone(): Node
 {

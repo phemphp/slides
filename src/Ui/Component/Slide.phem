@@ -6,9 +6,6 @@ use App\Deck\Step;
 use Phem\Attribute\{Component, Context};
 use Phem\{Html, Node};
 
-// A slide with points (steps > 0) shows them one at a time: down and up change the point (see
-// deck_keys_controller.js). The components with "reveal" read the current point (CodeWindow,
-// Annotation).
 #[Component]
 function Slide(
     Html $children,

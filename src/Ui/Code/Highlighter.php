@@ -2,11 +2,6 @@
 
 namespace App\Ui\Code;
 
-/**
- * Highlights PHP and .phem source on the server, with the tok-* classes of the design system
- * (the same classes as the highlighter of the Phem docs). It is made for the short samples of
- * the slides, not for all of PHP.
- */
 final class Highlighter
 {
     private const KEYWORDS = [
@@ -30,9 +25,6 @@ final class Highlighter
         .'|(?<other>\s+|.)'
         .')~su';
 
-    /**
-     * @return list<string> the HTML of each line
-     */
     public static function lines(string $code): array
     {
         $lines = [''];
@@ -51,9 +43,6 @@ final class Highlighter
         return $lines;
     }
 
-    /**
-     * @return list<array{?string, string}>
-     */
     private static function tokens(string $code): array
     {
         $code = rtrim(str_replace("\r\n", "\n", $code), "\n");

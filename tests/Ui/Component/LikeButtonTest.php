@@ -10,8 +10,6 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Phem\Test\InteractsWithPhem;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-// The LikeButton runs in the example slide: the slide loads the post in each event, so the
-// handler changes a managed entity.
 final class LikeButtonTest extends KernelTestCase
 {
     use InteractsWithPhem;

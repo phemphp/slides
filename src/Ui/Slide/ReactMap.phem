@@ -6,10 +6,6 @@ use App\Ui\Component\{Arrow, Chip, Slide, SlideHeading};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// For the React people in the room. The ideas are the same: components, props, state, children,
-// context, lifting state up. The differences: state is a #[State] property of a class (no hooks,
-// phemc even reports a call to a hook as E020), handlers run on the server, and a page is a
-// Symfony route. Imported modules become services injected in the constructor.
 #[Component]
 function ReactMap(): Node
 {
@@ -32,7 +28,6 @@ function ReactMap(): Node
     );
 }
 
-// Two columns of names in code: the old name (from) and its new name (to), joined by an arrow.
 #[Component]
 function Mapping(string $from, string $to, array $rows): Node
 {

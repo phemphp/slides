@@ -5,10 +5,6 @@ namespace App\Entity;
 use App\Repository\TechRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * A tech of the stack slide, with the counter of its TechCounter: the votes of the audience
- * for "this tech is in the like button of the example slide".
- */
 #[ORM\Entity(repositoryClass: TechRepository::class)]
 class Tech
 {
@@ -31,12 +27,6 @@ class Tech
     ) {
     }
 
-    /**
-     * The techs of the stack slide (slide 4), in their order: the frontend, then the backend.
-     * There are no build tools, and there is no Phem: it is the answer, later in the talk.
-     *
-     * @return list<self>
-     */
     public static function stack(): array
     {
         return [

@@ -7,10 +7,6 @@ use App\Deck\Step;
 use Phem\Attribute\{Component, Context};
 use Phem\{Html, Node};
 
-// With "reveal", the markers of the steps show one at a time (see Slide): the marker of the
-// current point is amber and its lines (stepFocus, or the line of the marker) are the focus. The
-// markers of the earlier points are "done", and the markers of the later points do not show.
-// With "dim" false, the lines out of focus keep full opacity.
 #[Component]
 function CodeWindow(
     string $code,

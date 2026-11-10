@@ -10,9 +10,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use function App\Ui\Page\Audience;
 
-/**
- * The URL of the audience view, and its QR code.
- */
 final class AudienceLink
 {
     public function __construct(
@@ -31,9 +28,6 @@ final class AudienceLink
         return $this->urls->generate(PageName::of(Audience(...)), [], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
-    /**
-     * @return string an SVG data URI
-     */
     public function qrCode(): string
     {
         $builder = new Builder(

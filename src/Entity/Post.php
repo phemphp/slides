@@ -6,9 +6,6 @@ use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * The blog post of the example slide, with the like counter of its LikeButton.
- */
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
 {
@@ -30,9 +27,6 @@ class Post
     ) {
     }
 
-    /**
-     * The post of the example slide (slide 3).
-     */
     public static function example(): self
     {
         return new self(

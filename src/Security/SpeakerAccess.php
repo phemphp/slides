@@ -9,12 +9,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * Only the speaker opens the /speaker pages, and sends their events.
- *
- * The speaker opens /speaker?key=<SPEAKER_KEY> one time: the session then keeps the access, and
- * the URL loses the key. Without the access, the pages do not exist (404).
- */
 final class SpeakerAccess
 {
     private const string SESSION_KEY = 'speaker';
@@ -26,7 +20,6 @@ final class SpeakerAccess
     ) {
     }
 
-    // After the session (128) and the router (32).
     #[AsEventListener(priority: 8)]
     public function onKernelRequest(RequestEvent $event): void
     {

@@ -6,14 +6,6 @@ use App\Ui\Component\{Annotation, Arrow, FlowNode, Slide, SlideHeading, StepMark
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// 1: the phem Stimulus controller on the root element sends a POST to the page URL: the handler
-// name, the event, and the signature of the state. 2: the server keeps no session. The state
-// lives in the browser as signed JSON (an HMAC with the app secret), and a cache pool keeps it by
-// signature, so the event sends only the signature. The server renders only the components on
-// the path to the handler, restores their state, and runs toggle() in a Doctrine transaction.
-// 3: it renders only the components that can change, compares their HTML with hashes, and
-// answers with a Turbo Stream morph for each one that changed, plus the changed state entries
-// and the new signature. 4: Turbo morphs them in place.
 #[Component]
 function EventFlow(): Node
 {

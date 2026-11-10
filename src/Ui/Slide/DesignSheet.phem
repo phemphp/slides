@@ -6,8 +6,6 @@ use App\Ui\Component\{Annotation, Arrow, BulletSlide, Button, Callout, Chip, Cod
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
-// The sheet of the design system: one tile for each component, to check their look on the
-// projector. The samples come from the design system.
 #[Component]
 function DesignSheet(): Node
 {
@@ -296,7 +294,6 @@ function DesignSheet(): Node
     );
 }
 
-// A tile of the sheet: the component and its name.
 #[Component]
 function Tile(string $name, string $group, Html $children): Node
 {
@@ -308,7 +305,6 @@ function Tile(string $name, string $group, Html $children): Node
     );
 }
 
-// A 16:9 stage of the given width for one element, scaled to the tile.
 #[Component]
 function Stage(Html $children, int $width = 640): Node
 {

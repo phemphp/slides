@@ -6,12 +6,6 @@ use App\Ui\Component\{CodeWindow, ListItem, Slide, SlideHeading};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// phemc is a compiler written in Rust. It finds the markup literals in the PHP code, checks them
-// (closed tags, one root, known components and props), and writes two things: PHP where each
-// literal becomes new \Phem\Element('PostPage.0.twig', [...]), and one Twig template for each
-// literal. Show the generated template: the numbers match the previous slide. The parent is an
-// embed, the slot is a block, the child is a component tag. Then bin/console phem:warmup
-// compiles the Twig cache at build time.
 #[Component]
 function Compile(): Node
 {

@@ -6,9 +6,6 @@ use App\Ui\Component\{Chip, ListItem, Slide, SlideHeading};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// Close with the three lines. Then ask for feedback: the project has no release yet, so the API
-// can still change, and this is the moment to shape it. Put the repository link and your handle
-// on the card before the talk.
 #[Component]
 function Thanks(): Node
 {

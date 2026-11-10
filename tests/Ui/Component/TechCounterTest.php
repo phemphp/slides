@@ -11,8 +11,6 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Phem\Test\InteractsWithPhem;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-// The TechCounters run in the stack slide: the slide loads the techs in each event, so the
-// handler changes a managed entity.
 final class TechCounterTest extends KernelTestCase
 {
     use InteractsWithPhem;
@@ -75,9 +73,6 @@ final class TechCounterTest extends KernelTestCase
         }
     }
 
-    /**
-     * @return array<string, int>
-     */
     private function votesInDatabase(): array
     {
         $connection = self::getContainer()->get(EntityManagerInterface::class)->getConnection();

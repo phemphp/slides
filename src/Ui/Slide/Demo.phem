@@ -6,12 +6,6 @@ use App\Ui\Component\{GlassPill, Slide, Terminal};
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// Demo script, about 5 minutes. 1. make up, open /examples/Profile: click the LikeButton, the
-// heart fills; show the request in the network tab: one POST with the handler name. 2. Open
-// LikeButton.phem side by side, change the label, save: phemc watch rebuilds, reload. 3. Open
-// /examples/CounterSeparate: two Counter components, each keeps its own state. 4. Make a typo in
-// a component name and show the phemc error with the line and column. Backup: a recording of
-// the same steps, in case the network fails.
 #[Component]
 function Demo(): Node
 {

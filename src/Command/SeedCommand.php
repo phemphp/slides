@@ -10,10 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * Adds the data that the slides need, if it is not there. The start scripts run it, so a new
- * database (the prod volume) works without the fixtures.
- */
 #[AsCommand('app:seed', 'Add the data that the slides need, if it is not there')]
 final class SeedCommand
 {

@@ -6,8 +6,6 @@ use App\Deck\Step;
 use Phem\Attribute\{Component, Context};
 use Phem\{Html, Node};
 
-// With "reveal", the note shows from its point on (see Slide), and its marker is "done" after
-// its point.
 #[Component]
 function Annotation(
     Html $children,

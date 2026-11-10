@@ -4,15 +4,8 @@ namespace App\Ui\Slide;
 
 use Phem\Node;
 
-// The slides of the presentation, in their order. Each slide has its own file, with its number
-// as the prefix. A slide is markup: it renders only when it is the current slide. A dynamic slide
-// is a component with its own handlers. The speaker notes are the comments of the slide
-// components.
 final class Slides
 {
-    /**
-     * @return list<Node>
-     */
     public function all(): array
     {
         return [

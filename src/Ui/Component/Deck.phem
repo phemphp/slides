@@ -32,7 +32,6 @@ final class Deck
         $this->step = new Step();
     }
 
-    // No #[State]: each render reads the current slide again (also after a push).
     public function mount(): void
     {
         $presentation = $this->presentation->get();
