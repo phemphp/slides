@@ -14,6 +14,12 @@ framework:
         save_path: '%kernel.project_dir%/var/data/sessions'
         gc_maxlifetime: 86400
 
+    # A 404 is expected (for example, SpeakerAccess hides /speaker from a browser with no
+    # speaker session): log it as info, not as an error.
+    exceptions:
+        Symfony\Component\HttpKernel\Exception\NotFoundHttpException:
+            log_level: info
+
     #esi: true
     #fragments: true
 
