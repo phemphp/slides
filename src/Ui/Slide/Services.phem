@@ -5,35 +5,39 @@ namespace App\Ui\Slide;
 use App\Ui\Component\{CodeWindow, ListItem, SplitSlide};
 use Phem\Attribute\Component;
 use Phem\Node;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Component]
 function Services(): Node
 {
     $code = <<<'PHP'
         #[Component]
-        final class LikePostButton {
+        final class LikePostButton 
+        {
             #[Prop] public Post $post;
 
             public function __construct(
-                private PostRepository $posts,
+                private EntityManagerInterface $em,
             ) {}
 
-            public function toggle(): void {
+            public function toggle(): void 
+            {
                 $this->post->liked = !$this->post->liked;
-                $this->posts->save($this->post);
+                $this->em->flush();
             }
-            // render(): {{ post.liked ? '♥ Liked' : '♡ Like' }}
+
+            // render(): {{ post.liked ? '♥' : '♡' }}
         }
         PHP;
 
     return (
-        <SplitSlide eyebrow="Phem · services" footer="The handler is plain PHP · call any service">
+        <SplitSlide eyebrow="Phem · services">
             <SplitSlide:title>Components are <span className="ph-em">services</span></SplitSlide:title>
             <ListItem step="1" title="A Post entity as a prop" />
             <ListItem step="2" title="Autowired by Symfony" />
             <ListItem step="3" title="Saved in the handler" />
             <SplitSlide:code>
-                <CodeWindow code={{ code }} file="src/Components/LikePostButton.phem" size="sm" focus={{ [3, 5, 6, 7, 11] }} steps={{ {3: '1', 6: '2', 11: '3'} }} />
+                <CodeWindow code={{ code }} file="src/Ui/LikePostButton.phem" size="sm" focus={{ [4, 6, 7, 8, 13] }} steps={{ {4: '1', 7: '2', 13: '3'} }} />
             </SplitSlide:code>
         </SplitSlide>
     );
