@@ -18,9 +18,9 @@ function FunctionComponent(): Node
         use Phem\{Attribute\Component, Node};
 
         #[Component]
-        function LikeButton(bool $liked, mixed ...$attrs): Node
+        function LikeButton(bool $liked): Node
         {
-            return <button class="btn" {{ ...attrs }}>
+            return <button class="btn">
                 {{ liked ? '♥' : '♡' }}
             </button>;
         }
@@ -36,6 +36,8 @@ function FunctionComponent(): Node
                 <div className="flex items-center gap-4">
                     <span className="ph-eyebrow m-0">Use it</span>
                     <Chip mono>{{ usage }}</Chip>
+                    <span className="ph-eyebrow m-0">Render it</span>
+                    <button type="button" className="ph-button ph-button-primary ph-like" aria-label="Liked">♥</button>
                 </div>
             </div>
             <CodeSlide:notes>
