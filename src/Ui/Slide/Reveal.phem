@@ -20,7 +20,7 @@ function Reveal(): Node
             <div>
                 <p className="ph-eyebrow">Meet</p>
                 <h1 className="ph-display">Phem</h1>
-                <p className="ph-lead">UI server components for Symfony web apps, <br/>written the way you think.</p>
+                <p className="ph-lead">UI server components for Symfony web apps, <br/>made of old friends.</p>
                 <div className="mt-10 flex flex-wrap gap-3">
                     <Chip mono>PHP</Chip>
                     <Chip mono>Symfony</Chip>
