@@ -12,13 +12,14 @@ function Annotation(
     ?string $step = null,
     ?Html $detail = null,
     bool $reveal = false,
+    bool $muted = false,
     #[Context] ?Step $current = null,
 ): Node {
     $current ??= new Step();
     $n = (int) $step;
     // A note before its point is in the page, but hidden: the layout of the notes stays simple.
     $hidden = $reveal && !$current->shows($n);
-    $tone = $reveal && $current->isDone($n) ? 'done' : '';
+    $tone = $muted || ($reveal && $current->isDone($n)) ? 'done' : '';
     $classes = ['ph-note', $reveal ? 'is-reveal' : ''];
 
     return (

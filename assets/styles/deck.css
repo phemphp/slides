@@ -266,9 +266,10 @@
     box-shadow: none;
 }
 
-/* A point that shows fades in. */
+/* A point that shows fades in. A muted marker does not: it was there before, or all the
+   points show at once. */
 .ph-note.is-reveal,
-.ph-line .ph-step-sm {
+.ph-line .ph-step-sm:not(.is-done) {
     animation: ph-reveal 240ms ease-out;
 }
 
@@ -278,7 +279,7 @@
 
 @media (prefers-reduced-motion: reduce) {
     .ph-note.is-reveal,
-    .ph-line .ph-step-sm {
+    .ph-line .ph-step-sm:not(.is-done) {
         animation: none;
     }
 }

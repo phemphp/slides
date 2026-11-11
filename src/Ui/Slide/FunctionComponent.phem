@@ -29,10 +29,10 @@ function FunctionComponent(): Node
     $usage = '<LikeButton liked={{ true }} />';
 
     return (
-        <CodeSlide steps={{ 4 }}>
+        <CodeSlide>
             <CodeSlide:title>A component is a <span className="ph-em">PHP function</span> and <span className="ph-em">Twig markup</span></CodeSlide:title>
             <div className="grid gap-6">
-                <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" reveal dim={{ false }} steps={{ {1: '1', 7: '2', 8: '3', 10: '4'} }} stepFocus={{ {4: [10, 11, 12]} }} />
+                <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" steps={{ {1: '1', 7: '2', 8: '3', 10: '4'} }} muted />
                 <div className="flex items-center gap-4">
                     <span className="ph-eyebrow m-0">Use it</span>
                     <Chip mono>{{ usage }}</Chip>
@@ -41,10 +41,10 @@ function FunctionComponent(): Node
                 </div>
             </div>
             <CodeSlide:notes>
-                <Annotation step="1" reveal>A new file type: .phem</Annotation>
-                <Annotation step="2" reveal>Mark a function</Annotation>
-                <Annotation step="3" reveal>Parameters are props</Annotation>
-                <Annotation step="4" reveal>It returns markup</Annotation>
+                <Annotation step="1" muted>A new file type: .phem</Annotation>
+                <Annotation step="2" muted>Mark a function</Annotation>
+                <Annotation step="3" muted>Parameters are props</Annotation>
+                <Annotation step="4" muted>It returns markup</Annotation>
             </CodeSlide:notes>
         </CodeSlide>
     );

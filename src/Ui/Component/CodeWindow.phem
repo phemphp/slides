@@ -24,6 +24,7 @@ function CodeWindow(
     bool $reveal = false,
     array $stepFocus = [],
     bool $dim = true,
+    bool $muted = false,
     #[Context] ?Step $step = null,
 ): Node {
     $current = 0;
@@ -42,7 +43,7 @@ function CodeWindow(
             $html .= '<span class="ph-line-tag">'.htmlspecialchars($tags[$n]).'</span>';
         }
         if (isset($steps[$n]) && (!$reveal || (int) $steps[$n] <= $current)) {
-            $done = $reveal && (int) $steps[$n] < $current ? ' is-done' : '';
+            $done = $muted || ($reveal && (int) $steps[$n] < $current) ? ' is-done' : '';
             $html .= ' <span class="ph-step ph-step-sm'.$done.'">'.htmlspecialchars((string) $steps[$n]).'</span>';
         }
         $lines[] = '<span class="'.$class.'">'.$html.'</span>';
