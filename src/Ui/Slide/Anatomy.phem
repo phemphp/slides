@@ -1,0 +1,54 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\SlideHeading;
+use App\Ui\Layout\Slide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function Anatomy(): Node
+{
+    // The parts of the like button: each label, the point where its line starts, the side of the
+    // label at that point, and where its line ends on the button. The coordinates are px in the
+    // 1120×440 diagram; the button is at its center. A line ends with a dot on its part: the lines
+    // are drawn over the button.
+    $parts = [
+        ['label' => 'LikeButton', 'mono' => true, 'x' => 330, 'y' => 220, 'side' => 'right', 'to' => [400, 220]],
+        ['label' => 'Prop', 'mono' => false, 'x' => 430, 'y' => 110, 'side' => 'bottom', 'to' => [490, 160]],
+        ['label' => 'HTML + CSS', 'mono' => false, 'x' => 700, 'y' => 110, 'side' => 'bottom', 'to' => [610, 160]],
+        ['label' => 'State', 'mono' => false, 'x' => 790, 'y' => 220, 'side' => 'left', 'to' => [650, 220]],
+        ['label' => 'Event + Handler', 'mono' => false, 'x' => 520, 'y' => 340, 'side' => 'top', 'to' => [560, 280]],
+    ];
+
+    // Moves a label so that the given side is at its point, with a small gap between the text and
+    // the line.
+    $sides = [
+        'right' => '-translate-x-full -translate-y-1/2 pr-3',
+        'left' => '-translate-y-1/2 pl-3',
+        'bottom' => '-translate-x-1/2 -translate-y-full pb-3',
+        'top' => '-translate-x-1/2 pt-3',
+    ];
+
+    return (
+        <Slide glowX="50%" glowY="62%">
+            <SlideHeading>The anatomy of a <span className="ph-em">component</span></SlideHeading>
+            <div className="relative mt-6 h-[440px]">
+                <div className="ph-button ph-button-primary absolute left-[400px] top-[160px] h-[120px] w-[320px] justify-center gap-6 text-[44px]" role="img" aria-label="A like button with a heart and 123 likes">
+                    <span className="w-12 text-center">♥</span>
+                    <span className="w-20 tabular-nums">123</span>
+                </div>
+                <svg className="pointer-events-none absolute inset-0" width="1120" height="440" viewBox="0 0 1120 440" aria-hidden="true">
+                    {% for part in parts %}
+                        <line key={{ part.label }} x1={{ part.x }} y1={{ part.y }} x2={{ part.to[0] }} y2={{ part.to[1] }} stroke="var(--text-tertiary)" stroke-width="1.25" stroke-dasharray="6 5" />
+                        <circle key={{ part.label ~ '-dot' }} cx={{ part.to[0] }} cy={{ part.to[1] }} r="5" fill="var(--accent)" />
+                    {% endfor %}
+                </svg>
+                {% for part in parts %}
+                    <span key={{ part.label }} className={{ ['absolute whitespace-nowrap text-[28px] leading-none font-medium', part.mono ? 'font-(family-name:--font-mono)' : '', sides[part.side]] }} style={{ 'left: ' ~ part.x ~ 'px; top: ' ~ part.y ~ 'px;' }}>{{ part.label }}</span>
+                {% endfor %}
+            </div>
+        </Slide>
+    );
+}
