@@ -1,6 +1,6 @@
 <?phem
 
-namespace App\Ui\Component;
+namespace App\Ui\Layout;
 
 use App\Deck\Step;
 use Phem\Attribute\{Component, Context};

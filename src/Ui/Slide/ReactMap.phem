@@ -2,7 +2,8 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{Arrow, Chip, Slide, SlideHeading};
+use App\Ui\Component\{Arrow, Chip, SlideHeading};
+use App\Ui\Layout\Slide;
 use Phem\Attribute\Component;
 use Phem\Node;
 

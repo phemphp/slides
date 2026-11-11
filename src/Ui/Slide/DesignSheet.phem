@@ -2,7 +2,8 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{Annotation, Arrow, BulletSlide, Button, Callout, Chip, CodeSlide, CodeWindow, ComparisonSlide, FlowNode, FlowSlide, GlassPill, IconOrb, ListItem, Sandbox, SectionSlide, Slide, SlideHeading, SplitSlide, StepMarker, Terminal, TitleSlide};
+use App\Ui\Component\{Annotation, Arrow, Button, Callout, Chip, CodeWindow, FlowNode, GlassPill, IconOrb, ListItem, Sandbox, SlideHeading, StepMarker, Terminal};
+use App\Ui\Layout\{BulletSlide, CodeSlide, ComparisonSlide, FlowSlide, SectionSlide, Slide, SplitSlide, TitleSlide};
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 

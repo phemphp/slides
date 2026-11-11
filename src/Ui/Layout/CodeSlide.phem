@@ -1,7 +1,8 @@
 <?phem
 
-namespace App\Ui\Component;
+namespace App\Ui\Layout;
 
+use App\Ui\Component\SlideHeading;
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 

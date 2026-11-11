@@ -1,6 +1,6 @@
 <?phem
 
-namespace App\Ui\Page;
+namespace App\Ui\Layout;
 
 use Phem\Attribute\Component;
 use Phem\{Html, Node, Root};

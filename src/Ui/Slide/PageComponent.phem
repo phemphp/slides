@@ -2,7 +2,8 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{Annotation, CodeSlide, CodeWindow};
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
 use Phem\Attribute\Component;
 use Phem\Node;
 

@@ -2,7 +2,8 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{Annotation, Arrow, FlowNode, Slide, SlideHeading, StepMarker};
+use App\Ui\Component\{Annotation, Arrow, FlowNode, SlideHeading, StepMarker};
+use App\Ui\Layout\Slide;
 use Phem\Attribute\Component;
 use Phem\Node;
 

@@ -2,7 +2,8 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{CodeWindow, Slide, SlideHeading};
+use App\Ui\Component\{CodeWindow, SlideHeading};
+use App\Ui\Layout\Slide;
 use Phem\Attribute\Component;
 use Phem\Node;
 

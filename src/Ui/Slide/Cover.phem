@@ -2,7 +2,7 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\Slide;
+use App\Ui\Layout\Slide;
 use Phem\Attribute\Component;
 use Phem\Node;
 
