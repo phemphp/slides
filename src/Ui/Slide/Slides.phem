@@ -34,14 +34,10 @@ final class Slides
             <Compile />,
             <EventFlow />,
 
-            // What changes for you, the limits, a live demo and the recap.
-            <WiresGone />,
+            // The limits, a live demo and the recap.
             <TradeOffs />,
             <Demo />,
             <Thanks />,
-
-            // Extra slide, for reference.
-            <DesignSheet />,
         ];
     }
 }

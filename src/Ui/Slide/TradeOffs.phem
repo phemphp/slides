@@ -18,7 +18,7 @@ function TradeOffs(): Node
     ];
 
     return (
-        <Slide glowX="30%" glowY="50%" footer="No release yet · the API can still change">
+        <Slide glowX="30%" glowY="50%">
             <SlideHeading eyebrow="What changes for you">The <span className="ph-em">trade-offs</span></SlideHeading>
             <div className="mt-12 grid grid-cols-2 gap-8">
                 {% for item in tradeOffs %}
