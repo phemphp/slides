@@ -1,0 +1,51 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\CodeWindow;
+use App\Ui\Layout\ComparisonSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function DocumentCompare(): Node
+{
+    $before = <<<'TWIG'
+        <html>
+            <head>
+                <title>{% block title %}{% endblock %}</title>
+                {{ importmap('app') }}
+            </head>
+            <body>
+                {% block body %}{% endblock %}
+            </body>
+        </html>
+        TWIG;
+
+    $after = <<<'PHP'
+        #[Component]
+        function Document(string $title, Html $children): Node
+        {
+            return <html>
+                <head>
+                    <title>{{ title }}</title>
+                    {{ importmap('app') }}
+                </head>
+                <body>
+                    <Root>{{ children }}</Root>
+                </body>
+            </html>;
+        }
+        PHP;
+
+    return (
+        <ComparisonSlide beforeLabel="Before" afterLabel="After">
+            <ComparisonSlide:before>
+                <CodeWindow code={{ before }} file="base.html.twig" size="xs" numbers={{ false }} />
+            </ComparisonSlide:before>
+            <ComparisonSlide:after>
+                <CodeWindow code={{ after }} file="Document.phem" size="xs" numbers={{ false }} />
+            </ComparisonSlide:after>
+        </ComparisonSlide>
+    );
+}

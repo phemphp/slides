@@ -8,7 +8,6 @@ use Phem\{Html, Node};
 
 #[Component]
 function ComparisonSlide(
-    Html $title,
     Html $before,
     Html $after,
     string $beforeLabel,
@@ -20,7 +19,6 @@ function ComparisonSlide(
 ): Node {
     return (
         <Slide glowX="78%" glowY="60%" footer={{ footer }} number={{ number }} className="pt-16">
-            <SlideHeading eyebrow={{ eyebrow }} className="text-[52px]">{{ title }}</SlideHeading>
             <div className="ph-compare mt-9">
                 <div>
                     <div className="ph-compare-head"><Chip dot="accent-cool">{{ beforeLabel }}</Chip></div>

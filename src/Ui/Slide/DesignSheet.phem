@@ -267,7 +267,6 @@ function DesignSheet(): Node
                 </Tile>
                 <Tile name="ComparisonSlide" group="Slides">
                     <ComparisonSlide eyebrow="React vs Phem" beforeLabel="React · JSX" afterLabel="Phem · .phem" footer="Phem · PHP + Twig" number="09">
-                        <ComparisonSlide:title>Same idea, <span className="ph-em">PHP syntax</span></ComparisonSlide:title>
                         <ComparisonSlide:before>
                             <CodeWindow code={{ myButtonJsx }} file="MyButton.jsx" size="sm" />
                         </ComparisonSlide:before>

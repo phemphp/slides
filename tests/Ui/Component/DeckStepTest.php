@@ -96,7 +96,7 @@ final class DeckStepTest extends KernelTestCase
         $this->speaker()->click('[data-deck-keys-target="next"]');
 
         $audience->receive()
-            ->assertSee('Components are')
+            ->assertSee('Document.phem')
             ->assertDontSee('A page is a');
     }
 
