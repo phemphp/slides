@@ -21,7 +21,7 @@ function FunctionComponent(): Node
         #[Component]
         function Badge(Html $children): Node
         {
-            return <span class="border-ring rounded-full px-3 py-1">
+            return <span className="border-ring rounded-full px-3 py-1">
                 {{ children }}
             </span>;
         }
