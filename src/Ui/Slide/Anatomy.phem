@@ -17,9 +17,10 @@ function Anatomy(): Node
     $parts = [
         ['label' => 'Name <LikeButton/>', 'mono' => true, 'x' => 330, 'y' => 220, 'side' => 'right', 'to' => [400, 220]],
         ['label' => 'Prop size="lg"', 'mono' => false, 'x' => 430, 'y' => 110, 'side' => 'bottom', 'to' => [490, 160]],
-        ['label' => 'Markup Twig', 'mono' => false, 'x' => 700, 'y' => 110, 'side' => 'bottom', 'to' => [610, 160]],
-        ['label' => 'State public int likes', 'mono' => false, 'x' => 790, 'y' => 220, 'side' => 'left', 'to' => [650, 220]],
-        ['label' => 'Handler onClick={{ like }}', 'mono' => false, 'x' => 520, 'y' => 340, 'side' => 'top', 'to' => [560, 280]],
+        ['label' => 'State int likes', 'mono' => false, 'x' => 700, 'y' => 110, 'side' => 'bottom', 'to' => [610, 160]],
+        ['label' => 'Markup Twig', 'mono' => false, 'x' => 790, 'y' => 220, 'side' => 'left', 'to' => [720, 220]],
+        ['label' => 'Event onClick', 'mono' => false, 'x' => 400, 'y' => 340, 'side' => 'top', 'to' => [490, 280]],
+        ['label' => 'Handler function like()', 'mono' => false, 'x' => 720, 'y' => 340, 'side' => 'top', 'to' => [630, 280]],
     ];
 
     // Moves a label so that the given side is at its point, with a small gap between the text and
