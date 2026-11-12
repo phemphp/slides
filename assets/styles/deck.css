@@ -257,6 +257,24 @@
     margin-left: auto;
 }
 
+/* ---------- Step markers on the first line ---------- */
+
+/* The marker of a note is on the middle of the first line of text (22px × 1.4), also when the
+   text wraps or has a detail line. */
+.ph-note .ph-step {
+    margin-top: calc((22px * 1.4 - 28px) / 2);
+}
+
+/* The same for a list item with a step marker (44px) and a title line of 28px × 1.3. The text
+   moves down, not the marker, so a one-line item keeps its height. */
+.ph-list-item:has(> .ph-step) {
+    align-items: flex-start;
+}
+
+.ph-list-item > .ph-step + .ph-list-text {
+    padding-top: calc((44px - 28px * 1.3) / 2);
+}
+
 /* ---------- Points shown one at a time ---------- */
 
 /* The marker of a point before the current one, in the code and in the notes: amber-gray. */
