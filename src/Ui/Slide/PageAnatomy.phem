@@ -1,0 +1,70 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Layout\Slide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+use function App\Ui\Component\SlideHeading;
+
+#[Component]
+function PageAnatomy(): Node
+{
+    // The parts of the post page: each label, the point where its line starts, the side of the
+    // label at that point, and where its line ends on the page. The coordinates are px in the
+    // 1120×440 diagram; the page is at its center (370–750 × 10–430): the tab strip (10–50), the
+    // address bar (50–94), the children slot (110–360) and the footer slot (370–414). A line ends
+    // with a dot on its part: the lines are drawn over the page.
+    $parts = [
+        ['label' => 'Title prop', 'mono' => false, 'x' => 300, 'y' => 34, 'side' => 'right', 'to' => [382, 34]],
+        ['label' => '<PostPage/>', 'mono' => true, 'x' => 300, 'y' => 180, 'side' => 'right', 'to' => [370, 180]],
+        ['label' => '<LikeButton/>', 'mono' => true, 'x' => 300, 'y' => 292, 'side' => 'right', 'to' => [434, 292]],
+        ['label' => 'Route', 'mono' => false, 'x' => 820, 'y' => 72, 'side' => 'left', 'to' => [660, 72]],
+        ['label' => 'Children slot', 'mono' => false, 'x' => 820, 'y' => 180, 'side' => 'left', 'to' => [734, 180]],
+        ['label' => '<PostCard/>', 'mono' => true, 'x' => 820, 'y' => 292, 'side' => 'left', 'to' => [710, 292]],
+        ['label' => 'Footer slot', 'mono' => false, 'x' => 820, 'y' => 392, 'side' => 'left', 'to' => [734, 392]],
+    ];
+
+    // Moves a label so that the given side is at its point, with a small gap between the text and
+    // the line.
+    $sides = [
+        'right' => '-translate-x-full -translate-y-1/2 pr-3',
+        'left' => '-translate-y-1/2 pl-3',
+    ];
+
+    return (
+        <Slide glowX="50%" glowY="62%">
+            <SlideHeading className="text-center text-[48px]"><span className="ph-em">#[Page]</span></SlideHeading>
+            <div className="relative mt-6 h-[440px]">
+                <div className="ph-preview absolute left-[370px] top-[10px] h-[420px] w-[380px] overflow-hidden rounded-(--radius-lg) border border-(--edge)" role="img" aria-label="A post page in a browser tab named Phem: a layout with a body and a footer, and a post card with a like button in the body">
+                    <div className="flex h-[40px] items-end bg-(--surface) px-3">
+                        <span className="flex h-[32px] w-[150px] items-center rounded-t-(--radius-sm) bg-(--surface-raised) px-3 text-[15px] font-medium">Phem</span>
+                    </div>
+                    <div className="ph-preview-bar h-[44px]">
+                        <span className="ph-url">/posts/1</span>
+                    </div>
+                    <div className="absolute left-4 right-4 top-[100px] bottom-[70px] rounded-(--radius-md) border border-dashed border-(--edge-strong)"></div>
+                    <div className="absolute left-4 right-4 bottom-4 flex h-[44px] items-center justify-center rounded-(--radius-md) border border-dashed border-(--edge-strong) text-[14px] text-(--text-tertiary)">© 2026 Phem</div>
+                    <div className="ph-card absolute shadow-none left-10 right-10 top-[116px] bottom-[86px] p-6">
+                        <p className="m-0 text-[24px] font-semibold leading-tight">Hello, Phem!</p>
+                        <p className="mt-2 mb-0 text-[17px] leading-[1.4] text-(--text-secondary)">A short post with one button under it.</p>
+                        <span className="ph-button ph-button-primary absolute bottom-6 left-6 h-[56px] px-6 text-[22px]">
+                            <span>♥</span>
+                            <span className="tabular-nums">123</span>
+                        </span>
+                    </div>
+                </div>
+                <svg className="pointer-events-none absolute inset-0" width="1120" height="440" viewBox="0 0 1120 440" aria-hidden="true">
+                    {% for part in parts %}
+                        <line key={{ part.label }} x1={{ part.x }} y1={{ part.y }} x2={{ part.to[0] }} y2={{ part.to[1] }} stroke="var(--text-tertiary)" stroke-width="1.25" stroke-dasharray="6 5" />
+                        <circle key={{ part.label ~ '-dot' }} cx={{ part.to[0] }} cy={{ part.to[1] }} r="5" fill="var(--accent)" />
+                    {% endfor %}
+                </svg>
+                {% for part in parts %}
+                    <span key={{ part.label }} className={{ ['absolute whitespace-nowrap text-[28px] leading-none font-medium', part.mono ? 'font-(family-name:--font-mono)' : '', sides[part.side]] }} style={{ 'left: ' ~ part.x ~ 'px; top: ' ~ part.y ~ 'px;' }}>{{ part.label }}</span>
+                {% endfor %}
+            </div>
+        </Slide>
+    );
+}

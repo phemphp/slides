@@ -15,11 +15,11 @@ function Anatomy(): Node
     // 1120×440 diagram; the button is at its center. A line ends with a dot on its part: the lines
     // are drawn over the button.
     $parts = [
-        ['label' => 'LikeButton', 'mono' => true, 'x' => 330, 'y' => 220, 'side' => 'right', 'to' => [400, 220]],
-        ['label' => 'Prop', 'mono' => false, 'x' => 430, 'y' => 110, 'side' => 'bottom', 'to' => [490, 160]],
-        ['label' => 'HTML + CSS', 'mono' => false, 'x' => 700, 'y' => 110, 'side' => 'bottom', 'to' => [610, 160]],
-        ['label' => 'State', 'mono' => false, 'x' => 790, 'y' => 220, 'side' => 'left', 'to' => [650, 220]],
-        ['label' => 'Event + Handler', 'mono' => false, 'x' => 520, 'y' => 340, 'side' => 'top', 'to' => [560, 280]],
+        ['label' => 'Name <LikeButton/>', 'mono' => true, 'x' => 330, 'y' => 220, 'side' => 'right', 'to' => [400, 220]],
+        ['label' => 'Prop size="lg"', 'mono' => false, 'x' => 430, 'y' => 110, 'side' => 'bottom', 'to' => [490, 160]],
+        ['label' => 'Markup Twig', 'mono' => false, 'x' => 700, 'y' => 110, 'side' => 'bottom', 'to' => [610, 160]],
+        ['label' => 'State public int likes', 'mono' => false, 'x' => 790, 'y' => 220, 'side' => 'left', 'to' => [650, 220]],
+        ['label' => 'Handler onClick={{ like }}', 'mono' => false, 'x' => 520, 'y' => 340, 'side' => 'top', 'to' => [560, 280]],
     ];
 
     // Moves a label so that the given side is at its point, with a small gap between the text and
@@ -33,6 +33,7 @@ function Anatomy(): Node
 
     return (
         <Slide glowX="50%" glowY="62%">
+            <SlideHeading className="text-center text-[48px]"><span className="ph-em">#[Component]</span></SlideHeading>
             <div className="relative mt-6 h-[440px]">
                 <div className="ph-button ph-button-primary absolute left-[400px] top-[160px] h-[120px] w-[320px] justify-center gap-6 text-[44px]" role="img" aria-label="A like button with a heart and 123 likes">
                     <span className="w-12 text-center">♥</span>

@@ -13,7 +13,7 @@ final class DeckStepTest extends KernelTestCase
 {
     use InteractsWithPhem;
 
-    private const int PAGE_COMPONENT = 8;
+    private const int PAGE_COMPONENT = 10;
 
     protected function setUp(): void
     {
