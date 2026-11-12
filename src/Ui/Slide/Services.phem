@@ -2,44 +2,46 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\{CodeWindow, ListItem};
-use App\Ui\Layout\SplitSlide;
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
 use Phem\Attribute\Component;
 use Phem\Node;
-use Doctrine\ORM\EntityManagerInterface;
 
 #[Component]
 function Services(): Node
 {
     $code = <<<'PHP'
         #[Component]
-        final class LikePostButton 
+        class LatestPosts
         {
-            #[Prop] public Post $post;
+            public array $posts;
 
-            public function __construct(
-                private EntityManagerInterface $em,
-            ) {}
+            public function __construct(private PostRepository $repository) {}
 
-            public function toggle(): void 
+            public function mount(): void
             {
-                $this->post->liked = !$this->post->liked;
-                $this->em->flush();
+                $this->posts = $this->repository->latest();
             }
 
-            // render(): {{ post.liked ? '♥' : '♡' }}
+            public function render(): Node
+            {
+                return <ul>
+                    {% for post in posts %}
+                        <li key={{ post.id }}>{{ post.title }}</li>
+                    {% endfor %}
+                </ul>;
+            }
         }
         PHP;
 
     return (
-        <SplitSlide eyebrow="Phem · services">
-            <SplitSlide:title>Components are <span className="ph-em">services</span></SplitSlide:title>
-            <ListItem step="1" title="A Post entity as a prop" />
-            <ListItem step="2" title="Autowired by Symfony" />
-            <ListItem step="3" title="Saved in the handler" />
-            <SplitSlide:code>
-                <CodeWindow code={{ code }} file="src/Ui/LikePostButton.phem" size="sm" focus={{ [4, 6, 7, 8, 13] }} steps={{ {4: '1', 7: '2', 13: '3'} }} />
-            </SplitSlide:code>
-        </SplitSlide>
+        <CodeSlide>
+            <CodeWindow code={{ code }} file="src/Ui/LatestPostsPage.phem" size="xs" startNumber={{ 6 }} />
+            <CodeSlide:notes>
+                <Annotation step="1" muted>Components are services</Annotation>
+                <Annotation step="2" muted>mount() loads the data</Annotation>
+                <Annotation step="3" muted>render() stays pure</Annotation>
+            </CodeSlide:notes>
+        </CodeSlide>
     );
 }

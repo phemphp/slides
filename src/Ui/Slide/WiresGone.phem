@@ -2,7 +2,7 @@
 
 namespace App\Ui\Slide;
 
-use App\Ui\Component\SlideHeading;
+use App\Ui\Component\{Arrow, Chip, SlideHeading};
 use App\Ui\Layout\Slide;
 use Phem\Attribute\Component;
 use Phem\Node;
@@ -42,5 +42,22 @@ function WiresGone(): Node
                 {% endfor %}
             </div>
         </Slide>
+    );
+}
+
+#[Component]
+function Mapping(string $from, string $to, array $rows): Node
+{
+    return (
+        <div className="grid grid-cols-[auto_140px_1fr] items-center gap-x-6 gap-y-4">
+            <p className="ph-eyebrow m-0 justify-self-end">{{ from }}</p>
+            <span></span>
+            <p className="ph-eyebrow ph-em-cool m-0">{{ to }}</p>
+            {% for row in rows %}
+                <Chip key={{ row[0] }} mono className="justify-self-end whitespace-nowrap">{{ row[0] }}</Chip>
+                <Arrow tone="accent" />
+                <Chip mono dot="accent-cool" className="justify-self-start whitespace-nowrap">{{ row[1] }}</Chip>
+            {% endfor %}
+        </div>
     );
 }

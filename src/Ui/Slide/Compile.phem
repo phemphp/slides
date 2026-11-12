@@ -10,23 +10,35 @@ use Phem\Node;
 #[Component]
 function Compile(): Node
 {
-    $code = <<<'TWIG'
-        {% component embed 'App\\Components\\Document' %}
-            {% block title %}My post{% endblock %}
-            {% block children %}
-                <h1>My post</h1>
-                {% component 'App\\Components\\LikeButton' %}
-            {% endblock %}
-        {% endcomponent %}
+    $php = <<<'PHP'
+        <?php /* compiled by phemc from src/Ui/Badge.phem; do not edit */
+        namespace App\Ui;
+        #[Component]
+        function Badge(Html $children): Node
+        {
+            return new \Phem\Element('Ui/Badge.0.twig', [
+                'children' => $children,
+            ]);
+        }
+        PHP;
+
+    $twig = <<<'TWIG'
+        <span class="border-ring rounded-full px-3 py-1">
+            {{ children }}
+        </span>
         TWIG;
 
     return (
-        <Slide glowX="36%" glowY="58%" footer="At runtime, nothing parses .phem or .twig">
-            <SlideHeading eyebrow="How it works · compile time">It compiles to the <span className="ph-em">Twig you know</span></SlideHeading>
-            <div className="mt-12 grid grid-cols-[1fr_340px] items-center gap-12">
-                <CodeWindow code={{ code }} file="templates/Pages/PostPage.0.twig" size="sm" focus={{ [1, 2, 5] }} steps={{ {1: '1', 2: '2', 5: '3'} }}>
-                    <CodeWindow:meta><span className="ph-eyebrow m-0">Generated</span></CodeWindow:meta>
-                </CodeWindow>
+        <Slide glowX="36%" glowY="58%">
+            <div className="mt-8 grid grid-cols-[1fr_340px] items-center gap-12">
+                <div className="flex flex-col gap-4">
+                    <CodeWindow code={{ php }} file="var/phem/php/Ui/Badge.php" size="sm">
+                        <CodeWindow:meta><span className="ph-eyebrow m-0">Generated</span></CodeWindow:meta>
+                    </CodeWindow>
+                    <CodeWindow code={{ twig }} file="var/phem/templates/Ui/Badge.0.twig" size="sm">
+                        <CodeWindow:meta><span className="ph-eyebrow m-0">Generated</span></CodeWindow:meta>
+                    </CodeWindow>
+                </div>
                 <ul className="ph-list">
                     <ListItem icon="code" title=".phem" detail="your source" />
                     <ListItem icon="wrench" title="phemc" detail="checks, then writes" active />
