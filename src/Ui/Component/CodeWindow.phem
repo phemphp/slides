@@ -20,6 +20,7 @@ function CodeWindow(
     array $steps = [],
     array $tags = [],
     bool $numbers = true,
+    int $startNumber = 1,
     string $className = '',
     bool $reveal = false,
     array $stepFocus = [],
@@ -34,7 +35,7 @@ function CodeWindow(
     }
     $lines = [];
     foreach (Highlighter::lines($code) as $i => $html) {
-        $n = $i + 1;
+        $n = $i + $startNumber;
         $class = 'ph-line'
             .(\in_array($n, $focus, true) ? ' is-focus' : '')
             .(\in_array($n, $added, true) ? ' is-add' : '')
@@ -52,6 +53,8 @@ function CodeWindow(
     $body = new Html(implode('', $lines));
     $codeClasses = ['ph-code', $size ? 'ph-code-'.$size : '', $focus && $dim ? 'has-focus' : '', $numbers ? '' : 'no-numbers'];
     $classes = ['ph-window', $className];
+    // The CSS counter adds one before each line, so it starts one below the first number.
+    $codeStyle = 1 !== $startNumber ? 'counter-reset: ph-line '.($startNumber - 1).';' : null;
 
     return (
         <div className={{ classes }}>
@@ -61,7 +64,7 @@ function CodeWindow(
                 {% for tab in tabs %}<span key={{ tab }} className="ph-window-tab">{{ tab }}</span>{% endfor %}
                 {% if meta %}<span className="ph-window-meta">{{ meta }}</span>{% endif %}
             </div>
-            <pre className={{ codeClasses }}><code>{{ body }}</code></pre>
+            <pre className={{ codeClasses }} style={{ codeStyle }}><code>{{ body }}</code></pre>
         </div>
     );
 }

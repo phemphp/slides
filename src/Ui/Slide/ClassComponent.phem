@@ -33,7 +33,7 @@ function ClassComponent(): Node
 
     return (
         <CodeSlide>
-            <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" />
+            <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" startNumber={{ 6 }} />
             <CodeSlide:notes>
                 <Annotation step="1" muted>Mark a class</Annotation>
                 <Annotation step="2" muted>A prop is a property</Annotation>
