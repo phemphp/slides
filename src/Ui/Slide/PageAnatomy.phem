@@ -13,14 +13,15 @@ function PageAnatomy(): Node
 {
     // The parts of the post page: each label, the point where its line starts, the side of the
     // label at that point, and where its line ends on the page. The coordinates are px in the
-    // 1120×440 diagram; the page is at its center (370–750 × 10–430): the tab strip (10–50), the
-    // address bar (50–94), the children slot (110–360) and the footer slot (370–414). A line ends
-    // with a dot on its part: the lines are drawn over the page.
+    // 1120×440 diagram; the page is at its center (370–750 × 10–430): the tab strip (10–50) with
+    // the window dots (387–439 × 25–37) and the tab (455–605 × 19–51), the address bar (50–94),
+    // the children slot (110–360) and the footer slot (370–414). A line ends with a dot on its
+    // part: the lines are drawn over the page.
     $parts = [
-        ['label' => 'Title prop', 'mono' => false, 'x' => 300, 'y' => 34, 'side' => 'right', 'to' => [382, 34]],
+        ['label' => 'Title prop', 'mono' => false, 'x' => 300, 'y' => 44, 'side' => 'right', 'to' => [455, 44]],
         ['label' => '<PostPage/>', 'mono' => true, 'x' => 300, 'y' => 180, 'side' => 'right', 'to' => [370, 180]],
         ['label' => '<LikeButton/>', 'mono' => true, 'x' => 300, 'y' => 292, 'side' => 'right', 'to' => [434, 292]],
-        ['label' => 'Route', 'mono' => false, 'x' => 820, 'y' => 72, 'side' => 'left', 'to' => [660, 72]],
+        ['label' => 'Route', 'mono' => false, 'x' => 820, 'y' => 76, 'side' => 'left', 'to' => [660, 76]],
         ['label' => 'Children slot', 'mono' => false, 'x' => 820, 'y' => 180, 'side' => 'left', 'to' => [734, 180]],
         ['label' => '<PostCard/>', 'mono' => true, 'x' => 820, 'y' => 292, 'side' => 'left', 'to' => [710, 292]],
         ['label' => 'Footer slot', 'mono' => false, 'x' => 820, 'y' => 392, 'side' => 'left', 'to' => [734, 392]],
@@ -38,10 +39,12 @@ function PageAnatomy(): Node
             <SlideHeading className="text-center text-[48px]"><span className="ph-em">#[Page]</span></SlideHeading>
             <div className="relative mt-6 h-[440px]">
                 <div className="ph-preview absolute left-[370px] top-[10px] h-[420px] w-[380px] overflow-hidden rounded-(--radius-lg) border border-(--edge)" role="img" aria-label="A post page in a browser tab named Phem: a layout with a body and a footer, and a post card with a like button in the body">
-                    <div className="flex h-[40px] items-end bg-(--surface) px-3">
+                    <div className="flex h-[40px] items-end gap-4 bg-(--surface) px-4">
+                        <span className="ph-window-dots self-center"><span></span><span></span><span></span></span>
                         <span className="flex h-[32px] w-[150px] items-center rounded-t-(--radius-sm) bg-(--surface-raised) px-3 text-[15px] font-medium">Phem</span>
                     </div>
-                    <div className="ph-preview-bar h-[44px]">
+                    <div className="ph-preview-bar h-[48px]">
+                        <span className="ph-icon ph-icon-home size-[14px] flex-none bg-none bg-(--text-tertiary)"></span>
                         <span className="ph-url">/posts/1</span>
                     </div>
                     <div className="absolute left-4 right-4 top-[100px] bottom-[70px] rounded-(--radius-md) border border-dashed border-(--edge-strong)"></div>
