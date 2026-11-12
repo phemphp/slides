@@ -248,7 +248,6 @@ function DesignSheet(): Node
                 </Tile>
                 <Tile name="CodeSlide" group="Slides">
                     <CodeSlide eyebrow="Components" footer="Phem · PHP + Twig" number="08">
-                        <CodeSlide:title>A component is a <span className="ph-em">PHP function</span></CodeSlide:title>
                         <CodeWindow code={{ myButton }} file="MyButton.phem" focus={{ [3, 4, 8] }} steps={{ {3: '1', 8: '2'} }} />
                         <CodeSlide:notes>
                             <Annotation step="1">Typed props are the parameters.</Annotation>

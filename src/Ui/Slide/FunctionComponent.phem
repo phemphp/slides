@@ -15,29 +15,29 @@ function FunctionComponent(): Node
 
         namespace App\Ui;
 
-        use Phem\{Attribute\Component, Node};
+        use Phem\Attribute\Component;
+        use Phem\{Html, Node};
 
         #[Component]
-        function LikeButton(bool $liked): Node
+        function Badge(Html $children): Node
         {
-            return <button class="btn">
-                {{ liked ? '♥' : '♡' }}
-            </button>;
+            return <span class="border-ring rounded-full px-3 py-1">
+                {{ children }}
+            </span>;
         }
         PHP;
 
-    $usage = '<LikeButton liked={{ true }} />';
+    $usage = '<Badge>Success</Badge>';
 
     return (
         <CodeSlide>
-            <CodeSlide:title>A component is a <span className="ph-em">PHP function</span> and <span className="ph-em">Twig markup</span></CodeSlide:title>
             <div className="grid gap-6">
-                <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" steps={{ {1: '1', 7: '2', 8: '3', 10: '4'} }} muted />
+                <CodeWindow code={{ code }} file="src/Ui/Badge.phem" size="sm" />
                 <div className="flex items-center gap-4">
                     <span className="ph-eyebrow m-0">Use it</span>
                     <Chip mono>{{ usage }}</Chip>
                     <span className="ph-eyebrow m-0">Render it</span>
-                    <button type="button" className="ph-button ph-button-primary ph-like" aria-label="Liked">♥</button>
+                    <button type="button" className="ph-button ph-button-primary ph-like" aria-label="Liked">Success</button>
                 </div>
             </div>
             <CodeSlide:notes>

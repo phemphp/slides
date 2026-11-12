@@ -33,7 +33,6 @@ function Anatomy(): Node
 
     return (
         <Slide glowX="50%" glowY="62%">
-            <SlideHeading>The anatomy of a <span className="ph-em">component</span></SlideHeading>
             <div className="relative mt-6 h-[440px]">
                 <div className="ph-button ph-button-primary absolute left-[400px] top-[160px] h-[120px] w-[320px] justify-center gap-6 text-[44px]" role="img" aria-label="A like button with a heart and 123 likes">
                     <span className="w-12 text-center">♥</span>

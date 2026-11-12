@@ -28,7 +28,6 @@ final class Example
     {
         return (
             <Slide glowX="30%" glowY="60%">
-                <SlideHeading>A Like, <span className="ph-em">End to End</span></SlideHeading>
                 <div className="mt-[77px] grid grid-cols-[653px_1fr] items-start gap-12">
                     <div className="ph-preview overflow-hidden rounded-(--radius-lg) border border-(--edge)">
                         <div className="ph-preview-bar">

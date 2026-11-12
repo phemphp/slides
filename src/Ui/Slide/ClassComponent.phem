@@ -11,30 +11,29 @@ use Phem\Node;
 function ClassComponent(): Node
 {
     $code = <<<'PHP'
-        <?phem
-
         #[Component]
-        final class PostCard
+        class LikeButton
         {
             #[Prop] public Post $post;
 
-            public function like(): void {
-                $this->post->liked = !$this->post->liked;
+            #[Transactional]
+            public function like(): void 
+            {
+                ++$this->post->likes;
             }
 
-            public function render(): Node {
-                return <article>
-                    <h2>{{ post.title }}</h2>
-                    <LikeButton liked={{ post.liked }} onClick={{ like }} />
-                </article>;
+            public function render(): Node
+            {
+                return <button onClick={{ like }}>
+                    ♥ {{ post.likes }}
+                </button>;
             }
         }
         PHP;
 
     return (
         <CodeSlide>
-            <CodeSlide:title>A component is a <span className="ph-em">PHP class</span> and <span className="ph-em">Twig markup</span></CodeSlide:title>
-            <CodeWindow code={{ code }} file="src/Ui/PostCard.phem" size="sm" steps={{ {3: '1', 6: '2', 8: '3', 12: '4'} }} muted />
+            <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" />
             <CodeSlide:notes>
                 <Annotation step="1" muted>Mark a class</Annotation>
                 <Annotation step="2" muted>A prop is a property</Annotation>
