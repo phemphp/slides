@@ -11,8 +11,7 @@ use Phem\Node;
 function Home(): Node
 {
     return (
-        <Document>
-            <Document.title>Phem</Document.title>
+        <Document title="Phem">
             <Deck />
         </Document>
     );
