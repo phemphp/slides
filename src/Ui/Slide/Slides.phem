@@ -23,8 +23,8 @@ final class Slides
             <ClassComponent />,
             <PageAnatomy />,
             <PageComponent />,
-            <DocumentCompare />,
             <Services />,
+            <DocumentCompare />,
 
             // How it works: compile to Twig, then events over HTTP.
             <Compile />,

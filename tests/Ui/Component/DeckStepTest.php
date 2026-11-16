@@ -28,40 +28,36 @@ final class DeckStepTest extends KernelTestCase
         $em->flush();
     }
 
-    public function testTheSlideStartsAtThePoint1(): void
+    public function testTheSlideShowsAllItsPointsAtOnce(): void
     {
         $this->deck()
-            ->assertSelectorExists('[data-deck-steps="3"][data-deck-step="1"]')
-            ->assertSelectorCount(1, '.ph-line .ph-step')
-            ->assertSelectorCount(0, '.ph-step.is-done')
-            ->assertSelectorCount(1, '.ph-note:not([hidden])')
+            ->assertSelectorNotExists('[data-deck-steps]')
+            ->assertSelectorCount(3, '.ph-note:not([hidden])')
+            ->assertSelectorCount(3, '.ph-note .ph-step.is-done')
             ->assertSelectorTextContains('.ph-note:not([hidden])', 'A page is a route')
-            ->assertSelectorCount(2, '.ph-line.is-focus');
+            ->assertSelectorCount(0, '.ph-line .ph-step')
+            ->assertSelectorCount(0, '.ph-line.is-focus');
     }
 
-    public function testDownShowsTheNextPoint(): void
+    public function testDownKeepsAllThePointsOnTheSlide(): void
     {
         $this->deck()
             ->click('[data-deck-keys-target="down"]')
             ->click('[data-deck-keys-target="down"]')
-            ->assertSelectorExists('[data-deck-step="3"]')
-            ->assertSelectorCount(3, '.ph-line .ph-step')
-            ->assertSelectorCount(2, '.ph-line .ph-step.is-done')
-            ->assertSelectorTextContains('.ph-line .ph-step:not(.is-done)', '3')
+            ->assertSelectorNotExists('[data-deck-steps]')
             ->assertSelectorCount(3, '.ph-note:not([hidden])')
-            ->assertSelectorCount(2, '.ph-note .ph-step.is-done')
-            ->assertSelectorCount(1, '.ph-line.is-focus');
+            ->assertSelectorCount(3, '.ph-note .ph-step.is-done');
 
         $this->assertSame(3, $this->step());
     }
 
-    public function testUpHidesTheCurrentPoint(): void
+    public function testUpStopsAtThePoint1(): void
     {
         $this->deck()
             ->click('[data-deck-keys-target="down"]')
             ->click('[data-deck-keys-target="up"]')
             ->click('[data-deck-keys-target="up"]')
-            ->assertSelectorExists('[data-deck-step="1"]');
+            ->assertSelectorCount(3, '.ph-note:not([hidden])');
 
         $this->assertSame(1, $this->step());
     }
@@ -72,20 +68,17 @@ final class DeckStepTest extends KernelTestCase
             ->click('[data-deck-keys-target="down"]')
             ->click('[data-deck-keys-target="previous"]')
             ->click('[data-deck-keys-target="next"]')
-            ->assertSelectorExists('[data-deck-steps="3"][data-deck-step="1"]')
             ->assertSelectorTextContains('.ph-note:not([hidden])', 'A page is a route');
 
         $this->assertSame(1, $this->step());
     }
 
-    public function testAMutedSlideShowsAllItsPointsAtOnce(): void
+    public function testPreviousShowsThePageAnatomy(): void
     {
         $this->deck()
             ->click('[data-deck-keys-target="previous"]')
-            ->assertSelectorTextContains('h2', 'A component is a')
-            ->assertSelectorCount(4, '.ph-line .ph-step.is-done')
-            ->assertSelectorCount(4, '.ph-note:not([hidden]) .ph-step.is-done')
-            ->assertSelectorCount(0, '.ph-line.is-focus');
+            ->assertSelectorTextContains('h2', '#[Page]')
+            ->assertSelectorCount(0, '.ph-note');
     }
 
     private function deck(): ComponentTester
