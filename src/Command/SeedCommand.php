@@ -3,9 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Post;
-use App\Entity\Tech;
 use App\Repository\PostRepository;
-use App\Repository\TechRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -15,7 +13,6 @@ final class SeedCommand
 {
     public function __construct(
         private readonly PostRepository $posts,
-        private readonly TechRepository $techs,
         private readonly EntityManagerInterface $em,
     ) {
     }
@@ -27,15 +24,6 @@ final class SeedCommand
         } else {
             $this->em->persist(Post::example());
             $io->writeln('Added the post of the example slide.');
-        }
-
-        if ([] !== $this->techs->stack()) {
-            $io->writeln('The techs of the stack slide are there.');
-        } else {
-            foreach (Tech::stack() as $tech) {
-                $this->em->persist($tech);
-            }
-            $io->writeln('Added the techs of the stack slide.');
         }
 
         $this->em->flush();

@@ -1,13 +1,13 @@
 # The common tasks of the project. Run "make" to see the list.
-#   Dev:  make up (or make up-tunnel, with TUNNEL_TOKEN and SPEAKER_KEY), make console c="debug:router", make test
-#   Live: SPEAKER_KEY=... PUBLIC_URL=... make live (or make live-tunnel, with TUNNEL_TOKEN)
+#   Dev:  make up, make console c="debug:router", make test
+#   Live: make live
 
 DEV  = docker compose
 LIVE = docker compose -f compose.prod.yaml
 EXEC = $(DEV) exec app
 
 .DEFAULT_GOAL = help
-.PHONY: help up up-tunnel down logs sh console schema fixtures test restart phem-link phem-unlink live live-tunnel live-down live-logs
+.PHONY: help up down logs sh console schema fixtures test restart phem-link phem-unlink live live-down live-logs
 
 help: ## Show this list
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
@@ -17,19 +17,14 @@ help: ## Show this list
 up: ## Start the dev server in the background (http://localhost:8080)
 	$(DEV) up --build --detach
 
-up-tunnel: ## Start the dev server with HTTPS (needs TUNNEL_TOKEN and SPEAKER_KEY; stop the live presentation first)
-	@test -n "$(TUNNEL_TOKEN)" || { echo "Set TUNNEL_TOKEN: the token of the Cloudflare Tunnel"; exit 1; }
-	@test -n "$(SPEAKER_KEY)" -a "$(SPEAKER_KEY)" != "dev" || { echo "Set SPEAKER_KEY to a secret: the tunnel is public, and the dev key is in git"; exit 1; }
-	$(DEV) --profile tunnel up --build --detach
-
 restart: ## Restart the dev server, for example to load a change in the linked phem
 	$(DEV) restart app
 
-down: ## Stop the dev server (and its tunnel)
-	$(DEV) --profile tunnel down
+down: ## Stop the dev server
+	$(DEV) down
 
-logs: ## Follow the logs of the dev server (and its tunnel)
-	$(DEV) --profile tunnel logs --follow
+logs: ## Follow the logs of the dev server
+	$(DEV) logs --follow
 
 sh: ## Open a shell in the dev container
 	$(EXEC) bash
@@ -61,16 +56,11 @@ phem-unlink: ## Restore the released phem version in vendor/
 
 ## --- Live presentation -------------------------------------------------
 
-live: ## Start the live presentation on the LAN (needs SPEAKER_KEY, PUBLIC_URL)
+live: ## Start the presentation with the prod image (http://localhost:8080)
 	$(LIVE) up --build --detach
 
-live-tunnel: ## Start the live presentation with HTTPS (also needs TUNNEL_TOKEN)
-	@test -n "$(TUNNEL_TOKEN)" || { echo "Set TUNNEL_TOKEN: the token of the Cloudflare Tunnel"; exit 1; }
-	$(LIVE) --profile tunnel up --build --detach
+live-down: ## Stop the presentation (the database stays in its volume)
+	$(LIVE) down
 
-# down and logs need no key, but compose reads the whole file.
-live-down: ## Stop the live presentation (the database stays in its volume)
-	SPEAKER_KEY=$${SPEAKER_KEY:-unused} $(LIVE) --profile tunnel down
-
-live-logs: ## Follow the logs of the live presentation
-	SPEAKER_KEY=$${SPEAKER_KEY:-unused} $(LIVE) --profile tunnel logs --follow
+live-logs: ## Follow the logs of the presentation
+	$(LIVE) logs --follow

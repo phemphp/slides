@@ -3,16 +3,16 @@
 namespace App\Ui\Component;
 
 use App\Entity\Post;
-use Phem\Attribute\{Component, Prop, Transactional, Broadcast, BroadcastKey};
+use Phem\Attribute\{Component, Prop, Transactional};
 use Phem\Node;
 
 #[Component]
 final class LikeButton
 {
-    #[Prop, BroadcastKey]
+    #[Prop]
     public Post $post;
 
-    #[Transactional, Broadcast]
+    #[Transactional]
     public function like(): void
     {
         ++$this->post->likes;

@@ -12,12 +12,8 @@ final class Slides
             // Who I am and what this talk is about.
             <Cover />,
 
-            // The audience joins on their phones, to follow the slides and use the live example.
-            <Join />,
-
-            // One like button, the techs of the usual ways, and the wires it needs.
+            // One like button, and the wires it needs.
             <Example />,
-            <Stack />,
             <ThreeFiles />,
 
             // The reveal: one PHP class holds the state, the actions and the markup.

@@ -1,27 +1,10 @@
 # The dev server: the project is mounted, phemc and Tailwind build again on each change.
-# The live presentation uses compose.prod.yaml.
-#   With HTTPS:  SPEAKER_KEY=... TUNNEL_TOKEN=... docker compose --profile tunnel up --build
+# The presentation uses compose.prod.yaml.
 name: slides-dev
 
 services:
   app:
     build: { context: ., target: dev }
     ports: ["8080:8080"]
-    environment:
-      # The tunnel ends TLS: trust its X-Forwarded-Proto, so the app makes https URLs.
-      SYMFONY_TRUSTED_PROXIES: private_ranges
-      SYMFONY_TRUSTED_HEADERS: x-forwarded-for,x-forwarded-proto
-      # The key of the speaker view. The tunnel is public: make up-tunnel needs a secret key.
-      SPEAKER_KEY: ${SPEAKER_KEY:-dev}
     volumes:
       - .:/app
-
-  # HTTPS for the phones during dev: the same Cloudflare Tunnel as compose.prod.yaml. Its route
-  # goes to http://app:8080, and this app has the same service name.
-  tunnel:
-    image: cloudflare/cloudflared:2026.10.3
-    command: tunnel --no-autoupdate run
-    environment:
-      TUNNEL_TOKEN: ${TUNNEL_TOKEN:-}
-    depends_on: [app]
-    profiles: [tunnel]

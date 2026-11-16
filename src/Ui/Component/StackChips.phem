@@ -19,7 +19,6 @@ function StackChips(): Node
             <div className="ph-row gap-3">
                 <Chip dot="accent-cool">Turbo</Chip>
                 <Chip dot="accent">Stimulus</Chip>
-                <Chip dot="tok-keyword">Mercure</Chip>
             </div>
         </div>
     );

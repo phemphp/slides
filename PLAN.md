@@ -1,15 +1,10 @@
 # Phem, live: the plan
 
-One interactive slide presentation, made with [Phem](../phem) on Symfony and FrankenPHP. The
-second goal is to test Phem on a real app. Write each problem with Phem in the
-[friction log](#friction-log).
+One slide presentation, made with [Phem](../phem) on Symfony and FrankenPHP. The second goal is
+to test Phem on a real app. Write each problem with Phem in the [friction log](#friction-log).
 
-## Two views
-
-| View | URL | Can do |
-|---|---|---|
-| Speaker (the projector) | `/speaker` (open `/speaker?key=<SPEAKER_KEY>` one time) | Move the slides with the keyboard or a clicker. All the screens follow. |
-| Audience (the phones, from the QR code) | `/` | See the current slide. Use the dynamic parts of the current slide. Cannot move the slides. |
+The presentation is not interactive: there is one view (`/`), on the projector. The audience
+does not join on their phones.
 
 ## How it works
 
@@ -18,14 +13,9 @@ second goal is to test Phem on a real app. Write each problem with Phem in the
   when it is the current slide.
 - `<Deck>` reads the current slide in `mount()`. It has no `#[State]`, so each render reads the
   database again.
-- On the speaker view, the `deck-keys` Stimulus controller changes a key into a click on a hidden
-  button. The click is a normal Phem event (`next`, `previous`, `first`).
-- `Navigator::go()` saves the index and pushes `refresh('deck')` to all the `#[Broadcast]`
-  pages. Each browser then renders its deck again through the Mercure hub of FrankenPHP.
-- `SpeakerAccess` gives the speaker access through the session. Without it, `/speaker` is a 404.
-  The handlers check the access again.
-- `<Deck>` provides the `Role` (speaker or audience) as a context. A dynamic slide reads it with
-  `#[Context] Role $role` and shows the part for that role.
+- The `deck-keys` Stimulus controller changes a key into a click on a hidden button. The click
+  is a normal Phem event (`move`, `point`).
+- `<DeckNav>` saves the slide and the point, then refreshes the deck.
 
 ## Phases
 
@@ -33,28 +23,16 @@ second goal is to test Phem on a real app. Write each problem with Phem in the
 
 - Layout components: title, section, bullets, code (syntax highlight on the server), image, two
   columns, quote.
-- Steps in a slide (show the items one by one). Keep the step with the slide index, so the
-  audience follows the steps too.
+- Steps in a slide (show the items one by one). Keep the step with the slide index.
 - Theme: fonts, colors, the transition between the slides.
 - Optional: a presenter view (notes, next slide, timer) on the laptop, apart from the projector.
 
-### Phase 2: Dynamic slides
+### Phase 2: Hardening
 
-- Decide the interactions of the talk (to do: you give the list).
-- Make one component for each interaction. It reads `Role` to show the audience part or the
-  speaker part.
-- Keep the data of the audience in SQLite. Push the changes with `Streams::refresh()`.
-- Add `#[RateLimit]` to the handlers of the audience.
-
-### Phase 3: Live hardening
-
-- Fix the lost push: a push between the page render and the Mercure connection does not arrive.
-  Refresh the deck when the connection opens.
-- A load test: about 200 phones on the hub, and a burst of audience events.
-- A reset command (current slide 0, delete the data of the audience).
+- A reset command (current slide 0).
 - A fallback: a static export of the slides (PDF or HTML).
 
-### Phase 4: Review
+### Phase 3: Review
 
 - Read the friction log. Report the problems and the good points to the Phem project.
 

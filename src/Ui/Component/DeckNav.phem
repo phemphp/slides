@@ -2,13 +2,10 @@
 
 namespace App\Ui\Component;
 
-use App\Deck\Role;
 use App\Entity\Presentation;
-use App\Security\SpeakerAccess;
-use Phem\Attribute\{Component, Context, Prop, Transactional};
+use Phem\Attribute\{Component, Prop, Transactional};
 use Phem\Event;
 use Phem\Node;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 #[Component, Transactional]
 final class DeckNav
@@ -16,12 +13,6 @@ final class DeckNav
     #[Prop] public Presentation $presentation;
     #[Prop] public int $number;
     #[Prop] public int $total;
-    #[Context] public Role $role;
-
-    public function __construct(
-        private readonly SpeakerAccess $speakerAccess,
-    ) {
-    }
 
     public function move(int $index, Event $e): void
     {
@@ -57,15 +48,10 @@ final class DeckNav
 
     private function update(\Closure $change, Event $e): void
     {
-        if (Role::Speaker !== $this->role || !$this->speakerAccess->granted()) {
-            throw new AccessDeniedHttpException('Only the speaker moves the slides.');
-        }
-
         // #[Transactional] flushes the change when the handler returns.
         $change($this->presentation);
 
-        // The deck reads the new slide and point in mount(). The other browsers get the
-        // broadcast of the Presentation (see Deck).
+        // The deck reads the new slide and point in mount().
         $e->refresh();
     }
 }

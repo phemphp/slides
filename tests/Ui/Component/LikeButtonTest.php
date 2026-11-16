@@ -3,7 +3,6 @@
 namespace App\Tests\Ui\Component;
 
 use App\Entity\Post;
-use App\Entity\Presentation;
 use App\Ui\Slide\Example;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -70,21 +69,6 @@ final class LikeButtonTest extends KernelTestCase
             ->assertSelectorCount(0, 'button .tabular-nums')
             ->click('button')
             ->assertSelectorTextContains('button', '♥ Like 1');
-    }
-
-    public function testLikeShowsOnTheOtherScreens(): void
-    {
-        $em = self::getContainer()->get(EntityManagerInterface::class);
-        $presentation = new Presentation();
-        $presentation->slide = 2;
-        $em->persist($presentation);
-        $em->flush();
-
-        $other = $this->visit('/')->assertSelectorTextContains('button.ph-like', '♥ Like 7');
-
-        $this->visit('/')->click('button.ph-like')->assertSelectorTextContains('button.ph-like', '♥ Like 8');
-
-        $other->receive()->assertSelectorTextContains('button.ph-like', '♥ Like 8');
     }
 
     private function likesInDatabase(): int

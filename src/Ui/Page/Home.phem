@@ -1,0 +1,19 @@
+<?phem
+
+namespace App\Ui\Page;
+
+use App\Ui\Component\Deck;
+use App\Ui\Layout\Document;
+use Phem\Attribute\Page;
+use Phem\Node;
+
+#[Page('/')]
+function Home(): Node
+{
+    return (
+        <Document>
+            <Document:title>Phem</Document:title>
+            <Deck />
+        </Document>
+    );
+}

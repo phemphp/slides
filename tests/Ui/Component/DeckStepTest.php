@@ -13,7 +13,7 @@ final class DeckStepTest extends KernelTestCase
 {
     use InteractsWithPhem;
 
-    private const int PAGE_COMPONENT = 10;
+    private const int PAGE_COMPONENT = 8;
 
     protected function setUp(): void
     {
@@ -30,7 +30,7 @@ final class DeckStepTest extends KernelTestCase
 
     public function testTheSlideStartsAtThePoint1(): void
     {
-        $this->speaker()
+        $this->deck()
             ->assertSelectorExists('[data-deck-steps="3"][data-deck-step="1"]')
             ->assertSelectorCount(1, '.ph-line .ph-step')
             ->assertSelectorCount(0, '.ph-step.is-done')
@@ -41,7 +41,7 @@ final class DeckStepTest extends KernelTestCase
 
     public function testDownShowsTheNextPoint(): void
     {
-        $this->speaker()
+        $this->deck()
             ->click('[data-deck-keys-target="down"]')
             ->click('[data-deck-keys-target="down"]')
             ->assertSelectorExists('[data-deck-step="3"]')
@@ -57,7 +57,7 @@ final class DeckStepTest extends KernelTestCase
 
     public function testUpHidesTheCurrentPoint(): void
     {
-        $this->speaker()
+        $this->deck()
             ->click('[data-deck-keys-target="down"]')
             ->click('[data-deck-keys-target="up"]')
             ->click('[data-deck-keys-target="up"]')
@@ -68,7 +68,7 @@ final class DeckStepTest extends KernelTestCase
 
     public function testANewSlideStartsAtItsFirstPoint(): void
     {
-        $this->speaker()
+        $this->deck()
             ->click('[data-deck-keys-target="down"]')
             ->click('[data-deck-keys-target="previous"]')
             ->click('[data-deck-keys-target="next"]')
@@ -80,7 +80,7 @@ final class DeckStepTest extends KernelTestCase
 
     public function testAMutedSlideShowsAllItsPointsAtOnce(): void
     {
-        $this->speaker()
+        $this->deck()
             ->click('[data-deck-keys-target="previous"]')
             ->assertSelectorTextContains('h2', 'A component is a')
             ->assertSelectorCount(4, '.ph-line .ph-step.is-done')
@@ -88,21 +88,9 @@ final class DeckStepTest extends KernelTestCase
             ->assertSelectorCount(0, '.ph-line.is-focus');
     }
 
-    public function testTheAudienceGetsTheMoveOfTheSpeaker(): void
+    private function deck(): ComponentTester
     {
-        $audience = $this->visit('/')
-            ->assertSee('A page is a');
-
-        $this->speaker()->click('[data-deck-keys-target="next"]');
-
-        $audience->receive()
-            ->assertSee('Document.phem')
-            ->assertDontSee('A page is a');
-    }
-
-    private function speaker(): ComponentTester
-    {
-        return $this->visit('/speaker?key=test')->followRedirect();
+        return $this->visit('/');
     }
 
     private function step(): int

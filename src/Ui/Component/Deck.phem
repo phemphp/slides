@@ -2,19 +2,16 @@
 
 namespace App\Ui\Component;
 
-use App\Deck\{Role, Step};
+use App\Deck\Step;
 use App\Entity\Presentation;
 use App\Repository\PresentationRepository;
 use App\Ui\Slide\Slides;
-use Phem\Attribute\{Component, Prop, Provide, Broadcast};
+use Phem\Attribute\{Component, Provide};
 use Phem\Node;
 
-#[Component, Broadcast(on: Presentation::class)]
+#[Component]
 final class Deck
 {
-    #[Prop, Provide]
-    public Role $role = Role::Audience;
-
     // The current point of the slide, for the slides that show their points one at a time.
     #[Provide]
     public Step $step;
@@ -43,21 +40,18 @@ final class Deck
 
     public function render(): Node
     {
-        $speaker = Role::Speaker === $this->role;
         $number = $this->index + 1;
 
         return (
             <section
                 id="deck"
-                className={{ speaker ? 'relative flex h-full flex-col overflow-hidden' : 'ph-deck-audience' }}
+                className="relative flex h-full flex-col overflow-hidden"
                 data-phem-transition
             >
                 <div className="ph-deck-stage">
                     <div>{{ slide }}</div>
                 </div>
-                {% if speaker %}
-                    <DeckNav presentation={{ presentation }} number={{ number }} total={{ total }} />
-                {% endif %}
+                <DeckNav presentation={{ presentation }} number={{ number }} total={{ total }} />
             </section>
         );
     }

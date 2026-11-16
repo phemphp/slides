@@ -45,33 +45,6 @@
     width: min(100%, var(--deck-height) * 16 / 9);
 }
 
-/* The audience view fills the screen. */
-.ph-deck-audience {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100dvh;
-}
-
-/* On a phone held upright, a 16:9 slide gets only the short side of the screen. Turn the view a
-   quarter turn, so the slide uses the long side. The audience turns the phone to read it, also
-   with the rotation lock on. */
-@media (orientation: portrait) and (pointer: coarse) {
-    .ph-deck-audience {
-        position: fixed;
-        top: 0;
-        left: 100dvw;
-        width: 100dvh;
-        height: 100dvw;
-        transform-origin: 0 0;
-        rotate: 90deg;
-    }
-
-    .ph-deck-audience .ph-deck-stage {
-        --deck-height: 100dvw;
-    }
-}
-
 /* A small stage for one element, centered. */
 .ph-frame-stage {
     display: flex;
@@ -116,17 +89,6 @@
     color: var(--text-tertiary);
 }
 
-/* The QR code of the audience view, on a white card so a phone camera reads it. It is big (most
-   of the slide height), so the back rows can scan it too. */
-.ph-qr {
-    box-sizing: border-box;
-    width: 460px;
-    padding: var(--space-16);
-    border-radius: var(--radius-lg);
-    background: var(--text);
-    box-shadow: var(--shadow-glass);
-}
-
 /* The icons of the talk that the design system does not have, drawn as its icons are. */
 .ph-icon-play { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 2.8v18.4L21 12Z'/%3E%3C/svg%3E"); }
 .ph-icon-wrench { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9Z'/%3E%3C/svg%3E"); }
@@ -164,57 +126,6 @@
 .ph-table td {
     padding: 10px var(--space-16);
     border-bottom: 1px solid var(--edge);
-}
-
-/* A tech counter of the stack slide: a glass button with a logo, a name and the votes. It gets
-   brighter on hover and darker on a click, and does not move. The votes are amber when they are
-   more than zero. */
-.ph-tech {
-    gap: 10px;
-    width: 100%;
-    padding: 12px var(--space-16);
-    font-size: 20px;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    transition: filter 150ms ease, box-shadow 150ms ease;
-}
-
-.ph-tech .ph-icon {
-    flex: none;
-    width: 28px;
-    height: 28px;
-}
-
-.ph-tech-name {
-    flex: 1;
-    overflow: hidden;
-    text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.ph-tech-votes {
-    padding-left: var(--space-12);
-    border-left: 1px solid var(--edge-strong);
-    font-variant-numeric: tabular-nums;
-    color: var(--text-tertiary);
-}
-
-.ph-tech-votes.is-voted {
-    color: var(--accent);
-}
-
-@media (hover: hover) {
-    .ph-tech:hover {
-        filter: brightness(1.15);
-    }
-}
-
-.ph-tech:active {
-    filter: brightness(0.95);
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* The live like button of the example slide: a primary button that glows more on hover and

@@ -10,12 +10,6 @@
 {$SERVER_NAME::8080} {
 	encode zstd gzip
 
-	# The hub of the #[Broadcast] pages. The slides are public, so the updates are public too.
-	mercure {
-		transport local
-		anonymous
-	}
-
 	root * public
 	php_server
 }
