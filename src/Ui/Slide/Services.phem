@@ -37,11 +37,11 @@ function Services(): Node
     return (
         <CodeSlide>
             <CodeWindow code={{ code }} file="src/Ui/LatestPostsPage.phem" size="xs" startNumber={{ 6 }} />
-            <CodeSlide:notes>
+            <CodeSlide.notes>
                 <Annotation step="1" muted>Components are services</Annotation>
                 <Annotation step="2" muted>mount() loads the data</Annotation>
                 <Annotation step="3" muted>render() stays pure</Annotation>
-            </CodeSlide:notes>
+            </CodeSlide.notes>
         </CodeSlide>
     );
 }

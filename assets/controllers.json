@@ -12,11 +12,39 @@
                 "enabled": false,
                 "fetch": "lazy"
             },
-            "toggle": {
+            "collapsible": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "accordion": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "depends": {
                 "enabled": false,
                 "fetch": "lazy"
             },
             "dialog": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "popover": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "tooltip": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "menu": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "context-menu": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "combobox": {
                 "enabled": false,
                 "fetch": "lazy"
             },
@@ -37,6 +65,98 @@
                 "fetch": "lazy"
             },
             "confirm": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "sortable": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "count": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "reveal": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "checkbox-group": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "time": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "scrollspy": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "theme": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "image-input": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "toggle": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "toggle-group": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "toolbar": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "radio-group": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "button": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "avatar": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "field": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "form": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "number-field": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "otp-field": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "slider": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "scroll-area": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "select": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "menubar": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
+            "navigation-menu": {
                 "enabled": false,
                 "fetch": "lazy"
             }

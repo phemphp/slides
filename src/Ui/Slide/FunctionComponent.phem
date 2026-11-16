@@ -40,12 +40,12 @@ function FunctionComponent(): Node
                     <button type="button" className="ph-button ph-button-primary ph-like" aria-label="Liked">Success</button>
                 </div>
             </div>
-            <CodeSlide:notes>
+            <CodeSlide.notes>
                 <Annotation step="1" muted>A new file type: .phem</Annotation>
                 <Annotation step="2" muted>Mark a function</Annotation>
                 <Annotation step="3" muted>Parameters are props</Annotation>
                 <Annotation step="4" muted>It returns markup</Annotation>
-            </CodeSlide:notes>
+            </CodeSlide.notes>
         </CodeSlide>
     );
 }

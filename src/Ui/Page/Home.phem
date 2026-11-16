@@ -12,7 +12,7 @@ function Home(): Node
 {
     return (
         <Document>
-            <Document:title>Phem</Document:title>
+            <Document.title>Phem</Document.title>
             <Deck />
         </Document>
     );

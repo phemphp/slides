@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "337e69aa815b6b29ddd4c9106af130aa",
+    "content-hash": "4a11e6910c8ca6d2c3093ee85518c323",
     "packages": [
         {
             "name": "composer/semver",
@@ -1202,16 +1202,16 @@
         },
         {
             "name": "phem/phem",
-            "version": "v0.3.17",
+            "version": "v0.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phemphp/phem.git",
-                "reference": "33a40fb959bef1625aeba1596d299e257d4e362c"
+                "reference": "cee993c176551322c4dced129e789a7d7c98ebd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phemphp/phem/zipball/33a40fb959bef1625aeba1596d299e257d4e362c",
-                "reference": "33a40fb959bef1625aeba1596d299e257d4e362c",
+                "url": "https://api.github.com/repos/phemphp/phem/zipball/cee993c176551322c4dced129e789a7d7c98ebd3",
+                "reference": "cee993c176551322c4dced129e789a7d7c98ebd3",
                 "shasum": ""
             },
             "require": {
@@ -1241,6 +1241,7 @@
                 "symfony/messenger": "^7.4|^8.0",
                 "symfony/rate-limiter": "^7.4|^8.0",
                 "symfony/security-core": "^7.4|^8.0",
+                "symfony/security-http": "^7.4|^8.0",
                 "symfony/serializer": "^7.4|^8.0",
                 "symfony/validator": "^7.4|^8.0",
                 "symfony/web-profiler-bundle": "^7.4|^8.0",
@@ -1254,6 +1255,7 @@
                 "symfony/http-client": "To publish the streams from a Messenger worker or a command, with the HTTP API of the Mercure hub (phem.mercure.publisher_key)",
                 "symfony/messenger": "To run the work of the #[Async] event handlers in a worker, after the response",
                 "symfony/rate-limiter": "To limit the events of a page or of one handler with the #[RateLimit] attribute of Symfony 8.1",
+                "symfony/security-bundle": "To protect a page, its events or one event handler with the #[IsGranted] attribute",
                 "symfony/serializer": "To map the form of an event to the object of a #[MapForm] handler parameter, and to keep objects in #[State]",
                 "symfony/validator": "To validate the #[State] properties of a component with a Validation property while the user types, and before a #[Validated] handler",
                 "tales-from-a-dev/tailwind-merge-php": "To merge the conflicting Tailwind CSS classes of a ClassList (phem.class_merger.tailwind)"
@@ -1286,7 +1288,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phemphp/phem/issues",
-                "source": "https://github.com/phemphp/phem/tree/v0.3.17"
+                "source": "https://github.com/phemphp/phem/tree/v0.4.4"
             },
             "funding": [
                 {
@@ -1294,8 +1296,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-10T10:34:41+00:00",
-            "published-time": "2026-11-10T10:34:46+00:00"
+            "time": "2026-11-16T09:22:07+00:00",
+            "published-time": "2026-11-16T09:22:11+00:00"
         },
         {
             "name": "psr/cache",

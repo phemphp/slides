@@ -23,7 +23,7 @@ function PageAnatomy(): Node
         ['label' => '<LikeButton/>', 'mono' => true, 'x' => 300, 'y' => 292, 'side' => 'right', 'to' => [434, 292]],
         ['label' => 'Route', 'mono' => false, 'x' => 820, 'y' => 76, 'side' => 'left', 'to' => [660, 76]],
         ['label' => 'Children slot', 'mono' => false, 'x' => 820, 'y' => 180, 'side' => 'left', 'to' => [734, 180]],
-        ['label' => '<PostCard/>', 'mono' => true, 'x' => 820, 'y' => 292, 'side' => 'left', 'to' => [710, 292]],
+        ['label' => '<Article/>', 'mono' => true, 'x' => 820, 'y' => 292, 'side' => 'left', 'to' => [710, 292]],
         ['label' => 'Footer slot', 'mono' => false, 'x' => 820, 'y' => 392, 'side' => 'left', 'to' => [734, 392]],
     ];
 

@@ -40,12 +40,12 @@ function DocumentCompare(): Node
 
     return (
         <ComparisonSlide beforeLabel="Before" afterLabel="After">
-            <ComparisonSlide:before>
+            <ComparisonSlide.before>
                 <CodeWindow code={{ before }} file="base.html.twig" size="xs" numbers={{ false }} />
-            </ComparisonSlide:before>
-            <ComparisonSlide:after>
+            </ComparisonSlide.before>
+            <ComparisonSlide.after>
                 <CodeWindow code={{ after }} file="Document.phem" size="xs" numbers={{ false }} />
-            </ComparisonSlide:after>
+            </ComparisonSlide.after>
         </ComparisonSlide>
     );
 }

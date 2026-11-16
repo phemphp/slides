@@ -22,9 +22,10 @@ function PageComponent(): Node
             public function render(): Node
             {
                 return <Document title={{ post.title }}>
-                    <h2>{{ post.title }}</h2>
-                    <p>{{ post.content }}</p>
-                    <LikeButton post={{ post }} />
+                    <Article title={{ post.title }}>
+                        <p>{{ post.content }}</p>
+                        <LikeButton post={{ post }} />
+                    </Article>
                 </Document>;
             }
         }
@@ -33,11 +34,11 @@ function PageComponent(): Node
     return (
         <CodeSlide>
             <CodeWindow code={{ code }} file="src/Ui/PostPage.phem" size="sm" startNumber={{ 5 }} />
-            <CodeSlide:notes>
+            <CodeSlide.notes>
                 <Annotation step="1" muted>A page is a route</Annotation>
                 <Annotation step="2" muted>The route value finds the Post</Annotation>
                 <Annotation step="3" muted>The page uses the LikeButton</Annotation>
-            </CodeSlide:notes>
+            </CodeSlide.notes>
         </CodeSlide>
     );
 }

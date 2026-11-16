@@ -14,18 +14,17 @@ function ClassComponent(): Node
         #[Component]
         class LikeButton
         {
-            #[Prop] public Post $post;
+            #[State] public int $likes = 0;
 
-            #[Transactional]
             public function like(): void 
             {
-                ++$this->post->likes;
+                ++$this->likes;
             }
 
             public function render(): Node
             {
                 return <button onClick={{ like }}>
-                    ♥ {{ post.likes }}
+                    ♥ {{ likes }}
                 </button>;
             }
         }
@@ -34,12 +33,12 @@ function ClassComponent(): Node
     return (
         <CodeSlide>
             <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" startNumber={{ 6 }} />
-            <CodeSlide:notes>
+            <CodeSlide.notes>
                 <Annotation step="1" muted>Mark a class</Annotation>
                 <Annotation step="2" muted>A prop is a property</Annotation>
                 <Annotation step="3" muted>A handler is a method</Annotation>
                 <Annotation step="4" muted>The markup uses both</Annotation>
-            </CodeSlide:notes>
+            </CodeSlide.notes>
         </CodeSlide>
     );
 }

@@ -33,10 +33,10 @@ function Compile(): Node
             <div className="mt-8 grid grid-cols-[1fr_340px] items-center gap-12">
                 <div className="flex flex-col gap-4">
                     <CodeWindow code={{ php }} file="var/phem/php/Ui/Badge.php" size="sm">
-                        <CodeWindow:meta><span className="ph-eyebrow m-0">Generated</span></CodeWindow:meta>
+                        <CodeWindow.meta><span className="ph-eyebrow m-0">Generated</span></CodeWindow.meta>
                     </CodeWindow>
                     <CodeWindow code={{ twig }} file="var/phem/templates/Ui/Badge.0.twig" size="sm">
-                        <CodeWindow:meta><span className="ph-eyebrow m-0">Generated</span></CodeWindow:meta>
+                        <CodeWindow.meta><span className="ph-eyebrow m-0">Generated</span></CodeWindow.meta>
                     </CodeWindow>
                 </div>
                 <ul className="ph-list">
