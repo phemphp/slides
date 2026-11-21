@@ -159,6 +159,10 @@
             "navigation-menu": {
                 "enabled": false,
                 "fetch": "lazy"
+            },
+            "drawer-provider": {
+                "enabled": false,
+                "fetch": "lazy"
             }
         }
     },

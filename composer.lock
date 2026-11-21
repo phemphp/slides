@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a11e6910c8ca6d2c3093ee85518c323",
+    "content-hash": "82986371af3bfcfd2b74a81337f21c56",
     "packages": [
         {
             "name": "composer/semver",
@@ -1202,16 +1202,16 @@
         },
         {
             "name": "phem/phem",
-            "version": "v0.4.4",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phemphp/phem.git",
-                "reference": "cee993c176551322c4dced129e789a7d7c98ebd3"
+                "reference": "5b8edbfa5b2d3f1b85812d132b19c314c3bdcfe4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phemphp/phem/zipball/cee993c176551322c4dced129e789a7d7c98ebd3",
-                "reference": "cee993c176551322c4dced129e789a7d7c98ebd3",
+                "url": "https://api.github.com/repos/phemphp/phem/zipball/5b8edbfa5b2d3f1b85812d132b19c314c3bdcfe4",
+                "reference": "5b8edbfa5b2d3f1b85812d132b19c314c3bdcfe4",
                 "shasum": ""
             },
             "require": {
@@ -1288,7 +1288,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phemphp/phem/issues",
-                "source": "https://github.com/phemphp/phem/tree/v0.4.4"
+                "source": "https://github.com/phemphp/phem/tree/v0.7.0"
             },
             "funding": [
                 {
@@ -1296,8 +1296,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-16T09:22:07+00:00",
-            "published-time": "2026-11-16T09:22:11+00:00"
+            "time": "2026-11-21T13:52:54+00:00",
+            "published-time": "2026-11-21T13:52:58+00:00"
         },
         {
             "name": "psr/cache",

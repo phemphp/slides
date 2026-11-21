@@ -4,8 +4,8 @@ namespace App\Ui\Component;
 
 use App\Entity\Presentation;
 use Phem\Attribute\{Component, Prop, Transactional};
-use Phem\Event;
 use Phem\Node;
+use Phem\Reply;
 
 #[Component, Transactional]
 final class DeckNav
@@ -14,18 +14,18 @@ final class DeckNav
     #[Prop] public int $number;
     #[Prop] public int $total;
 
-    public function move(int $index, Event $e): void
+    public function move(int $index, Reply $reply): void
     {
         $this->update(function (Presentation $presentation) use ($index) {
             $presentation->slide = max(0, min($index, $this->total - 1));
             // A slide starts at its first point.
             $presentation->step = 1;
-        }, $e);
+        }, $reply);
     }
 
-    public function point(int $by, Event $e): void
+    public function point(int $by, Reply $reply): void
     {
-        $this->update(fn (Presentation $presentation) => $presentation->step = max(1, $presentation->step + $by), $e);
+        $this->update(fn (Presentation $presentation) => $presentation->step = max(1, $presentation->step + $by), $reply);
     }
 
     public function render(): Node
@@ -46,12 +46,12 @@ final class DeckNav
         );
     }
 
-    private function update(\Closure $change, Event $e): void
+    private function update(\Closure $change, Reply $reply): void
     {
         // #[Transactional] flushes the change when the handler returns.
         $change($this->presentation);
 
         // The deck reads the new slide and point in mount().
-        $e->refresh();
+        $reply->refresh();
     }
 }
