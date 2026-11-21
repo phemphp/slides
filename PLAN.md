@@ -14,8 +14,8 @@ does not join on their phones.
 - `<Deck>` reads the current slide in `mount()`. It has no `#[State]`, so each render reads the
   database again.
 - The `deck-keys` Stimulus controller changes a key into a click on a hidden button. The click
-  is a normal Phem event (`move`, `point`).
-- `<DeckNav>` saves the slide and the point, then refreshes the deck.
+  is a normal Phem event (`move`).
+- `<DeckNav>` saves the slide, then refreshes the deck.
 
 ## Phases
 
@@ -23,7 +23,6 @@ does not join on their phones.
 
 - Layout components: title, section, bullets, code (syntax highlight on the server), image, two
   columns, quote.
-- Steps in a slide (show the items one by one). Keep the step with the slide index.
 - Theme: fonts, colors, the transition between the slides.
 - Optional: a presenter view (notes, next slide, timer) on the laptop, apart from the projector.
 

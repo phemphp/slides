@@ -2,20 +2,15 @@
 
 namespace App\Ui\Component;
 
-use App\Deck\Step;
 use App\Entity\Presentation;
 use App\Repository\PresentationRepository;
 use App\Ui\Slide\Slides;
-use Phem\Attribute\{Component, Provide};
+use Phem\Attribute\Component;
 use Phem\Node;
 
 #[Component]
 final class Deck
 {
-    // The current point of the slide, for the slides that show their points one at a time.
-    #[Provide]
-    public Step $step;
-
     private Presentation $presentation;
     private int $index = 0;
     private int $total = 0;
@@ -28,14 +23,12 @@ final class Deck
         private readonly PresentationRepository $repository,
     ) {
         $this->slides = new Slides()->all();
-        $this->step = new Step();
     }
 
     public function mount(): void
     {
         $this->presentation = $this->repository->get();
         $this->load($this->presentation->slide);
-        $this->step = new Step(max(1, $this->presentation->step));
     }
 
     public function render(): Node

@@ -7,25 +7,20 @@ use Phem\Attribute\{Component, Prop, Transactional};
 use Phem\Node;
 use Phem\Reply;
 
-#[Component, Transactional]
+#[Component]
 final class DeckNav
 {
     #[Prop] public Presentation $presentation;
     #[Prop] public int $number;
     #[Prop] public int $total;
 
+    #[Transactional]
     public function move(int $index, Reply $reply): void
     {
-        $this->update(function (Presentation $presentation) use ($index) {
-            $presentation->slide = max(0, min($index, $this->total - 1));
-            // A slide starts at its first point.
-            $presentation->step = 1;
-        }, $reply);
-    }
+        $this->presentation->slide = max(0, min($index, $this->total - 1));
 
-    public function point(int $by, Reply $reply): void
-    {
-        $this->update(fn (Presentation $presentation) => $presentation->step = max(1, $presentation->step + $by), $reply);
+        // The deck reads the new slide in mount().
+        $reply->refresh();
     }
 
     public function render(): Node
@@ -39,19 +34,8 @@ final class DeckNav
                 <button type="button" onClick={{ move(0) }} data-deck-keys-target="first" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="First slide (Home)">⇤</button>
                 <button type="button" onClick={{ move(number - 2) }} data-deck-keys-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Previous (←)">←</button>
                 <span className="tabular-nums">{{ number }} / {{ total }}</span>
-                <button type="button" onClick={{ point(-1) }} data-deck-keys-target="up" tabindex="-1" hidden>↑</button>
-                <button type="button" onClick={{ point(1) }} data-deck-keys-target="down" tabindex="-1" hidden>↓</button>
                 <button type="button" onClick={{ move(number) }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
             </nav>
         );
-    }
-
-    private function update(\Closure $change, Reply $reply): void
-    {
-        // #[Transactional] flushes the change when the handler returns.
-        $change($this->presentation);
-
-        // The deck reads the new slide and point in mount().
-        $reply->refresh();
     }
 }

@@ -13,8 +13,4 @@ class Presentation
 
     #[ORM\Column]
     public int $slide = 0;
-
-    /** The current point of the slide, from 1 (see App\Deck\Step). */
-    #[ORM\Column(options: ['default' => 1])]
-    public int $step = 1;
 }

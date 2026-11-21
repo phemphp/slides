@@ -3,8 +3,7 @@
 namespace App\Ui\Component;
 
 use App\Ui\Code\Highlighter;
-use App\Deck\Step;
-use Phem\Attribute\{Component, Context};
+use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
 #[Component]
@@ -17,22 +16,12 @@ function CodeWindow(
     array $focus = [],
     array $added = [],
     array $removed = [],
-    array $steps = [],
     array $tags = [],
     bool $numbers = true,
     int $startNumber = 1,
     string $className = '',
-    bool $reveal = false,
-    array $stepFocus = [],
     bool $dim = true,
-    bool $muted = false,
-    #[Context] ?Step $step = null,
 ): Node {
-    $current = 0;
-    if ($reveal && $steps) {
-        $current = min($step?->current ?? 1, max(array_map('intval', $steps)));
-        $focus = $stepFocus[$current] ?? array_keys(array_filter($steps, fn ($s) => (int) $s === $current));
-    }
     $lines = [];
     foreach (Highlighter::lines($code) as $i => $html) {
         $n = $i + $startNumber;
@@ -42,10 +31,6 @@ function CodeWindow(
             .(\in_array($n, $removed, true) ? ' is-del' : '');
         if (isset($tags[$n])) {
             $html .= '<span class="ph-line-tag">'.htmlspecialchars($tags[$n]).'</span>';
-        }
-        if (isset($steps[$n]) && (!$reveal || (int) $steps[$n] <= $current)) {
-            $done = $muted || ($reveal && (int) $steps[$n] < $current) ? ' is-done' : '';
-            $html .= ' <span class="ph-step ph-step-sm'.$done.'">'.htmlspecialchars((string) $steps[$n]).'</span>';
         }
         $lines[] = '<span class="'.$class.'">'.$html.'</span>';
     }

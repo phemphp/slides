@@ -2,8 +2,7 @@
 
 namespace App\Ui\Layout;
 
-use App\Deck\Step;
-use Phem\Attribute\{Component, Context};
+use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
 #[Component]
@@ -14,17 +13,13 @@ function Slide(
     ?string $footer = null,
     ?string $number = null,
     string $className = '',
-    int $steps = 0,
-    #[Context] ?Step $step = null,
 ): Node {
     $classes = ['ph-slide ph-frame-content', $className];
     $style = sprintf('--glow-x: %s; --glow-y: %s;', $glowX, $glowY);
-    $stepCount = $steps > 0 ? $steps : null;
-    $current = $steps > 0 ? min($step?->current ?? 1, $steps) : null;
 
     return (
         <div className="ph-frame">
-            <section className={{ classes }} style={{ style }} data-deck-steps={{ stepCount }} data-deck-step={{ current }}>
+            <section className={{ classes }} style={{ style }}>
                 {{ children }}
                 {% if footer or number %}
                     <div className="ph-footer">{% if footer %}<span>{{ footer }}</span>{% endif %}{% if number %}<span>{{ number }}</span>{% endif %}</div>
