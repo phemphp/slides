@@ -26,16 +26,19 @@ final class Slides
             <Services />,
             <DocumentCompare />,
 
-            // Three features: save in a transaction, go to another page, and push to each browser.
+            // Four features: save in a transaction, push to each browser, go to another page, and show
+            // an error page.
             <Transactional />,
             <Broadcast />,
             <RedirectTo />,
+            <ErrorPage />,
 
             // How it works: compile to Twig, then events over HTTP.
             <Compile />,
             <EventFlow />,
 
-            // The tools: VS Code and PhpStorm read .phem files through one language server.
+            // The tools: the editors read .phem files through the language server, and the coding agents
+            // get the docs and the check through the MCP server.
             <EditorSupport />,
 
             // The packages: a Composer package of components compiles with the app.

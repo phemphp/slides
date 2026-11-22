@@ -10,23 +10,15 @@ use Phem\Node;
 #[Component]
 function EditorSupport(): Node
 {
-    $features = ['Highlighting', 'Diagnostics as you type', 'Completion', 'Auto import', 'Go to definition', 'Find usages', 'Hover', 'Outline'];
-
     return (
-        <FlowSlide eyebrow="Editor support" footer="Other editors with LSP support · run phemc lsp">
+        <FlowSlide>
             <FlowSlide.title>Your editor <span className="ph-em">reads .phem</span></FlowSlide.title>
             <FlowNode icon="code" label="VS Code" caption="Extension" />
-            <Arrow label="LSP" tone="accent" className="flex-1" />
-            <FlowNode icon="wrench" label="phemc lsp" caption="One language server" active />
-            <Arrow label="LSP" tone="accent" back className="flex-1" />
             <FlowNode icon="code" label="PhpStorm" caption="Plugin" />
-            <FlowSlide.back>
-                <div className="flex max-w-[900px] flex-wrap justify-center gap-3">
-                    {% for feature in features %}
-                        <Chip key={{ feature }}>{{ feature }}</Chip>
-                    {% endfor %}
-                </div>
-            </FlowSlide.back>
+            <Arrow label="LSP" tone="accent" className="flex-1" />
+            <FlowNode icon="wrench" label="phemc" caption="One binary" active />
+            <Arrow label="MCP" tone="cool" back className="flex-1" />
+            <FlowNode icon="sparkle" label="Claude Code" caption="Plugin" />
         </FlowSlide>
     );
 }

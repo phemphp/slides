@@ -20,7 +20,6 @@ The security slide fits best after `EventFlow`, because that slide shows the sta
 
 ### Good second choices
 
-- **Coding agents**: `phemc mcp` and the Claude Code plugin. This fits as one more node on the `EditorSupport` slide.
 - **Profiler panel**: the Symfony profiler shows the component tree, the state size, and the event passes.
 - **Feeds**: `Phem\Feed` with `onVisible` gives infinite scroll, and the items stay out of the state.
 - **Context**: `#[Provide]` and `#[Context]` pass a value to deep children without props.
@@ -28,7 +27,6 @@ The security slide fits best after `EventFlow`, because that slide shows the sta
 
 ### Lower priority
 
-- `#[ErrorPage]` for 404 and 500 pages.
 - Uploads: chunked, direct to S3, with progress.
 - Optimistic updates with the `phem-optimistic` controller.
 - Component replacement: `#[Component(replaces: ...)]`.

@@ -43,5 +43,6 @@ final class FeatureSlidesTest extends KernelTestCase
         yield 'Transactional' => [11, 'LikeButton.phem', '#[Transactional]', 4, 'Mark the handler'];
         yield 'RedirectTo' => [12, 'PublishButton.phem', 'new RedirectTo(PostPage::class', 4, 'Return a RedirectTo'];
         yield 'Broadcast' => [13, 'LikeButton.phem', '#[Transactional, Broadcast]', 4, 'Mark the handler'];
+        yield 'ErrorPage' => [14, 'ErrorPages.phem', '#[ErrorPage(404)]', 4, 'Mark a function'];
     }
 }

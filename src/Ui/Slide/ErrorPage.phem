@@ -1,0 +1,47 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function ErrorPage(): Node
+{
+    $code = <<<'PHP'
+        #[ErrorPage(404)]
+        function NotFoundPage(): Node
+        {
+            return (
+                <Document title="Page not found">
+                    <h1>Page not found</h1>
+                    <a href={{ path(HomePage) }}>Back to the home page</a>
+                </Document>
+            );
+        }
+
+        #[ErrorPage]
+        function ErrorPage(int $status): Node
+        {
+            return (
+                <Document title="Something went wrong">
+                    <h1>Error {{ status }}</h1>
+                </Document>
+            );
+        }
+        PHP;
+
+    return (
+        <CodeSlide>
+            <CodeWindow code={{ code }} file="src/Ui/ErrorPages.phem" size="xs" startNumber={{ 10 }} focus={{ [10] }} dim={{ false }} />
+            <CodeSlide.notes>
+                <Annotation step="1" muted>Mark a function</Annotation>
+                <Annotation step="2" muted>A page for the 404</Annotation>
+                <Annotation step="3" muted>A page for the rest</Annotation>
+                <Annotation step="4" muted>Preview at /_error/404</Annotation>
+            </CodeSlide.notes>
+        </CodeSlide>
+    );
+}
