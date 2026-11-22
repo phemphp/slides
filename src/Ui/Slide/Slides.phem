@@ -35,6 +35,9 @@ final class Slides
             <Compile />,
             <EventFlow />,
 
+            // The tools: VS Code and PhpStorm read .phem files through one language server.
+            <EditorSupport />,
+
             // The limits, a live demo and the recap.
             <TradeOffs />,
             <Demo />,
