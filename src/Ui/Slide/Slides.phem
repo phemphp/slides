@@ -38,6 +38,9 @@ final class Slides
             // The tools: VS Code and PhpStorm read .phem files through one language server.
             <EditorSupport />,
 
+            // The packages: a Composer package of components compiles with the app.
+            <Packages />,
+
             // The limits, a live demo and the recap.
             <TradeOffs />,
             <Demo />,

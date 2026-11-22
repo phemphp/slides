@@ -1,0 +1,49 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeWindow, Terminal};
+use App\Ui\Layout\CodeSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function Packages(): Node
+{
+    $commands = [
+        ['cmd', 'composer require phem/ui-base'],
+    ];
+
+    $code = <<<'PHP'
+        use Phem\Ui\Base\{Accordion, AccordionItem};
+        use function Phem\Ui\Base\{AccordionHeader, AccordionPanel, AccordionTrigger};
+
+        #[Component]
+        function Faq(): Node
+        {
+            return <Accordion>
+                <AccordionItem value="what">
+                    <AccordionHeader>
+                        <AccordionTrigger>What is Phem?</AccordionTrigger>
+                    </AccordionHeader>
+                    <AccordionPanel>PHP components.</AccordionPanel>
+                </AccordionItem>
+            </Accordion>;
+        }
+        PHP;
+
+    return (
+        <CodeSlide>
+            <div className="flex flex-col gap-4">
+                <Terminal lines={{ commands }} className="[&_.ph-terminal-body]:py-4 [&_.ph-terminal-body]:text-[17px]" />
+                <CodeWindow code={{ code }} file="src/Ui/Faq.phem" size="xs" startNumber={{ 5 }} focus={{ [5, 6] }} dim={{ false }} />
+            </div>
+            <CodeSlide.notes>
+                <Annotation step="1" muted>Require the package</Annotation>
+                <Annotation step="2" muted>Built with your app</Annotation>
+                <Annotation step="3" muted>Import like PHP</Annotation>
+                <Annotation step="4" muted>Each part is a tag</Annotation>
+            </CodeSlide.notes>
+        </CodeSlide>
+    );
+}
