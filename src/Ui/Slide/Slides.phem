@@ -26,6 +26,11 @@ final class Slides
             <Services />,
             <DocumentCompare />,
 
+            // Three features: save in a transaction, go to another page, and push to each browser.
+            <Transactional />,
+            <Broadcast />,
+            <RedirectTo />,
+
             // How it works: compile to Twig, then events over HTTP.
             <Compile />,
             <EventFlow />,

@@ -1,0 +1,45 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function Broadcast(): Node
+{
+    $code = <<<'PHP'
+        #[Component]
+        class LikeButton
+        {
+            #[Prop] public Post $post;
+
+            #[Transactional, Broadcast]
+            public function like(): void
+            {
+                ++$this->post->likes;
+            }
+
+            public function render(): Node
+            {
+                return <button onClick={{ like }}>
+                    ♥ {{ post.likes }}
+                </button>;
+            }
+        }
+        PHP;
+
+    return (
+        <CodeSlide>
+            <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" startNumber={{ 6 }} focus={{ [11] }} dim={{ false }} />
+            <CodeSlide.notes>
+                <Annotation step="1" muted>Mark the handler</Annotation>
+                <Annotation step="2" muted>A like saves the Post</Annotation>
+                <Annotation step="3" muted>The button renders again</Annotation>
+                <Annotation step="4" muted>In the other browsers</Annotation>
+            </CodeSlide.notes>
+        </CodeSlide>
+    );
+}

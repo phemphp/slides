@@ -1,0 +1,45 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function RedirectTo(): Node
+{
+    $code = <<<'PHP'
+        #[Component]
+        class PublishButton
+        {
+            #[Prop] public Post $post;
+
+            #[Transactional]
+            public function publish(): RedirectTo
+            {
+                $this->post->published = true;
+
+                return new RedirectTo(PostPage::class, ['post' => $this->post]);
+            }
+
+            public function render(): Node
+            {
+                return <button onClick={{ publish }}>Publish</button>;
+            }
+        }
+        PHP;
+
+    return (
+        <CodeSlide>
+            <CodeWindow code={{ code }} file="src/Ui/PublishButton.phem" size="xs" startNumber={{ 8 }} focus={{ [18] }} dim={{ false }} />
+            <CodeSlide.notes>
+                <Annotation step="1" muted>Return a RedirectTo</Annotation>
+                <Annotation step="2" muted>The page is a class</Annotation>
+                <Annotation step="3" muted>The Post gives the id</Annotation>
+                <Annotation step="4" muted>Turbo visits the page</Annotation>
+            </CodeSlide.notes>
+        </CodeSlide>
+    );
+}
