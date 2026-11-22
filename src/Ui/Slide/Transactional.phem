@@ -11,6 +11,8 @@ use Phem\Node;
 function Transactional(): Node
 {
     $code = <<<'PHP'
+        use Phem\Attribute\Transactional;
+
         #[Component]
         class LikeButton
         {
@@ -33,7 +35,7 @@ function Transactional(): Node
 
     return (
         <CodeSlide>
-            <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" startNumber={{ 6 }} focus={{ [11] }} dim={{ false }} />
+            <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="xs" startNumber={{ 5 }} focus={{ [12] }} dim={{ false }} />
             <CodeSlide.notes>
                 <Annotation step="1" muted>Mark the handler</Annotation>
                 <Annotation step="2" muted>No flush() in the code</Annotation>

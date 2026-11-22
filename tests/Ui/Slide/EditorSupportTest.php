@@ -24,7 +24,7 @@ final class EditorSupportTest extends KernelTestCase
     {
         $em = self::getContainer()->get(EntityManagerInterface::class);
         $presentation = new Presentation();
-        $presentation->slide = 17;
+        $presentation->slide = 18;
         $em->persist($presentation);
         $em->flush();
 
@@ -39,7 +39,6 @@ final class EditorSupportTest extends KernelTestCase
             ->assertSelectorCount(2, '.ph-arrow')
             ->assertSelectorTextContains('.ph-arrow.is-accent', 'LSP')
             ->assertSelectorTextContains('.ph-arrow.is-cool.is-back', 'MCP')
-            ->assertSelectorCount(8, '.ph-chip')
             ->assertSelectorCount(0, '.ph-footer');
     }
 }

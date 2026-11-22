@@ -1,0 +1,47 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function Security(): Node
+{
+    $code = <<<'PHP'
+        use Symfony\Component\HttpKernel\Attribute\RateLimit;
+        use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+        #[Page('/posts/{id:post}')]
+        class PostPage
+        {
+            #[Path] public Post $post;
+
+            #[IsGranted('POST_EDIT', subject: 'post')]
+            public function publish(): void
+            {
+                // ...
+            }
+
+            #[RateLimit('likes')]
+            public function like(): void
+            {
+                // ...
+            }
+        }
+        PHP;
+
+    return (
+        <CodeSlide>
+            <CodeWindow code={{ code }} file="src/Ui/PostPage.phem" size="xs" startNumber={{ 5 }} focus={{ [13, 19] }} dim={{ false }} />
+            <CodeSlide.notes>
+                <Annotation step="1" muted>The state has a signature</Annotation>
+                <Annotation step="2" muted>Only your origin sends events</Annotation>
+                <Annotation step="3" muted>A voter guards publish()</Annotation>
+                <Annotation step="4" muted>like() has a rate limit</Annotation>
+            </CodeSlide.notes>
+        </CodeSlide>
+    );
+}

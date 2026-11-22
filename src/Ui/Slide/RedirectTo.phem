@@ -11,15 +11,17 @@ use Phem\Node;
 function RedirectTo(): Node
 {
     $code = <<<'PHP'
+        use App\Ui\PostPage;
+        use Phem\RedirectTo;
+
         #[Component]
         class PublishButton
         {
             #[Prop] public Post $post;
 
-            #[Transactional]
             public function publish(): RedirectTo
             {
-                $this->post->published = true;
+                // ...
 
                 return new RedirectTo(PostPage::class, ['post' => $this->post]);
             }
@@ -33,7 +35,7 @@ function RedirectTo(): Node
 
     return (
         <CodeSlide>
-            <CodeWindow code={{ code }} file="src/Ui/PublishButton.phem" size="xs" startNumber={{ 8 }} focus={{ [18] }} dim={{ false }} />
+            <CodeWindow code={{ code }} file="src/Ui/PublishButton.phem" size="xs" startNumber={{ 5 }} focus={{ [17] }} dim={{ false }} />
             <CodeSlide.notes>
                 <Annotation step="1" muted>Return a RedirectTo</Annotation>
                 <Annotation step="2" muted>The page is a class</Annotation>

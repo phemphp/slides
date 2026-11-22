@@ -35,7 +35,7 @@ function ErrorPage(): Node
 
     return (
         <CodeSlide>
-            <CodeWindow code={{ code }} file="src/Ui/ErrorPages.phem" size="xs" startNumber={{ 10 }} focus={{ [10] }} dim={{ false }} />
+            <CodeWindow code={{ code }} file="src/Ui/ErrorPages.phem" size="xs" startNumber={{ 10 }} focus={{ [10, 21] }} dim={{ false }} />
             <CodeSlide.notes>
                 <Annotation step="1" muted>Mark a function</Annotation>
                 <Annotation step="2" muted>A page for the 404</Annotation>

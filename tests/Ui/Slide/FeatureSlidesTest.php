@@ -22,7 +22,7 @@ final class FeatureSlidesTest extends KernelTestCase
     }
 
     #[DataProvider('slides')]
-    public function testTheSlideShowsOneFeature(int $slide, string $file, string $attribute, int $notes, string $note): void
+    public function testTheSlideShowsOneFeature(int $slide, string $file, int $focus, string $attribute, int $notes, string $note): void
     {
         $em = self::getContainer()->get(EntityManagerInterface::class);
         $presentation = new Presentation();
@@ -32,7 +32,7 @@ final class FeatureSlidesTest extends KernelTestCase
 
         $this->visit('/')
             ->assertSelectorTextContains('.ph-window-tab.is-active', $file)
-            ->assertSelectorCount(1, '.ph-line.is-focus')
+            ->assertSelectorCount($focus, '.ph-line.is-focus')
             ->assertSelectorTextContains('.ph-line.is-focus', $attribute)
             ->assertSelectorCount($notes, '.ph-note')
             ->assertSelectorTextContains('.ph-note', $note);
@@ -40,9 +40,9 @@ final class FeatureSlidesTest extends KernelTestCase
 
     public static function slides(): iterable
     {
-        yield 'Transactional' => [11, 'LikeButton.phem', '#[Transactional]', 4, 'Mark the handler'];
-        yield 'RedirectTo' => [12, 'PublishButton.phem', 'new RedirectTo(PostPage::class', 4, 'Return a RedirectTo'];
-        yield 'Broadcast' => [13, 'LikeButton.phem', '#[Transactional, Broadcast]', 4, 'Mark the handler'];
-        yield 'ErrorPage' => [14, 'ErrorPages.phem', '#[ErrorPage(404)]', 4, 'Mark a function'];
+        yield 'Transactional' => [11, 'LikeButton.phem', 1, '#[Transactional]', 4, 'Mark the handler'];
+        yield 'Broadcast' => [12, 'LikeButton.phem', 1, '#[Broadcast]', 4, 'Mark the handler'];
+        yield 'RedirectTo' => [13, 'PublishButton.phem', 1, 'new RedirectTo(PostPage::class', 4, 'Return a RedirectTo'];
+        yield 'ErrorPage' => [14, 'ErrorPages.phem', 2, '#[ErrorPage(404)]', 4, 'Mark a function'];
     }
 }

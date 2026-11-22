@@ -11,12 +11,14 @@ use Phem\Node;
 function Broadcast(): Node
 {
     $code = <<<'PHP'
+        use Phem\Attribute\Broadcast;
+
         #[Component]
         class LikeButton
         {
             #[Prop] public Post $post;
 
-            #[Transactional, Broadcast]
+            #[Broadcast]
             public function like(): void
             {
                 ++$this->post->likes;
@@ -33,7 +35,7 @@ function Broadcast(): Node
 
     return (
         <CodeSlide>
-            <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="sm" startNumber={{ 6 }} focus={{ [11] }} dim={{ false }} />
+            <CodeWindow code={{ code }} file="src/Ui/LikeButton.phem" size="xs" startNumber={{ 5 }} focus={{ [12] }} dim={{ false }} />
             <CodeSlide.notes>
                 <Annotation step="1" muted>Mark the handler</Annotation>
                 <Annotation step="2" muted>A like saves the Post</Annotation>
