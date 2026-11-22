@@ -23,6 +23,8 @@ function DocumentCompare(): Node
         TWIG;
 
     $after = <<<'PHP'
+        use Phem\Root;
+
         #[Component]
         function Document(string $title, Html $children): Node
         {
