@@ -32,7 +32,7 @@ function FunctionComponent(): Node
     return (
         <CodeSlide>
             <div className="grid gap-6">
-                <CodeWindow code={{ code }} file="src/Ui/Badge.phem" size="sm" />
+                <CodeWindow code={{ code }} file="src/Ui/Badge.phem" size="sm" focus={{ [8] }} dim={{ false }} />
                 <div className="flex items-center gap-4">
                     <span className="ph-eyebrow m-0">Use it</span>
                     <Chip mono>{{ usage }}</Chip>
