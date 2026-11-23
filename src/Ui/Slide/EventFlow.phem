@@ -10,27 +10,31 @@ use Phem\Node;
 #[Component]
 function EventFlow(): Node
 {
+    // The row puts the bottom of the marker on the bottom of the arrow line. This moves the
+    // center of the marker (28px) to the center of the line (3px).
+    $onLine = 'translate-y-[12.5px]';
+
     return (
-        <Slide glowX="80%" glowY="38%" footer="No session on the server · the browser keeps the signed state">
-            <SlideHeading eyebrow="How it works · an event">What happens when you <span className="ph-em">click Like</span></SlideHeading>
-            <div className="mt-12 grid grid-cols-[280px_1fr_280px] items-start gap-6">
+        <Slide glowX="80%" glowY="38%">
+            <SlideHeading>What happens when you <span className="ph-em">click Like</span></SlideHeading>
+            <div className="mt-24 grid grid-cols-[280px_1fr_280px] items-start gap-6">
                 <div className="flex flex-col items-center gap-6">
                     <FlowNode icon="browser" label="Browser" />
-                    <Annotation step="4">Morphs only what changed.</Annotation>
+                    <Annotation step="4" tone="cool">Morphs only what changed.</Annotation>
                 </div>
                 <div className="grid gap-10 pt-12">
-                    <div className="flex items-center gap-3">
-                        <StepMarker small>1</StepMarker>
+                    <div className="flex items-end gap-3">
+                        <StepMarker small className={{ onLine }}>1</StepMarker>
                         <Arrow label="POST /posts/42 {signature, handler}" tone="accent" className="flex-1" />
                     </div>
-                    <div className="flex items-center gap-3">
-                        <StepMarker small tone="cool">3</StepMarker>
+                    <div className="flex items-end gap-3">
+                        <StepMarker small tone="cool" className={{ onLine }}>3</StepMarker>
                         <Arrow label="Turbo Streams + changed state" tone="cool" back className="flex-1" />
                     </div>
                 </div>
                 <div className="flex flex-col items-center gap-6">
                     <FlowNode icon="server" label="Server" active />
-                    <Annotation step="2">Restores the state and runs toggle().</Annotation>
+                    <Annotation step="2">Restores the state and runs handler().</Annotation>
                 </div>
             </div>
         </Slide>

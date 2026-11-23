@@ -11,10 +11,12 @@ use Phem\Node;
 function EditorSupport(): Node
 {
     return (
-        <FlowSlide>
+        <FlowSlide titleClassName="text-right">
             <FlowSlide.title>Your editor <span className="ph-em">reads .phem</span></FlowSlide.title>
-            <FlowNode icon="code" label="VS Code" caption="Extension" />
-            <FlowNode icon="code" label="PhpStorm" caption="Plugin" />
+            <div className="flex flex-col gap-6">
+                <FlowNode icon="code" label="VS Code" caption="Extension" />
+                <FlowNode icon="code" label="PhpStorm" caption="Plugin" />
+            </div>
             <Arrow label="LSP" tone="accent" className="flex-1" />
             <FlowNode icon="wrench" label="phemc" caption="One binary" active />
             <Arrow label="MCP" tone="cool" back className="flex-1" />

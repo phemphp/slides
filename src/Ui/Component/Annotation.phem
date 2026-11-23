@@ -11,12 +11,13 @@ function Annotation(
     ?string $step = null,
     ?Html $detail = null,
     bool $muted = false,
+    string $tone = '',
 ): Node {
-    $tone = $muted ? 'done' : '';
+    $stepTone = $muted ? 'done' : $tone;
 
     return (
         <div className="ph-note">
-            {% if step %}<StepMarker small tone={{ tone }}>{{ step }}</StepMarker>{% endif %}
+            {% if step %}<StepMarker small tone={{ stepTone }}>{{ step }}</StepMarker>{% endif %}
             <span>
                 {{ children }}
                 {% if detail %}<small>{{ detail }}</small>{% endif %}
