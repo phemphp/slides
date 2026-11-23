@@ -1,0 +1,46 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function EventAndRequest(): Node
+{
+    $code = <<<'PHP'
+        use Phem\Event;
+        use Symfony\Component\HttpFoundation\Request;
+
+        #[Component]
+        class SearchBox
+        {
+            #[State] public string $query = '';
+
+            public function search(Event $e, Request $request): void
+            {
+                $this->query = (string) $e->value;  // the DOM input
+                $locale = $request->getLocale();    // the HTTP context
+            }
+
+            public function render(): Node
+            {
+                return <input value={{ query }} onInput={{ search }} />;
+            }
+        }
+        PHP;
+
+    return (
+        <CodeSlide>
+            <CodeWindow code={{ code }} file="src/Ui/SearchBox.phem" size="xs" startNumber={{ 5 }} focus={{ [13] }} dim={{ false }} />
+            <CodeSlide.notes>
+                <Annotation step="1" muted>Event: what the user did</Annotation>
+                <Annotation step="2" muted>Request: how it arrived</Annotation>
+                <Annotation step="3" muted>Both are optional</Annotation>
+                <Annotation step="4" muted>The order is free</Annotation>
+            </CodeSlide.notes>
+        </CodeSlide>
+    );
+}

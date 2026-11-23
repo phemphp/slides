@@ -24,7 +24,7 @@ final class SecurityTest extends KernelTestCase
     {
         $em = self::getContainer()->get(EntityManagerInterface::class);
         $presentation = new Presentation();
-        $presentation->slide = 17;
+        $presentation->slide = 18;
         $em->persist($presentation);
         $em->flush();
 

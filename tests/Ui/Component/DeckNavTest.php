@@ -13,7 +13,7 @@ final class DeckNavTest extends KernelTestCase
 {
     use InteractsWithPhem;
 
-    private const int PAGE_COMPONENT = 8;
+    private const int PAGE_COMPONENT = 9;
 
     protected function setUp(): void
     {

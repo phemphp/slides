@@ -24,7 +24,7 @@ final class PackagesTest extends KernelTestCase
     {
         $em = self::getContainer()->get(EntityManagerInterface::class);
         $presentation = new Presentation();
-        $presentation->slide = 19;
+        $presentation->slide = 20;
         $em->persist($presentation);
         $em->flush();
 

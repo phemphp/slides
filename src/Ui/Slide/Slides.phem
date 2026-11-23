@@ -26,6 +26,7 @@ final class Slides
             <RedirectTo />,
             <ErrorPage />,
             <EventFlow />,
+            <EventAndRequest />,
             <Security />,
             <EditorSupport />,
             <Packages />,
