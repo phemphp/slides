@@ -741,8 +741,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * @psalm-type PhemConfig = array{
  *     build_dir?: scalar|Param|null, // The phemc output (`phemc build --out`) // Default: "%kernel.project_dir%/var/phem"
  *     secret?: scalar|Param|null, // The key that signs the component state in the browser // Default: "%kernel.secret%"
- *     state_max_age?: int|Param, // The seconds that a signed state is valid (0 for no limit). An older state reloads the page. // Default: 86400
- *     state_bind_session?: bool|Param, // Sign the session id with the state, so the state of a session is not valid in another session. A login makes the open pages reload on their next event. // Default: false
+ *     state_max_age?: int|Param, // The seconds that a signed state is valid (0 for no limit). An older state reloads the page. // Default: 3600
+ *     state_bind_session?: bool|Param, // Sign the session id with the state, so the state of a session is not valid in another session. A login makes the open pages reload on their next event. A visitor with no session gets states that are not bound. // Default: true
  *     state_cache?: bool|Param, // Keep each signed state in the cache.phem.state pool (framework.cache.pools), so an event can send only its signature. The browser sends the full state when the pool does not have it. // Default: true
  *     state_cache_min_size?: int|Param, // The bytes of the smallest state that the cache.phem.state pool keeps. An event sends a smaller state with its signature: no request more on a miss, and no cache write. 0 keeps all the states. // Default: 4096
  *     max_event_size?: int|Param, // The maximum size of an event body in bytes, with the state of the page (0 for no limit). A larger event gets a 413 response. A page whose state is too large for an event throws in debug mode, and logs an error in production. // Default: 1048576
@@ -768,7 +768,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         subscriber_key?: scalar|Param|null, // The subscriber key of the hub (`issuer … { subscriber { jwt <key> } }` in the Caddyfile). With a key, the updates are private and each page gets an access token for its topics. With null, the updates are public: the hub needs the `anonymous` directive. // Default: null
  *         issuer?: scalar|Param|null, // The issuer of the hub configuration (`issuer phem { … }`) // Default: "phem"
  *         cookie_name?: scalar|Param|null, // The cookie of the access token (`cookie_name` of the hub) // Default: "__Secure-mercure_access_token"
- *         publisher_key?: scalar|Param|null, // The publisher key of the hub (`issuer … { publisher { jwt <key> } }` in the Caddyfile). With a key, a process with no FrankenPHP request (a request of PHP-FPM with a standalone hub, a Messenger worker of an #[Async] handler, a command) publishes with the HTTP API of the hub at publish_url. With null, only a FrankenPHP request publishes (mercure_publish()). // Default: null
+ *         publisher_key?: scalar|Param|null, // The publisher key of the hub (`issuer … { publisher { jwt <key> } }` in the Caddyfile). With a key, a process with no FrankenPHP request (a request of PHP-FPM with a standalone hub, a Messenger worker, a command) publishes with the HTTP API of the hub at publish_url. With null, only a FrankenPHP request publishes (mercure_publish()). // Default: null
  *         publish_url?: scalar|Param|null, // The URL of the hub for the server, with publisher_key (`http://localhost:8080/.well-known/mercure`) // Default: null
  *     },
  * }

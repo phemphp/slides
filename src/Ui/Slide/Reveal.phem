@@ -29,6 +29,7 @@ function Reveal(): Node
                     <Chip mono>Stimulus</Chip>
                     <Chip mono>Rust</Chip>
                 </div>
+                <a href="https://phem.dev" target="_blank" rel="noopener" className="ph-em mt-10 inline-block text-[26px] font-medium font-(family-name:--font-mono) hover:underline">https://phem.dev</a>
             </div>
         </Slide>
     );

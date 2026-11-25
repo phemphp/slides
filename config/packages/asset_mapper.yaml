@@ -4,6 +4,10 @@ framework:
         paths:
             - assets/
         missing_import_mode: strict
+        # The theme of phem/ui-base is an input of Tailwind, not a public asset. Its first comment
+        # has an @import, and AssetMapper does not skip a comment that starts at offset 0.
+        excluded_patterns:
+            - '*/vendor/phem/ui-base/assets/theme.css'
 
 when@prod:
     framework:

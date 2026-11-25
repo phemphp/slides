@@ -11,31 +11,30 @@ use Phem\Node;
 function ErrorPage(): Node
 {
     $code = <<<'PHP'
+        use App\Ui\HomePage;
+        use Phem\Attribute\ErrorPage;
+
         #[ErrorPage(404)]
         function NotFoundPage(): Node
         {
-            return (
-                <Document title="Page not found">
-                    <h1>Page not found</h1>
-                    <a href={{ path(HomePage) }}>Back to the home page</a>
-                </Document>
-            );
+            return <Document title="Page not found">
+                <h1>Page not found</h1>
+                <a href={{ path(HomePage) }}>Back to the home page</a>
+            </Document>;
         }
 
         #[ErrorPage]
         function ErrorPage(int $status): Node
         {
-            return (
-                <Document title="Something went wrong">
-                    <h1>Error {{ status }}</h1>
-                </Document>
-            );
+            return <Document title="Something went wrong">
+                <h1>Error {{ status }}</h1>
+            </Document>;
         }
         PHP;
 
     return (
         <CodeSlide>
-            <CodeWindow code={{ code }} file="src/Ui/ErrorPages.phem" size="xs" startNumber={{ 10 }} focus={{ [10, 21] }} dim={{ false }} />
+            <CodeWindow code={{ code }} file="src/Ui/ErrorPages.phem" size="xs" startNumber={{ 5 }} focus={{ [8, 17] }} dim={{ false }} />
             <CodeSlide.notes>
                 <Annotation step="1" muted>Mark a function</Annotation>
                 <Annotation step="2" muted>A page for the 404</Annotation>

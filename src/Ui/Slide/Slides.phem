@@ -29,6 +29,7 @@ final class Slides
             <EventAndRequest />,
             <Security />,
             <EditorSupport />,
+            <UiBaseCollage />,
             <Packages />,
             <TradeOffs />,
             <Thanks />,

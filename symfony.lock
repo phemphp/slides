@@ -50,6 +50,9 @@
     "phem/phem": {
         "version": "v0.1.2"
     },
+    "phem/ui-base": {
+        "version": "v0.8.1"
+    },
     "phpunit/phpunit": {
         "version": "13.4",
         "recipe": {

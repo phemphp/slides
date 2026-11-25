@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* The slides are always dark: <html> has the dark class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* The theme of phem/ui-base. The theme and the design system both have an --accent, and the
+   theme has no layer, so it wins on :root. revert-layer gives :root the --accent of the design
+   system again (the base layer). The .ph-ui class of deck.css gives the --accent of the theme to
+   the components. */
+@import "../../vendor/phem/ui-base/assets/theme.css";
+
+:root {
+    --accent: revert-layer;
+}
+
 /* The Phem design system (https://claude.ai/artifact/T5N2WpkFmnefFy1coMezsV): copy its files as
    they are. The utilities of Tailwind come after its layer, so a class can change a component. */
 @import "./phem/tokens.css" layer(base);

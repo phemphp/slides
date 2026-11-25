@@ -50,3 +50,20 @@ Write each problem with Phem here: the date, what happened, and the work-around.
   (`mount(LikeButton::class, ['post' => $post])`) shows the new value, but saves nothing. The
   event resets the services, so the prop is a detached entity and the flush ignores it. No
   error tells you. Work-around: mount the parent that loads the entity (`Example`).
+- 2026-11-24: `composer require phem/ui-base` installs v0.1.0 when the app has `phem/phem` ^0.7:
+  each minor version of the package needs a newer `phem/phem`. Work-around: require the two
+  packages together (`composer require phem/ui-base:^0.8 phem/phem:^0.10 -W`).
+- 2026-11-24: With phem/ui-base installed, each asset gives a 500 error in dev. The bundle adds
+  its `assets/` folder to AssetMapper, and `theme.css` starts with a comment that has
+  `@import "tailwindcss";`. `CssAssetUrlCompiler` does not skip a comment that starts at offset 0
+  (`elseif ($start)` is false for `0`), and `missing_import_mode: strict` throws. Work-around:
+  an `excluded_patterns` entry for `theme.css` in `config/packages/asset_mapper.yaml`.
+- 2026-11-24: The theme of phem/ui-base sets `--accent` on `:root`, and the design system of
+  the slides has its own `--accent`. `@import "…/theme.css" layer(theme)` does not build: the
+  `@source` of the theme is then nested. Work-around: `--accent: revert-layer` on `:root`, and a
+  `.ph-ui` class that gives the `--accent` of the theme to the components.
+- 2026-11-24: `<TabsIndicator>` and the popup of `<NavigationMenu>` use sizes from
+  `getBoundingClientRect()`. A slide has a `scale`, so the indicator has the wrong width and the
+  popup opens at the wrong place. The popups in the top layer (select, menu, popover, tooltip,
+  dialog, drawer) are correct. Work-around: no indicator (classes on the active tab), and no
+  `<NavigationMenu>` on the slide.

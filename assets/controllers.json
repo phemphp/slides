@@ -13,11 +13,11 @@
                 "fetch": "lazy"
             },
             "collapsible": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "accordion": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "depends": {
@@ -25,31 +25,31 @@
                 "fetch": "lazy"
             },
             "dialog": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "popover": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "tooltip": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "menu": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "context-menu": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "combobox": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "tabs": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "toast": {
@@ -81,7 +81,7 @@
                 "fetch": "lazy"
             },
             "checkbox-group": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "time": {
@@ -96,36 +96,40 @@
                 "enabled": false,
                 "fetch": "lazy"
             },
+            "palette": {
+                "enabled": false,
+                "fetch": "lazy"
+            },
             "image-input": {
                 "enabled": false,
                 "fetch": "lazy"
             },
             "toggle": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "toggle-group": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "toolbar": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "radio-group": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "button": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "avatar": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "field": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "form": {
@@ -133,27 +137,27 @@
                 "fetch": "lazy"
             },
             "number-field": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "otp-field": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "slider": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "scroll-area": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "select": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "menubar": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             },
             "navigation-menu": {
@@ -161,7 +165,7 @@
                 "fetch": "lazy"
             },
             "drawer-provider": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "lazy"
             }
         }

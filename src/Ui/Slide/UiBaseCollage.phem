@@ -1,0 +1,495 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\Terminal;
+use App\Ui\Layout\Slide;
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+use Phem\Ui\Base\{Accordion, AccordionItem, Autocomplete, Button, Checkbox, CheckboxGroup, Collapsible, Combobox, ContextMenu, Dialog, Drawer, Field, Fieldset, Menu, Menubar, Meter, Progress, Radio, RadioGroup, Select, Separator, Slider, SwitchRoot, Tabs, ToggleGroup, Toolbar, Tooltip};
+
+use function Phem\Ui\Base\{AccordionHeader, AccordionPanel, AccordionTrigger, AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger, Avatar, AvatarFallback, AvatarImage, CheckboxIndicator, CollapsiblePanel, CollapsibleTrigger, ComboboxActions, ComboboxClear, ComboboxEmpty, ComboboxInput, ComboboxInputGroup, ComboboxItem, ComboboxItemIndicator, ComboboxItemLabel, ComboboxList, ComboboxPopup, ComboboxTrigger, ContextMenuTrigger, DialogClose, DialogDescription, DialogPopup, DialogTitle, DialogTrigger, DrawerClose, DrawerContent, DrawerDescription, DrawerPopup, DrawerTitle, DrawerTrigger, FieldControl, FieldLabel, FieldsetLegend, MenuItem, MenuPopup, MenuSeparator, MenuTrigger, MeterIndicator, MeterLabel, MeterTrack, MeterValue, NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput, OTPField, OTPFieldInput, Popover, PopoverArrow, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger, PreviewCard, PreviewCardArrow, PreviewCardPopup, PreviewCardTrigger, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue, RadioIndicator, ScrollArea, ScrollAreaContent, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport, SelectIcon, SelectItem, SelectItemIndicator, SelectItemText, SelectList, SelectPopup, SelectTrigger, SelectValue, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SwitchThumb, TabsList, TabsPanel, TabsTab, Toggle, ToolbarButton, ToolbarGroup, ToolbarSeparator, TooltipArrow, TooltipPopup, TooltipTrigger};
+
+/*
+ * A collage of the components of phem/ui-base: a grid of 7 columns and 7 rows that fills the
+ * slide. The command that installs the package is in the center, in a terminal that fills the
+ * three middle columns. It has the border and the fill of a tile, and its warm glow gets strong
+ * and weak in a slow loop (ph-glow). The terminal itself does not move. Each tile shows one component, and a large component takes two columns or two rows. No
+ * component has a server handler: all the behavior is in the browser.
+ */
+#[Component]
+function UiBaseCollage(): Node
+{
+    $option = 'flex items-center gap-2 text-sm font-normal text-foreground';
+    $link = 'text-sm text-foreground decoration-separator decoration-1 underline-offset-2 hover:underline';
+    $frameworks = ['symfony' => 'Symfony', 'laravel' => 'Laravel', 'slim' => 'Slim'];
+    $roles = ['reader' => 'Reader', 'author' => 'Author', 'admin' => 'Admin'];
+    $channels = ['email' => 'Email', 'push' => 'Push', 'sms' => 'SMS'];
+    $fruits = ['apple' => 'Apple', 'banana' => 'Banana', 'orange' => 'Orange', 'grape' => 'Grape', 'mango' => 'Mango'];
+    $tags = ['bug' => 'bug', 'docs' => 'docs', 'feature' => 'feature', 'refactor' => 'refactor', 'test' => 'test'];
+    $slots = range(1, 6);
+    $commands = [['cmd', 'composer require phem/ui-base']];
+
+    // The slide has a scale, and <TabsIndicator> measures the tab on the screen: its box is then
+    // wrong. The active tab has the look of the indicator instead.
+    $tab = 'border-x border-t border-transparent data-active:border-border data-active:bg-background';
+
+    // The icons of the Base UI demos.
+    $alignments = [
+        'left' => 'M2.5 4.5h11m-11 7h9M2.5 8h5',
+        'center' => 'M2.5 4.5h11m-10 7h9M5.5 8h5',
+        'right' => 'M2.5 4.5h11m-9 7h9M8.5 8h5',
+    ];
+    $tools = [
+        'Bold' => 'M4 2.5h4.5a2.75 2.75 0 0 1 0 5.5H4zm0 5.5h5.25a2.75 2.75 0 0 1 0 5.5H4z',
+        'Italic' => 'M6.5 2.5h5m-7 11h5m.5-11-4 11',
+        'Underline' => 'M4.5 2.5v5a3.5 3.5 0 0 0 7 0v-5m-8 11h9',
+    ];
+
+    return (
+        <Slide glowX="50%" glowY="50%">
+            <div className="absolute inset-0 grid grid-flow-row-dense grid-cols-7 grid-rows-[repeat(3,minmax(0,1fr))_auto_repeat(3,minmax(0,1fr))] gap-2.5 p-5">
+                <CollageTile name="Tabs" className="col-span-2 row-span-2">
+                    <Tabs defaultValue="overview" className="flex size-full max-w-none flex-col">
+                        <TabsList>
+                            <TabsTab value="overview" className={{ tab }}>Overview</TabsTab>
+                            <TabsTab value="projects" className={{ tab }}>Projects</TabsTab>
+                            <TabsTab value="account" className={{ tab }}>Account</TabsTab>
+                        </TabsList>
+                        <div className="grid w-full flex-1 grid-cols-1 border border-border">
+                            <TabsPanel value="overview"><p>Workspace stats and activity.</p></TabsPanel>
+                            <TabsPanel value="projects"><p>Milestones and deadlines.</p></TabsPanel>
+                            <TabsPanel value="account"><p>Profile and preferences.</p></TabsPanel>
+                        </div>
+                    </Tabs>
+                </CollageTile>
+
+                <CollageTile name="Button">
+                    <div className="flex gap-2">
+                        <Button>Save</Button>
+                        <Button disabled>Cancel</Button>
+                    </div>
+                </CollageTile>
+
+                <CollageTile name="Field">
+                    <Field id="collage-name" className="flex-row items-center gap-2">
+                        <FieldLabel>Name</FieldLabel>
+                        <FieldControl placeholder="e.g. Fabien" className="w-full min-w-0" />
+                    </Field>
+                </CollageTile>
+
+                <CollageTile name="Select">
+                    <Select id="collage-framework" name="framework" defaultValue="symfony" sideOffset={{ 4 }}>
+                        <SelectTrigger className="w-full min-w-0">
+                            <SelectValue placeholder="Select framework" />
+                            <SelectIcon />
+                        </SelectTrigger>
+                        <SelectPopup>
+                            <SelectList>
+                                {% for value, name in frameworks %}
+                                    <SelectItem key={{ value }} value={{ value }}>
+                                        <SelectItemIndicator />
+                                        <SelectItemText>{{ name }}</SelectItemText>
+                                    </SelectItem>
+                                {% endfor %}
+                            </SelectList>
+                        </SelectPopup>
+                    </Select>
+                </CollageTile>
+
+                <CollageTile name="Checkbox">
+                    <label className={{ option }}>
+                        <Checkbox defaultChecked><CheckboxIndicator /></Checkbox>
+                        Accept the terms
+                    </label>
+                </CollageTile>
+
+                <CollageTile name="RadioGroup" className="row-span-2">
+                    <RadioGroup aria-labelledby="collage-role" defaultValue="author" name="role">
+                        <div className="text-sm font-bold text-foreground" id="collage-role">Role</div>
+                        {% for value, name in roles %}
+                            <label key={{ value }} className={{ option }}>
+                                <Radio value={{ value }}><RadioIndicator /></Radio>
+                                {{ name }}
+                            </label>
+                        {% endfor %}
+                    </RadioGroup>
+                </CollageTile>
+
+                <CollageTile name="Switch">
+                    <label className={{ option }}>
+                        <SwitchRoot defaultChecked><SwitchThumb /></SwitchRoot>
+                        Notifications
+                    </label>
+                </CollageTile>
+
+                <CollageTile name="NumberField">
+                    <NumberField defaultValue={{ 100 }}>
+                        <NumberFieldGroup>
+                            <NumberFieldDecrement />
+                            <NumberFieldInput aria-label="Amount" />
+                            <NumberFieldIncrement />
+                        </NumberFieldGroup>
+                    </NumberField>
+                </CollageTile>
+
+                <CollageTile name="Slider">
+                    <Slider defaultValue={{ 40 }} className="w-full">
+                        <SliderControl className="w-full">
+                            <SliderTrack>
+                                <SliderIndicator />
+                                <SliderThumb aria-label="Volume" />
+                            </SliderTrack>
+                        </SliderControl>
+                    </Slider>
+                </CollageTile>
+
+                <CollageTile name="Progress">
+                    <Progress id="collage-export" value={{ 64 }} className="w-full">
+                        <ProgressLabel>Export data</ProgressLabel>
+                        <ProgressValue />
+                        <ProgressTrack><ProgressIndicator /></ProgressTrack>
+                    </Progress>
+                </CollageTile>
+
+                <CollageTile name="Meter">
+                    <Meter id="collage-storage" value={{ 24 }} className="w-full">
+                        <MeterLabel>Storage</MeterLabel>
+                        <MeterValue />
+                        <MeterTrack><MeterIndicator /></MeterTrack>
+                    </Meter>
+                </CollageTile>
+
+                <CollageTile name="Combobox">
+                    <Combobox id="collage-fruit" filter="contains">
+                        <ComboboxInputGroup className="w-full">
+                            <ComboboxInput placeholder="e.g. Apple" aria-label="Fruit" />
+                            <ComboboxActions>
+                                <ComboboxClear aria-label="Clear selection" />
+                                <ComboboxTrigger aria-label="Open popup" />
+                            </ComboboxActions>
+                        </ComboboxInputGroup>
+                        <ComboboxPopup>
+                            <ComboboxEmpty>No fruits found.</ComboboxEmpty>
+                            <ComboboxList>
+                                {% for value, name in fruits %}
+                                    <ComboboxItem key={{ value }} value={{ value }}>
+                                        <ComboboxItemIndicator />
+                                        <ComboboxItemLabel>{{ name }}</ComboboxItemLabel>
+                                    </ComboboxItem>
+                                {% endfor %}
+                            </ComboboxList>
+                        </ComboboxPopup>
+                    </Combobox>
+                </CollageTile>
+
+                <CollageTile name="Autocomplete">
+                    <Autocomplete id="collage-tags" filter="contains">
+                        <ComboboxInput placeholder="e.g. feature" aria-label="Tag" className="w-full" />
+                        <ComboboxPopup>
+                            <ComboboxEmpty>No tags found.</ComboboxEmpty>
+                            <ComboboxList>
+                                {% for value, name in tags %}
+                                    <ComboboxItem key={{ value }} value={{ value }} className="flex">{{ name }}</ComboboxItem>
+                                {% endfor %}
+                            </ComboboxList>
+                        </ComboboxPopup>
+                    </Autocomplete>
+                </CollageTile>
+
+                <CollageTile name="Avatar">
+                    <div className="flex gap-3">
+                        <Avatar>
+                            <AvatarImage src={{ asset('images/yonel-ceruto.jpg') }} width="48" height="48" />
+                            <AvatarFallback>YC</AvatarFallback>
+                        </Avatar>
+                        <Avatar>PH</Avatar>
+                    </div>
+                </CollageTile>
+
+                <CollageTile name="ToggleGroup">
+                    <ToggleGroup aria-label="Text alignment" defaultValue={{ ['left'] }}>
+                        {% for value, path in alignments %}
+                            <Toggle key={{ value }} aria-label="Align {{ value }}" value={{ value }}>
+                                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" className="block">
+                                    <path stroke-linecap="square" stroke-linejoin="round" d={{ path }} />
+                                </svg>
+                            </Toggle>
+                        {% endfor %}
+                    </ToggleGroup>
+                </CollageTile>
+
+                <CollageTile name="Toggle">
+                    <Toggle aria-label="Favorite" defaultPressed>
+                        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="hidden group-data-pressed:block">
+                            <path d="M8 13.9a.5.5 0 0 1-.3-.1C7.4 13.6 1.6 9.2 1.6 5.9a3.7 3.7 0 0 1 6.4-2.6 3.7 3.7 0 0 1 6.4 2.6c0 3.3-5.8 7.7-6.1 7.9a.5.5 0 0 1-.3.1Z" />
+                        </svg>
+                        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" className="block group-data-pressed:hidden">
+                            <path d="M8 13.3C6.9 12.5 2.1 8.7 2.1 5.9A3.2 3.2 0 0 1 8 4.1a3.2 3.2 0 0 1 5.9 1.8c0 2.8-4.8 6.6-5.9 7.4Z" />
+                        </svg>
+                    </Toggle>
+                </CollageTile>
+
+                <CollageTile name="Menubar">
+                    <Menubar>
+                        <Menu sideOffset={{ 4 }}>
+                            <MenuTrigger>File</MenuTrigger>
+                            <MenuPopup>
+                                <MenuItem>New</MenuItem>
+                                <MenuItem>Open</MenuItem>
+                                <MenuSeparator />
+                                <MenuItem>Print</MenuItem>
+                            </MenuPopup>
+                        </Menu>
+                        <Menu sideOffset={{ 4 }}>
+                            <MenuTrigger>Edit</MenuTrigger>
+                            <MenuPopup>
+                                <MenuItem>Cut</MenuItem>
+                                <MenuItem>Copy</MenuItem>
+                                <MenuItem>Paste</MenuItem>
+                            </MenuPopup>
+                        </Menu>
+                        <Menu sideOffset={{ 4 }}>
+                            <MenuTrigger>View</MenuTrigger>
+                            <MenuPopup>
+                                <MenuItem>Zoom In</MenuItem>
+                                <MenuItem>Zoom Out</MenuItem>
+                            </MenuPopup>
+                        </Menu>
+                    </Menubar>
+                </CollageTile>
+
+                <CollageTile name="Toolbar" className="col-span-2 col-start-1 row-start-4">
+                    <Toolbar aria-label="Format">
+                        <ToggleGroup aria-label="Alignment">
+                            <Toggle aria-label="Align left" value="align-left">Align Left</Toggle>
+                            <Toggle aria-label="Align right" value="align-right">Align Right</Toggle>
+                        </ToggleGroup>
+                        <ToolbarSeparator />
+                        <ToolbarGroup aria-label="Numerical format">
+                            <ToolbarButton aria-label="Format as currency" className="px-0">$</ToolbarButton>
+                            <ToolbarButton aria-label="Format as percent" className="px-0">%</ToolbarButton>
+                        </ToolbarGroup>
+                                                </Toolbar>
+                </CollageTile>
+
+                <Terminal
+                    lines={{ commands }}
+                    className="ph-glow col-span-3 col-start-3 row-start-4 border border-(--edge) bg-(--surface-glass) [&_.ph-terminal-body]:py-4 [&_.ph-window-bar]:bg-transparent"
+                />
+
+                <CollageTile name="OTPField" className="col-span-2 col-start-6 row-start-4">
+                    <OTPField name="code" aria-label="Verification code" className="w-auto">
+                        {% for i in slots %}
+                            <OTPFieldInput key={{ i }} />
+                        {% endfor %}
+                    </OTPField>
+                </CollageTile>
+
+                <CollageTile name="CheckboxGroup" className="row-span-2">
+                    <CheckboxGroup aria-labelledby="collage-channels" defaultValue={{ ['email'] }}>
+                        <div className="text-sm font-bold text-foreground" id="collage-channels">Channels</div>
+                        {% for value, name in channels %}
+                            <label key={{ value }} className={{ option }}>
+                                <Checkbox name="channel" value={{ value }}><CheckboxIndicator /></Checkbox>
+                                {{ name }}
+                            </label>
+                        {% endfor %}
+                    </CheckboxGroup>
+                </CollageTile>
+
+                <CollageTile name="Accordion" className="col-span-2 row-span-2">
+                    <Accordion id="collage-faq" defaultValue={{ ['what'] }} className="max-w-none">
+                        <AccordionItem value="what">
+                            <AccordionHeader><AccordionTrigger>What is Phem?</AccordionTrigger></AccordionHeader>
+                            <AccordionPanel>UI server components for Symfony.</AccordionPanel>
+                        </AccordionItem>
+                        <AccordionItem value="start">
+                            <AccordionHeader><AccordionTrigger>How do I get started?</AccordionTrigger></AccordionHeader>
+                            <AccordionPanel>Run composer require phem/phem.</AccordionPanel>
+                        </AccordionItem>
+                    </Accordion>
+                </CollageTile>
+
+                <CollageTile name="Fieldset" className="row-span-2">
+                    <Fieldset className="[--fieldset-gap:0.5rem]">
+                        <FieldsetLegend>Billing details</FieldsetLegend>
+                        <Field id="collage-company">
+                            <FieldControl placeholder="Company" aria-label="Company" className="w-full" />
+                        </Field>
+                        <Field id="collage-tax-id">
+                            <FieldControl placeholder="Tax ID" aria-label="Tax ID" className="w-full" />
+                        </Field>
+                    </Fieldset>
+                </CollageTile>
+
+                <CollageTile name="Tooltip">
+                    <div className="flex border border-border bg-background">
+                        {% for label, path in tools %}
+                            <Tooltip key={{ label }} sideOffset={{ 11 }}>
+                                <TooltipTrigger aria-label={{ label }}>
+                                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" className="block">
+                                        <path stroke-linejoin="round" d={{ path }} />
+                                    </svg>
+                                </TooltipTrigger>
+                                <TooltipPopup>
+                                    <TooltipArrow />
+                                    {{ label }}
+                                </TooltipPopup>
+                            </Tooltip>
+                        {% endfor %}
+                    </div>
+                </CollageTile>
+
+                <CollageTile name="ScrollArea" className="row-span-2">
+                    <ScrollArea className="size-full">
+                        <ScrollAreaViewport>
+                            <ScrollAreaContent>
+                                <p>Phem is a component layer for Symfony web apps. A .phem file is PHP with markup literals, and phemc compiles it to PHP and Twig.</p>
+                                <p>The server owns the UI. The browser sends the events, and it morphs in the HTML that changed.</p>
+                            </ScrollAreaContent>
+                        </ScrollAreaViewport>
+                        <ScrollAreaScrollbar>
+                            <ScrollAreaThumb />
+                        </ScrollAreaScrollbar>
+                    </ScrollArea>
+                </CollageTile>
+
+                <CollageTile name="Collapsible" className="row-span-2">
+                    <Collapsible defaultOpen className="min-h-0 w-full justify-start">
+                        <CollapsibleTrigger>Recovery keys</CollapsibleTrigger>
+                        <CollapsiblePanel>
+                            <div className="flex flex-col gap-2 px-3 py-2">
+                                <div>alien-bean-pasta</div>
+                                <div>wild-irish-burrito</div>
+                                <div>calm-otter-tea</div>
+                            </div>
+                        </CollapsiblePanel>
+                    </Collapsible>
+                </CollageTile>
+
+                <CollageTile name="Separator">
+                    <div className="flex gap-3 text-nowrap">
+                        <a href="#" className={{ link }}>Home</a>
+                        <a href="#" className={{ link }}>Blog</a>
+                        <Separator orientation="vertical" />
+                        <a href="#" className={{ link }}>Log in</a>
+                    </div>
+                </CollageTile>
+
+                <CollageTile name="Dialog">
+                    <Dialog>
+                        <DialogTrigger>View notifications</DialogTrigger>
+                        <DialogPopup>
+                            <div className="flex flex-col gap-1">
+                                <DialogTitle>Notifications</DialogTitle>
+                                <DialogDescription>You are all caught up. Good job!</DialogDescription>
+                            </div>
+                            <div className="flex justify-end gap-3">
+                                <DialogClose>Close</DialogClose>
+                            </div>
+                        </DialogPopup>
+                    </Dialog>
+                </CollageTile>
+
+                <CollageTile name="AlertDialog">
+                    <AlertDialog>
+                        <AlertDialogTrigger className="text-destructive">Discard draft</AlertDialogTrigger>
+                        <AlertDialogPopup>
+                            <div className="flex flex-col gap-1">
+                                <AlertDialogTitle>Discard draft?</AlertDialogTitle>
+                                <AlertDialogDescription>You can’t undo this action.</AlertDialogDescription>
+                            </div>
+                            <div className="flex justify-end gap-3">
+                                <AlertDialogClose>Cancel</AlertDialogClose>
+                                <AlertDialogClose className="text-destructive">Discard</AlertDialogClose>
+                            </div>
+                        </AlertDialogPopup>
+                    </AlertDialog>
+                </CollageTile>
+
+                <CollageTile name="Drawer">
+                    <Drawer swipeDirection="right">
+                        <DrawerTrigger>Open drawer</DrawerTrigger>
+                        <DrawerPopup>
+                            <DrawerContent>
+                                <DrawerTitle>Drawer</DrawerTitle>
+                                <DrawerDescription>This is a drawer that slides in from the side. You can swipe to dismiss it.</DrawerDescription>
+                                <div className="flex justify-end gap-3">
+                                    <DrawerClose>Close</DrawerClose>
+                                </div>
+                            </DrawerContent>
+                        </DrawerPopup>
+                    </Drawer>
+                </CollageTile>
+
+                <CollageTile name="Popover">
+                    <Popover sideOffset={{ 8 }}>
+                        <PopoverTrigger>Notifications</PopoverTrigger>
+                        <PopoverPopup>
+                            <PopoverArrow />
+                            <PopoverTitle>Notifications</PopoverTitle>
+                            <PopoverDescription>You are all caught up. Good job!</PopoverDescription>
+                        </PopoverPopup>
+                    </Popover>
+                </CollageTile>
+
+                <CollageTile name="Menu">
+                    <Menu sideOffset={{ 8 }}>
+                        <MenuTrigger>Song</MenuTrigger>
+                        <MenuPopup>
+                            <MenuItem>Add to Library</MenuItem>
+                            <MenuItem>Add to Playlist</MenuItem>
+                            <MenuSeparator />
+                            <MenuItem>Play Next</MenuItem>
+                            <MenuItem>Play Last</MenuItem>
+                        </MenuPopup>
+                    </Menu>
+                </CollageTile>
+
+                <CollageTile name="ContextMenu">
+                    <ContextMenu>
+                        <ContextMenuTrigger className="aspect-auto h-full">Right click here</ContextMenuTrigger>
+                        <MenuPopup>
+                            <MenuItem>Add to Library</MenuItem>
+                            <MenuItem>Add to Playlist</MenuItem>
+                            <MenuSeparator />
+                            <MenuItem>Favorite</MenuItem>
+                            <MenuItem>Share</MenuItem>
+                        </MenuPopup>
+                    </ContextMenu>
+                </CollageTile>
+
+                <CollageTile name="PreviewCard">
+                    <PreviewCard>
+                        <p className="text-sm text-foreground">Made with <PreviewCardTrigger href="#">Phem</PreviewCardTrigger></p>
+                        <PreviewCardPopup>
+                            <PreviewCardArrow />
+                            <div className="flex w-56 flex-col gap-2 p-2">
+                                <img src={{ asset('images/phem-logo.svg') }} alt="The Phem logo" className="h-16 self-start" />
+                                <p className="text-sm"><strong>Phem</strong> is a component layer for Symfony web apps.</p>
+                            </div>
+                        </PreviewCardPopup>
+                    </PreviewCard>
+                </CollageTile>
+            </div>
+        </Slide>
+    );
+}
+
+/*
+ * One tile of the collage: the name of the component, and the component in the center. The tile
+ * has the ph-ui class, not the grid: the terminal in the grid needs the --accent of the slides.
+ */
+#[Component]
+function CollageTile(string $name, Html $children, string $className = ''): Node
+{
+    $classes = ['ph-ui m-0 flex min-h-0 min-w-0 flex-col gap-1.5 rounded-(--radius-md) border border-(--edge) bg-(--surface-glass) px-2 pt-2 pb-3', $className];
+
+    return (
+        <figure className={{ classes }}>
+            <figcaption className="font-mono text-xs/none font-medium text-(--text-tertiary)">{{ name }}</figcaption>
+            <div className="flex min-h-0 flex-1 items-center justify-center">{{ children }}</div>
+        </figure>
+    );
+}

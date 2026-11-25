@@ -193,3 +193,37 @@
     background: color-mix(in srgb, var(--accent) 45%, var(--surface-raised));
     box-shadow: none;
 }
+
+/* ---------- The components of phem/ui-base ---------- */
+
+/* The design system and the theme of phem/ui-base both have an --accent. The design system wins
+   on :root (the color of a word in a title). In an area with components of phem/ui-base, --accent
+   is the color of the theme: the fill of a hover and of an open part. */
+.ph-ui {
+    --accent: var(--color-neutral-800);
+}
+
+/* ---------- Glow: a card that pulls the eye ---------- */
+
+/* The warm glow of the card gets strong, then weak, in a slow loop. Only the shadow changes: the
+   card does not move and keeps its size. Without motion, the card keeps the strong glow. */
+.ph-glow {
+    animation: ph-glow 2.6s ease-in-out infinite;
+}
+
+@keyframes ph-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px 0 color-mix(in srgb, var(--iris-orange) 22%, transparent);
+    }
+
+    50% {
+        box-shadow: var(--shadow-glow);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ph-glow {
+        animation: none;
+        box-shadow: var(--shadow-glow);
+    }
+}
