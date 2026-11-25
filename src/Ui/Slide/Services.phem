@@ -42,6 +42,12 @@ function Services(): Node
                 <Annotation step="2" muted>mount() loads the data</Annotation>
                 <Annotation step="3" muted>render() stays pure</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>Autowiring in the constructor</li>
+                    <li>mount() loads, render() stays pure</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

@@ -30,6 +30,11 @@ Click the phone button of the deck to show the QR code of this URL. To close the
 its close button, press `Esc`, or click the phone button again. On the phone, the same button turns on the touch navigation: tap the left or the right
 half of the screen.
 
+With the touch navigation on, a phone in portrait shows the slide at the top of the screen and
+the speaker notes of the slide below it. A tap on the notes also moves the deck, and a long text
+scrolls. A screen with a mouse never shows the notes. Write the notes of a slide in the
+`speakerNotes` slot of its layout, for example `<CodeSlide.speakerNotes>`.
+
 The screen of the phone stays on while the deck shows, after the first tap. On plain HTTP, the
 deck plays a silent video that you cannot see to keep the screen on, so the phone can show the
 page in its media controls and can stop other audio.

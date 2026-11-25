@@ -39,6 +39,12 @@ function ClassComponent(): Node
                 <Annotation step="3" muted>A handler is a method</Annotation>
                 <Annotation step="4" muted>The markup uses both</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>State or handler: a class</li>
+                    <li>No route, no controller, no JavaScript</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

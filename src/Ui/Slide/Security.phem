@@ -42,6 +42,12 @@ function Security(): Node
                 <Annotation step="3" muted>A voter guards publish()</Annotation>
                 <Annotation step="4" muted>like() has a rate limit</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>Signed state, same origin</li>
+                    <li>IsGranted and RateLimit on a handler</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

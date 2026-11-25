@@ -50,6 +50,12 @@ function Anatomy(): Node
                     <span key={{ part.label }} className={{ ['absolute whitespace-nowrap text-[28px] leading-none font-medium', part.mono ? 'font-(family-name:--font-mono)' : '', sides[part.side]] }} style={{ 'left: ' ~ part.x ~ 'px; top: ' ~ part.y ~ 'px;' }}>{{ part.label }}</span>
                 {% endfor %}
             </div>
+            <Slide.speakerNotes>
+                <ul>
+                    <li>Six parts, one file</li>
+                    <li>Go around the button</li>
+                </ul>
+            </Slide.speakerNotes>
         </Slide>
     );
 }

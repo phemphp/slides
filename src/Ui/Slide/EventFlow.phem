@@ -37,6 +37,12 @@ function EventFlow(): Node
                     <Annotation step="2">Restores the state and runs handler().</Annotation>
                 </div>
             </div>
+            <Slide.speakerNotes>
+                <ul>
+                    <li>Follow the numbers 1 to 4</li>
+                    <li>Only the changes come back</li>
+                </ul>
+            </Slide.speakerNotes>
         </Slide>
     );
 }

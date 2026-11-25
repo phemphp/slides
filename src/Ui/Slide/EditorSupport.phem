@@ -21,6 +21,12 @@ function EditorSupport(): Node
             <FlowNode icon="wrench" label="phemc" caption="One binary" active />
             <Arrow label="MCP" tone="cool" back className="flex-1" />
             <FlowNode icon="sparkle" label="Claude Code" caption="Plugin" />
+            <FlowSlide.speakerNotes>
+                <ul>
+                    <li>One binary: compiler, LSP, MCP</li>
+                    <li>Editors and agents use it</li>
+                </ul>
+            </FlowSlide.speakerNotes>
         </FlowSlide>
     );
 }

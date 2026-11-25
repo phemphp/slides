@@ -7,10 +7,10 @@ use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
 #[Component]
-function SplitSlide(Html $title, Html $children, Html $code, string $eyebrow = '', ?string $footer = null, ?string $number = null): Node
+function SplitSlide(Html $title, Html $children, Html $code, string $eyebrow = '', ?string $footer = null, ?string $number = null, ?Html $speakerNotes = null): Node
 {
     return (
-        <Slide glowX="20%" glowY="30%" footer={{ footer }} number={{ number }}>
+        <Slide glowX="20%" glowY="30%" footer={{ footer }} number={{ number }} speakerNotes={{ speakerNotes }}>
             <div className="ph-split">
                 <div>
                     <SlideHeading eyebrow={{ eyebrow }}>{{ title }}</SlideHeading>

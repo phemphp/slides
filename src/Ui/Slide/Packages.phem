@@ -44,6 +44,12 @@ function Packages(): Node
                 <Annotation step="3" muted>Import like PHP</Annotation>
                 <Annotation step="4" muted>Each part is a tag</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>composer require</li>
+                    <li>Import, then use the tags</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

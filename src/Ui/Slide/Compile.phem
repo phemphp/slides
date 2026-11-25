@@ -46,6 +46,12 @@ function Compile(): Node
                     <ListItem icon="bolt" title="Twig cache" detail="built before deploy" />
                 </ul>
             </div>
+            <Slide.speakerNotes>
+                <ul>
+                    <li>phemc checks, then writes PHP and Twig</li>
+                    <li>Errors before the code runs</li>
+                </ul>
+            </Slide.speakerNotes>
         </Slide>
     );
 }

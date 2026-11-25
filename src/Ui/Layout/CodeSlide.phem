@@ -7,14 +7,14 @@ use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
 #[Component]
-function CodeSlide(Html $children, ?Html $notes = null, string $eyebrow = '', ?string $footer = null, ?string $number = null): Node
+function CodeSlide(Html $children, ?Html $notes = null, string $eyebrow = '', ?string $footer = null, ?string $number = null, ?Html $speakerNotes = null): Node
 {
     $columns = $notes ? 'grid-cols-[1fr_300px]' : 'grid-cols-1';
     // The gap of the notes (gap-8, 32px) is more than the outer rims of two note cards (10px
     // each, see --shadow-glass), so the rims do not overlap.
 
     return (
-        <Slide glowX="82%" glowY="12%" footer={{ footer }} number={{ number }} className="pt-16">
+        <Slide glowX="82%" glowY="12%" footer={{ footer }} number={{ number }} speakerNotes={{ speakerNotes }} className="pt-16">
             <div className={{ ['mt-9 grid items-start gap-8', columns] }}>
                 {{ children }}
                 {% if notes %}<div className="grid gap-8 pt-6">{{ notes }}</div>{% endif %}

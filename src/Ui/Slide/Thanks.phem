@@ -27,6 +27,12 @@ function Thanks(): Node
                 <Chip mono>https://github.com/phemphp</Chip>
                 <p className="text-[20px] text-(--text-secondary)">@yceruto</p>
             </div>
+            <Slide.speakerNotes>
+                <ul>
+                    <li>Three files, now one component</li>
+                    <li>Thank you, questions, links</li>
+                </ul>
+            </Slide.speakerNotes>
         </Slide>
     );
 }

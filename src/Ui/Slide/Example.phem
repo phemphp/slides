@@ -50,6 +50,12 @@ final class Example
                         <ListItem number="3" title="Show it" detail="The button shows the new state." />
                     </ul>
                 </div>
+                <Slide.speakerNotes>
+                    <ul>
+                        <li>Click the like button</li>
+                        <li>How much code today?</li>
+                    </ul>
+                </Slide.speakerNotes>
             </Slide>
         );
     }

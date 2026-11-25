@@ -42,6 +42,12 @@ function RedirectTo(): Node
                 <Annotation step="3" muted>The Post gives the id</Annotation>
                 <Annotation step="4" muted>Turbo visits the page</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>Page class, not a route name</li>
+                    <li>Turbo visit, no full reload</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

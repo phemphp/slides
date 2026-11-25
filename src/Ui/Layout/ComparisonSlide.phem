@@ -16,9 +16,10 @@ function ComparisonSlide(
     string $eyebrow = '',
     ?string $footer = null,
     ?string $number = null,
+    ?Html $speakerNotes = null,
 ): Node {
     return (
-        <Slide glowX="78%" glowY="60%" footer={{ footer }} number={{ number }} className="pt-16">
+        <Slide glowX="78%" glowY="60%" footer={{ footer }} number={{ number }} speakerNotes={{ speakerNotes }} className="pt-16">
             <div className="ph-compare mt-9">
                 <div>
                     <div className="ph-compare-head"><Chip dot="accent-cool">{{ beforeLabel }}</Chip></div>

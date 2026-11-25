@@ -1,0 +1,24 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use Phem\Attribute\Component;
+use Phem\{Html, Node};
+
+// The speaker notes of a slide. A slide writes them in the speakerNotes slot of its layout, and
+// the Slide layout puts them after the scaled frame. They show below the slide only on a phone
+// with the touch navigation on (see "Speaker notes" in deck.css). The projector never shows them.
+#[Component]
+function SpeakerNotes(Html $children): Node
+{
+    return (
+        <aside
+            className="ph-speaker-notes"
+            aria-label="Speaker notes"
+            data-controller="deck-notes"
+            data-action="click->deck-notes#tap"
+        >
+            {{ children }}
+        </aside>
+    );
+}

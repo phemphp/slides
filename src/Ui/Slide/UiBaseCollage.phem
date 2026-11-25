@@ -473,6 +473,12 @@ function UiBaseCollage(): Node
                     </PreviewCard>
                 </CollageTile>
             </div>
+            <Slide.speakerNotes>
+                <ul>
+                    <li>phem/ui-base: all live</li>
+                    <li>Behavior in the browser</li>
+                </ul>
+            </Slide.speakerNotes>
         </Slide>
     );
 }

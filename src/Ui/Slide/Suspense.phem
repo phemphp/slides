@@ -39,6 +39,12 @@ function Suspense(): Node
                 <Annotation step="3" muted>lazy waits for the scroll</Annotation>
                 <Annotation step="4" muted>error catches a throw</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>Fallback first, content streams</li>
+                    <li>lazy and error</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

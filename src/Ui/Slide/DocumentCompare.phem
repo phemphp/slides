@@ -48,6 +48,12 @@ function DocumentCompare(): Node
             <ComparisonSlide.after>
                 <CodeWindow code={{ after }} file="src/Ui/Document.phem" size="xs" numbers={{ false }} />
             </ComparisonSlide.after>
+            <ComparisonSlide.speakerNotes>
+                <ul>
+                    <li>Blocks become props and children</li>
+                    <li>Root: the part that Phem updates</li>
+                </ul>
+            </ComparisonSlide.speakerNotes>
         </ComparisonSlide>
     );
 }

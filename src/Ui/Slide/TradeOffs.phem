@@ -28,6 +28,12 @@ function TradeOffs(): Node
                     </div>
                 {% endfor %}
             </div>
+            <Slide.speakerNotes>
+                <ul>
+                    <li>Four costs</li>
+                    <li>Stimulus for browser-only logic</li>
+                </ul>
+            </Slide.speakerNotes>
         </Slide>
     );
 }

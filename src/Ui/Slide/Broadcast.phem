@@ -42,6 +42,12 @@ function Broadcast(): Node
                 <Annotation step="3" muted>The button renders again</Annotation>
                 <Annotation step="4" muted>In the other browsers</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>All browsers render again</li>
+                    <li>This deck uses it: phone and projector</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

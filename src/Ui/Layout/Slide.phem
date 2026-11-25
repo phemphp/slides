@@ -2,6 +2,7 @@
 
 namespace App\Ui\Layout;
 
+use App\Ui\Component\SpeakerNotes;
 use Phem\Attribute\Component;
 use Phem\{Html, Node};
 
@@ -13,18 +14,24 @@ function Slide(
     ?string $footer = null,
     ?string $number = null,
     string $className = '',
+    ?Html $speakerNotes = null,
 ): Node {
     $classes = ['ph-slide ph-frame-content', $className];
     $style = sprintf('--glow-x: %s; --glow-y: %s;', $glowX, $glowY);
 
+    // The speaker notes are after the frame, so they are not a part of the scaled slide (see
+    // SpeakerNotes.phem).
     return (
-        <div className="ph-frame">
-            <section className={{ classes }} style={{ style }}>
-                {{ children }}
-                {% if footer or number %}
-                    <div className="ph-footer">{% if footer %}<span>{{ footer }}</span>{% endif %}{% if number %}<span>{{ number }}</span>{% endif %}</div>
-                {% endif %}
-            </section>
-        </div>
+        <>
+            <div className="ph-frame">
+                <section className={{ classes }} style={{ style }}>
+                    {{ children }}
+                    {% if footer or number %}
+                        <div className="ph-footer">{% if footer %}<span>{{ footer }}</span>{% endif %}{% if number %}<span>{{ number }}</span>{% endif %}</div>
+                    {% endif %}
+                </section>
+            </div>
+            {% if speakerNotes %}<SpeakerNotes>{{ speakerNotes }}</SpeakerNotes>{% endif %}
+        </>
     );
 }

@@ -15,9 +15,10 @@ function TitleSlide(
     ?Html $stack = null,
     ?string $footer = null,
     ?string $number = null,
+    ?Html $speakerNotes = null,
 ): Node {
     return (
-        <Slide glowX="24%" glowY="46%" footer={{ footer }} number={{ number }} className="flex items-center gap-[72px]">
+        <Slide glowX="24%" glowY="46%" footer={{ footer }} number={{ number }} speakerNotes={{ speakerNotes }} className="flex items-center gap-[72px]">
             <IconOrb icon={{ icon }} size="lg" active />
             <div>
                 {% if eyebrow %}<p className="ph-eyebrow">{{ eyebrow }}</p>{% endif %}

@@ -41,6 +41,12 @@ function EventAndRequest(): Node
                 <Annotation step="3" muted>Both are optional</Annotation>
                 <Annotation step="4" muted>The order is free</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>Event: what the user did</li>
+                    <li>Request: how it arrived</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

@@ -42,6 +42,12 @@ function Transactional(): Node
                 <Annotation step="3" muted>A return commits</Annotation>
                 <Annotation step="4" muted>A throw rolls back</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>No flush()</li>
+                    <li>Return commits, throw rolls back</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

@@ -41,6 +41,12 @@ function ErrorPage(): Node
                 <Annotation step="3" muted>A page for the rest</Annotation>
                 <Annotation step="4" muted>Preview at /_error/404</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>One page for 404, one for the rest</li>
+                    <li>Preview: /_error/404</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

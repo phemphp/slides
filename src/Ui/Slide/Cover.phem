@@ -33,6 +33,12 @@ function Cover(): Node
                     <img src={{ asset('images/symfony.svg') }} alt="Symfony" className="size-14" />
                 </p>
             </div>
+            <Slide.speakerNotes>
+                <ul>
+                    <li>Name, role, Symfony Core Team</li>
+                    <li>The wires: routes, templates, JavaScript</li>
+                </ul>
+            </Slide.speakerNotes>
         </Slide>
     );
 }

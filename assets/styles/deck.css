@@ -61,6 +61,91 @@
     pointer-events: auto;
 }
 
+/* ---------- Speaker notes ---------- */
+
+/* The notes of a slide are after its frame, out of the 1280×720 stage (see Slide.phem). They
+   take no space: the slide keeps its size and its place on the projector. */
+.ph-speaker-notes {
+    display: none;
+}
+
+/* A phone (no mouse) in portrait, with the touch navigation on: the slide moves to the top of
+   the screen and the notes fill the space below it. In landscape, the slide fills the screen, so
+   there is no space for the notes. */
+@media (pointer: coarse) and (orientation: portrait) {
+    #deck:has([data-deck-touch][data-pressed]) .ph-deck-stage {
+        align-items: stretch;
+        padding-top: env(safe-area-inset-top);
+    }
+
+    #deck:has([data-deck-touch][data-pressed]) .ph-deck-stage > * {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    #deck:has([data-deck-touch][data-pressed]) .ph-deck-stage .ph-frame {
+        flex: none;
+    }
+
+    /* The notes take the touches, so a long text scrolls (the deck-notes controller sends a tap
+       to the touch navigation). The bottom padding keeps the last line above the buttons of the
+       deck. */
+    #deck:has([data-deck-touch][data-pressed]) .ph-speaker-notes {
+        display: block;
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        box-sizing: border-box;
+        padding: var(--space-16) 20px calc(var(--space-64) + env(safe-area-inset-bottom));
+        border-top: 1px solid var(--edge);
+        font: 400 18px/1.5 var(--font-sans);
+        color: var(--text-secondary);
+        pointer-events: auto;
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .ph-speaker-notes > * + * {
+        margin-top: var(--space-12);
+    }
+
+    .ph-speaker-notes ul,
+    .ph-speaker-notes ol {
+        padding-left: 22px;
+    }
+
+    .ph-speaker-notes ul {
+        list-style: disc;
+    }
+
+    .ph-speaker-notes ol {
+        list-style: decimal;
+    }
+
+    .ph-speaker-notes li + li {
+        margin-top: var(--space-8);
+    }
+
+    .ph-speaker-notes li::marker {
+        color: var(--text-tertiary);
+    }
+
+    .ph-speaker-notes strong {
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .ph-speaker-notes code {
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+        color: var(--accent);
+    }
+}
+
 /* A small stage for one element, centered. */
 .ph-frame-stage {
     display: flex;

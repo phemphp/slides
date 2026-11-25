@@ -46,6 +46,12 @@ function FunctionComponent(): Node
                 <Annotation step="3" muted>Parameters are props</Annotation>
                 <Annotation step="4" muted>It returns markup</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>The smallest component: a function</li>
+                    <li>Parameters are props</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

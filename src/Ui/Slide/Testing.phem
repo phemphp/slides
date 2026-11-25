@@ -36,6 +36,12 @@ function Testing(): Node
                 <Annotation step="3" muted>click() sends the event</Annotation>
                 <Annotation step="4" muted>Assert text and state</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>PHPUnit, no browser</li>
+                    <li>mount, click, assert</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }

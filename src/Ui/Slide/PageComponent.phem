@@ -39,6 +39,12 @@ function PageComponent(): Node
                 <Annotation step="2" muted>The route value finds the Post</Annotation>
                 <Annotation step="3" muted>The page uses the LikeButton</Annotation>
             </CodeSlide.notes>
+            <CodeSlide.speakerNotes>
+                <ul>
+                    <li>The Page attribute is the route</li>
+                    <li>The id finds the Post</li>
+                </ul>
+            </CodeSlide.speakerNotes>
         </CodeSlide>
     );
 }
