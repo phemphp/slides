@@ -50,9 +50,8 @@ function DocumentCompare(): Node
             </ComparisonSlide.after>
             <ComparisonSlide.speakerNotes>
                 <ul>
-                    <li>Blocks become props and children</li>
-                    <li>Root: the part that Phem updates</li>
-                    <li>What if a click writes to the database?</li>
+                    <li>Blocks become slots and children</li>
+                    <li>Root</li>
                 </ul>
             </ComparisonSlide.speakerNotes>
         </ComparisonSlide>

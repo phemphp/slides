@@ -49,7 +49,9 @@ function Compile(): Node
             <Slide.speakerNotes>
                 <ul>
                     <li>phemc checks, then writes PHP and Twig</li>
-                    <li>Errors before the code runs</li>
+                    <li>Build time, JSX</li>
+                    <li>Errors before write</li>
+                    <li>Generated files under var/phem/</li>
                     <li>What if the button needs state?</li>
                 </ul>
             </Slide.speakerNotes>

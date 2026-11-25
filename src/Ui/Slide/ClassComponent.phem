@@ -43,6 +43,7 @@ function ClassComponent(): Node
                 <ul>
                     <li>State or handler: a class</li>
                     <li>No route, no controller, no JavaScript</li>
+                    <li>Properties</li>
                     <li>What if the component needs a URL?</li>
                 </ul>
             </CodeSlide.speakerNotes>

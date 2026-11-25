@@ -41,8 +41,8 @@ function PageComponent(): Node
             </CodeSlide.notes>
             <CodeSlide.speakerNotes>
                 <ul>
-                    <li>The Page attribute is the route</li>
-                    <li>The id finds the Post</li>
+                    <li>Page -> Route</li>
+                    <li>Path and Query vars</li>
                     <li>Where do the services come from?</li>
                 </ul>
             </CodeSlide.speakerNotes>

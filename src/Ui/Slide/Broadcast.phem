@@ -18,7 +18,7 @@ function Broadcast(): Node
         {
             #[Prop] public Post $post;
 
-            #[Broadcast]
+            #[Transactional, Broadcast]
             public function like(): void
             {
                 ++$this->post->likes;
@@ -46,6 +46,7 @@ function Broadcast(): Node
                 <ul>
                     <li>All browsers render again</li>
                     <li>This deck uses it: phone and projector</li>
+                    <li>BroadcastKey and Broadcast(on Post::$likes)</li>
                     <li>What if the action takes you to another page?</li>
                 </ul>
             </CodeSlide.speakerNotes>

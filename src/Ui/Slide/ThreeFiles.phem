@@ -57,9 +57,10 @@ function ThreeFiles(): Node
             </div>
             <Slide.speakerNotes>
                 <ul>
-                    <li>Controller, template, JavaScript</li>
-                    <li>Names connect them: the wires</li>
-                    <li>What if we cut the wires?</li>
+                    <li>HTML over the wire</li>
+                    <li>Mental wires</li>
+                    <li>Cutting the wires: Symfony UX</li>
+                    <li>Pages, DDD, Two Files in Different Places</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>

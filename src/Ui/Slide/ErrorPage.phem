@@ -45,6 +45,7 @@ function ErrorPage(): Node
                 <ul>
                     <li>One page for 404, one for the rest</li>
                     <li>Preview: /_error/404</li>
+                    <li>ErrorPage(path: '/admin')</li>
                     <li>Back to Like: what happens on click?</li>
                 </ul>
             </CodeSlide.speakerNotes>

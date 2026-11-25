@@ -49,8 +49,10 @@ function FunctionComponent(): Node
             <CodeSlide.speakerNotes>
                 <ul>
                     <li>The smallest component: a function</li>
+                    <li>This is PHP & Twig markup</li>
                     <li>Parameters are props</li>
-                    <li>What does phemc generate?</li>
+                    <li>Examples: badge, label, card, etc.</li>
+                    <li>phemc</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

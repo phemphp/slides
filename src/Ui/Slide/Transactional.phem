@@ -44,8 +44,9 @@ function Transactional(): Node
             </CodeSlide.notes>
             <CodeSlide.speakerNotes>
                 <ul>
-                    <li>No flush()</li>
+                    <li>Doctrine Entity, RAD</li>
                     <li>Return commits, throw rolls back</li>
+                    <li>DDD</li>
                     <li>What about everyone else watching?</li>
                 </ul>
             </CodeSlide.speakerNotes>

@@ -35,8 +35,8 @@ function Cover(): Node
             </div>
             <Slide.speakerNotes>
                 <ul>
-                    <li>My Experience</li>
-                    <li>Who I am</li>
+                    <li>DX, LLMx</li>
+                    <li>Who I am, Vacatia, Symfony</li>
                     <li>Tiny Example</li>
                 </ul>
             </Slide.speakerNotes>

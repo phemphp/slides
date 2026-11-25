@@ -71,8 +71,9 @@ function PageAnatomy(): Node
             <Slide.speakerNotes>
                 <ul>
                     <li>A page: a component with a URL</li>
-                    <li>Slots of the document</li>
-                    <li>A page in PHP: route and post</li>
+                    <li>Composition</li>
+                    <li>Slots</li>
+                    <li>Example</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>

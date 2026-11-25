@@ -53,8 +53,7 @@ function Anatomy(): Node
             <Slide.speakerNotes>
                 <ul>
                     <li>Six parts, one file</li>
-                    <li>Go around the button</li>
-                    <li>Start with just a function</li>
+                    <li>The simplest component</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>
