@@ -59,6 +59,7 @@ function ThreeFiles(): Node
                 <ul>
                     <li>Controller, template, JavaScript</li>
                     <li>Names connect them: the wires</li>
+                    <li>What if we cut the wires?</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>

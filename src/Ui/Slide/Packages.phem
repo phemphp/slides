@@ -48,6 +48,7 @@ function Packages(): Node
                 <ul>
                     <li>composer require</li>
                     <li>Import, then use the tags</li>
+                    <li>What are the trade-offs?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

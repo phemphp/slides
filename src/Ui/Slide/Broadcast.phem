@@ -46,6 +46,7 @@ function Broadcast(): Node
                 <ul>
                     <li>All browsers render again</li>
                     <li>This deck uses it: phone and projector</li>
+                    <li>What if the action takes you to another page?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

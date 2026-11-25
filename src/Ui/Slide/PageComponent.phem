@@ -43,6 +43,7 @@ function PageComponent(): Node
                 <ul>
                     <li>The Page attribute is the route</li>
                     <li>The id finds the Post</li>
+                    <li>Where do the services come from?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

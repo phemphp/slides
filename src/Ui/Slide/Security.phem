@@ -46,6 +46,7 @@ function Security(): Node
                 <ul>
                     <li>Signed state, same origin</li>
                     <li>IsGranted and RateLimit on a handler</li>
+                    <li>What if rendering takes a while?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

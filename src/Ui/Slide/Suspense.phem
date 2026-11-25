@@ -43,6 +43,7 @@ function Suspense(): Node
                 <ul>
                     <li>Fallback first, content streams</li>
                     <li>lazy and error</li>
+                    <li>How do we test the interaction?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

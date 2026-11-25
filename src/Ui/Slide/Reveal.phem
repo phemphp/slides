@@ -35,6 +35,7 @@ function Reveal(): Node
                 <ul>
                     <li>Old friends: PHP, Symfony, Twig, Turbo, Stimulus</li>
                     <li>The compiler is in Rust</li>
+                    <li>What does a Phem component look like?</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>

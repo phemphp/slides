@@ -40,6 +40,7 @@ function Testing(): Node
                 <ul>
                     <li>PHPUnit, no browser</li>
                     <li>mount, click, assert</li>
+                    <li>What does the editor know about Phem?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

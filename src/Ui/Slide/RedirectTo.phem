@@ -46,6 +46,7 @@ function RedirectTo(): Node
                 <ul>
                     <li>Page class, not a route name</li>
                     <li>Turbo visit, no full reload</li>
+                    <li>What if the page is missing?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

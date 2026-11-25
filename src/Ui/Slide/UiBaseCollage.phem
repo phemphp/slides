@@ -477,6 +477,7 @@ function UiBaseCollage(): Node
                 <ul>
                     <li>phem/ui-base: all live</li>
                     <li>Behavior in the browser</li>
+                    <li>How do we install these components?</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>

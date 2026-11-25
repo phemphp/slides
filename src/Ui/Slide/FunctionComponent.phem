@@ -50,6 +50,7 @@ function FunctionComponent(): Node
                 <ul>
                     <li>The smallest component: a function</li>
                     <li>Parameters are props</li>
+                    <li>What does phemc generate?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>
