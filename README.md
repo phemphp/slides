@@ -30,6 +30,10 @@ Click the phone button of the deck to show the QR code of this URL. To close the
 its close button, press `Esc`, or click the phone button again. On the phone, the same button turns on the touch navigation: tap the left or the right
 half of the screen.
 
+The screen of the phone stays on while the deck shows, after the first tap. On plain HTTP, the
+deck plays a silent video that you cannot see to keep the screen on, so the phone can show the
+page in its media controls and can stop other audio.
+
 After a change of network, run `make up` (or `make live`) again: the QR code gets the new
 address. If the address is wrong, set it: `make up HOST_IP=192.168.1.20`.
 
