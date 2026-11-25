@@ -16,6 +16,7 @@
 
 ###> app ###
 /compose.override.yaml
+/.playwright-mcp/
 ###< app ###
 
 ###> phpunit/phpunit ###

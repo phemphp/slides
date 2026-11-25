@@ -38,20 +38,20 @@ final class LikeButtonTest extends KernelTestCase
             ->assertSee('Blog · 22 October')
             ->assertSee('Hello, components')
             ->assertSee('A short post.')
-            ->assertSelectorTextContains('button', '♥ Like 7');
+            ->assertSelectorTextContains('.ph-like', '♥ Like 7');
     }
 
     public function testTheButtonTakesTheTapsInTouchNavigation(): void
     {
         $this->mount(Example::class)
-            ->assertSelectorCount(1, '[data-deck-touchable] button');
+            ->assertSelectorCount(1, '[data-deck-touchable] .ph-like');
     }
 
     public function testClickSavesTheLike(): void
     {
         $this->mount(Example::class)
-            ->click('button')
-            ->assertSelectorTextContains('button', '♥ Like 8');
+            ->click('.ph-like')
+            ->assertSelectorTextContains('.ph-like', '♥ Like 8');
 
         $this->assertSame(8, $this->likesInDatabase());
     }
@@ -59,22 +59,17 @@ final class LikeButtonTest extends KernelTestCase
     public function testEachClickAddsALike(): void
     {
         $this->mount(Example::class)
-            ->click('button')
-            ->click('button')
-            ->click('button')
-            ->assertSelectorTextContains('button', '♥ Like 10');
+            ->click('.ph-like')
+            ->click('.ph-like')
+            ->click('.ph-like')
+            ->assertSelectorTextContains('.ph-like', '♥ Like 10');
 
         $this->assertSame(10, $this->likesInDatabase());
     }
 
     public function testALikeShowsInTheOtherBrowsers(): void
     {
-        // Only a page gets the pushes: the deck shows the example slide.
-        $em = self::getContainer()->get(EntityManagerInterface::class);
-        $presentation = new Presentation();
-        $presentation->slide = self::EXAMPLE_SLIDE;
-        $em->persist($presentation);
-        $em->flush();
+        $this->showTheExampleSlide();
 
         $other = $this->visit('/');
 
@@ -84,6 +79,53 @@ final class LikeButtonTest extends KernelTestCase
         $other->receive()->assertSelectorTextContains('.ph-like', '♥ Like 8');
     }
 
+    public function testTheResetButtonSetsTheLikesToZero(): void
+    {
+        $this->showTheExampleSlide();
+
+        $other = $this->visit('/');
+        $deck = $this->visit('/');
+
+        $deck->assertSelectorTextContains('.ph-like', '♥ Like 7')
+            ->click('[data-deck-reset]');
+
+        $this->assertSame(0, $this->likesInDatabase());
+
+        // The reset renders its own button only: the like button gets the refresh of the change
+        // of Post::$likes in each browser.
+        $deck->receive()
+            ->assertSelectorTextContains('.ph-like', '♡ Like')
+            ->assertSelectorCount(0, '.ph-like .tabular-nums');
+        $other->receive()
+            ->assertSelectorTextContains('.ph-like', '♡ Like')
+            ->assertSelectorCount(0, '.ph-like .tabular-nums');
+    }
+
+    public function testOnlyTheExampleSlideHasTheResetButton(): void
+    {
+        $this->showTheExampleSlide();
+
+        $this->visit('/')
+            ->assertSelectorCount(1, '.ph-preview-bar [data-deck-reset][data-deck-touchable] + .ph-url')
+            ->click('[data-deck-keys-target="next"]')
+            ->assertSelectorCount(0, '[data-deck-reset]')
+            ->click('[data-deck-keys-target="first"]')
+            ->assertSelectorCount(0, '[data-deck-reset]');
+    }
+
+    public function testALikeAfterTheResetCountsFromOne(): void
+    {
+        $this->showTheExampleSlide();
+
+        $deck = $this->visit('/');
+        $deck->click('[data-deck-reset]');
+        $deck->receive()
+            ->click('.ph-like')
+            ->assertSelectorTextContains('.ph-like', '♥ Like 1');
+
+        $this->assertSame(1, $this->likesInDatabase());
+    }
+
     public function testEmptyHeartAndNoCounterWithNoLikes(): void
     {
         $em = self::getContainer()->get(EntityManagerInterface::class);
@@ -91,10 +133,22 @@ final class LikeButtonTest extends KernelTestCase
         $em->clear();
 
         $this->mount(Example::class)
-            ->assertSelectorTextContains('button', '♡ Like')
-            ->assertSelectorCount(0, 'button .tabular-nums')
-            ->click('button')
-            ->assertSelectorTextContains('button', '♥ Like 1');
+            ->assertSelectorTextContains('.ph-like', '♡ Like')
+            ->assertSelectorCount(0, '.ph-like .tabular-nums')
+            ->click('.ph-like')
+            ->assertSelectorTextContains('.ph-like', '♥ Like 1');
+    }
+
+    /**
+     * Only a page gets the pushes: the deck shows the example slide.
+     */
+    private function showTheExampleSlide(): void
+    {
+        $em = self::getContainer()->get(EntityManagerInterface::class);
+        $presentation = new Presentation();
+        $presentation->slide = self::EXAMPLE_SLIDE;
+        $em->persist($presentation);
+        $em->flush();
     }
 
     private function likesInDatabase(): int

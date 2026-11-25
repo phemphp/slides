@@ -4,7 +4,7 @@ namespace App\Ui\Slide;
 
 use App\Entity\Post;
 use App\Repository\PostRepository;
-use App\Ui\Component\{LikeButton, ListItem, SlideHeading};
+use App\Ui\Component\{LikeButton, LikeReset, ListItem, SlideHeading};
 use App\Ui\Layout\Slide;
 use Phem\Attribute\Component;
 use Phem\Node;
@@ -31,6 +31,7 @@ final class Example
                 <div className="mt-[77px] grid grid-cols-[653px_1fr] items-start gap-12">
                     <div className="ph-preview overflow-hidden rounded-(--radius-lg) border border-(--edge)">
                         <div className="ph-preview-bar">
+                            <LikeReset post={{ this.post }} />
                             <span className="ph-url">localhost/posts/{{ this.post.id ?? 1 }}</span>
                             <span className="ph-live">Live</span>
                         </div>

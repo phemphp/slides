@@ -1,0 +1,41 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use App\Entity\Post;
+use Phem\Attribute\{Component, Prop, Transactional};
+use Phem\Node;
+
+// The reset button of the likes: the speaker sets the counter of the example slide back to zero.
+// It is in the bar of the browser box of the slide, on the left of the URL, where a browser has
+// its reload button. It takes its taps in touch navigation.
+//
+// The like button renders again in all the browsers, also in this one: it has
+// #[Broadcast(on: Post::likes)].
+#[Component]
+final class LikeReset
+{
+    #[Prop] public Post $post;
+
+    #[Transactional]
+    public function reset(): void
+    {
+        $this->post->likes = 0;
+    }
+
+    public function render(): Node
+    {
+        return (
+            <button
+                type="button"
+                onClick={{ reset }}
+                data-deck-reset
+                data-deck-touchable
+                tabindex="-1"
+                className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full text-[22px] leading-none text-(--text-tertiary) transition-colors hover:bg-(--surface) hover:text-(--text)"
+                title="Reset the likes"
+                aria-label="Reset the likes"
+            >↺</button>
+        );
+    }
+}
