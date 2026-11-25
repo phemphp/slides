@@ -27,11 +27,11 @@ and print the URL for a phone, for example `http://192.168.1.20:8080/`. The phon
 same network.
 
 Click the phone button of the deck to show the QR code of this URL. To close the QR code, click
-its close button, press `Esc`, or click the phone button again. On the phone, the same button turns on the touch navigation: tap the left or the right
-half of the screen.
+its close button, press `Esc`, or click the phone button again. On the phone, the same button turns on the touch navigation: swipe to the
+left for the next slide, and to the right for the previous slide.
 
 With the touch navigation on, a phone in portrait shows the slide at the top of the screen and
-the speaker notes of the slide below it. A tap on the notes also moves the deck, and a long text
+the speaker notes of the slide below it. A swipe on the notes also moves the deck, and a long text
 scrolls. A screen with a mouse never shows the notes. Write the notes of a slide in the
 `speakerNotes` slot of its layout, for example `<CodeSlide.speakerNotes>`.
 

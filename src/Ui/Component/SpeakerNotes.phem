@@ -16,7 +16,6 @@ function SpeakerNotes(Html $children): Node
             className="ph-speaker-notes"
             aria-label="Speaker notes"
             data-controller="deck-notes"
-            data-action="click->deck-notes#tap"
         >
             {{ children }}
         </aside>

@@ -1,16 +1,14 @@
 import { Controller } from '@hotwired/stimulus';
 
 /*
- * The speaker notes of a slide (see SpeakerNotes.phem). The notes take the touches, so a long
- * text scrolls. Thus a tap on the notes does not go through to the two halves of the touch
- * navigation: the controller clicks the button of the half that has the tap.
+ * The speaker notes of a slide (see SpeakerNotes.phem). A long text scrolls. The morph of a move
+ * puts the notes of the new slide in the same element, so the controller moves the scroll to
+ * the top again.
  */
 export default class extends Controller {
     #observer = null;
 
     connect() {
-        // The morph of a move puts the notes of the new slide in the same element: start at
-        // their top again.
         this.#observer = new MutationObserver(() => {
             this.element.scrollTop = 0;
         });
@@ -20,11 +18,5 @@ export default class extends Controller {
     disconnect() {
         this.#observer?.disconnect();
         this.#observer = null;
-    }
-
-    tap(event) {
-        const half = event.clientX < window.innerWidth / 2 ? 'previous' : 'next';
-
-        this.element.closest('#deck')?.querySelector(`[data-deck-tap="${half}"]`)?.click();
     }
 }

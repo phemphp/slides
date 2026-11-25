@@ -30,7 +30,6 @@ final class LikeReset
                 type="button"
                 onClick={{ reset }}
                 data-deck-reset
-                data-deck-touchable
                 tabindex="-1"
                 className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full text-[22px] leading-none text-(--text-tertiary) transition-colors hover:bg-(--surface) hover:text-(--text)"
                 title="Reset the likes"

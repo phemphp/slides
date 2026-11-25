@@ -35,8 +35,9 @@ function Cover(): Node
             </div>
             <Slide.speakerNotes>
                 <ul>
-                    <li>Name, role, Symfony Core Team</li>
-                    <li>The wires: routes, templates, JavaScript</li>
+                    <li>This talk is about</li>
+                    <li>Who I am, what I do</li>
+                    <li>Tiny example</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>

@@ -47,18 +47,13 @@
 
 /* ---------- Touch navigation ---------- */
 
-/* While the touch button of the deck is pressed, the two halves of the screen are buttons (z-index
-   40). The slide is above them and takes no tap, so a tap on the slide goes through to a half. */
-#deck:has([data-deck-touch][data-pressed]) .ph-deck-stage {
-    position: relative;
-    z-index: 45;
-    pointer-events: none;
-}
-
-/* A part of a slide with data-deck-touchable takes its taps, so its buttons work in touch
-   navigation. */
-#deck:has([data-deck-touch][data-pressed]) [data-deck-touchable] {
-    pointer-events: auto;
+/* A phone (no mouse) with the touch button pressed: a swipe to the side moves the deck (the
+   deck-swipe controller). The browser keeps only the vertical scroll, for the speaker notes, so
+   a swipe to the side is not a gesture of the browser. */
+@media (pointer: coarse) {
+    #deck:has([data-deck-touch][data-pressed]) {
+        touch-action: pan-y;
+    }
 }
 
 /* ---------- Speaker notes ---------- */
@@ -69,7 +64,7 @@
     display: none;
 }
 
-/* A phone (no mouse) in portrait, with the touch navigation on: the slide moves to the top of
+/* A phone in portrait, with the touch navigation on: the slide moves to the top of
    the screen and the notes fill the space below it. In landscape, the slide fills the screen, so
    there is no space for the notes. */
 @media (pointer: coarse) and (orientation: portrait) {
@@ -88,8 +83,7 @@
         flex: none;
     }
 
-    /* The notes take the touches, so a long text scrolls (the deck-notes controller sends a tap
-       to the touch navigation). The bottom padding keeps the last line above the buttons of the
+    /* A long text scrolls. The bottom padding keeps the last line above the buttons of the
        deck. */
     #deck:has([data-deck-touch][data-pressed]) .ph-speaker-notes {
         display: block;
@@ -102,8 +96,6 @@
         border-top: 1px solid var(--edge);
         font: 400 18px/1.5 var(--font-sans);
         color: var(--text-secondary);
-        pointer-events: auto;
-        touch-action: pan-y;
         user-select: none;
         -webkit-user-select: none;
         -webkit-tap-highlight-color: transparent;

@@ -41,12 +41,6 @@ final class LikeButtonTest extends KernelTestCase
             ->assertSelectorTextContains('.ph-like', '♥ Like 7');
     }
 
-    public function testTheButtonTakesTheTapsInTouchNavigation(): void
-    {
-        $this->mount(Example::class)
-            ->assertSelectorCount(1, '[data-deck-touchable] .ph-like');
-    }
-
     public function testClickSavesTheLike(): void
     {
         $this->mount(Example::class)
@@ -106,7 +100,7 @@ final class LikeButtonTest extends KernelTestCase
         $this->showTheExampleSlide();
 
         $this->visit('/')
-            ->assertSelectorCount(1, '.ph-preview-bar [data-deck-reset][data-deck-touchable] + .ph-url')
+            ->assertSelectorCount(1, '.ph-preview-bar [data-deck-reset] + .ph-url')
             ->click('[data-deck-keys-target="next"]')
             ->assertSelectorCount(0, '[data-deck-reset]')
             ->click('[data-deck-keys-target="first"]')

@@ -25,31 +25,27 @@ final class DeckNav
 
     public function render(): Node
     {
-        // A half of the screen. It shows only while the touch button is pressed. It is below the
-        // slide, and the slide lets the taps through to it (see "Touch navigation" in deck.css).
-        $tap = 'fixed inset-y-0 z-40 hidden w-1/2 touch-manipulation select-none [-webkit-tap-highlight-color:transparent] group-has-[[data-deck-touch][data-pressed]]/nav:block';
-
+        // On a phone, the touch button turns on the touch navigation: a swipe to the left or to the
+        // right clicks the next or the previous button (the deck-swipe controller).
         return (
             <nav
                 className="group/nav"
                 aria-label="Slides"
-                data-controller="deck-keys phone-qr"
-                data-action="keydown@window->deck-keys#press keydown.esc@window->phone-qr#close"
+                data-controller="deck-keys deck-swipe phone-qr"
+                data-action="keydown@window->deck-keys#press keydown.esc@window->phone-qr#close touchstart@window->deck-swipe#start:passive touchend@window->deck-swipe#end touchcancel@window->deck-swipe#cancel"
             >
-                <button type="button" onClick={{ move(number - 2) }} data-deck-tap="previous" tabindex="-1" className="{{ tap }} left-0" aria-label="Previous slide"></button>
-                <button type="button" onClick={{ move(number) }} data-deck-tap="next" tabindex="-1" className="{{ tap }} right-0" aria-label="Next slide"></button>
                 <PhoneQr />
                 <div className="absolute right-4 bottom-4 z-50 flex items-center gap-2 text-sm text-(--text-tertiary) opacity-30 transition-opacity hover:opacity-100 has-[[data-pressed]]:opacity-60">
-                    <button type="button" data-controller="phem-toggle" data-deck-touch data-phone-qr-target="button" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised) data-pressed:bg-(--surface-raised) data-pressed:text-(--text)" title="Phone: show the QR code of the slides. On a phone: tap the left or the right half of the screen" aria-label="Phone">
+                    <button type="button" data-controller="phem-toggle" data-deck-touch data-phone-qr-target="button" data-deck-swipe-target="toggle" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised) data-pressed:bg-(--surface-raised) data-pressed:text-(--text)" title="Phone: show the QR code of the slides. On a phone: swipe left or right to move" aria-label="Phone">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" className="block">
                             <rect x="6" y="2" width="12" height="20" rx="2.5" />
                             <path d="M11 18h2" />
                         </svg>
                     </button>
                     <button type="button" onClick={{ move(0) }} data-deck-keys-target="first" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="First slide (Home)">⇤</button>
-                    <button type="button" onClick={{ move(number - 2) }} data-deck-keys-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Previous (←)">←</button>
+                    <button type="button" onClick={{ move(number - 2) }} data-deck-keys-target="previous" data-deck-swipe-target="previous" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Previous (←)">←</button>
                     <span className="tabular-nums">{{ number }} / {{ total }}</span>
-                    <button type="button" onClick={{ move(number) }} data-deck-keys-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
+                    <button type="button" onClick={{ move(number) }} data-deck-keys-target="next" data-deck-swipe-target="next" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised)" title="Next (→)">→</button>
                 </div>
             </nav>
         );

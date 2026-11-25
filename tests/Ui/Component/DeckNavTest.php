@@ -67,7 +67,7 @@ final class DeckNavTest extends KernelTestCase
     {
         $other = $this->deck();
 
-        $this->deck()->click('[data-deck-tap="previous"]');
+        $this->deck()->click('[data-deck-keys-target="previous"]');
 
         $other->assertSelectorCount(3, '.ph-note');
         $other->receive()
@@ -80,28 +80,36 @@ final class DeckNavTest extends KernelTestCase
         $this->deck()->assertSelectorCount(1, '#deck[data-controller="wake-lock"]');
     }
 
-    public function testTheTouchButtonTurnsTheScreenIntoTwoButtons(): void
+    public function testTheTouchButtonTurnsOnTheSwipes(): void
     {
         $this->deck()
-            ->assertSelectorCount(1, '[data-deck-touch][data-controller="phem-toggle"]')
-            ->assertSelectorCount(1, '[data-deck-tap="previous"]')
-            ->assertSelectorCount(1, '[data-deck-tap="next"]');
+            ->assertSelectorCount(1, 'nav[data-controller~="deck-swipe"] [data-deck-touch][data-controller="phem-toggle"][data-deck-swipe-target="toggle"]')
+            ->assertSelectorCount(1, 'nav[data-action~="touchstart@window->deck-swipe#start:passive"][data-action~="touchend@window->deck-swipe#end"][data-action~="touchcancel@window->deck-swipe#cancel"]');
     }
 
-    public function testTheLeftHalfShowsThePreviousSlide(): void
+    public function testATapDoesNotMoveTheDeck(): void
     {
+        // The two halves of the screen were buttons. Now only a swipe moves the deck.
         $this->deck()
-            ->click('[data-deck-tap="previous"]')
+            ->assertSelectorNotExists('[data-deck-tap]')
+            ->assertSelectorNotExists('[data-deck-touchable]');
+    }
+
+    public function testASwipeToTheRightShowsThePreviousSlide(): void
+    {
+        // The deck-swipe controller clicks the target of the swipe.
+        $this->deck()
+            ->click('[data-deck-swipe-target="previous"]')
             ->assertSelectorTextContains('h2', '#[Page]');
 
         $this->assertSame(self::PAGE_COMPONENT - 1, $this->slide());
     }
 
-    public function testTheRightHalfShowsTheNextSlide(): void
+    public function testASwipeToTheLeftShowsTheNextSlide(): void
     {
         $this->deck()
-            ->click('[data-deck-tap="previous"]')
-            ->click('[data-deck-tap="next"]')
+            ->click('[data-deck-swipe-target="previous"]')
+            ->click('[data-deck-swipe-target="next"]')
             ->assertSelectorTextContains('.ph-note:not([hidden])', 'A page is a route');
 
         $this->assertSame(self::PAGE_COMPONENT, $this->slide());

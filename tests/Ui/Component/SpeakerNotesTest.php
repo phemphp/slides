@@ -44,13 +44,14 @@ final class SpeakerNotesTest extends KernelTestCase
             $this->assertNotContains($notes, $seen, "Slide $number shows the notes of another slide.");
             $seen[] = $notes;
 
-            $deck->click('[data-deck-tap="next"]');
+            $deck->click('[data-deck-swipe-target="next"]');
         }
     }
 
-    public function testATapOnTheNotesGoesToTheTouchNavigation(): void
+    public function testTheNotesStartAtTheirTopAfterAMove(): void
     {
-        $this->deck()->assertSelectorCount(1, '.ph-speaker-notes[data-controller="deck-notes"][data-action="click->deck-notes#tap"]');
+        // The deck-notes controller moves the scroll to the top when the notes change.
+        $this->deck()->assertSelectorCount(1, '.ph-speaker-notes[data-controller="deck-notes"]:not([data-action])');
     }
 
     private function deck(): ComponentTester
