@@ -12,7 +12,7 @@ function Reveal(): Node
 {
     return (
         <Slide glowX="28%" glowY="46%" className="grid grid-cols-[340px_1fr] items-center gap-20">
-            <span className="ph-orb is-active" style="--size: 340px; --ring: 24px;">
+            <span className="ph-orb is-active" style="--size: 340px; --ring: 16px;">
                 <span className="ph-orb-ring"></span>
                 <span className="ph-orb-disc"></span>
                 <img src={{ asset('images/phem-logo.svg') }} alt="The Phem logo in light brushed metal: an elephant with a sprout" className="relative w-[180px]" />
