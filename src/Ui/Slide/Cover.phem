@@ -35,9 +35,9 @@ function Cover(): Node
             </div>
             <Slide.speakerNotes>
                 <ul>
-                    <li>This talk is about</li>
-                    <li>Who I am, what I do</li>
-                    <li>Tiny example</li>
+                    <li>My Experience</li>
+                    <li>Who I am</li>
+                    <li>Tiny Example</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>
