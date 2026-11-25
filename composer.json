@@ -10,6 +10,7 @@
         "doctrine/doctrine-bundle": "^3.3",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.7",
+        "endroid/qr-code": "^6.2",
         "phem/phem": "^0.10",
         "phem/ui-base": "^0.8",
         "symfony/asset": "8.1.*",

@@ -6,8 +6,14 @@ DEV  = docker compose
 LIVE = docker compose -f compose.prod.yaml
 EXEC = $(DEV) exec app
 
+# The address of this machine in the current network. The QR code of the deck has it, so a phone
+# in the same network opens the slides. Set it yourself if it is wrong: make up HOST_IP=192.168.1.20
+HOST_IP ?= $(shell bin/host-ip)
+export HOST_IP
+PORT ?= 8080
+
 .DEFAULT_GOAL = help
-.PHONY: help up down logs sh console schema fixtures test restart phem-link phem-unlink live live-down live-logs
+.PHONY: help up down logs sh console schema fixtures test restart phem-link phem-unlink live live-down live-logs phone-url
 
 help: ## Show this list
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
@@ -16,6 +22,14 @@ help: ## Show this list
 
 up: ## Start the dev server in the background (http://localhost:8080)
 	$(DEV) up --build --detach
+	@$(MAKE) --no-print-directory phone-url PORT=8080
+
+# Docker publishes the port on all the addresses of this machine, so the address of the network
+# also opens the slides.
+phone-url:
+	@test -n "$(HOST_IP)" \
+		&& echo "Phone: http://$(HOST_IP):$(PORT)/ (the phone button of the deck shows the QR code)" \
+		|| echo "Phone: no network address. Connect to a network, then run this command again."
 
 restart: ## Restart the dev server, for example to load a change in the linked phem
 	$(DEV) restart app
@@ -58,6 +72,7 @@ phem-unlink: ## Restore the released phem version in vendor/
 
 live: ## Start the presentation with the prod image (http://localhost:8080)
 	$(LIVE) up --build --detach
+	@$(MAKE) --no-print-directory phone-url
 
 live-down: ## Stop the presentation (the database stays in its volume)
 	$(LIVE) down

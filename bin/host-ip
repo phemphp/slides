@@ -1,0 +1,16 @@
+#!/bin/sh
+# Print the IPv4 address of this machine in the current network: the address of the interface
+# of the default route. A phone in the same network opens the slides with it.
+
+if command -v ipconfig >/dev/null 2>&1 && command -v route >/dev/null 2>&1; then
+    # macOS
+    interface=$(route -n get default 2>/dev/null | awk '/interface:/ { print $2 }')
+    if [ -n "$interface" ]; then
+        ipconfig getifaddr "$interface" 2>/dev/null
+    fi
+elif command -v ip >/dev/null 2>&1; then
+    # Linux
+    ip -4 route get 1.1.1.1 2>/dev/null | awk '{ for (i = 1; i < NF; i++) if ($i == "src") print $(i + 1) }'
+fi
+
+exit 0

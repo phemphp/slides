@@ -6,6 +6,10 @@ services:
   app:
     build: { context: ., target: prod }
     ports: ["${PORT:-8080}:8080"]
+    # The address of the host in the current network, for the QR code of the deck. The Makefile
+    # sets it.
+    environment:
+      HOST_IP: ${HOST_IP:-}
     volumes:
       - data:/app/var/data
     restart: unless-stopped

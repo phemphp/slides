@@ -33,13 +33,14 @@ final class DeckNav
             <nav
                 className="group/nav"
                 aria-label="Slides"
-                data-controller="deck-keys"
-                data-action="keydown@window->deck-keys#press"
+                data-controller="deck-keys phone-qr"
+                data-action="keydown@window->deck-keys#press keydown.esc@window->phone-qr#close"
             >
                 <button type="button" onClick={{ move(number - 2) }} data-deck-tap="previous" tabindex="-1" className="{{ tap }} left-0" aria-label="Previous slide"></button>
                 <button type="button" onClick={{ move(number) }} data-deck-tap="next" tabindex="-1" className="{{ tap }} right-0" aria-label="Next slide"></button>
+                <PhoneQr />
                 <div className="absolute right-4 bottom-4 z-50 flex items-center gap-2 text-sm text-(--text-tertiary) opacity-30 transition-opacity hover:opacity-100 has-[[data-pressed]]:opacity-60">
-                    <button type="button" data-controller="phem-toggle" data-deck-touch tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised) data-pressed:bg-(--surface-raised) data-pressed:text-(--text)" title="Touch navigation: tap the left or the right half of the screen" aria-label="Touch navigation">
+                    <button type="button" data-controller="phem-toggle" data-deck-touch data-phone-qr-target="button" tabindex="-1" className="rounded px-2 py-1 hover:bg-(--surface-raised) data-pressed:bg-(--surface-raised) data-pressed:text-(--text)" title="Phone: show the QR code of the slides. On a phone: tap the left or the right half of the screen" aria-label="Phone">
                         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" className="block">
                             <rect x="6" y="2" width="12" height="20" rx="2.5" />
                             <path d="M11 18h2" />

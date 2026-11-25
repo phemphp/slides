@@ -1,0 +1,51 @@
+<?phem
+
+namespace App\Ui\Component;
+
+use App\Phone\PhoneLink;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+// The QR code of the slides, for a phone in the same network. It shows while the touch button of
+// the deck is pressed, on a screen with a mouse: a phone has the slides already. The close
+// button and the Escape key release the touch button (the phone-qr controller of the nav).
+#[Component]
+final class PhoneQr
+{
+    private ?string $url = null;
+    private ?string $qrCode = null;
+
+    public function __construct(
+        private readonly PhoneLink $link,
+    ) {
+    }
+
+    public function mount(): void
+    {
+        $this->url = $this->link->url();
+        $this->qrCode = null === $this->url ? null : $this->link->qrCode($this->url);
+    }
+
+    public function render(): Node
+    {
+        return (
+            <div
+                data-deck-qr
+                className="absolute right-4 bottom-14 z-50 hidden w-60 rounded-2xl bg-white p-3 text-center text-neutral-900 shadow-2xl pointer-fine:group-has-[[data-deck-touch][data-pressed]]/nav:block"
+            >
+                <div className="flex items-center justify-between pl-1 text-sm font-medium">
+                    <span>Open on a phone</span>
+                    <button type="button" data-action="phone-qr#close" tabindex="-1" className="rounded px-2 py-0.5 text-lg leading-none text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900" title="Close (Esc)" aria-label="Close the QR code">×</button>
+                </div>
+                {% if qrCode %}
+                    <img src={{ qrCode }} alt="QR code of the slides" className="block w-full" />
+                    <p className="mt-1 font-mono text-xs break-all">{{ url }}</p>
+                {% else %}
+                    <p className="text-sm">
+                        No network address. Start the server with <code>make up</code> or <code>make live</code>.
+                    </p>
+                {% endif %}
+            </div>
+        );
+    }
+}
