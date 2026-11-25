@@ -54,6 +54,7 @@ function Anatomy(): Node
                 <ul>
                     <li>Six parts, one file</li>
                     <li>Go around the button</li>
+                    <li>Start with just a function</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>

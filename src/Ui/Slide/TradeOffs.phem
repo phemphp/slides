@@ -32,6 +32,7 @@ function TradeOffs(): Node
                 <ul>
                     <li>Four costs</li>
                     <li>Stimulus for browser-only logic</li>
+                    <li>Back to the button: three files to one</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>

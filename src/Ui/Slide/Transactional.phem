@@ -46,6 +46,7 @@ function Transactional(): Node
                 <ul>
                     <li>No flush()</li>
                     <li>Return commits, throw rolls back</li>
+                    <li>What about everyone else watching?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

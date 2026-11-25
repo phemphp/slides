@@ -25,6 +25,7 @@ function EditorSupport(): Node
                 <ul>
                     <li>One binary: compiler, LSP, MCP</li>
                     <li>Editors and agents use it</li>
+                    <li>What can we build with the UI kit?</li>
                 </ul>
             </FlowSlide.speakerNotes>
         </FlowSlide>

@@ -46,6 +46,7 @@ function Services(): Node
                 <ul>
                     <li>Autowiring in the constructor</li>
                     <li>mount() loads, render() stays pure</li>
+                    <li>How does this compare to Twig blocks?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

@@ -45,6 +45,7 @@ function EventAndRequest(): Node
                 <ul>
                     <li>Event: what the user did</li>
                     <li>Request: how it arrived</li>
+                    <li>Which requests should we trust?</li>
                 </ul>
             </CodeSlide.speakerNotes>
         </CodeSlide>

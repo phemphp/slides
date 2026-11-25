@@ -50,6 +50,7 @@ function Compile(): Node
                 <ul>
                     <li>phemc checks, then writes PHP and Twig</li>
                     <li>Errors before the code runs</li>
+                    <li>What if the button needs state?</li>
                 </ul>
             </Slide.speakerNotes>
         </Slide>
