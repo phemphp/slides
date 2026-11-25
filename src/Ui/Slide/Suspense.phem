@@ -1,0 +1,44 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function Suspense(): Node
+{
+    $code = <<<'PHEM'
+        <Document title="Sales">
+            <Suspense>
+                <Suspense.fallback>
+                    <p>Loading the sales report…</p>
+                </Suspense.fallback>
+                <SalesReport />
+            </Suspense>
+            <Suspense lazy>
+                <Suspense.fallback>
+                    <p>Loading the chart…</p>
+                </Suspense.fallback>
+                <Suspense.error>
+                    <p>The chart is not available now.</p>
+                </Suspense.error>
+                <ActivityChart />
+            </Suspense>
+        </Document>
+        PHEM;
+
+    return (
+        <CodeSlide>
+            <CodeWindow code={{ code }} file="src/Ui/SalesPage.phem" size="sm" numbers={{ false }} focus={{ [2, 8, 12] }} dim={{ false }} />
+            <CodeSlide.notes>
+                <Annotation step="1" muted>The fallback goes first</Annotation>
+                <Annotation step="2" muted>The content streams</Annotation>
+                <Annotation step="3" muted>lazy waits for the scroll</Annotation>
+                <Annotation step="4" muted>error catches a throw</Annotation>
+            </CodeSlide.notes>
+        </CodeSlide>
+    );
+}

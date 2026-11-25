@@ -45,5 +45,6 @@ final class FeatureSlidesTest extends KernelTestCase
         yield 'RedirectTo' => [14, 'PublishButton.phem', 1, 'new RedirectTo(PostPage::class', 4, 'Return a RedirectTo'];
         yield 'ErrorPage' => [15, 'ErrorPages.phem', 2, '#[ErrorPage(404)]', 4, 'Mark a function'];
         yield 'EventAndRequest' => [17, 'SearchBox.phem', 1, 'Event $e, Request $request', 4, 'Event: what the user did'];
+        yield 'Testing' => [20, 'CounterTest.php', 4, '$this->mount(Counter::class', 4, 'PHPUnit, no browser'];
     }
 }

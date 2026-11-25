@@ -28,6 +28,8 @@ final class Slides
             <EventFlow />,
             <EventAndRequest />,
             <Security />,
+            <Suspense />,
+            <Testing />,
             <EditorSupport />,
             <UiBaseCollage />,
             <Packages />,

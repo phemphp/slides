@@ -11,9 +11,9 @@ use Phem\Node;
 function Thanks(): Node
 {
     return (
-        <Slide glowX="80%" glowY="50%" footer="Phem · no release yet" className="grid grid-cols-[1fr_400px] items-center gap-16">
+        <Slide glowX="80%" glowY="50%" className="grid grid-cols-[1fr_400px] items-center gap-16">
             <div>
-                <SlideHeading eyebrow="Recap">One component, <span className="ph-em">no wires</span></SlideHeading>
+                <SlideHeading>One component, <span className="ph-em">no wires</span></SlideHeading>
                 <ul className="ph-list mt-10">
                     <ListItem number="1" title="One file per component" detail="State, actions and markup in one class." active />
                     <ListItem number="2" title="Compiled to PHP and Twig" detail="Checked by phemc before you run it." />
@@ -24,8 +24,8 @@ function Thanks(): Node
                 <img src={{ asset('images/phem-logo.svg') }} alt="The Phem logo" className="w-[107px]" />
                 <p className="ph-title">Thank you</p>
                 <p className="ph-lead m-0">Questions?</p>
-                <Chip mono>[repository link]</Chip>
-                <p className="text-[20px] text-(--text-secondary)">@[handle]</p>
+                <Chip mono>https://github.com/phemphp</Chip>
+                <p className="text-[20px] text-(--text-secondary)">@yceruto</p>
             </div>
         </Slide>
     );

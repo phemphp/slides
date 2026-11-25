@@ -49,6 +49,10 @@ final class Highlighter
         $tokens = [];
         $inTag = false;
         $tagName = false;
+        // A slot tag has a dot in its name: <Card.footer>. The name goes on after the dot.
+        $slot = false;
+        // In a Twig expression, a word is not the name of an attribute.
+        $twig = false;
         $offset = 0;
 
         while ($offset < \strlen($code) && preg_match(self::PATTERN, $code, $m, 0, $offset)) {
@@ -59,6 +63,13 @@ final class Highlighter
             if ('' !== ($m['open'] ?? '')) {
                 $tokens[] = ['punct', $text];
                 $inTag = $tagName = true;
+                $slot = false;
+                continue;
+            }
+
+            if ($slot && '.' === $text) {
+                $tokens[] = ['component', $text];
+                $tagName = true;
                 continue;
             }
 
@@ -70,18 +81,23 @@ final class Highlighter
 
             if ('' !== ($m['word'] ?? '')) {
                 $class = match (true) {
-                    $tagName => ctype_upper($text[0]) ? 'component' : 'tag',
-                    $inTag && '=' === $next => 'attr',
+                    $tagName => $slot || ctype_upper($text[0]) ? 'component' : 'tag',
+                    // An attribute with a value (title="…") or without one (lazy).
+                    $inTag && !$twig && ('=' === $next || 1 === preg_match('~[\s/>]~', $next)) => 'attr',
                     \in_array($text, self::KEYWORDS, true) => 'keyword',
                     '(' === $next => ctype_upper($text[0]) ? 'component' : 'function',
                     default => null,
                 };
+                $slot = $tagName && 'component' === $class && '.' === $next;
                 $tagName = false;
                 $tokens[] = [$class, $text];
                 continue;
             }
 
             $tagName = false;
+            if ('' !== ($m['twig'] ?? '')) {
+                $twig = \in_array($text, ['{{', '{%'], true);
+            }
             $class = null;
             foreach (['comment', 'attribute', 'string', 'twig', 'variable', 'number'] as $name) {
                 if ('' !== ($m[$name] ?? '')) {

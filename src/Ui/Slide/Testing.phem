@@ -1,0 +1,41 @@
+<?phem
+
+namespace App\Ui\Slide;
+
+use App\Ui\Component\{Annotation, CodeWindow};
+use App\Ui\Layout\CodeSlide;
+use Phem\Attribute\Component;
+use Phem\Node;
+
+#[Component]
+function Testing(): Node
+{
+    $code = <<<'PHP'
+        use Phem\Test\InteractsWithPhem;
+
+        final class CounterTest extends KernelTestCase
+        {
+            use InteractsWithPhem;
+
+            public function testIncrement(): void
+            {
+                $this->mount(Counter::class, ['label' => 'Clicks'])
+                    ->click('button')
+                    ->assertSee('Clicks 1 times')
+                    ->assertState('count', 1);
+            }
+        }
+        PHP;
+
+    return (
+        <CodeSlide>
+            <CodeWindow code={{ code }} file="tests/CounterTest.php" size="sm" numbers={{ false }} focus={{ [9, 10, 11, 12] }} dim={{ false }} />
+            <CodeSlide.notes>
+                <Annotation step="1" muted>PHPUnit, no browser</Annotation>
+                <Annotation step="2" muted>mount() renders it</Annotation>
+                <Annotation step="3" muted>click() sends the event</Annotation>
+                <Annotation step="4" muted>Assert text and state</Annotation>
+            </CodeSlide.notes>
+        </CodeSlide>
+    );
+}

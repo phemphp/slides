@@ -13,7 +13,7 @@ final class UiBaseCollageTest extends KernelTestCase
 {
     use InteractsWithPhem;
 
-    private const int SLIDE = 20;
+    private const int SLIDE = 22;
 
     protected function setUp(): void
     {
