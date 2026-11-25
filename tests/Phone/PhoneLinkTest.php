@@ -38,6 +38,18 @@ final class PhoneLinkTest extends TestCase
         $this->assertNull(new PhoneLink(new RequestStack(), '192.168.1.20')->url());
     }
 
+    #[TestWith(['https://deck.example.com'])]
+    #[TestWith(['https://deck.example.com/'])]
+    public function testAPublicUrlReplacesTheAddressOfTheHost(string $phoneUrl): void
+    {
+        $this->assertSame('https://deck.example.com/', $this->link('http://localhost:8080/', '192.168.1.20', $phoneUrl)->url());
+    }
+
+    public function testAPublicUrlNeedsNoRequest(): void
+    {
+        $this->assertSame('https://deck.example.com/', new PhoneLink(new RequestStack(), '', 'https://deck.example.com')->url());
+    }
+
     public function testTheQrCodeIsAnSvgImage(): void
     {
         $qrCode = $this->link('http://localhost:8080/', '192.168.1.20')->qrCode('http://192.168.1.20:8080/');
@@ -45,11 +57,11 @@ final class PhoneLinkTest extends TestCase
         $this->assertStringStartsWith('data:image/svg+xml;base64,', $qrCode);
     }
 
-    private function link(string $uri, string $hostIp): PhoneLink
+    private function link(string $uri, string $hostIp, string $phoneUrl = ''): PhoneLink
     {
         $requests = new RequestStack();
         $requests->push(Request::create($uri));
 
-        return new PhoneLink($requests, $hostIp);
+        return new PhoneLink($requests, $hostIp, $phoneUrl);
     }
 }

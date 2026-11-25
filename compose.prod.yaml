@@ -7,9 +7,10 @@ services:
     build: { context: ., target: prod }
     ports: ["${PORT:-8080}:8080"]
     # The address of the host in the current network, for the QR code of the deck. The Makefile
-    # sets it.
+    # sets it. PHONE_URL is a public URL that replaces it (make live PHONE_URL=https://...).
     environment:
       HOST_IP: ${HOST_IP:-}
+      PHONE_URL: ${PHONE_URL:-}
     volumes:
       - data:/app/var/data
     restart: unless-stopped

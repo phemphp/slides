@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * The URL that opens the slides on a phone in the same network.
+ * The URL that opens the slides on a phone: the address of the host in the current network, or
+ * a public URL.
  */
 final class PhoneLink
 {
@@ -20,11 +21,19 @@ final class PhoneLink
         // The address of the host in the current network. The Makefile sets it (see bin/host-ip).
         #[Autowire(env: 'HOST_IP')]
         private readonly string $hostIp = '',
+        // A public URL of the slides, for example the URL of a tunnel. It replaces the address of
+        // the network: use it when the network blocks the traffic between its clients.
+        #[Autowire(env: 'PHONE_URL')]
+        private readonly string $phoneUrl = '',
     ) {
     }
 
     public function url(): ?string
     {
+        if ('' !== $this->phoneUrl) {
+            return rtrim($this->phoneUrl, '/').'/';
+        }
+
         $request = $this->requests->getMainRequest();
         if (null === $request) {
             return null;

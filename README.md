@@ -42,6 +42,37 @@ page in its media controls and can stop other audio.
 After a change of network, run `make up` (or `make live`) again: the QR code gets the new
 address. If the address is wrong, set it: `make up HOST_IP=192.168.1.20`.
 
+### Public tunnel
+
+Some networks block the traffic between their clients (guest networks, venue networks). The phone
+then cannot open the address of this machine. Use a public URL:
+
+```sh
+make tunnel                                            # prints https://<name>.trycloudflare.com
+make live PHONE_URL=https://<name>.trycloudflare.com   # in a second terminal
+```
+
+`make tunnel` needs [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/).
+The QR code then has the public URL, and the phone needs only the internet. All persons who have
+the URL can open the slides while the tunnel runs. Each start of the tunnel gives a new URL. For
+the dev server, use `make up PHONE_URL=...`.
+
+For a URL that stays the same, use a named tunnel with a domain of your Cloudflare account. Do
+the setup one time:
+
+```sh
+cloudflared tunnel login                                      # select the zone of the domain
+cloudflared tunnel create phem-slides-local
+cloudflared tunnel route dns phem-slides-local slides.phem.dev
+```
+
+Then start the tunnel and the presentation:
+
+```sh
+make tunnel TUNNEL=phem-slides-local
+make live PHONE_URL=https://slides.phem.dev                   # in a second terminal
+```
+
 ## The presentation
 
 Use the prod image:
