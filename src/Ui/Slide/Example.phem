@@ -51,6 +51,7 @@ final class Example
                 <Slide.speakerNotes>
                     <ul>
                         <li>Click the like button</li>
+                        <li>Wires across the stack</li>
                         <li>How much code today?</li>
                     </ul>
                 </Slide.speakerNotes>
