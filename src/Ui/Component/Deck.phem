@@ -5,10 +5,12 @@ namespace App\Ui\Component;
 use App\Entity\Presentation;
 use App\Repository\PresentationRepository;
 use App\Ui\Slide\Slides;
-use Phem\Attribute\Component;
+use Phem\Attribute\{Broadcast, Component};
 use Phem\Node;
 
-#[Component]
+// A move saves the slide of the presentation. Each browser then renders the deck again, so all
+// the devices show the same slide.
+#[Component, Broadcast(on: Presentation::class)]
 final class Deck
 {
     private Presentation $presentation;
@@ -39,6 +41,7 @@ final class Deck
             <section
                 id="deck"
                 className="relative flex h-full flex-col overflow-hidden"
+                data-controller="wake-lock"
                 data-phem-transition
             >
                 <div className="ph-deck-stage">

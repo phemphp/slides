@@ -10,6 +10,15 @@
 {$SERVER_NAME::8080} {
 	encode zstd gzip
 
+	# The hub of the #[Broadcast] updates. The updates are public (no subscriber key): they only
+	# tell a browser to render a component again, and a public update needs no Secure cookie, so
+	# it also reaches a phone on plain HTTP.
+	mercure {
+		name phem
+		transport local
+		anonymous
+	}
+
 	root * public
 	php_server
 }

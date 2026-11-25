@@ -45,6 +45,22 @@
     width: min(100%, var(--deck-height) * 16 / 9);
 }
 
+/* ---------- Touch navigation ---------- */
+
+/* While the touch button of the deck is pressed, the two halves of the screen are buttons (z-index
+   40). The slide is above them and takes no tap, so a tap on the slide goes through to a half. */
+#deck:has([data-deck-touch][data-pressed]) .ph-deck-stage {
+    position: relative;
+    z-index: 45;
+    pointer-events: none;
+}
+
+/* A part of a slide with data-deck-touchable takes its taps, so its buttons work in touch
+   navigation. */
+#deck:has([data-deck-touch][data-pressed]) [data-deck-touchable] {
+    pointer-events: auto;
+}
+
 /* A small stage for one element, centered. */
 .ph-frame-stage {
     display: flex;

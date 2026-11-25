@@ -63,6 +63,50 @@ final class DeckNavTest extends KernelTestCase
         $this->assertSame(self::PAGE_COMPONENT, $this->slide());
     }
 
+    public function testAMoveShowsInTheOtherBrowsers(): void
+    {
+        $other = $this->deck();
+
+        $this->deck()->click('[data-deck-tap="previous"]');
+
+        $other->assertSelectorCount(3, '.ph-note');
+        $other->receive()
+            ->assertSelectorTextContains('h2', '#[Page]')
+            ->assertSelectorCount(0, '.ph-note');
+    }
+
+    public function testTheDeckKeepsTheScreenOn(): void
+    {
+        $this->deck()->assertSelectorCount(1, '#deck[data-controller="wake-lock"]');
+    }
+
+    public function testTheTouchButtonTurnsTheScreenIntoTwoButtons(): void
+    {
+        $this->deck()
+            ->assertSelectorCount(1, '[data-deck-touch][data-controller="phem-toggle"]')
+            ->assertSelectorCount(1, '[data-deck-tap="previous"]')
+            ->assertSelectorCount(1, '[data-deck-tap="next"]');
+    }
+
+    public function testTheLeftHalfShowsThePreviousSlide(): void
+    {
+        $this->deck()
+            ->click('[data-deck-tap="previous"]')
+            ->assertSelectorTextContains('h2', '#[Page]');
+
+        $this->assertSame(self::PAGE_COMPONENT - 1, $this->slide());
+    }
+
+    public function testTheRightHalfShowsTheNextSlide(): void
+    {
+        $this->deck()
+            ->click('[data-deck-tap="previous"]')
+            ->click('[data-deck-tap="next"]')
+            ->assertSelectorTextContains('.ph-note:not([hidden])', 'A page is a route');
+
+        $this->assertSame(self::PAGE_COMPONENT, $this->slide());
+    }
+
     private function deck(): ComponentTester
     {
         return $this->visit('/');

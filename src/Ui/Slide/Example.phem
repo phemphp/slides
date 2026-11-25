@@ -38,7 +38,9 @@ final class Example
                             <p className="ph-eyebrow m-0">Blog · {{ this.post.date|date('j F') }}</p>
                             <h3>{{ this.post.title }}</h3>
                             <p className="mb-2 text-[20px] leading-[1.4] text-(--text-secondary)">{{ this.post.summary }}</p>
-                            <LikeButton post={{ this.post }} />
+                            <div className="contents" data-deck-touchable>
+                                <LikeButton post={{ this.post }} />
+                            </div>
                         </div>
                     </div>
                     <ul className="ph-list">

@@ -3,6 +3,7 @@
 namespace App\Tests\Ui\Component;
 
 use App\Entity\Post;
+use App\Entity\Presentation;
 use App\Ui\Slide\Example;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -12,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 final class LikeButtonTest extends KernelTestCase
 {
     use InteractsWithPhem;
+
+    private const int EXAMPLE_SLIDE = 1;
 
     private int $postId;
 
@@ -38,6 +41,12 @@ final class LikeButtonTest extends KernelTestCase
             ->assertSelectorTextContains('button', '♥ Like 7');
     }
 
+    public function testTheButtonTakesTheTapsInTouchNavigation(): void
+    {
+        $this->mount(Example::class)
+            ->assertSelectorCount(1, '[data-deck-touchable] button');
+    }
+
     public function testClickSavesTheLike(): void
     {
         $this->mount(Example::class)
@@ -56,6 +65,23 @@ final class LikeButtonTest extends KernelTestCase
             ->assertSelectorTextContains('button', '♥ Like 10');
 
         $this->assertSame(10, $this->likesInDatabase());
+    }
+
+    public function testALikeShowsInTheOtherBrowsers(): void
+    {
+        // Only a page gets the pushes: the deck shows the example slide.
+        $em = self::getContainer()->get(EntityManagerInterface::class);
+        $presentation = new Presentation();
+        $presentation->slide = self::EXAMPLE_SLIDE;
+        $em->persist($presentation);
+        $em->flush();
+
+        $other = $this->visit('/');
+
+        $this->visit('/')->click('.ph-like');
+
+        $other->assertSelectorTextContains('.ph-like', '♥ Like 7');
+        $other->receive()->assertSelectorTextContains('.ph-like', '♥ Like 8');
     }
 
     public function testEmptyHeartAndNoCounterWithNoLikes(): void
