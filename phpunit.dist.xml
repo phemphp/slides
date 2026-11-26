@@ -15,8 +15,8 @@
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
-        <!-- The QR code of the deck: a fixed address, not the address of the host. -->
-        <env name="HOST_IP" value="192.0.2.10" force="true" />
+        <!-- The QR code of the deck: a fixed URL, not the URL of the dev container. -->
+        <env name="PHONE_URL" value="https://slides.example.com" force="true" />
     </php>
 
     <testsuites>

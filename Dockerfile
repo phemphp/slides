@@ -10,21 +10,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 WORKDIR /app
 
-# --- Dev: the project is mounted at /app --------------------------------
+# The project is mounted at /app. The presentation also uses this image: the deck shows the
+# debug toolbar of Symfony.
 FROM base AS dev
 CMD ["docker/dev.sh"]
-
-# --- Prod: the compiled application, for the live presentation ----------
-FROM base AS prod
-ENV APP_ENV=prod APP_DEBUG=0
-COPY . /app
-# composer install boots the kernel before phemc build: build its cache again after.
-RUN printf 'APP_SECRET=%s\n' "$(od -An -tx1 -N32 /dev/urandom | tr -d ' \n')" > .env.local \
- && composer install --no-dev --optimize-autoloader --no-interaction \
- && vendor/bin/phemc build src --no-warmup \
- && rm -rf var/cache/prod \
- && php bin/console cache:warmup \
- && php bin/console tailwind:build --minify \
- && php bin/console asset-map:compile
-COPY docker/php-prod.ini /usr/local/etc/php/conf.d/zz-app.ini
-CMD ["docker/prod.sh"]

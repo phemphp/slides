@@ -115,12 +115,12 @@ final class DeckNavTest extends KernelTestCase
         $this->assertSame(self::PAGE_COMPONENT, $this->slide());
     }
 
-    public function testThePhoneButtonHasTheQrCodeOfTheNetworkAddress(): void
+    public function testThePhoneButtonHasTheQrCodeOfThePublicUrl(): void
     {
-        // phpunit.dist.xml sets HOST_IP. The port is the port of the request.
+        // phpunit.dist.xml sets PHONE_URL.
         $this->deck()
             ->assertSelectorCount(1, 'nav [data-deck-qr] img[src^="data:image/svg+xml;base64,"]')
-            ->assertSelectorTextContains('[data-deck-qr]', 'http://192.0.2.10/');
+            ->assertSelectorTextContains('[data-deck-qr]', 'https://slides.example.com/');
     }
 
     public function testTheQrCodeStaysAfterAMove(): void
@@ -128,7 +128,7 @@ final class DeckNavTest extends KernelTestCase
         $this->deck()
             ->click('[data-deck-keys-target="previous"]')
             ->assertSelectorCount(1, '[data-deck-qr] img')
-            ->assertSelectorTextContains('[data-deck-qr]', 'http://192.0.2.10/');
+            ->assertSelectorTextContains('[data-deck-qr]', 'https://slides.example.com/');
     }
 
     public function testTheQrCodeHasACloseButtonThatReleasesThePhoneButton(): void

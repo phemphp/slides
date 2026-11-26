@@ -5,24 +5,14 @@ namespace App\Phone;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Writer\SvgWriter;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * The URL that opens the slides on a phone: the address of the host in the current network, or
- * a public URL.
+ * The URL that opens the slides on a phone: a public URL, for example the URL of a tunnel.
  */
 final class PhoneLink
 {
-    private const array LOOPBACK = ['localhost', '127.0.0.1', '[::1]'];
-
     public function __construct(
-        private readonly RequestStack $requests,
-        // The address of the host in the current network. The Makefile sets it (see bin/host-ip).
-        #[Autowire(env: 'HOST_IP')]
-        private readonly string $hostIp = '',
-        // A public URL of the slides, for example the URL of a tunnel. It replaces the address of
-        // the network: use it when the network blocks the traffic between its clients.
+        // "make up PHONE_URL=..." sets it (see "Phone" in README.md).
         #[Autowire(env: 'PHONE_URL')]
         private readonly string $phoneUrl = '',
     ) {
@@ -30,25 +20,7 @@ final class PhoneLink
 
     public function url(): ?string
     {
-        if ('' !== $this->phoneUrl) {
-            return rtrim($this->phoneUrl, '/').'/';
-        }
-
-        $request = $this->requests->getMainRequest();
-        if (null === $request) {
-            return null;
-        }
-
-        if ('' !== $this->hostIp) {
-            return \sprintf('%s://%s%s/', $request->getScheme(), $this->hostIp, $this->port($request));
-        }
-
-        // The browser already uses an address of the network.
-        if (!\in_array($request->getHost(), self::LOOPBACK, true)) {
-            return $request->getSchemeAndHttpHost().'/';
-        }
-
-        return null;
+        return '' === $this->phoneUrl ? null : rtrim($this->phoneUrl, '/').'/';
     }
 
     public function qrCode(string $url): string
@@ -62,17 +34,5 @@ final class PhoneLink
         );
 
         return $builder->build()->getDataUri();
-    }
-
-    /**
-     * The port of the request is the port that the host publishes: the browser of the speaker
-     * and the phone use the same port.
-     */
-    private function port(Request $request): string
-    {
-        $port = (int) $request->getPort();
-        $default = $request->isSecure() ? 443 : 80;
-
-        return $default === $port ? '' : ':'.$port;
     }
 }

@@ -7,9 +7,9 @@ import silentVideo from '../wake_lock_video.js';
  * again when the page shows again. A browser can refuse the lock (low battery, no action of the
  * user yet), so each tap and each key also asks again while there is no lock.
  *
- * Only a secure page (HTTPS or localhost) has navigator.wakeLock. A phone opens the deck with
- * the address of the network, on plain HTTP. There, the controller plays a video that the user
- * cannot see: a phone keeps its screen on while a video plays (the method of NoSleep.js).
+ * Only a secure page (HTTPS or localhost) has navigator.wakeLock. On plain HTTP, the controller
+ * plays a video that the user cannot see: a phone keeps its screen on while a video plays (the
+ * method of NoSleep.js).
  */
 // A click is the action of the user that lets a phone start a video with sound.
 const EVENTS = ['visibilitychange', 'pointerdown', 'keydown', 'click'];

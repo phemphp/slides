@@ -6,7 +6,7 @@ use App\Phone\PhoneLink;
 use Phem\Attribute\Component;
 use Phem\Node;
 
-// The QR code of the slides, for a phone in the same network. It shows while the touch button of
+// The QR code of the public URL of the slides, for a phone. It shows while the touch button of
 // the deck is pressed, on a screen with a mouse: a phone has the slides already. The close
 // button and the Escape key release the touch button (the phone-qr controller of the nav).
 #[Component]
@@ -42,7 +42,7 @@ final class PhoneQr
                     <p className="mt-1 font-mono text-xs break-all">{{ url }}</p>
                 {% else %}
                     <p className="text-sm">
-                        No network address. Start the server with <code>make up</code> or <code>make live</code>.
+                        No public URL. Run <code>make tunnel</code>, then <code>make up PHONE_URL=…</code>.
                     </p>
                 {% endif %}
             </div>
