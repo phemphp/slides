@@ -21,12 +21,14 @@ function PageComponent(): Node
 
             public function render(): Node
             {
-                return <Document title={{ post.title }}>
-                    <Article title={{ post.title }}>
-                        <p>{{ post.content }}</p>
-                        <LikeButton post={{ post }} />
-                    </Article>
-                </Document>;
+                return (
+                    <Document title={{ post.title }}>
+                        <Article title={{ post.title }}>
+                            <p>{{ post.content }}</p>
+                            <LikeButton post={{ post }} />
+                        </Article>
+                    </Document>
+                );
             }
         }
         PHP;
