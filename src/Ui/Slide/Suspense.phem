@@ -11,28 +11,34 @@ use Phem\Node;
 function Suspense(): Node
 {
     $code = <<<'PHEM'
-        <Document title="Sales">
-            <Suspense>
-                <Suspense.fallback>
-                    <p>Loading the sales report…</p>
-                </Suspense.fallback>
-                <SalesReport />
-            </Suspense>
-            <Suspense lazy>
-                <Suspense.fallback>
-                    <p>Loading the chart…</p>
-                </Suspense.fallback>
-                <Suspense.error>
-                    <p>The chart is not available now.</p>
-                </Suspense.error>
-                <ActivityChart />
-            </Suspense>
-        </Document>
+        #[Page('/sales')]
+        function SalesPage(): Node
+        {
+            return (
+                <Document title="Sales">
+                    <Suspense>
+                        <Suspense.fallback>
+                            <p>Loading the sales report…</p>
+                        </Suspense.fallback>
+                        <SalesReport />
+                    </Suspense>
+                    <Suspense lazy>
+                        <Suspense.fallback>
+                            <p>Loading the chart…</p>
+                        </Suspense.fallback>
+                        <Suspense.error>
+                            <p>The chart is not available now.</p>
+                        </Suspense.error>
+                        <ActivityChart />
+                    </Suspense>
+                </Document>
+            );
+        }
         PHEM;
 
     return (
         <CodeSlide>
-            <CodeWindow code={{ code }} file="src/Ui/SalesPage.phem" size="sm" numbers={{ false }} focus={{ [2, 8, 12] }} dim={{ false }} />
+            <CodeWindow code={{ code }} file="src/Ui/SalesPage.phem" size="xs" startNumber={{ 6 }} focus={{ [11, 17, 21] }} dim={{ false }} />
             <CodeSlide.notes>
                 <Annotation step="1" muted>The fallback goes first</Annotation>
                 <Annotation step="2" muted>The content streams</Annotation>

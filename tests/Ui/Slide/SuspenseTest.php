@@ -33,9 +33,9 @@ final class SuspenseTest extends KernelTestCase
             ->assertSelectorNotExists('.ph-slide h2')
             ->assertSelectorCount(1, '.ph-window')
             ->assertSelectorTextContains('.ph-window-tab.is-active', 'SalesPage.phem')
-            ->assertSelectorExists('.ph-code.no-numbers')
+            ->assertSelectorNotExists('.ph-code.no-numbers')
             ->assertSelectorNotExists('.ph-code.has-focus')
-            ->assertSelectorCount(17, '.ph-line');
+            ->assertSelectorCount(23, '.ph-line');
     }
 
     public function testTheLegendIsAfterTheCodeWindow(): void
@@ -54,9 +54,9 @@ final class SuspenseTest extends KernelTestCase
     {
         $this->slide()
             ->assertSelectorCount(3, '.ph-line.is-focus')
-            ->assertSelectorTextContains('.ph-line.is-focus:nth-of-type(2)', '<Suspense>')
-            ->assertSelectorTextContains('.ph-line.is-focus:nth-of-type(8)', '<Suspense lazy>')
-            ->assertSelectorTextContains('.ph-line.is-focus:nth-of-type(12)', '<Suspense.error>');
+            ->assertSelectorTextContains('.ph-line.is-focus:nth-of-type(6)', '<Suspense>')
+            ->assertSelectorTextContains('.ph-line.is-focus:nth-of-type(12)', '<Suspense lazy>')
+            ->assertSelectorTextContains('.ph-line.is-focus:nth-of-type(16)', '<Suspense.error>');
     }
 
     public function testTheCodeHasTheFallbackSlotOfEachBoundary(): void
@@ -79,7 +79,7 @@ final class SuspenseTest extends KernelTestCase
         $document = $this->slide()->document();
 
         $names = [];
-        foreach ($document->querySelectorAll('.ph-line:nth-of-type(12) .tok-component') as $token) {
+        foreach ($document->querySelectorAll('.ph-line:nth-of-type(16) .tok-component') as $token) {
             $names[] = $token->textContent;
         }
 
@@ -89,8 +89,8 @@ final class SuspenseTest extends KernelTestCase
     public function testAnAttributeWithoutAValueHasTheAttributeColor(): void
     {
         $this->slide()
-            ->assertSelectorCount(1, '.ph-line:nth-of-type(8) .tok-attr')
-            ->assertSelectorTextContains('.ph-line:nth-of-type(8) .tok-attr', 'lazy');
+            ->assertSelectorCount(1, '.ph-line:nth-of-type(12) .tok-attr')
+            ->assertSelectorTextContains('.ph-line:nth-of-type(12) .tok-attr', 'lazy');
     }
 
     private function slide(): ComponentTester
