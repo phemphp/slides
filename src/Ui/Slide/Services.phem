@@ -25,11 +25,13 @@ function Services(): Node
 
             public function render(): Node
             {
-                return <ul>
-                    {% for post in posts %}
-                        <li key={{ post.id }}>{{ post.title }}</li>
-                    {% endfor %}
-                </ul>;
+                return (
+                    <ul>
+                        {% for post in posts %}
+                            <li key={{ post.id }}>{{ post.title }}</li>
+                        {% endfor %}
+                    </ul>
+                );
             }
         }
         PHP;

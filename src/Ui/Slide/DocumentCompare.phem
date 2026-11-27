@@ -28,15 +28,17 @@ function DocumentCompare(): Node
         #[Component]
         function Document(string $title, Html $children): Node
         {
-            return <html>
-                <head>
-                    <title>{{ title }}</title>
-                    {{ importmap('app') }}
-                </head>
-                <body>
-                    <Root>{{ children }}</Root>
-                </body>
-            </html>;
+            return (
+                <html>
+                    <head>
+                        <title>{{ title }}</title>
+                        {{ importmap('app') }}
+                    </head>
+                    <body>
+                        <Root>{{ children }}</Root>
+                    </body>
+                </html>
+            );
         }
         PHP;
 
