@@ -15,8 +15,10 @@
 	# viewer) is only for a browser on this machine. The Host header is safe for this check,
 	# because compose.yaml publishes the port to this machine only, and the tunnel does not accept
 	# a false Host header.
+	# The path matcher finds the name at each position of the path: php_server also sends
+	# /index.php/_profiler to the profiler.
 	@profiler {
-		path /_profiler* /_error*
+		path */_profiler* */_error*
 		not host localhost 127.0.0.1 ::1
 	}
 	respond @profiler 404
